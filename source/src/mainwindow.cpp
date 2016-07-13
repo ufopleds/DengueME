@@ -285,13 +285,13 @@ void MainWindow::actionSetWorkspace() {
     if (ChangeWorkspace(this).exec() == QDialog::Accepted)
         ui->treeView->setWorkspace(dengueme::config("workspace"));
 }
-///TODO - New Model Builder Windows
+
 void MainWindow::actionModelBuilder() {
     ModelBuilder *builder = new ModelBuilder(this);
     builder->show();
 
 }
-///TODO - New Model Builder Windows
+
 
 void MainWindow::actionResetViews() {
     restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toAscii()));

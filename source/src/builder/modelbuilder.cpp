@@ -115,7 +115,7 @@ void ModelBuilder::deleteModel()
 void ModelBuilder::editModel() {
     modelActivated(ui->listView->currentIndex());
 }
-///TODO - Models Folder Name
+
 void ModelBuilder::newModel() {
     if (!ui->editor->close(0))
         return;
