@@ -1,0 +1,68 @@
+<xmlmodel>
+  <script interpreter="">
+    <file>Coupled.lua</file>
+    <main>Coupled.lua</main>
+  </script>
+  <parameters>
+    <groupbox label="Parameters">
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="ODE" label="ODE steps:">0</field>
+      <field minimum="-1000000.000000000" maximum="1000000.000000000" precision="9" type="doublespinbox" id="K" step="0.000000001" label="Carrying capacity (K):">0.000000000</field>
+      <csv id="Temp" label="Temperature time series"></csv>
+    </groupbox>
+    <groupbox label="Mortality rate">
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M1" step="0.000001" label="Egg:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M2" step="0.000001" label="Larvae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M3" step="0.000001" label="Pupae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M4" step="0.000001" label="Mosquito:">0.000000</field>
+    </groupbox>
+    <groupbox label="Development rate">
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransO" step="0.000001" label="Egg:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransL" step="0.000001" label="Larvae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransP" step="0.000001" label="Pupae:">0.000000</field>
+    </groupbox>
+    <groupbox label="Population">
+      <field minimum="-1e+06" maximum="1e+06" precision="3" type="doublespinbox" id="DEMAND_SCALE" step="0.001" label="Population scale:">0.000</field>
+      <field type="combobox" value="Oviposition" id="POPULATION_TYPE" label="Population type:">
+        <option>Oviposition</option>
+        <option>Eggs</option>
+        <option>Larvae</option>
+        <option>Pupae</option>
+        <option>Mosquitoes</option>
+      </field>
+    </groupbox>
+  </parameters>
+  <simulation label="Simulation">
+    <field type="checkbox" id="DEBUG_MODE" name="Debug mode" label="">false</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_START" label="Simulation start time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_END" label="Simulation end time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_START_LOG" label="Log start time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_END_LOG" label="Log end time:">0</field>
+  </simulation>
+  <results label="Results">
+    <field type="lineedit" id="RESULTS_DIR" label="Directory:">coupled_results</field>
+    <field type="lineedit" id="RESULTS_FILE" label="File:">results.csv</field>
+  </results>
+  <Database>
+    <dbType Value="mysql"/>
+    <host Value=""/>
+    <db Value=""/>
+    <user Value=""/>
+    <password Value=""/>
+    <layer Value=""/>
+    <theme Value=""/>
+    <select Value=""/>
+  </Database>
+  <Observer>
+    <legendScale Value="1"/>
+    <type Value="number"/>
+    <grouping Value="equalsteps"/>
+    <slices Value="100"/>
+    <precision Value="10"/>
+    <stdDeviation Value="none"/>
+    <maximum Value="100"/>
+    <minimum Value="0"/>
+    <colorBar Value="{color = {0, 255, 255}, value = 10 * legend_scale}, {color = {0, 227, 170}, value = 20 * legend_scale}, {color = {0, 199, 85}, value = 30 * legend_scale}, {color = {0, 170, 0}, value = 40 * legend_scale}, {color = {85, 198, 0}, value = 50 * legend_scale}, {color = {170, 226, 0}, value = 60 * legend_scale}, {color = {255, 255, 0}, value = 70 * legend_scale}, {color = {255, 170, 0}, value = 80 * legend_scale}, {color = {255, 85, 0}, value = 90 * legend_scale}, {color = {255, 1, 0}, value = 100* legend_scale}"/>
+    <map Value="true"/>
+    <viewExec Value="true"/>
+  </Observer>
+</xmlmodel>

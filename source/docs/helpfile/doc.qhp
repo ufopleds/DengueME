@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QtHelpProject version="1.0">
+    <virtualFolder>doc</virtualFolder>
+    <namespace>leds.ufop.dengueme</namespace>
+    <filterSection>
+	<toc>
+	    <section title="Index" ref="index.html">
+		<section title="Test" ref="welcome.html"></section>
+	    </section>
+	</toc>
+        <keywords>
+            <keyword name="constants" id="constants" ref="models/constants.html"/>
+            <keyword name="constantstemporal" id="constantstemporal" ref="models/constantstemporal.html"/>
+            <keyword name="database" id="database" ref="models/database.html"/>
+            <keyword name="databaseintegrated" id="databaseintegrated" ref="models/databaseintegrated.html"/>
+            <keyword name="logfile" id="logfile" ref="models/logfile.html"/>
+            <keyword name="logfilecoupled" id="logfilecoupled" ref="models/logfilecoupled.html"/>
+            <keyword name="logfileintegrated" id="logfileintegrated" ref="models/logfileintegrated.html"/>
+            <keyword name="observer" id="observer" ref="models/observer.html"/>
+            <keyword name="ode" id="ode" ref="models/ode.html"/>
+            <keyword name="parameters_contamination" id="parameters_contamination" ref="models/parameters_contamination.html"/>
+            <keyword name="parameters_humans" id="parameters_humans" ref="models/parameters_humans.html"/>
+            <keyword name="parameters_initial" id="parameters_initial" ref="models/parameters_initial.html"/>
+            <keyword name="parameters_locationtime" id="parameters_locationtime" ref="models/parameters_locationtime.html"/>
+            <keyword name="parameters_vector" id="parameters_vector" ref="models/parameters_vector.html"/>
+            <keyword name="path" id="path" ref="models/path.html"/>
+            <keyword name="pathepidemiological" id="pathepidemiological" ref="models/pathepidemiological.html"/>
+            <keyword name="popcontrol" id="popcontrol" ref="models/popcontrol.html"/>
+            <keyword name="population" id="population" ref="models/population.html"/>
+            <keyword name="simulation" id="simulation" ref="models/simulation.html"/>
+            <keyword name="Index" id="index" ref="index.html"/>
+            <keyword name="Test" id="test" ref="welcome.html"/>
+        </keywords>
+        <files>
+            <file>models/*.html</file>
+	    <file>*.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>

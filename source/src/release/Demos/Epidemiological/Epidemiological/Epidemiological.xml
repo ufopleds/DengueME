@@ -1,0 +1,63 @@
+<xmlmodel>
+  <script interpreter="TerraME">
+    <file>epidemiological_model.lua</file>
+    <file>epidemiologic_auxiliary_files/DailyNHumRenewal.lua</file>
+    <file>epidemiologic_auxiliary_files/init.lua</file>
+    <file>epidemiologic_auxiliary_files/InitCond.lua</file>
+    <file>epidemiologic_auxiliary_files/LoadCellSpaceAtt3_2.lua</file>
+    <file>epidemiologic_auxiliary_files/RoundNear.lua</file>
+    <file>epidemiologic_auxiliary_files/RoundNearExt.lua</file>
+    <file>epidemiologic_auxiliary_files/RoundProb.lua</file>
+    <file>epidemiologic_auxiliary_files/UpdateCell.lua</file>
+    <main>epidemiological_model.lua</main>
+  </script>
+  <parameters>
+    <populationdata>
+      <usepopdata>true</usepopdata>
+      <pa type="lineedit" id="POPULATION_ATTRIBUTE" label="Population attribute:"></pa>
+      <pp minimum="0" maximum="1" precision="4" type="doublespinbox" id="POPULATION_PERCENTAGE" step="0.0001" label="Population percentage:">0.0000</pp>
+      <pcwh minimum="0" maximum="1" precision="4" type="doublespinbox" id="PERCENTAGE_CELLS_HUMANS" step="0.0001" label="Percentage of cells with humans:">0.0000</pcwh>
+      <hpc minimum="1" maximum="999999999" type="spinbox" id="HUMANS_BY_CELL" label="Humans per cell:">1</hpc>
+      <dmr minimum="0" maximum="1" precision="4" type="doublespinbox" id="HUMAN_MOBILITY_PERCENTAGE" step="0.0001" label="Daily mobility rate:">0.0000</dmr>
+      <dmrp minimum="0" maximum="1" precision="4" type="doublespinbox" id="PERCENTAGE_HUMANS_PUBLIC_LOCATIONS" step="0.0001" label="Daily mobility rate to public locations:">0.0000</dmrp>
+      <ahrr minimum="0" maximum="1" precision="4" type="doublespinbox" id="ANNUAL_HUMAN_RENEWAL" step="0.0001" label="Annual human renewal rate:">0.0000</ahrr>
+      <paih minimum="0" maximum="1" precision="4" type="doublespinbox" id="PERCENTAGE_ASSYMPTOMATIC_INFECTED_HUM" step="0.0001" label="Percentage of assymptomatic infected humans:">0.0000</paih>
+    </populationdata>
+    <groupbox label="Parameters about vectors">
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="PERCENTAGE_CELLS_FEM_MOSQ" step="0.0001" label="Percentage of cells with vectors:">0.0000</field>
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="PROB_DRAFT_CENTRAL_CELL" step="0.0001" label="Probability for migration:">0.0000</field>
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="FEMALE_MOSQ_LIFE_PROBABILITY" step="0.0001" label="Daily survival probability:">0.0000</field>
+      <field minimum="0.0000" maximum="1000000.0000" precision="4" type="doublespinbox" id="MAXIMUM_PROP_VEC_HUMAN" step="0.0001" label="Maximum proportion of vectors by human:">0.0000</field>
+      <field minimum="0.0000" maximum="1000000.0000" precision="4" type="doublespinbox" id="BITE_FREQUENCY" step="0.0001" label="Bite frequency:">0.0000</field>
+    </groupbox>
+    <groupbox label="Contamination probabilities">
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="PROB_INFEC_FROM_HUM_TO_VEC" step="0.0001" label="Transmission probability from human to vector:">0.0000</field>
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="PROB_INFEC_FROM_VEC_TO_HUM" step="0.0001" label="Transmission probability from vector to human:">0.0000</field>
+    </groupbox>
+    <groupbox label="Locations and time">
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="PERCENTAGE_PUBLIC_LOCATIONS" step="0.0001" label="Percentage of cells with public locations:">0.0000</field>
+      <field minimum="1" maximum="1000000" type="spinbox" id="TOTAL_NUMBER_DAYS" label="Total number of days:">1</field>
+    </groupbox>
+    <groupbox label="Initial conditions">
+      <field minimum="0" maximum="1000000000" type="spinbox" id="NITIAL_NUMBER_INFECTED" label="Infected humans:">0</field>
+      <field minimum="0" maximum="1000000000" type="spinbox" id="INITIAL_NUMBER_RECOVERED" label="Recovered humans:">0</field>
+    </groupbox>
+  </parameters>
+  <results label="Results">
+    <field type="lineedit" id="RESULTS_PATH" label="Results path:">results_epi</field>
+    <field type="checkbox" id="OBSERVER_MAP" name="Show observer" label="">true</field>
+    <field type="checkbox" id="SAVE_IMAGES" name="Save images" label="">false</field>
+    <field type="checkbox" id="LOG" name="Save log file" label="">true</field>
+    <field type="lineedit" id="FREQUENCY_SAVE_IMAGES" label="Frequency save images:"></field>
+  </results>
+  <Database>
+    <dbType Value="mysql"/>
+    <host Value=""/>
+    <db Value=""/>
+    <user Value=""/>
+    <password Value=""/>
+    <layer Value=""/>
+    <theme Value=""/>
+    <select Value=""/>
+  </Database>
+</xmlmodel>

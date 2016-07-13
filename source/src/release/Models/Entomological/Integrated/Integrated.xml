@@ -1,0 +1,107 @@
+<xmlmodel>
+  <script interpreter="">
+    <file>Integrated.lua</file>
+    <main>Integrated.lua</main>
+  </script>
+  <parameters>
+    <groupbox label="Cell attributes">
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="DAT_EGGS" label="Eggs:">0</field>
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="DAT_LARVAE" label="Larvae:">0</field>
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="DAT_PUPAE" label="Pupae:">0</field>
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="DAT_MOSQUITOES" label="Mosquitoes:">0</field>
+    </groupbox>
+    <groupbox label="Parameters">
+      <field minimum="-1e+06" maximum="1e+06" type="spinbox" id="ODE" label="ODE steps:">0</field>
+      <field minimum="-1000000.000000000" maximum="1000000.000000000" precision="9" type="doublespinbox" id="K" step="0.000000001" label="Carrying capacity (K):">0.000000000</field>
+      <csv id="Temp" label="Temperature time series"></csv>
+    </groupbox>
+    <groupbox label="Mortality rate">
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M1" step="0.000001" label="Egg:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M2" step="0.000001" label="Larvae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M3" step="0.000001" label="Pupae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="M4" step="0.000001" label="Mosquito:">0.000000</field>
+    </groupbox>
+    <groupbox label="Development rate">
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransO" step="0.000001" label="Egg:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransL" step="0.000001" label="Larvae:">0.000000</field>
+      <field minimum="-1000000.000000" maximum="1000000.000000" precision="6" type="doublespinbox" id="txTransP" step="0.000001" label="Pupae:">0.000000</field>
+    </groupbox>
+    <groupbox label="Population">
+      <field minimum="-1e+06" maximum="1e+06" precision="3" type="doublespinbox" id="DEMAND_SCALE" step="0.001" label="Population scale:">0.000</field>
+      <field type="combobox" value="Oviposition" id="POPULATION_TYPE" label="Population type:">
+        <option>Oviposition</option>
+        <option>Eggs</option>
+        <option>Larvae</option>
+        <option>Pupae</option>
+        <option>Mosquitoes</option>
+      </field>
+    </groupbox>
+    <groupbox label="Mechanical control">
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="MC_rate" step="0.0001" label="Efficacy rate:">0.0000</field>
+      <csv id="MC_timeToApplyControl" label="Time (when control will be applied):"></csv>
+      <csv id="MC_cellsToApplyControl" label="Cell (where control will be applied):"></csv>
+    </groupbox>
+    <groupbox label="Chemical control">
+      <field type="combobox" value="None" id="CC_POP_TYPE" label="Target population:">
+        <option>None</option>
+        <option>Larvae</option>
+        <option>Mosquitoes</option>
+      </field>
+      <field minimum="0.0000" maximum="1.0000" precision="4" type="doublespinbox" id="CC_efRate_K" step="0.0001" label="Efficacy rate:">0.0000</field>
+      <field minimum="0.0000" maximum="1000000.0000" precision="4" type="doublespinbox" id="CC_efRate_Ta" step="0.0001" label="Environmental persistence:">0.0000</field>
+      <csv id="CC_timeToApplyControl" label="Time (when control will be applied):"></csv>
+      <csv id="CC_cellsToApplyControl" label="Cell (where control will be applied):"></csv>
+    </groupbox>
+  </parameters>
+  <simulation label="Simulation">
+    <field type="checkbox" id="DEBUG_MODE" name="Debug mode" label="">false</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_START" label="Simulation start time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_END" label="Simulation end time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_START_LOG" label="Log start time:">0</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_TIME_END_LOG" label="Log end time:">0</field>
+  </simulation>
+  <results label="Results">
+    <field type="lineedit" id="RESULTS_DIR" label="Directory:">coupled_results</field>
+    <field type="lineedit" id="GLOBAL_RESULTS_FILE" label="Global results fiile:">global_outputfile.csv</field>
+    <field type="checkbox" id="GLOBAL_TEMP" name="Temperature" label="Global attributes:">false</field>
+    <field type="checkbox" id="GLOBAL_OVIP" name="Oviposition (total)" label="">false</field>
+    <field type="checkbox" id="GLOBAL_EGGS" name="Eggs" label="Global population:">false</field>
+    <field type="checkbox" id="GLOBAL_LARVAE" name="Larvae" label="">false</field>
+    <field type="checkbox" id="GLOBAL_PUPAE" name="Pupae" label="">false</field>
+    <field type="checkbox" id="GLOBAL_MOSQUITOES" name="Mosquitoes" label="">false</field>
+    <field type="checkbox" id="GLOBAL_EGGLARVA" name="Egg to larva" label="Global development rate:">false</field>
+    <field type="checkbox" id="GLOBAL_LARVAPUPA" name="Larva to pupa" label="">false</field>
+    <field type="checkbox" id="GLOBAL_PUPAMOSQUITO" name="Pupa to mosquito" label="">false</field>
+    <field type="lineedit" id="INDIVIDUAL_RESULTS_FILE" label="Individual results fiile:">individual_outputfile.csv</field>
+    <csv id="INDIVIDUAL_CELL" label="Cell:"></csv>
+    <field type="checkbox" id="INDIVIDUAL_TEMP" name="Temperature" label="Individual attributes:">false</field>
+    <field type="checkbox" id="INDIVIDUAL_OVIP" name="Oviposition" label="">false</field>
+    <field type="checkbox" id="INDIVIDUAL_EGGS" name="Eggs" label="Individual population:">false</field>
+    <field type="checkbox" id="INDIVIDUAL_LARVAE" name="Larvae" label="">false</field>
+    <field type="checkbox" id="INDIVIDUAL_PUPAE" name="Pupae" label="">false</field>
+    <field type="checkbox" id="INDIVIDUAL_MOSQUITOES" name="Mosquitoes" label="">false</field>
+  </results>
+  <Database>
+    <dbType Value="mysql"/>
+    <host Value=""/>
+    <db Value=""/>
+    <user Value=""/>
+    <password Value=""/>
+    <layer Value=""/>
+    <theme Value=""/>
+    <select Value=""/>
+  </Database>
+  <Observer>
+    <legendScale Value="1"/>
+    <type Value="number"/>
+    <grouping Value="equalsteps"/>
+    <slices Value="100"/>
+    <precision Value="10"/>
+    <stdDeviation Value="none"/>
+    <maximum Value="100"/>
+    <minimum Value="0"/>
+    <colorBar Value="{color = {0, 255, 255}, value = 10 * legend_scale}, {color = {0, 227, 170}, value = 20 * legend_scale}, {color = {0, 199, 85}, value = 30 * legend_scale}, {color = {0, 170, 0}, value = 40 * legend_scale}, {color = {85, 198, 0}, value = 50 * legend_scale}, {color = {170, 226, 0}, value = 60 * legend_scale}, {color = {255, 255, 0}, value = 70 * legend_scale}, {color = {255, 170, 0}, value = 80 * legend_scale}, {color = {255, 85, 0}, value = 90 * legend_scale}, {color = {255, 1, 0}, value = 100* legend_scale}"/>
+    <map Value="true"/>
+    <viewExec Value="true"/>
+  </Observer>
+</xmlmodel>

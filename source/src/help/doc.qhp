@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QtHelpProject version="1.0">
+    <virtualFolder>doc</virtualFolder>
+    <namespace>leds.ufop.dengueme</namespace>
+    <filterSection>
+        <keywords>
+            <keyword name="Epidemiological" id="Epidemiological" ref="Epidemiological.html"/>
+            <keyword name="Integrated" id="Integrated" ref="Integrated.html"/>
+            <keyword name="Coupled" id="Coupled" ref="Coupled.html"/>
+            <keyword name="Temporal" id="Temporal" ref="Temporal.html"/>
+        </keywords>
+        <files>
+	    <file>*.html</file>
+        </files>
+    </filterSection>
+</QtHelpProject>
