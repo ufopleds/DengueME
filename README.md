@@ -1,3 +1,20 @@
 # DengueME
-<h2> DengueME </h2>
-DengueMe is a framework software projected to model and simulate transmission models (<b>Dengue</b>) or population dynamics (<b>Aedes aegypti</b>).
+
+## Overview
+DengueME is a collaborative and open source software framework to model and simulate the spatiotemporal dynamics of dengue transmission and the ecology of its vector. It supports compartmental and individual-based models, integrated with a  geographical database. Currently, DengueME is based on TerraME 1.6 <https://github.com/TerraME/terrame/releases/tag/1.6.0>.
+
+## License
+DengueME is distributed under the BSD 2-clause License. See [dengueme-license-bsd2.txt](https://github.com/ufopleds/DengueME/blob/master/dengueme-licence-bsd2.txt) for details. 
+
+
+## Supported Platforms
+MS Windows, and Linux.
+
+## Building and Configuring
+
+## Using
+
+## How to contribute
+
+## Reporting Bugs
+If you have found a bug, open an entry in the [DengueME Issue Tracker](https://github.com/ufopleds/DengueME/issues).
