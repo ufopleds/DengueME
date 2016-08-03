@@ -1,0 +1,45 @@
+<xmlmodel>
+  <script interpreter="">
+    <file>aegypti_ecology_temperature_model.lua</file>
+    <main>aegypti_ecology_temperature_model.lua</main>
+    <modelcategory>vector</modelcategory>
+    <modeltype>aegypti_ecology_temperature_model</modeltype>
+  </script>
+  <parameters>
+    <groupbox label="Population">
+      <field minimum="0" maximum="999999999" type="spinbox" id="INIT_EGG" label="Eggs:" description="initial value of eggs [1-999999999]">1000</field>
+      <field minimum="0" maximum="999999999" type="spinbox" id="INIT_LARVA" label="Larvae:" description="initial value of larvae [1-999999999]">0</field>
+      <field minimum="0" maximum="999999999" type="spinbox" id="INIT_PUPA" label="Pupae:" description="initial value of pupae [1-999999999]">0</field>
+      <field minimum="0" maximum="999999999" type="spinbox" id="INIT_ADULT" label="Adults:" description="initial value of adults [1-999999999]">0</field>
+    </groupbox>
+    
+    <groupbox label="Environmental parameters">
+      <field minimum="0" maximum="9999999" precision="5" type="doublespinbox" id="CC" step="0.1" label="Carrying capacity (limits the oviposition):">191.5</field>
+      <field minimum="0" maximum="9999999" precision="4" type="doublespinbox" id="TX_OVIP" step="0.1" label="Oviposition rate (per day per mosquito):" description="oviposition rate (per day per mosquito) [0-9999999]">1</field>
+      <csv id="TEMP" label="Weekly temperature values:">23.47142857,22.71428571,24.87142857,26.35714286,22.61428571,25.01428571,26.12857143,21.92857143,26.94285714,26.9,26.28571429,25.52857143,28.6,30.31428571,26.7,26.37142857,25.88571429,26.82857143,28.85714286,27.58571429,29.12857143,27.81428571,29.55714286,29.7,30.21428571,29.58571429,28.18571429,29.35714286,28.18571429,27.54285714,27.11428571,27.38571429,26.07142857,23.71428571,24.78571429,22.02857143,20.95714286,22.91428571,25.18571429,23.75714286,22.67142857,25.15714286,21.65714286,21.08571429,17.98571429,21.45714286,23.01428571,21.68571429,23.95714286,22.7,25.85714286,24.97142857,24.78571429,22.48571429,24.14285714,25.62857143,24.95714286,25.28571429,27.7,26.15714286,24.01428571,25.37142857,24.25714286,28.21428571,26.8,25.57142857,31.18571429,28.91428571,28.98571429,28.15714286,23.71428571,25.17142857,26.98571429,28.88571429,27.8,28.12727273</csv>
+    </groupbox>
+    
+    <groupbox label="Mortality rates">
+      <field minimum="0" maximum="1.0000" precision="10" type="doublespinbox" id="MORT_EGG" step="0.1" label="Mortality rate in egg stage (per day):" description="mortality rate in egg stage [0-1]">0,01</field>
+      <field minimum="0" maximum="1.0000" precision="10" type="doublespinbox" id="MORT_LARVA" step="0.1" label="Mortality rate in larval stage (per day):" description="mortality rate in larval stage [0-1]">0,33333333333333333333333333333333</field>
+      <field minimum="0" maximum="1.0000" precision="10" type="doublespinbox" id="MORT_PUPA" step="0.1" label="Mortality rate in pupal stage (per day):" description="mortality rate in pupal stage [0-1]">0,01428571428571428571428571428571</field>
+      <field minimum="0" maximum="1.0000" precision="10" type="doublespinbox" id="MORT_ADULT" step="0.1" label="Mortality rate in adult stage (per day):" description="mortality rate in adult stage [0-1]">0,05714285714285714285714285714286</field>
+    </groupbox>
+    
+    <groupbox label="Differential Equation">
+      <field minimum="0" maximum="9999" type="spinbox" id="DT" step="1" label="dt (day):" description="A number with the beginning of the interval (EDO function)">1</field>
+      <field minimum="0" maximum="9999" type="spinbox" id="UPPER" step="1" label="Upper limit (week):" description="A number with the end of the interval (EDO function)">7</field>
+      <field minimum="0" maximum="9999" precision="4" type="doublespinbox" id="DELTA" step="1" label="Step:" description="A positive number with the step within the interval (EDO function)">0,1</field>
+    </groupbox>
+    
+  </parameters>
+  <simulation label="Simulation">
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_START" label="Simulation start time (day):">1</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_END" label="Simulation end time:">720</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_REPORT_START" label="Log start time:">360</field>
+    <field minimum="0" maximum="1000000000" type="spinbox" id="SIMULATION_REPORT_END" label="Log end time:">720</field>
+  </simulation>
+  <results label="Results">    
+    <field type="lineedit" id="RESULTS_FILE" label="Filename (.csv):" description="name of the file with results (a .csv file)">results</field>
+  </results>
+</xmlmodel>
