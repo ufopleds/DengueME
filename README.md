@@ -13,7 +13,7 @@ MS Windows, and Linux.
 ## Building and Configuring
 Please, go to our wiki to find more information about [Building and Running](https://github.com/ufopleds/DengueME/wiki/Building-&-Running).
 ## Using
-Please,  go to our wiki to find more information about [Ussage](https://github.com/ufopleds/DengueME/wiki/How-to-Use).
+Please,  go to our wiki to find more information about [Usage](https://github.com/ufopleds/DengueME/wiki/How-to-Use).
 ## How to contribute
 If you want to contribute, please send a message to: tiago.lima.ufop@gmail.com or lsaraiva@oswego.edu
 ## Reporting Bugs
