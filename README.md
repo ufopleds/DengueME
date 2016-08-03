@@ -10,11 +10,11 @@ DengueME is distributed under the BSD 2-clause License. See [dengueme-license-bs
 ## Supported Platforms
 MS Windows, and Linux.
 
-## Building and Configuring
-Please, go to our wiki to find more information about [Building and Running]().
+## Install
+Please, go to our wiki to find more information about [Installing](https://github.com/ufopleds/DengueME/wiki/How-to-Install).
 ## Using
 Please,  go to our wiki to find more information about [Usage](https://github.com/ufopleds/DengueME/wiki/How-to-Use).
 ## How to contribute
-Please, go to our wiki to find more information about [How to Contribute]()
+Please, go to our wiki to find more information about [How to Contribute](https://github.com/ufopleds/DengueME/wiki/How-to-contribute)
 ## Reporting Bugs
 If you have found a bug, open an entry in the [DengueME Issue Tracker](https://github.com/ufopleds/DengueME/issues).
