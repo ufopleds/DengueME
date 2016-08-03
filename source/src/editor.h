@@ -71,6 +71,7 @@ public slots:
     bool loadModel(QString filename, bool editMode);
     void execModel(bool stepByStep);
     bool close(int del);
+    void updateModelInfo(QString newPath);
     void clearModel();
     bool save();
     bool saveAs();

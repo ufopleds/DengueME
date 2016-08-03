@@ -14,7 +14,7 @@ QModelIndex BuilderDirModel::addRootItem(QString path)
     QStandardItem *item = new QStandardItem(QFileInfo(path).fileName());
     item->setSizeHint(QSize(-1,20));
     item->setBackground(QBrush(QApplication::palette().color(QPalette::Background)));
-    item->setSelectable(false);
+    item->setSelectable(false);    
 
     appendRow(item);
 

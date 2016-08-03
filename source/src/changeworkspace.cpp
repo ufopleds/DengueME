@@ -14,8 +14,9 @@ ChangeWorkspace::ChangeWorkspace(QWidget *parent) :
     setPage(Page_SelectWorkspace, new SelectPage(this));
     setStartId(Page_SelectWorkspace);
     setOption(QWizard::NoBackButtonOnLastPage);
-    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/icon-logo.png"));
-    setWindowTitle(tr("Workspace dir"));
+ //   setPixmap(QWizard::LogoPixmap, QPixmap(":/Resources/logo.png"));
+    setWindowTitle(tr("Workspace Directory"));
+
 }
 
 void ChangeWorkspace::accept() {

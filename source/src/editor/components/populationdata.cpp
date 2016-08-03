@@ -15,7 +15,7 @@ struct CBField : public Component {
         layout->addWidget(cbox);
     }
 
-    virtual QDomDocument getXml() {
+    virtual QDomDocument getXml(){
         QDomDocument doc;
         QDomElement root = doc.createElement("usepopdata");
         doc.appendChild(root);

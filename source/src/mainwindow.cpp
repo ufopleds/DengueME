@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->actionNewModel,     SIGNAL(triggered()), SLOT(actionNewModel()));
     connect(ui->actionNewProject,   SIGNAL(triggered()), SLOT(actionNewProject()));
 
+   connect(ui->actionBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
     connect(ui->actionSave,         SIGNAL(triggered()), SLOT(actionSave()));
     connect(ui->actionClose,        SIGNAL(triggered()), SLOT(actionClose()));
     connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
@@ -82,8 +83,10 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
         connect(ui->outputDock, SIGNAL(visibilityChanged(bool)), output, SLOT(setChecked(bool)));
         connect(output, SIGNAL(toggled(bool)), ui->outputDock, SLOT(setVisible(bool)));
     }
-
+   ///TODO - Shortcuts
     new QShortcut(QKeySequence("Ctrl+F2"),this,SLOT(runUnitTests()));
+
+    ///TODO - Shortcuts
 }
 
 MainWindow::~MainWindow() {
@@ -105,6 +108,8 @@ void MainWindow::setState(State state) {
         ui->editorView->show();
         ui->run_stopButton->setEnabled(true);
         ui->actionRun->setEnabled(true);
+        ui->actionModelBuilder->setEnabled(true);
+        ui->actionBuilder->setEnabled(true);
         ui->actionRunByStep->setEnabled(true);
         ui->actionClose->setEnabled(true);
         ui->actionSave->setEnabled(true);
@@ -171,6 +176,7 @@ void MainWindow::workspaceContextMenu(const QPoint& point) {
 
 void MainWindow::modelActivated(QModelIndex index) {
     QFileInfo modelinfo(ui->treeView->fileInfo(index));
+
     if (modelinfo.isFile()) {
 
         if (ui->editor->loadModel(modelinfo.filePath(), false)) {
@@ -225,7 +231,6 @@ void MainWindow::actionDefault() {
 
         ui->editor->close(2);
 
-        qDebug() << DEFAULT_MODELS_DIR;
         QString original_dir = DEFAULT_MODELS_DIR + modelcategory + '/' + modeltype;
         QFileInfo original_file(original_dir + '/' + modeltype+ ".xml");
         dengueme::copy(original_file.absoluteFilePath(),path,true);
@@ -254,9 +259,16 @@ void MainWindow::actionRename() {
     QModelIndex index = ui->treeView->currentIndex();
     if (!index.isValid()) return;
 
-    ui->treeView->askRename(index);
-}
+   QString newPath = ui->treeView->askRename(index);
+   if(newPath != "false"){
+      QFileInfo info = ui->treeView->fileInfo(index);
+      newPath = info.path()+ '/' + newPath + ".xml";
+       ui->modelFile->setText( newPath);
+       ui->editor->updateModelInfo(newPath);
+   }
 
+}
+/// TODO - Study Run to R
 void MainWindow::actionRun() {
     if(ui->editorView->isVisible()) {
         setState(Running);
@@ -264,7 +276,8 @@ void MainWindow::actionRun() {
         else ui->editor->stopModel();
     }
 }
-
+/// TODO - Study Run to R
+///TODO - Step by Step
 void MainWindow::actionRunByStep() {
     if(ui->editorView->isVisible()) {
         setState(Running);
@@ -272,7 +285,7 @@ void MainWindow::actionRunByStep() {
         else ui->editor->stopModel();
     }
 }
-
+///TODO - Step by Step
 void MainWindow::actionOptions() {
     Options(this).exec();
 }
@@ -348,6 +361,7 @@ void MainWindow::newProject(QString name)
         QMessageBox::critical(this, tr("Error"), tr("Error creating project folder."));
     }
 }
+
 
 void MainWindow::onHelpRequested() {
     DescriptionWindow *description = new DescriptionWindow(this,ui->editor->modelDescription);

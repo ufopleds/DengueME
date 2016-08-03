@@ -81,7 +81,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Restore</string>
+            <string>Default Values</string>
            </property>
           </widget>
          </item>
@@ -108,8 +108,8 @@
             <string notr="true">border: none;</string>
            </property>
            <property name="icon">
-            <iconset resource="Resource.qrc">
-             <normaloff>:/img/Resources/exit.png</normaloff>:/img/Resources/exit.png</iconset>
+            <iconset>
+             <normaloff>Resources/close.png</normaloff>Resources/close.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -182,8 +182,8 @@
     <addaction name="actionResetViews"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuEdit"/>
    <addaction name="menuProject"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuView"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -214,6 +214,8 @@
    <addaction name="actionSave"/>
    <addaction name="actionRename"/>
    <addaction name="actionRemove"/>
+   <addaction name="separator"/>
+   <addaction name="actionBuilder"/>
    <addaction name="separator"/>
    <addaction name="actionRun"/>
    <addaction name="actionRunByStep"/>
@@ -275,7 +277,7 @@
     <set>QDockWidget::DockWidgetClosable</set>
    </property>
    <property name="windowTitle">
-    <string>Output</string>
+    <string>Console</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>8</number>
@@ -318,7 +320,7 @@
        <item>
         <widget class="QPushButton" name="clearButton">
          <property name="text">
-          <string>Clear</string>
+          <string>Clear Console</string>
          </property>
         </widget>
        </item>
@@ -339,11 +341,14 @@
   </widget>
   <action name="actionAbout">
    <property name="icon">
-    <iconset resource="Resource.qrc">
-     <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
+    <iconset>
+     <normaloff>Resources/about.png</normaloff>Resources/about.png</iconset>
    </property>
    <property name="text">
     <string>&amp;About</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
   <action name="actionExit">
@@ -368,6 +373,9 @@
    </property>
   </action>
   <action name="actionRun">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resource.qrc">
      <normaloff>:/img/Resources/run.png</normaloff>:/img/Resources/run.png</iconset>
@@ -376,7 +384,7 @@
     <string>&amp;Run</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string>F9, Ctrl+R</string>
    </property>
   </action>
   <action name="actionProject">
@@ -390,12 +398,18 @@
    </property>
   </action>
   <action name="actionNewProject">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="Resource.qrc">
      <normaloff>:/img/Resources/folder-new.png</normaloff>:/img/Resources/folder-new.png</iconset>
    </property>
    <property name="text">
     <string>New &amp;project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionEpidemiological">
@@ -454,10 +468,13 @@
   <action name="actionClose">
    <property name="icon">
     <iconset>
-     <normaloff>:/img/Resources/img/archive-extract.png</normaloff>:/img/Resources/img/archive-extract.png</iconset>
+     <normaloff>Resources/close.png</normaloff>Resources/close.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Close model</string>
+    <string>&amp;Close model </string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="actionRunByStep">
@@ -468,10 +485,13 @@
    <property name="text">
     <string>Run &amp;step by step</string>
    </property>
+   <property name="shortcut">
+    <string>F10</string>
+   </property>
   </action>
   <action name="actionSetWorkspace">
    <property name="text">
-    <string>Change current &amp;workspace</string>
+    <string>Change &amp;workspace</string>
    </property>
   </action>
   <action name="actionRename">
@@ -506,15 +526,44 @@
    <property name="text">
     <string>New &amp;model</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionModelBuilder">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/img/Resources/builderTool.png</normaloff>:/img/Resources/builderTool.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Model builder</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
   </action>
   <action name="actionResetViews">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/img/Resources/Synchronize-64.png</normaloff>:/img/Resources/Synchronize-64.png</iconset>
+   </property>
    <property name="text">
     <string>Reset views</string>
+   </property>
+  </action>
+  <action name="actionBuilder">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/img/Resources/builderTool.png</normaloff>:/img/Resources/builderTool.png</iconset>
+   </property>
+   <property name="text">
+    <string>Model Builder</string>
    </property>
   </action>
  </widget>

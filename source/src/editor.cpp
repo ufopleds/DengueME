@@ -73,7 +73,7 @@ Editor::Editor(QWidget *parent) :
         simulationGroup->setLabel(tr("Simulation"));
         layout->addWidget(simulationGroup);
 
-
+         ///TODO  - Observers
 
         QGroupBox *group = new QGroupBox(tr("Observer"));
         QVBoxLayout *groupLayout = new QVBoxLayout(group);
@@ -83,6 +83,8 @@ Editor::Editor(QWidget *parent) :
         group->setVisible(false);      
         layout->addWidget(enableObserver);
         layout->addWidget(group);
+
+          ///TODO - Observers
 
         layout->addStretch(1);
     }
@@ -121,8 +123,10 @@ Editor::Editor(QWidget *parent) :
     viewmap.insert(ViewSimulation, ViewData(tr("Simulation"), view_simulation));
     viewmap.insert(ViewResults,    ViewData(tr("Results"),    view_results));
 
+    ///TODO - Interpreter new Window
+    ///IDEA - Show just model, add a OK button, after pressed get all the information and show the right views
     connect(view_model, SIGNAL(interpreterChanged(Interpreter)), SLOT(onInterpreterChanged(Interpreter)));
-
+    ///TODO - Interpreter new Window
 
 }
 
@@ -235,6 +239,7 @@ bool Editor::loadModel(QString filename, bool editMode){
     }
     modelDescription = "";
     modelFile = info.absoluteFilePath();
+
     emit renamed(modelFile);
     QDomElement root = modelXml.firstChildElement("xmlmodel");
 
@@ -351,7 +356,10 @@ void Editor::execModel(bool stepByStep){
     emit interpreterStarted();
 }
 
-// Basic Model Functions
+void Editor::updateModelInfo(QString newPath){
+    modelFile = newPath;
+}
+
 bool Editor::close(int del){
     if (modelFile.isEmpty()) return true;
 
@@ -414,7 +422,6 @@ bool Editor::save(){
     sim.firstChildElement().setTagName("simulation");
     root.appendChild(sim);
 
-    ///CREATE NEW TAG HERe
 
     if (enableResults->isChecked()) {
         QDomDocument res = resultsGroup->getXml();
@@ -461,12 +468,13 @@ void Editor::readyReadStandardOutput(){
     emit output (1, interpreter.readAllStandardOutput());
 }
 
-
+//Interpreter Functions - TerraME or R
+///TODO - R Interpreter
 void Editor::onInterpreterFinished(int exitCode){
     interpreter.close();
     emit interpreterStopped(exitCode);
 }
-
+/// TODO - INTERPRETER DINAMIC WINDOW
 void Editor::onInterpreterChanged(ModelView::Interpreter intr)
 {
     if (intr == ModelView::TerraME) {
@@ -482,4 +490,4 @@ void Editor::onInterpreterChanged(ModelView::Interpreter intr)
     }
     setupViews();
 }
-
+///TODO - R Interpreter

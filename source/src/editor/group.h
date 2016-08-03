@@ -39,13 +39,17 @@ private:
 private slots:
     inline void onRemove() { emit remove(); }
     void removeField();
+    void askRemoveGroup();
+    void cloneField();
+    void changeType(QString);
+    void morphField(QString type);
 
 public slots:
     Field *addBoolean();
     Field *addText();
     Field *addInteger();
     Field *addFloating();
-    Field *addCheckbox();
+  //  Field *addCheckbox();
     Field *addCombobox();
     ImportCsv *addCsv();
     Component *addComponent(Component *comp);

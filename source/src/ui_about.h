@@ -30,6 +30,11 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame;
     QLabel *label;
+    QLabel *label_5;
+    QLabel *label_2;
+    QLabel *label_4;
+    QLabel *label_3;
+    QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *pushButton;
@@ -38,15 +43,15 @@ public:
     {
         if (About->objectName().isEmpty())
             About->setObjectName(QString::fromUtf8("About"));
-        About->resize(415, 194);
+        About->resize(420, 284);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(About->sizePolicy().hasHeightForWidth());
         About->setSizePolicy(sizePolicy);
-        About->setMaximumSize(QSize(420, 194));
+        About->setMaximumSize(QSize(420, 284));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8(":/img/Resources/about.png"), QSize(), QIcon::Normal, QIcon::Off);
         About->setWindowIcon(icon);
         About->setSizeGripEnabled(false);
         verticalLayout = new QVBoxLayout(About);
@@ -73,8 +78,39 @@ public:
         label->setScaledContents(false);
         label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label->setWordWrap(true);
+        label->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
 
         verticalLayout->addWidget(label);
+
+        label_5 = new QLabel(About);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setOpenExternalLinks(true);
+        label_5->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+
+        verticalLayout->addWidget(label_5);
+
+        label_2 = new QLabel(About);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        verticalLayout->addWidget(label_2);
+
+        label_4 = new QLabel(About);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setOpenExternalLinks(true);
+        label_4->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+
+        verticalLayout->addWidget(label_4);
+
+        label_3 = new QLabel(About);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setOpenExternalLinks(true);
+        label_3->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+
+        verticalLayout->addWidget(label_3);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -100,7 +136,11 @@ public:
     void retranslateUi(QDialog *About)
     {
         About->setWindowTitle(QApplication::translate("About", "About", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("About", "The DengueME is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("About", "<b>DengueME</b> is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("About", "<b>Lab WebSite:</b> <a href=\"http://www.leds.ufop.br/\">http://www.leds.ufop.br/ </a>", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("About", "<html><head/><body><p>This software is distributed under the &quot;<span style=\" font-weight:600;\">BSD - 2 Clause</span>&quot; license. </p></body></html>", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("About", "<b>GitHub:</b>  <a href=\"https://github.com/ufopleds/dengueme\">https://github.com/ufopleds/dengueme </a>", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("About", "<b>Icons:</b> <a href=\" https://icons8.com/web-app/\">https://icons8.com</a>", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("About", "Close", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

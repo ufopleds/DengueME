@@ -12,7 +12,7 @@ NewProject::NewProject(QString workspace, QWidget *parent)
 //    setWizardStyle(ModernStyle);
 //#endif
 //    setOption(HaveHelpButton, true);
-    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/icon-error.png"));
+  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
 //    connect(this, SIGNAL(helpRequested()), this, SLOT(showHelp()));
     setWindowTitle(tr("New project"));
 }

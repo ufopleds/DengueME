@@ -1,6 +1,7 @@
 #include <limits>
 #include "field.h"
 #include "ui_field.h"
+#include "importcsv.h"
 #include "constraints/doublespinboxrules.h"
 #include "constraints/spinboxrules.h"
 #include "constraints/comboboxrules.h"
@@ -56,6 +57,7 @@ Field::Field(QWidget *parent) :
 
     menu = new QMenu(this);
 
+    actionCsv = new QAction(tr("&Csv"),menu);
     actionBoolean = new QAction(tr("&Boolean"),menu);
     actionText     = new QAction(tr("&Text"),menu);
     actionInteger  = new QAction(tr("&Integer"),menu);
@@ -64,41 +66,53 @@ Field::Field(QWidget *parent) :
     actionCombobox = new QAction(tr("C&ombobox"),menu);
     actionOptions  = new QAction(tr("&Options"),menu);
     actionDelete   = new QAction(tr("&Delete"),menu);
+    actionClone =new QAction(tr("Cl&one"),menu);
 
+    actionCsv->setCheckable(true);
     actionBoolean->setCheckable(true);
     actionText->setCheckable(true);
     actionInteger->setCheckable(true);
     actionFloating->setCheckable(true);
-    actionCheckbox->setCheckable(true);
     actionCombobox->setCheckable(true);
 
+    menu->addAction(actionCsv);
     menu->addAction(actionBoolean);
     menu->addAction(actionText);
     menu->addAction(actionInteger);
     menu->addAction(actionFloating);
-    menu->addAction(actionCheckbox);
     menu->addAction(actionCombobox);
-    menu->addSeparator();
-    menu->addAction(actionOptions);
-    menu->addAction(actionDelete);
+    //menu->addSeparator();
+   // menu->addAction(actionClone);
+   // menu->addAction(actionOptions);
+   // menu->addAction(actionDelete);
 
     ui->options->setMenu(menu);
 
+      connect(actionCsv, SIGNAL(triggered()), SLOT(onActionCsv()));
     connect(actionBoolean, SIGNAL(triggered()), SLOT(onActionBoolean()));
     connect(actionText,     SIGNAL(triggered()), SLOT(onActionText()));
     connect(actionInteger,  SIGNAL(triggered()), SLOT(onActionInteger()));
     connect(actionFloating, SIGNAL(triggered()), SLOT(onActionFloating()));
-    connect(actionCheckbox, SIGNAL(triggered()), SLOT(onActionCheckbox()));
     connect(actionCombobox, SIGNAL(triggered()), SLOT(onActionCombobox()));
-    connect(actionOptions,  SIGNAL(triggered()), SLOT(onActionOptions()));
-    connect(actionDelete,   SIGNAL(triggered()), SLOT(onActionDelete()));
-
+  //  connect(actionOptions,  SIGNAL(triggered()), SLOT(onActionOptions()));
+    //connect(actionDelete,   SIGNAL(triggered()), SLOT(onActionDelete()));
+    //connect(actionClone,   SIGNAL(triggered()), SLOT(onActionClone()));
+    connect(ui->toolOptions,   SIGNAL(clicked()), SLOT(onActionOptions()));
+   connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
+    connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
+    ui->toolOptions->setToolTip("Options");
+    ui->toolDelete->setToolTip("Delete");
+    ui->toolClone->setToolTip("Clone");
     updateMenu();
 }
 
 Field::~Field()
 {
     delete ui;
+}
+void Field::onActionCsv(){
+    emit remove();
+    emit csv("csv");
 }
 
 QDomDocument Field::getXml()
@@ -212,6 +226,12 @@ QDomDocument Field::getXml()
     }
     return ret;
 }
+///TODO - HELP
+/*QString Field::produceDescription(QDomElement node){
+    QString test = "";
+    test+= node.attribute("description");
+}*/
+///TODO - HELP
 void Field::setXml(QDomElement node)
 {
     if (node.attribute("type").compare("spinbox") == 0) {
@@ -253,7 +273,7 @@ void Field::setXml(QDomElement node)
         ui->var->setText(node.attribute("id"));
         ui->descript->setText(node.attribute("description"));
 
-        onActionCheckbox();
+      onActionBoolean();
         EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
         if (field) {
             field->setChecked(node.text().compare("true", Qt::CaseInsensitive) == 0);
@@ -264,7 +284,7 @@ void Field::setXml(QDomElement node)
         ui->var->setText(node.attribute("id"));
           ui->descript->setText(node.attribute("description"));
 
-        onActionCheckbox();
+        onActionBoolean();
         EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
         if (field) {
             field->setChecked(node.text().compare("true", Qt::CaseInsensitive) == 0);
@@ -301,9 +321,10 @@ void Field::setEditMode(bool enable)
     ui->line->setVisible(enable);
     ui->descript->setVisible(enable);
     ui->label->setReadOnly(!enable);
-
-
-    if (type == Checkbox) {
+    ui->toolOptions->setVisible(enable);
+    ui->toolClone->setVisible(enable);
+        ui->toolDelete->setVisible(enable);
+    if (type == Boolean) {
         EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
         if (field)
             field->lineedit->setReadOnly(!enable);
@@ -403,7 +424,8 @@ void Field::updateMenu()
     actionCheckbox->setChecked(type == Checkbox);
     actionCombobox->setChecked(type == Combobox);
 
-    actionOptions->setDisabled(type == Text);
+    ui->toolOptions->setDisabled(type == Text || type == Boolean);
+
 }
 
 void Field::setWidget(QWidget *widget)
@@ -423,23 +445,25 @@ void Field::setWidget(QWidget *widget)
 
     updateMenu();
 }
+
 void Field::onActionBoolean(){
     type = Boolean;
-
+     emit changeType("Boolean");
     setWidget(new EditableCheckbox);
 }
 
 void Field::onActionText()
 {
-    type = Text;
 
+    type = Text;
+    emit changeType("Text");
     setWidget(new QLineEdit);
 }
 
 void Field::onActionInteger()
 {
     type = Integer;
-
+       emit changeType("Integer");
     QSpinBox *w = new QSpinBox;
     double x;
     w->setMinimum(x= attr["minimum"].toDouble());
@@ -451,7 +475,7 @@ void Field::onActionInteger()
 void Field::onActionFloating()
 {
     type = Floating;
-
+     emit changeType("Float");
     QDoubleSpinBox *w = new QDoubleSpinBox;
     w->setDecimals(attr["precision"].toInt());
     w->setSingleStep(attr["step"].toDouble());
@@ -464,15 +488,17 @@ void Field::onActionFloating()
 void Field::onActionCheckbox()
 {
     type = Checkbox;
-
+ emit changeType("Boolean");
     setWidget(new EditableCheckbox);
 }
 
 void Field::onActionCombobox()
 {
     type = Combobox;
-
+    emit changeType("Combobox");
     setWidget(new QComboBox);
+
+
 }
 
 bool Field::onActionOptions()
@@ -538,8 +564,20 @@ bool Field::onActionOptions()
     return false;
 }
 
+void Field::onActionClone(){
+    emit clone();
+}
+
 void Field::onActionDelete()
 {
-    emit remove();
+    int opt = QMessageBox::question(this,tr("Remove Field"),
+                                    "This action will remove this field. Do you want to continue?",
+                                    QMessageBox::Yes | QMessageBox::No);
+
+
+    if(opt == QMessageBox::Yes){
+           emit remove();
+    }
+
 }
 

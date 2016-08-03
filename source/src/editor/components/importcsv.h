@@ -25,7 +25,14 @@ public:
 private slots:
     void openCsv();
     void onActionDelete();
+    void onMorphBoolean( );
+    void onMorphCombobox();
+    void onMorphText();
+    void onMorphInteger();
+    void onMorphFloat();
 
+
+    void onActionClone();
 private:
     Ui::ImportCsv *ui;
 };

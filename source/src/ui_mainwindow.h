@@ -59,6 +59,7 @@ public:
     QAction *actionNewModel;
     QAction *actionModelBuilder;
     QAction *actionResetViews;
+    QAction *actionBuilder;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QWidget *editorView;
@@ -103,7 +104,7 @@ public:
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("Resources/about.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionAbout->setIcon(icon);
         actionExit = new QAction(MainWindow);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
@@ -117,6 +118,7 @@ public:
         actionSave->setIcon(icon2);
         actionRun = new QAction(MainWindow);
         actionRun->setObjectName(QString::fromUtf8("actionRun"));
+        actionRun->setEnabled(true);
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/img/Resources/run.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRun->setIcon(icon3);
@@ -126,6 +128,7 @@ public:
         actionModel->setObjectName(QString::fromUtf8("actionModel"));
         actionNewProject = new QAction(MainWindow);
         actionNewProject->setObjectName(QString::fromUtf8("actionNewProject"));
+        actionNewProject->setEnabled(true);
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/img/Resources/folder-new.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionNewProject->setIcon(icon4);
@@ -151,7 +154,7 @@ public:
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/img/Resources/img/archive-extract.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QString::fromUtf8("Resources/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClose->setIcon(icon6);
         actionRunByStep = new QAction(MainWindow);
         actionRunByStep->setObjectName(QString::fromUtf8("actionRunByStep"));
@@ -177,8 +180,19 @@ public:
         actionNewModel->setIcon(icon10);
         actionModelBuilder = new QAction(MainWindow);
         actionModelBuilder->setObjectName(QString::fromUtf8("actionModelBuilder"));
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/img/Resources/builderTool.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionModelBuilder->setIcon(icon11);
         actionResetViews = new QAction(MainWindow);
         actionResetViews->setObjectName(QString::fromUtf8("actionResetViews"));
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/img/Resources/Synchronize-64.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionResetViews->setIcon(icon12);
+        actionBuilder = new QAction(MainWindow);
+        actionBuilder->setObjectName(QString::fromUtf8("actionBuilder"));
+        actionBuilder->setCheckable(false);
+        actionBuilder->setEnabled(true);
+        actionBuilder->setIcon(icon11);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -217,7 +231,9 @@ public:
         buttonHelp = new QToolButton(editorView);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
         buttonHelp->setStyleSheet(QString::fromUtf8("border: none;"));
-        buttonHelp->setIcon(icon);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        buttonHelp->setIcon(icon13);
         buttonHelp->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(buttonHelp);
@@ -225,7 +241,7 @@ public:
         buttonClose = new QToolButton(editorView);
         buttonClose->setObjectName(QString::fromUtf8("buttonClose"));
         buttonClose->setStyleSheet(QString::fromUtf8("border: none;"));
-        buttonClose->setIcon(icon1);
+        buttonClose->setIcon(icon6);
         buttonClose->setIconSize(QSize(18, 18));
 
         horizontalLayout_2->addWidget(buttonClose);
@@ -330,8 +346,8 @@ public:
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(8), outputDock);
 
         menuBar->addAction(menuFile->menuAction());
-        menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuProject->menuAction());
+        menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuView->menuAction());
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionNewModel);
@@ -357,6 +373,8 @@ public:
         mainToolBar->addAction(actionRename);
         mainToolBar->addAction(actionRemove);
         mainToolBar->addSeparator();
+        mainToolBar->addAction(actionBuilder);
+        mainToolBar->addSeparator();
         mainToolBar->addAction(actionRun);
         mainToolBar->addAction(actionRunByStep);
 
@@ -369,14 +387,16 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "DengueME", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("MainWindow", "&About", 0, QApplication::UnicodeUTF8));
+        actionAbout->setShortcut(QApplication::translate("MainWindow", "F1", 0, QApplication::UnicodeUTF8));
         actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0, QApplication::UnicodeUTF8));
         actionSave->setText(QApplication::translate("MainWindow", "&Save", 0, QApplication::UnicodeUTF8));
         actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0, QApplication::UnicodeUTF8));
         actionRun->setText(QApplication::translate("MainWindow", "&Run", 0, QApplication::UnicodeUTF8));
-        actionRun->setShortcut(QApplication::translate("MainWindow", "Ctrl+R", 0, QApplication::UnicodeUTF8));
+        actionRun->setShortcut(QApplication::translate("MainWindow", "F9, Ctrl+R", 0, QApplication::UnicodeUTF8));
         actionProject->setText(QApplication::translate("MainWindow", "Project", 0, QApplication::UnicodeUTF8));
         actionModel->setText(QApplication::translate("MainWindow", "Model", 0, QApplication::UnicodeUTF8));
         actionNewProject->setText(QApplication::translate("MainWindow", "New &project", 0, QApplication::UnicodeUTF8));
+        actionNewProject->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0, QApplication::UnicodeUTF8));
         actionEpidemiological->setText(QApplication::translate("MainWindow", "E&pidemiological", 0, QApplication::UnicodeUTF8));
         actionCoupled->setText(QApplication::translate("MainWindow", "&Coupled", 0, QApplication::UnicodeUTF8));
         actionIntegrated->setText(QApplication::translate("MainWindow", "&Integrated", 0, QApplication::UnicodeUTF8));
@@ -388,26 +408,31 @@ public:
         actionPaste->setText(QApplication::translate("MainWindow", "Paste", 0, QApplication::UnicodeUTF8));
         actionPaste->setShortcut(QApplication::translate("MainWindow", "Ctrl+V", 0, QApplication::UnicodeUTF8));
         actionOptions->setText(QApplication::translate("MainWindow", "&Options", 0, QApplication::UnicodeUTF8));
-        actionClose->setText(QApplication::translate("MainWindow", "&Close model", 0, QApplication::UnicodeUTF8));
+        actionClose->setText(QApplication::translate("MainWindow", "&Close model ", 0, QApplication::UnicodeUTF8));
+        actionClose->setShortcut(QApplication::translate("MainWindow", "Ctrl+W", 0, QApplication::UnicodeUTF8));
         actionRunByStep->setText(QApplication::translate("MainWindow", "Run &step by step", 0, QApplication::UnicodeUTF8));
-        actionSetWorkspace->setText(QApplication::translate("MainWindow", "Change current &workspace", 0, QApplication::UnicodeUTF8));
+        actionRunByStep->setShortcut(QApplication::translate("MainWindow", "F10", 0, QApplication::UnicodeUTF8));
+        actionSetWorkspace->setText(QApplication::translate("MainWindow", "Change &workspace", 0, QApplication::UnicodeUTF8));
         actionRename->setText(QApplication::translate("MainWindow", "&Rename", 0, QApplication::UnicodeUTF8));
         actionRename->setShortcut(QApplication::translate("MainWindow", "F2", 0, QApplication::UnicodeUTF8));
         actionRemove->setText(QApplication::translate("MainWindow", "R&emove", 0, QApplication::UnicodeUTF8));
         actionRemove->setShortcut(QApplication::translate("MainWindow", "Del", 0, QApplication::UnicodeUTF8));
         actionNewModel->setText(QApplication::translate("MainWindow", "New &model", 0, QApplication::UnicodeUTF8));
+        actionNewModel->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0, QApplication::UnicodeUTF8));
         actionModelBuilder->setText(QApplication::translate("MainWindow", "&Model builder", 0, QApplication::UnicodeUTF8));
+        actionModelBuilder->setShortcut(QApplication::translate("MainWindow", "Ctrl+B", 0, QApplication::UnicodeUTF8));
         actionResetViews->setText(QApplication::translate("MainWindow", "Reset views", 0, QApplication::UnicodeUTF8));
+        actionBuilder->setText(QApplication::translate("MainWindow", "Model Builder", 0, QApplication::UnicodeUTF8));
         modelFile->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        buttonDefault->setText(QApplication::translate("MainWindow", "Restore", 0, QApplication::UnicodeUTF8));
+        buttonDefault->setText(QApplication::translate("MainWindow", "Default Values", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0, QApplication::UnicodeUTF8));
         menuProject->setTitle(QApplication::translate("MainWindow", "&Project", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("MainWindow", "&Tools", 0, QApplication::UnicodeUTF8));
         menuView->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
         explorerDock->setWindowTitle(QApplication::translate("MainWindow", "Projects", 0, QApplication::UnicodeUTF8));
-        outputDock->setWindowTitle(QApplication::translate("MainWindow", "Output", 0, QApplication::UnicodeUTF8));
-        clearButton->setText(QApplication::translate("MainWindow", "Clear", 0, QApplication::UnicodeUTF8));
+        outputDock->setWindowTitle(QApplication::translate("MainWindow", "Console", 0, QApplication::UnicodeUTF8));
+        clearButton->setText(QApplication::translate("MainWindow", "Clear Console", 0, QApplication::UnicodeUTF8));
         run_stopButton->setText(QApplication::translate("MainWindow", "Run", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

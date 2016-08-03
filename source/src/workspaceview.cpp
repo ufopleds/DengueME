@@ -69,7 +69,7 @@ bool WorkspaceView::askDelete(QModelIndex index)
     return true;
 }
 
-bool WorkspaceView::askRename(QModelIndex index)
+QString WorkspaceView::askRename(QModelIndex index)
 {
     QFileInfo info = fileInfo(index);
     RenameWizard *w = new RenameWizard(info.path(),info.baseName(),info.isDir(),this);
@@ -79,25 +79,25 @@ bool WorkspaceView::askRename(QModelIndex index)
             QString oldpath = info.filePath();
             QString newpath = info.path() + QDir::separator() + newname;
             if (QFile::rename(oldpath, newpath))
-                return true;
+                return newpath;
         } else {
            {
                 QString oldpath = info.filePath();
                 QString newpath = info.path() + '/' + newname + ".xml";
                 if (!QFile::rename(oldpath, newpath))
-                    return false;
+                    return "false";
             }
             {
                 QString oldpath = info.path() + '/' + info.baseName() + "_scripts";
                 QString newpath = info.path() + '/' + newname + "_scripts";
                 if (!QFile::rename(oldpath, newpath))
-                    return false;
+                    return "false";
             }
-            return true;
+            return newname;
         }
         QMessageBox::critical(this, tr("Error"), tr("Error trying to rename file/folder."));
     }
-    return false;
+    return "false";
 }
 
 void WorkspaceView::setDirModel(DirModel *model)

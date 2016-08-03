@@ -3,7 +3,7 @@
 #include "newmodelwizard.h"
 #include "builderdirmodel.h"
 #include "../dengueme.h"
-
+#include "openmodel.h"
 
 
 ModelBuilder::ModelBuilder(QWidget *parent) :
@@ -30,17 +30,36 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
     connect(ui->editor, SIGNAL(renamed(QString)), ui->modelFile, SLOT(setText(QString)));
     connect(ui->actionSave, SIGNAL(triggered()), ui->editor, SLOT(save()));
     connect(ui->actionDelete, SIGNAL(triggered()), SLOT(deleteModel()));
-    connect(ui->actionEdit, SIGNAL(triggered()), SLOT(editModel()));
+    connect(ui->actionEdit, SIGNAL(triggered()), SLOT(openModelWizard()));
     connect(ui->actionNew, SIGNAL(triggered()), SLOT(newModel()));
-    connect(ui->actionClone, SIGNAL(triggered()), SLOT(cloneModel()));
-    connect(ui->buttonClose, SIGNAL(clicked()), ui->editor, SLOT(close()));
+    connect(ui->buttonClose, SIGNAL(clicked()), SLOT(actionClose()));
     connect(ui->stackedWidget, SIGNAL(currentChanged(int)), SLOT(setToolbar(int)));
     ui->actionSave->setEnabled(false);
     ui->actionDelete->setEnabled(false);
+    ui->toolBar->addAction(ui->actionEdit);
     ui->toolBar->addAction(ui->actionNew);
 
 }
 
+void ModelBuilder::openModelWizard(){
+
+    OpenModel *openWizard = new OpenModel(this);
+
+      if(openWizard->exec() == QDialog::Accepted){
+
+          QFileInfo modelinfo(openWizard->getFilePath() + QDir::separator() +openWizard->getFileName() + ".xml");
+          qDebug() << modelinfo.filePath();
+           if (modelinfo.isFile()) {
+              if (!ui->editor->loadModel(modelinfo.filePath(), true))
+                  return;
+               ui->stackedWidget->setCurrentIndex(1);
+      }
+  }
+
+}
+void ModelBuilder::actionClose() {
+    ui->editor->close(0);
+}
 ModelBuilder::~ModelBuilder()
 {
     delete ui;
@@ -55,11 +74,12 @@ void ModelBuilder::closeEvent(QCloseEvent *event) {
 
 void ModelBuilder::modelActivated(QModelIndex index)
 {
+
     QFileInfo modelinfo(ui->listView->filePath(index) + QDir::separator() + ui->listView->fileInfo(index).fileName() + ".xml");
+    qDebug() << modelinfo.filePath();
     if (modelinfo.isFile()) {
         if (!ui->editor->loadModel(modelinfo.filePath(), true))
             return;
-
        ui->stackedWidget->setCurrentIndex(1);
 
     }
@@ -68,13 +88,15 @@ void ModelBuilder::modelActivated(QModelIndex index)
 void ModelBuilder::selectionChanged(const QModelIndex &current, const QModelIndex &/*previous*/)
 {
     ui->toolBar->clear();
-    ui->actionClone->setEnabled(false);
+
     ui->actionDelete->setEnabled(false);
-    ui->actionEdit->setEnabled(false);
+
     ui->actionSave->setEnabled(false);
 
     ui->toolBar->addAction(ui->actionNew);
     ui->actionNew->setEnabled(true);
+    ui->toolBar->addAction(ui->actionEdit);
+    ui->actionEdit->setEnabled(true);
 
     if (!current.isValid()) return;
 
@@ -87,6 +109,7 @@ void ModelBuilder::selectionChanged(const QModelIndex &current, const QModelInde
         ui->actionDelete->setEnabled(true);
     }
 }
+
 
 void ModelBuilder::onModelClosed()
 {
@@ -132,28 +155,17 @@ void ModelBuilder::newModel() {
     ui->editor->loadModel(dest, true);
     ui->modelFile->setText(ui->editor->getModelFile());
     ui->stackedWidget->setCurrentIndex(1);
-    ///DEFAULT
+
 
 }
 
-void ModelBuilder::cloneModel()
-{
-    switch (ui->stackedWidget->currentIndex()) {
-    case 0:
-
-        break;
-
-    case 1:
-    default:
-        return;
-    }
-}
 
 void ModelBuilder::setToolbar(int i)
 {
     ui->toolBar->clear();
     switch (i) {
     case 0:
+        ui->actionEdit->setEnabled(true);
         selectionChanged(ui->listView->currentIndex());
         break;
 
@@ -164,7 +176,7 @@ void ModelBuilder::setToolbar(int i)
         ui->toolBar->addAction(ui->actionSave);
         ui->actionSave->setEnabled(true);
 
-        ui->actionEdit->setEnabled(false);
+       // ui->actionEdit->setEnabled(false);
         ui->actionNew->setEnabled(false);
         break;
     }

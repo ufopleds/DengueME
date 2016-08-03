@@ -17,6 +17,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
+#include <QtGui/QSpacerItem>
 #include <QtGui/QToolButton>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -30,6 +31,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *label;
     QToolButton *addField;
+    QSpacerItem *horizontalSpacer;
     QToolButton *removeGroup;
     QListWidget *widgets;
 
@@ -52,17 +54,28 @@ public:
 
         addField = new QToolButton(Group);
         addField->setObjectName(QString::fromUtf8("addField"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/Resources/plus"), QSize(), QIcon::Normal, QIcon::Off);
+        addField->setIcon(icon);
+        addField->setIconSize(QSize(15, 15));
         addField->setPopupMode(QToolButton::InstantPopup);
-        addField->setToolButtonStyle(Qt::ToolButtonTextOnly);
-        addField->setArrowType(Qt::DownArrow);
+        addField->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        addField->setArrowType(Qt::NoArrow);
 
         horizontalLayout->addWidget(addField);
 
+        horizontalSpacer = new QSpacerItem(20, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
         removeGroup = new QToolButton(Group);
         removeGroup->setObjectName(QString::fromUtf8("removeGroup"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Resources/minus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        removeGroup->setIcon(icon1);
         removeGroup->setPopupMode(QToolButton::InstantPopup);
-        removeGroup->setToolButtonStyle(Qt::ToolButtonTextOnly);
-        removeGroup->setArrowType(Qt::DownArrow);
+        removeGroup->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        removeGroup->setArrowType(Qt::NoArrow);
 
         horizontalLayout->addWidget(removeGroup);
 

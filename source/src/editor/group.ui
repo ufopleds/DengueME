@@ -40,30 +40,60 @@
        <property name="text">
         <string>Add field</string>
        </property>
+       <property name="icon">
+        <iconset resource="../Resource.qrc">
+         <normaloff>:/Resources/plus</normaloff>:/Resources/plus</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>15</height>
+        </size>
+       </property>
        <property name="popupMode">
         <enum>QToolButton::InstantPopup</enum>
        </property>
        <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonTextOnly</enum>
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
        <property name="arrowType">
-        <enum>Qt::DownArrow</enum>
+        <enum>Qt::NoArrow</enum>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QToolButton" name="removeGroup">
        <property name="text">
         <string>Remove group</string>
        </property>
+       <property name="icon">
+        <iconset resource="../Resource.qrc">
+         <normaloff>:/Resources/minus.png</normaloff>:/Resources/minus.png</iconset>
+       </property>
        <property name="popupMode">
         <enum>QToolButton::InstantPopup</enum>
        </property>
        <property name="toolButtonStyle">
-        <enum>Qt::ToolButtonTextOnly</enum>
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
        </property>
        <property name="arrowType">
-        <enum>Qt::DownArrow</enum>
+        <enum>Qt::NoArrow</enum>
        </property>
       </widget>
      </item>
@@ -87,6 +117,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

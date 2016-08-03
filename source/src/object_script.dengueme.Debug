@@ -31,6 +31,7 @@ INPUT(
 ./debug\modelview.o
 ./debug\tests.o
 ./debug\descriptionwindow.o
+./debug\openmodel.o
 ./debug\moc_mainwindow.o
 ./debug\moc_newproject.o
 ./debug\moc_observer.o
@@ -59,5 +60,6 @@ INPUT(
 ./debug\moc_editor.o
 ./debug\moc_modelview.o
 ./debug\moc_descriptionwindow.o
+./debug\moc_openmodel.o
 ./debug\qrc_Resource.o
 );

@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>ModelBuilder</class>
  <widget class="QMainWindow" name="ModelBuilder">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>900</width>
     <height>600</height>
    </rect>
   </property>
@@ -90,6 +93,12 @@
              <iconset resource="../Resource.qrc">
               <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
             </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
            </widget>
           </item>
           <item>
@@ -100,6 +109,12 @@
             <property name="icon">
              <iconset resource="../Resource.qrc">
               <normaloff>:/img/Resources/exit.png</normaloff>:/img/Resources/exit.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
             </property>
            </widget>
           </item>
@@ -119,7 +134,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>900</width>
      <height>21</height>
     </rect>
    </property>
@@ -131,7 +146,6 @@
     <addaction name="separator"/>
     <addaction name="actionEdit"/>
     <addaction name="actionSave"/>
-    <addaction name="actionClone"/>
     <addaction name="separator"/>
     <addaction name="actionDelete"/>
     <addaction name="separator"/>
@@ -167,6 +181,9 @@
    <property name="text">
     <string>&amp;Save</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionDelete">
    <property name="icon">
@@ -175,6 +192,9 @@
    </property>
    <property name="text">
     <string>&amp;Delete</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
   <action name="actionNew">
@@ -185,6 +205,9 @@
    <property name="text">
     <string>&amp;New</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionEdit">
    <property name="icon">
@@ -194,14 +217,8 @@
    <property name="text">
     <string>&amp;Open</string>
    </property>
-  </action>
-  <action name="actionClone">
-   <property name="icon">
-    <iconset resource="../Resource.qrc">
-     <normaloff>:/img/Resources/clone.png</normaloff>:/img/Resources/clone.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Clone</string>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>

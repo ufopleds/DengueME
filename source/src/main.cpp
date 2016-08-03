@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         dengueme::setconfig("terrame/gui","true");
     }
 
-
+    ///TODO - Translator
     if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "Default") {
         QTranslator translator;
         translator.load(QString("translations/") + dengueme::config("locale"));
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     QTranslator translator;
     translator.load(QString("translations/") + dengueme::config("locale"));
     app.installTranslator(&translator);
-
+    ///TODO - Translator
 
     (new MainWindow)->show();
 

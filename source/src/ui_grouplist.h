@@ -30,9 +30,9 @@ public:
     QVBoxLayout *verticalLayout;
     QWidget *panel;
     QHBoxLayout *horizontalLayout;
-    QSpacerItem *horizontalSpacer;
     QToolButton *addWidget;
     QToolButton *addGroup;
+    QSpacerItem *horizontalSpacer;
     QListWidget *widgets;
 
     void setupUi(QFrame *GroupEditor)
@@ -52,10 +52,6 @@ public:
         horizontalLayout = new QHBoxLayout(panel);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
         addWidget = new QToolButton(panel);
         addWidget->setObjectName(QString::fromUtf8("addWidget"));
         addWidget->setPopupMode(QToolButton::InstantPopup);
@@ -66,6 +62,10 @@ public:
         addGroup->setObjectName(QString::fromUtf8("addGroup"));
 
         horizontalLayout->addWidget(addGroup);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
 
 
         verticalLayout->addWidget(panel);

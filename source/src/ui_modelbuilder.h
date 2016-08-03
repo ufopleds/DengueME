@@ -37,7 +37,6 @@ public:
     QAction *actionDelete;
     QAction *actionNew;
     QAction *actionEdit;
-    QAction *actionClone;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QStackedWidget *stackedWidget;
@@ -59,7 +58,8 @@ public:
     {
         if (ModelBuilder->objectName().isEmpty())
             ModelBuilder->setObjectName(QString::fromUtf8("ModelBuilder"));
-        ModelBuilder->resize(800, 600);
+        ModelBuilder->setWindowModality(Qt::WindowModal);
+        ModelBuilder->resize(900, 600);
         actionExit = new QAction(ModelBuilder);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         QIcon icon;
@@ -85,11 +85,6 @@ public:
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/img/Resources/open.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionEdit->setIcon(icon4);
-        actionClone = new QAction(ModelBuilder);
-        actionClone->setObjectName(QString::fromUtf8("actionClone"));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/img/Resources/clone.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionClone->setIcon(icon5);
         centralwidget = new QWidget(ModelBuilder);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -128,9 +123,10 @@ public:
         buttonHelp = new QToolButton(page_2);
         buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
         buttonHelp->setStyleSheet(QString::fromUtf8("border: none;"));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
-        buttonHelp->setIcon(icon6);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        buttonHelp->setIcon(icon5);
+        buttonHelp->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(buttonHelp);
 
@@ -138,6 +134,7 @@ public:
         buttonClose->setObjectName(QString::fromUtf8("buttonClose"));
         buttonClose->setStyleSheet(QString::fromUtf8("border: none;"));
         buttonClose->setIcon(icon);
+        buttonClose->setIconSize(QSize(20, 20));
 
         horizontalLayout_2->addWidget(buttonClose);
 
@@ -157,7 +154,7 @@ public:
         ModelBuilder->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ModelBuilder);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 900, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         ModelBuilder->setMenuBar(menubar);
@@ -170,7 +167,6 @@ public:
         menuFile->addSeparator();
         menuFile->addAction(actionEdit);
         menuFile->addAction(actionSave);
-        menuFile->addAction(actionClone);
         menuFile->addSeparator();
         menuFile->addAction(actionDelete);
         menuFile->addSeparator();
@@ -190,10 +186,13 @@ public:
         ModelBuilder->setWindowTitle(QApplication::translate("ModelBuilder", "MainWindow", 0, QApplication::UnicodeUTF8));
         actionExit->setText(QApplication::translate("ModelBuilder", "E&xit", 0, QApplication::UnicodeUTF8));
         actionSave->setText(QApplication::translate("ModelBuilder", "&Save", 0, QApplication::UnicodeUTF8));
+        actionSave->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+S", 0, QApplication::UnicodeUTF8));
         actionDelete->setText(QApplication::translate("ModelBuilder", "&Delete", 0, QApplication::UnicodeUTF8));
+        actionDelete->setShortcut(QApplication::translate("ModelBuilder", "Del", 0, QApplication::UnicodeUTF8));
         actionNew->setText(QApplication::translate("ModelBuilder", "&New", 0, QApplication::UnicodeUTF8));
+        actionNew->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+N", 0, QApplication::UnicodeUTF8));
         actionEdit->setText(QApplication::translate("ModelBuilder", "&Open", 0, QApplication::UnicodeUTF8));
-        actionClone->setText(QApplication::translate("ModelBuilder", "&Clone", 0, QApplication::UnicodeUTF8));
+        actionEdit->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+P", 0, QApplication::UnicodeUTF8));
         modelFile->setText(QApplication::translate("ModelBuilder", "TextLabel", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("ModelBuilder", "Fi&le", 0, QApplication::UnicodeUTF8));
         toolBar->setWindowTitle(QApplication::translate("ModelBuilder", "toolBar", 0, QApplication::UnicodeUTF8));

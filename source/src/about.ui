@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>415</width>
-    <height>194</height>
+    <width>420</width>
+    <height>284</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>420</width>
-    <height>194</height>
+    <height>284</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="Resource.qrc">
-    <normaloff>:/Resources/help.png</normaloff>:/Resources/help.png</iconset>
+    <normaloff>:/img/Resources/about.png</normaloff>:/img/Resources/about.png</iconset>
   </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
@@ -67,7 +67,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>The DengueME is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.</string>
+      <string>&lt;b&gt;DengueME&lt;/b&gt; is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -81,7 +81,69 @@
      <property name="wordWrap">
       <bool>true</bool>
      </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse</set>
+     </property>
     </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>&lt;b&gt;Lab WebSite:&lt;/b&gt; &lt;a href=&quot;http://www.leds.ufop.br/&quot;&gt;http://www.leds.ufop.br/ &lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This software is distributed under the &amp;quot;&lt;span style=&quot; font-weight:600;&quot;&gt;BSD - 2 Clause&lt;/span&gt;&amp;quot; license. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>&lt;b&gt;GitHub:&lt;/b&gt;  &lt;a href=&quot;https://github.com/ufopleds/dengueme&quot;&gt;https://github.com/ufopleds/dengueme &lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>&lt;b&gt;Icons:&lt;/b&gt; &lt;a href=&quot; https://icons8.com/web-app/&quot;&gt;https://icons8.com&lt;/a&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

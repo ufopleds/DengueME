@@ -31,6 +31,7 @@ INPUT(
 ./release\modelview.o
 ./release\tests.o
 ./release\descriptionwindow.o
+./release\openmodel.o
 ./release\moc_mainwindow.o
 ./release\moc_newproject.o
 ./release\moc_observer.o
@@ -59,5 +60,6 @@ INPUT(
 ./release\moc_editor.o
 ./release\moc_modelview.o
 ./release\moc_descriptionwindow.o
+./release\moc_openmodel.o
 ./release\qrc_Resource.o
 );

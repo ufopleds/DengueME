@@ -26,6 +26,12 @@
         <file>Resources/results.png</file>
         <file>Resources/clone.png</file>
         <file>Resources/components.png</file>
+        <file>Resources/about.png</file>
+        <file>Resources/close.png</file>
+        <file>Resources/Synchronize-64.png</file>
+        <file>Resources/builderTool.png</file>
+        <file>Resources/Trash-52 (1).png</file>
+        <file>Resources/Trash-52 (2).png</file>
     </qresource>
     <qresource prefix="/">
         <file>Resources/simulation.png</file>
@@ -56,5 +62,6 @@
         <file>Resources/configure.png</file>
         <file>Resources/components.png</file>
         <file>Resources/clone.png</file>
+        <file>Resources/builderTool.png</file>
     </qresource>
 </RCC>

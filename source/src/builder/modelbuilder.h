@@ -22,15 +22,15 @@ private:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+void openModelWizard();
     void modelActivated(QModelIndex index);
     void selectionChanged(const QModelIndex &current, const QModelIndex &previous = QModelIndex());
     void onModelClosed();
     void deleteModel();
     void editModel();
     void newModel();
-    void cloneModel();
     void setToolbar(int i);
-
+  void actionClose();
 
 };
 

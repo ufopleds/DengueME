@@ -34,16 +34,18 @@ public:
     QLineEdit *var;
     QFrame *line;
     QLineEdit *label;
-    QWidget *spacer;
     QPushButton *importButton;
     QToolButton *options;
+    QToolButton *toolClone;
+    QToolButton *toolOptions;
+    QToolButton *toolDelete;
     QTextEdit *textEdit;
 
     void setupUi(QWidget *ImportCsv)
     {
         if (ImportCsv->objectName().isEmpty())
             ImportCsv->setObjectName(QString::fromUtf8("ImportCsv"));
-        ImportCsv->resize(399, 124);
+        ImportCsv->resize(590, 187);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -81,12 +83,6 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        spacer = new QWidget(ImportCsv);
-        spacer->setObjectName(QString::fromUtf8("spacer"));
-        spacer->setMinimumSize(QSize(32, 0));
-
-        horizontalLayout->addWidget(spacer);
-
         importButton = new QPushButton(ImportCsv);
         importButton->setObjectName(QString::fromUtf8("importButton"));
 
@@ -101,8 +97,42 @@ public:
 
         horizontalLayout->addWidget(options);
 
-        horizontalLayout->setStretch(0, 2);
-        horizontalLayout->setStretch(2, 3);
+        toolClone = new QToolButton(ImportCsv);
+        toolClone->setObjectName(QString::fromUtf8("toolClone"));
+        toolClone->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Resources/clone.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolClone->setIcon(icon1);
+        toolClone->setIconSize(QSize(24, 24));
+        toolClone->setPopupMode(QToolButton::InstantPopup);
+        toolClone->setAutoRaise(true);
+
+        horizontalLayout->addWidget(toolClone);
+
+        toolOptions = new QToolButton(ImportCsv);
+        toolOptions->setObjectName(QString::fromUtf8("toolOptions"));
+        toolOptions->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolOptions->setIcon(icon2);
+        toolOptions->setIconSize(QSize(24, 24));
+        toolOptions->setPopupMode(QToolButton::InstantPopup);
+        toolOptions->setAutoRaise(true);
+
+        horizontalLayout->addWidget(toolOptions);
+
+        toolDelete = new QToolButton(ImportCsv);
+        toolDelete->setObjectName(QString::fromUtf8("toolDelete"));
+        toolDelete->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/img/Resources/Trash-52 (2).png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolDelete->setIcon(icon3);
+        toolDelete->setIconSize(QSize(24, 24));
+
+        horizontalLayout->addWidget(toolDelete);
+
+        horizontalLayout->setStretch(0, 4);
+        horizontalLayout->setStretch(2, 5);
 
         verticalLayout->addLayout(horizontalLayout);
 
@@ -130,15 +160,19 @@ public:
 #endif // QT_NO_TOOLTIP
         label->setPlaceholderText(QApplication::translate("ImportCsv", "Label...", 0, QApplication::UnicodeUTF8));
         importButton->setText(QApplication::translate("ImportCsv", "Import From CSV", 0, QApplication::UnicodeUTF8));
-        options->setText(QString());
+        options->setText(QApplication::translate("ImportCsv", "Type", 0, QApplication::UnicodeUTF8));
+        toolClone->setText(QApplication::translate("ImportCsv", "...", 0, QApplication::UnicodeUTF8));
+        toolClone->setShortcut(QApplication::translate("ImportCsv", "Ctrl++", 0, QApplication::UnicodeUTF8));
+        toolOptions->setText(QApplication::translate("ImportCsv", "...", 0, QApplication::UnicodeUTF8));
+        toolDelete->setText(QApplication::translate("ImportCsv", "...", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         textEdit->setToolTip(QApplication::translate("ImportCsv", "Default value", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
         textEdit->setHtml(QApplication::translate("ImportCsv", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;\"><br /></p></body></html>", 0, QApplication::UnicodeUTF8));
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\"><br /></p></body></html>", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

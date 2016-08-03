@@ -40,12 +40,10 @@ public:
     QLabel *label_5;
     QHBoxLayout *horizontalLayout_4;
     QComboBox *comboBox;
-    QLabel *label_6;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit;
     QPushButton *pushButton;
-    QLabel *label_3;
     QCheckBox *checkBox;
     QWidget *tab_2;
     QFormLayout *formLayout_3;
@@ -53,11 +51,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit_2;
     QPushButton *pushButton_2;
-    QLabel *label_4;
     QHBoxLayout *horizontalLayout_3;
     QLineEdit *lineEdit_3;
     QPushButton *pushButton_3;
-    QLabel *label_7;
     QLabel *label_8;
     QDialogButtonBox *buttonBox;
 
@@ -97,14 +93,6 @@ public:
 
         horizontalLayout_4->addWidget(comboBox);
 
-        label_6 = new QLabel(tab);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setCursor(QCursor(Qt::WhatsThisCursor));
-        label_6->setStyleSheet(QString::fromUtf8("color: rgb(0, 85, 255);"));
-        label_6->setTextFormat(Qt::AutoText);
-
-        horizontalLayout_4->addWidget(label_6);
-
 
         formLayout_2->setLayout(4, QFormLayout::FieldRole, horizontalLayout_4);
 
@@ -123,14 +111,6 @@ public:
         pushButton->setMouseTracking(true);
 
         horizontalLayout->addWidget(pushButton);
-
-        label_3 = new QLabel(tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setCursor(QCursor(Qt::WhatsThisCursor));
-        label_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 85, 255);"));
-        label_3->setTextFormat(Qt::AutoText);
-
-        horizontalLayout->addWidget(label_3);
 
 
         verticalLayout_3->addLayout(horizontalLayout);
@@ -165,14 +145,6 @@ public:
 
         horizontalLayout_2->addWidget(pushButton_2);
 
-        label_4 = new QLabel(tab_2);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setCursor(QCursor(Qt::WhatsThisCursor));
-        label_4->setStyleSheet(QString::fromUtf8("color: rgb(0, 85, 255);"));
-        label_4->setTextFormat(Qt::AutoText);
-
-        horizontalLayout_2->addWidget(label_4);
-
 
         formLayout_3->setLayout(0, QFormLayout::FieldRole, horizontalLayout_2);
 
@@ -187,14 +159,6 @@ public:
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
 
         horizontalLayout_3->addWidget(pushButton_3);
-
-        label_7 = new QLabel(tab_2);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setCursor(QCursor(Qt::WhatsThisCursor));
-        label_7->setStyleSheet(QString::fromUtf8("color: rgb(0, 85, 255);"));
-        label_7->setTextFormat(Qt::AutoText);
-
-        horizontalLayout_3->addWidget(label_7);
 
 
         formLayout_3->setLayout(1, QFormLayout::FieldRole, horizontalLayout_3);
@@ -233,28 +197,12 @@ public:
         Options->setWindowTitle(QApplication::translate("Options", "Options", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Options", "Workspace:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("Options", "Language:", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        label_6->setToolTip(QApplication::translate("Options", "<html><head/><body><p>Restart DengueME to apply changes.</p></body></html>", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        label_6->setText(QApplication::translate("Options", "?", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("Options", "Browse", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        label_3->setToolTip(QApplication::translate("Options", "<html><head/><body><p>Directory where new projects will be created.</p></body></html>", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        label_3->setText(QApplication::translate("Options", "?", 0, QApplication::UnicodeUTF8));
         checkBox->setText(QApplication::translate("Options", "Prompt for workspace on startup", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Options", "General", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Options", "TerraME:", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QApplication::translate("Options", "Browse", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        label_4->setToolTip(QApplication::translate("Options", "<html><head/><body><p>TerraME executable path.</p></body></html>", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        label_4->setText(QApplication::translate("Options", "?", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("Options", "Browse", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        label_7->setToolTip(QApplication::translate("Options", "<html><head/><body><p>RScript executable path.</p></body></html>", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-        label_7->setText(QApplication::translate("Options", "?", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("Options", "Rscript:", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("Options", "Run", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

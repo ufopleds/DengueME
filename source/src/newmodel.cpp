@@ -14,6 +14,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget *parent) :
     addPage(new TypePage());
     addPage(new ProjectPage(workspace, project));
     addPage(new NamePage(workspace));
+    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
     setWindowTitle(tr("New model"));
 }
 

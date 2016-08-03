@@ -17,6 +17,9 @@ public:
 
 signals:
     void remove();
+    void clone();
+    void csv(QString type);
+    void changeType(QString type);
 };
 
 #endif // COMPONENT_H

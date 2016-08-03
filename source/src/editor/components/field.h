@@ -33,12 +33,14 @@ private:
     QMenu *menu;
     QAction *actionText;
     QAction *actionBoolean;
+    QAction *actionCsv;
     QAction *actionInteger;
     QAction *actionFloating;
     QAction *actionCheckbox;
     QAction *actionCombobox;
     QAction *actionOptions;
     QAction *actionDelete;
+    QAction *actionClone;
     Ui::Field *ui;
     FieldType type;
 
@@ -54,6 +56,8 @@ public slots:
     void onActionCombobox();
     bool onActionOptions();
     void onActionDelete();
+    void onActionClone();
+    void onActionCsv( );
 };
 
 #endif // FIELD_H

@@ -34,12 +34,15 @@ public:
     QWidget *container;
     QHBoxLayout *horizontalLayout_2;
     QToolButton *options;
+    QToolButton *toolClone;
+    QToolButton *toolOptions;
+    QToolButton *toolDelete;
 
     void setupUi(QWidget *Field)
     {
         if (Field->objectName().isEmpty())
             Field->setObjectName(QString::fromUtf8("Field"));
-        Field->resize(399, 41);
+        Field->resize(540, 52);
         horizontalLayout = new QHBoxLayout(Field);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         var = new QLineEdit(Field);
@@ -95,6 +98,42 @@ public:
 
         horizontalLayout->addWidget(options);
 
+        toolClone = new QToolButton(Field);
+        toolClone->setObjectName(QString::fromUtf8("toolClone"));
+        toolClone->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/Resources/clone.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolClone->setIcon(icon);
+        toolClone->setIconSize(QSize(24, 24));
+        toolClone->setPopupMode(QToolButton::InstantPopup);
+        toolClone->setAutoRaise(true);
+
+        horizontalLayout->addWidget(toolClone);
+
+        toolOptions = new QToolButton(Field);
+        toolOptions->setObjectName(QString::fromUtf8("toolOptions"));
+        toolOptions->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolOptions->setIcon(icon1);
+        toolOptions->setIconSize(QSize(24, 24));
+        toolOptions->setPopupMode(QToolButton::InstantPopup);
+        toolOptions->setAutoRaise(true);
+
+        horizontalLayout->addWidget(toolOptions);
+
+        toolDelete = new QToolButton(Field);
+        toolDelete->setObjectName(QString::fromUtf8("toolDelete"));
+        toolDelete->setStyleSheet(QString::fromUtf8("border: none;"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/img/Resources/Trash-52 (2).png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolDelete->setIcon(icon2);
+        toolDelete->setIconSize(QSize(24, 24));
+        toolDelete->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        toolDelete->setAutoRaise(true);
+
+        horizontalLayout->addWidget(toolDelete);
+
         horizontalLayout->setStretch(0, 2);
 
         retranslateUi(Field);
@@ -120,6 +159,12 @@ public:
 #ifndef QT_NO_TOOLTIP
         container->setToolTip(QApplication::translate("Field", "Default value", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
+        options->setText(QApplication::translate("Field", "Type", 0, QApplication::UnicodeUTF8));
+        toolClone->setText(QApplication::translate("Field", "...", 0, QApplication::UnicodeUTF8));
+        toolClone->setShortcut(QApplication::translate("Field", "Ctrl++", 0, QApplication::UnicodeUTF8));
+        toolOptions->setText(QApplication::translate("Field", "...", 0, QApplication::UnicodeUTF8));
+        toolDelete->setText(QApplication::translate("Field", "...", 0, QApplication::UnicodeUTF8));
+        toolDelete->setShortcut(QApplication::translate("Field", "Ctrl+Del", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

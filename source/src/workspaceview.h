@@ -17,7 +17,7 @@ public:
     QFileInfo fileInfo(QModelIndex index);
     QModelIndex indexFromPath(QString path);
     bool askDelete(QModelIndex index);
-    bool askRename(QModelIndex index);
+    QString askRename(QModelIndex index);
     void setDirModel(DirModel *model);
 
 private:

@@ -61,7 +61,8 @@ SOURCES += main.cpp \
     editor.cpp \
     editor/views/modelview.cpp \
     tests.cpp \
-    descriptionwindow.cpp
+    descriptionwindow.cpp \
+    openmodel.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -95,7 +96,8 @@ HEADERS  += \
     editor.h \
     editor/views/modelview.h \
     tests.h \
-    descriptionwindow.h
+    descriptionwindow.h \
+    openmodel.h
 
 FORMS    += \
     mainwindow.ui \
@@ -115,7 +117,8 @@ FORMS    += \
     editor/components/constraints/comboboxrules.ui \
     editor.ui \
     editor/views/modelview.ui \
-    descriptionwindow.ui
+    descriptionwindow.ui \
+    openmodel.ui
 
 RESOURCES += \
     Resource.qrc
