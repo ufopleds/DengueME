@@ -4,8 +4,7 @@
 #include <QSizePolicy>
 DescriptionWindow::DescriptionWindow(QWidget *parent,QString description) :
     QDialog(parent),
-    ui(new Ui::DescriptionWindow)
-{
+    ui(new Ui::DescriptionWindow){
 
     ui->setupUi(this);
 
@@ -14,7 +13,6 @@ DescriptionWindow::DescriptionWindow(QWidget *parent,QString description) :
 
 }
 
-DescriptionWindow::~DescriptionWindow()
-{
+DescriptionWindow::~DescriptionWindow(){
     delete ui;
 }

@@ -356,7 +356,7 @@ QString Field::genLua()
         QSpinBox *field = dynamic_cast<QSpinBox *>(widget);
         if (field)
             ret += QString::number(field->value());
-            ret+= "--- "+ ui->descript->text();
+           ret+= "--- "+ ui->descript->text();
 
         break;
     }
@@ -372,7 +372,7 @@ QString Field::genLua()
         QDoubleSpinBox *field = dynamic_cast<QDoubleSpinBox *>(widget);
         if (field)
             ret += QString::number(field->value(), 'f', attr["precision"].toInt());
-            ret+= "--- "+ui->descript->text();
+           ret+= "--- "+ui->descript->text();
         break;
     }
     case Text: {
@@ -399,7 +399,7 @@ QString Field::genLua()
             ret += "\"";
             ret += field->currentText().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
             ret += "\"";
-            ret+= "--- "+ui->descript->text();
+           ret+= "--- "+ui->descript->text();
         }
         break;
     }

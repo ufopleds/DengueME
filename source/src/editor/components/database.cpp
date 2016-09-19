@@ -1,8 +1,8 @@
 #include "dengueme.h"
 #include "database.h"
 #include "ui_database.h"
-
-#include <QtGui>
+#include <QtWidgets>
+#include <QtWidgets>
 
 Database::Database(QWidget *parent) :
     QWidget(parent),

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,24 +10,24 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDockWidget>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QStatusBar>
-#include <QtGui/QTextBrowser>
-#include <QtGui/QToolBar>
-#include <QtGui/QToolButton>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDockWidget>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 #include <workspaceview.h>
 #include "editor.h"
 
@@ -60,6 +60,7 @@ public:
     QAction *actionModelBuilder;
     QAction *actionResetViews;
     QAction *actionBuilder;
+    QAction *actionSynchronize;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QWidget *editorView;
@@ -94,7 +95,7 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(706, 534);
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -102,123 +103,125 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         actionAbout = new QAction(MainWindow);
-        actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
+        actionAbout->setObjectName(QStringLiteral("actionAbout"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8("Resources/about.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral("Resources/about.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionAbout->setIcon(icon);
         actionExit = new QAction(MainWindow);
-        actionExit->setObjectName(QString::fromUtf8("actionExit"));
+        actionExit->setObjectName(QStringLiteral("actionExit"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/img/Resources/exit.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/img/Resources/exit.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionExit->setIcon(icon1);
         actionSave = new QAction(MainWindow);
-        actionSave->setObjectName(QString::fromUtf8("actionSave"));
+        actionSave->setObjectName(QStringLiteral("actionSave"));
         QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/img/Resources/save.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/img/Resources/save.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSave->setIcon(icon2);
         actionRun = new QAction(MainWindow);
-        actionRun->setObjectName(QString::fromUtf8("actionRun"));
+        actionRun->setObjectName(QStringLiteral("actionRun"));
         actionRun->setEnabled(true);
         QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/img/Resources/run.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QStringLiteral(":/img/Resources/run.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRun->setIcon(icon3);
         actionProject = new QAction(MainWindow);
-        actionProject->setObjectName(QString::fromUtf8("actionProject"));
+        actionProject->setObjectName(QStringLiteral("actionProject"));
         actionModel = new QAction(MainWindow);
-        actionModel->setObjectName(QString::fromUtf8("actionModel"));
+        actionModel->setObjectName(QStringLiteral("actionModel"));
         actionNewProject = new QAction(MainWindow);
-        actionNewProject->setObjectName(QString::fromUtf8("actionNewProject"));
+        actionNewProject->setObjectName(QStringLiteral("actionNewProject"));
         actionNewProject->setEnabled(true);
         QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/img/Resources/folder-new.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QStringLiteral(":/img/Resources/folder-new.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionNewProject->setIcon(icon4);
         actionEpidemiological = new QAction(MainWindow);
-        actionEpidemiological->setObjectName(QString::fromUtf8("actionEpidemiological"));
+        actionEpidemiological->setObjectName(QStringLiteral("actionEpidemiological"));
         actionCoupled = new QAction(MainWindow);
-        actionCoupled->setObjectName(QString::fromUtf8("actionCoupled"));
+        actionCoupled->setObjectName(QStringLiteral("actionCoupled"));
         actionIntegrated = new QAction(MainWindow);
-        actionIntegrated->setObjectName(QString::fromUtf8("actionIntegrated"));
+        actionIntegrated->setObjectName(QStringLiteral("actionIntegrated"));
         actionTemporal = new QAction(MainWindow);
-        actionTemporal->setObjectName(QString::fromUtf8("actionTemporal"));
+        actionTemporal->setObjectName(QStringLiteral("actionTemporal"));
         actionCut = new QAction(MainWindow);
-        actionCut->setObjectName(QString::fromUtf8("actionCut"));
+        actionCut->setObjectName(QStringLiteral("actionCut"));
         actionCopy = new QAction(MainWindow);
-        actionCopy->setObjectName(QString::fromUtf8("actionCopy"));
+        actionCopy->setObjectName(QStringLiteral("actionCopy"));
         actionPaste = new QAction(MainWindow);
-        actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
+        actionPaste->setObjectName(QStringLiteral("actionPaste"));
         actionOptions = new QAction(MainWindow);
-        actionOptions->setObjectName(QString::fromUtf8("actionOptions"));
+        actionOptions->setObjectName(QStringLiteral("actionOptions"));
         QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/img/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QStringLiteral(":/img/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionOptions->setIcon(icon5);
         actionClose = new QAction(MainWindow);
-        actionClose->setObjectName(QString::fromUtf8("actionClose"));
+        actionClose->setObjectName(QStringLiteral("actionClose"));
         QIcon icon6;
-        icon6.addFile(QString::fromUtf8("Resources/close.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QStringLiteral("Resources/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClose->setIcon(icon6);
         actionRunByStep = new QAction(MainWindow);
-        actionRunByStep->setObjectName(QString::fromUtf8("actionRunByStep"));
+        actionRunByStep->setObjectName(QStringLiteral("actionRunByStep"));
         QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/img/Resources/run-step.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon7.addFile(QStringLiteral(":/img/Resources/run-step.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRunByStep->setIcon(icon7);
         actionSetWorkspace = new QAction(MainWindow);
-        actionSetWorkspace->setObjectName(QString::fromUtf8("actionSetWorkspace"));
+        actionSetWorkspace->setObjectName(QStringLiteral("actionSetWorkspace"));
         actionRename = new QAction(MainWindow);
-        actionRename->setObjectName(QString::fromUtf8("actionRename"));
+        actionRename->setObjectName(QStringLiteral("actionRename"));
         QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/img/Resources/rename.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon8.addFile(QStringLiteral(":/img/Resources/rename.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRename->setIcon(icon8);
         actionRemove = new QAction(MainWindow);
-        actionRemove->setObjectName(QString::fromUtf8("actionRemove"));
+        actionRemove->setObjectName(QStringLiteral("actionRemove"));
         QIcon icon9;
-        icon9.addFile(QString::fromUtf8(":/img/Resources/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon9.addFile(QStringLiteral(":/img/Resources/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRemove->setIcon(icon9);
         actionNewModel = new QAction(MainWindow);
-        actionNewModel->setObjectName(QString::fromUtf8("actionNewModel"));
+        actionNewModel->setObjectName(QStringLiteral("actionNewModel"));
         QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/img/Resources/model-new.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon10.addFile(QStringLiteral(":/img/Resources/model-new.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionNewModel->setIcon(icon10);
         actionModelBuilder = new QAction(MainWindow);
-        actionModelBuilder->setObjectName(QString::fromUtf8("actionModelBuilder"));
+        actionModelBuilder->setObjectName(QStringLiteral("actionModelBuilder"));
         QIcon icon11;
-        icon11.addFile(QString::fromUtf8(":/img/Resources/builderTool.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon11.addFile(QStringLiteral(":/img/Resources/builderTool.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionModelBuilder->setIcon(icon11);
         actionResetViews = new QAction(MainWindow);
-        actionResetViews->setObjectName(QString::fromUtf8("actionResetViews"));
+        actionResetViews->setObjectName(QStringLiteral("actionResetViews"));
         QIcon icon12;
-        icon12.addFile(QString::fromUtf8(":/img/Resources/Synchronize-64.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon12.addFile(QStringLiteral(":/img/Resources/Synchronize-64.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionResetViews->setIcon(icon12);
         actionBuilder = new QAction(MainWindow);
-        actionBuilder->setObjectName(QString::fromUtf8("actionBuilder"));
+        actionBuilder->setObjectName(QStringLiteral("actionBuilder"));
         actionBuilder->setCheckable(false);
         actionBuilder->setEnabled(true);
         actionBuilder->setIcon(icon11);
+        actionSynchronize = new QAction(MainWindow);
+        actionSynchronize->setObjectName(QStringLiteral("actionSynchronize"));
         centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         editorView = new QWidget(centralWidget);
-        editorView->setObjectName(QString::fromUtf8("editorView"));
+        editorView->setObjectName(QStringLiteral("editorView"));
         verticalLayout_2 = new QVBoxLayout(editorView);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         modelFile = new QLabel(editorView);
-        modelFile->setObjectName(QString::fromUtf8("modelFile"));
+        modelFile->setObjectName(QStringLiteral("modelFile"));
         modelFile->setMargin(6);
         modelFile->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
         horizontalLayout_2->addWidget(modelFile);
 
         buttonDefault = new QPushButton(editorView);
-        buttonDefault->setObjectName(QString::fromUtf8("buttonDefault"));
+        buttonDefault->setObjectName(QStringLiteral("buttonDefault"));
         buttonDefault->setEnabled(true);
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
@@ -229,18 +232,18 @@ public:
         horizontalLayout_2->addWidget(buttonDefault);
 
         buttonHelp = new QToolButton(editorView);
-        buttonHelp->setObjectName(QString::fromUtf8("buttonHelp"));
-        buttonHelp->setStyleSheet(QString::fromUtf8("border: none;"));
+        buttonHelp->setObjectName(QStringLiteral("buttonHelp"));
+        buttonHelp->setStyleSheet(QStringLiteral("border: none;"));
         QIcon icon13;
-        icon13.addFile(QString::fromUtf8(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon13.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
         buttonHelp->setIcon(icon13);
         buttonHelp->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(buttonHelp);
 
         buttonClose = new QToolButton(editorView);
-        buttonClose->setObjectName(QString::fromUtf8("buttonClose"));
-        buttonClose->setStyleSheet(QString::fromUtf8("border: none;"));
+        buttonClose->setObjectName(QStringLiteral("buttonClose"));
+        buttonClose->setStyleSheet(QStringLiteral("border: none;"));
         buttonClose->setIcon(icon6);
         buttonClose->setIconSize(QSize(18, 18));
 
@@ -250,7 +253,7 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_2);
 
         editor = new Editor(editorView);
-        editor->setObjectName(QString::fromUtf8("editor"));
+        editor->setObjectName(QStringLiteral("editor"));
 
         verticalLayout_2->addWidget(editor);
 
@@ -260,42 +263,42 @@ public:
 
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 706, 21));
         menuFile = new QMenu(menuBar);
-        menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuFile->setObjectName(QStringLiteral("menuFile"));
         menuHelp = new QMenu(menuBar);
-        menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuProject = new QMenu(menuBar);
-        menuProject->setObjectName(QString::fromUtf8("menuProject"));
+        menuProject->setObjectName(QStringLiteral("menuProject"));
         menuEdit = new QMenu(menuBar);
-        menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
+        menuEdit->setObjectName(QStringLiteral("menuEdit"));
         menuView = new QMenu(menuBar);
-        menuView->setObjectName(QString::fromUtf8("menuView"));
+        menuView->setObjectName(QStringLiteral("menuView"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         mainToolBar->setMovable(false);
         mainToolBar->setAllowedAreas(Qt::TopToolBarArea);
         mainToolBar->setIconSize(QSize(24, 24));
         mainToolBar->setFloatable(false);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         explorerDock = new QDockWidget(MainWindow);
-        explorerDock->setObjectName(QString::fromUtf8("explorerDock"));
+        explorerDock->setObjectName(QStringLiteral("explorerDock"));
         explorerDock->setFloating(false);
         explorerDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
         dockWidgetContents = new QWidget();
-        dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
+        dockWidgetContents->setObjectName(QStringLiteral("dockWidgetContents"));
         verticalLayout_6 = new QVBoxLayout(dockWidgetContents);
         verticalLayout_6->setSpacing(0);
         verticalLayout_6->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
         verticalLayout_6->setContentsMargins(0, 0, 0, 0);
         treeView = new WorkspaceView(dockWidgetContents);
-        treeView->setObjectName(QString::fromUtf8("treeView"));
+        treeView->setObjectName(QStringLiteral("treeView"));
         treeView->setContextMenuPolicy(Qt::CustomContextMenu);
         treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         treeView->setSortingEnabled(true);
@@ -307,34 +310,34 @@ public:
         explorerDock->setWidget(dockWidgetContents);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), explorerDock);
         outputDock = new QDockWidget(MainWindow);
-        outputDock->setObjectName(QString::fromUtf8("outputDock"));
+        outputDock->setObjectName(QStringLiteral("outputDock"));
         outputDock->setFeatures(QDockWidget::DockWidgetClosable);
         dockWidgetContents_4 = new QWidget();
-        dockWidgetContents_4->setObjectName(QString::fromUtf8("dockWidgetContents_4"));
+        dockWidgetContents_4->setObjectName(QStringLiteral("dockWidgetContents_4"));
         verticalLayout_3 = new QVBoxLayout(dockWidgetContents_4);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         outputBrowser = new QTextBrowser(dockWidgetContents_4);
-        outputBrowser->setObjectName(QString::fromUtf8("outputBrowser"));
+        outputBrowser->setObjectName(QStringLiteral("outputBrowser"));
 
         verticalLayout_3->addWidget(outputBrowser);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 
         clearButton = new QPushButton(dockWidgetContents_4);
-        clearButton->setObjectName(QString::fromUtf8("clearButton"));
+        clearButton->setObjectName(QStringLiteral("clearButton"));
 
         horizontalLayout->addWidget(clearButton);
 
         run_stopButton = new QPushButton(dockWidgetContents_4);
-        run_stopButton->setObjectName(QString::fromUtf8("run_stopButton"));
+        run_stopButton->setObjectName(QStringLiteral("run_stopButton"));
         run_stopButton->setEnabled(false);
 
         horizontalLayout->addWidget(run_stopButton);
@@ -366,6 +369,7 @@ public:
         menuEdit->addAction(actionOptions);
         menuEdit->addAction(actionSetWorkspace);
         menuEdit->addAction(actionModelBuilder);
+        menuEdit->addAction(actionSynchronize);
         menuView->addAction(actionResetViews);
         mainToolBar->addAction(actionNewProject);
         mainToolBar->addAction(actionNewModel);
@@ -385,55 +389,57 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "DengueME", 0, QApplication::UnicodeUTF8));
-        actionAbout->setText(QApplication::translate("MainWindow", "&About", 0, QApplication::UnicodeUTF8));
-        actionAbout->setShortcut(QApplication::translate("MainWindow", "F1", 0, QApplication::UnicodeUTF8));
-        actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0, QApplication::UnicodeUTF8));
-        actionSave->setText(QApplication::translate("MainWindow", "&Save", 0, QApplication::UnicodeUTF8));
-        actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0, QApplication::UnicodeUTF8));
-        actionRun->setText(QApplication::translate("MainWindow", "&Run", 0, QApplication::UnicodeUTF8));
-        actionRun->setShortcut(QApplication::translate("MainWindow", "F9, Ctrl+R", 0, QApplication::UnicodeUTF8));
-        actionProject->setText(QApplication::translate("MainWindow", "Project", 0, QApplication::UnicodeUTF8));
-        actionModel->setText(QApplication::translate("MainWindow", "Model", 0, QApplication::UnicodeUTF8));
-        actionNewProject->setText(QApplication::translate("MainWindow", "New &project", 0, QApplication::UnicodeUTF8));
-        actionNewProject->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0, QApplication::UnicodeUTF8));
-        actionEpidemiological->setText(QApplication::translate("MainWindow", "E&pidemiological", 0, QApplication::UnicodeUTF8));
-        actionCoupled->setText(QApplication::translate("MainWindow", "&Coupled", 0, QApplication::UnicodeUTF8));
-        actionIntegrated->setText(QApplication::translate("MainWindow", "&Integrated", 0, QApplication::UnicodeUTF8));
-        actionTemporal->setText(QApplication::translate("MainWindow", "&Temporal", 0, QApplication::UnicodeUTF8));
-        actionCut->setText(QApplication::translate("MainWindow", "Cut", 0, QApplication::UnicodeUTF8));
-        actionCut->setShortcut(QApplication::translate("MainWindow", "Ctrl+X", 0, QApplication::UnicodeUTF8));
-        actionCopy->setText(QApplication::translate("MainWindow", "Copy", 0, QApplication::UnicodeUTF8));
-        actionCopy->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", 0, QApplication::UnicodeUTF8));
-        actionPaste->setText(QApplication::translate("MainWindow", "Paste", 0, QApplication::UnicodeUTF8));
-        actionPaste->setShortcut(QApplication::translate("MainWindow", "Ctrl+V", 0, QApplication::UnicodeUTF8));
-        actionOptions->setText(QApplication::translate("MainWindow", "&Options", 0, QApplication::UnicodeUTF8));
-        actionClose->setText(QApplication::translate("MainWindow", "&Close model ", 0, QApplication::UnicodeUTF8));
-        actionClose->setShortcut(QApplication::translate("MainWindow", "Ctrl+W", 0, QApplication::UnicodeUTF8));
-        actionRunByStep->setText(QApplication::translate("MainWindow", "Run &step by step", 0, QApplication::UnicodeUTF8));
-        actionRunByStep->setShortcut(QApplication::translate("MainWindow", "F10", 0, QApplication::UnicodeUTF8));
-        actionSetWorkspace->setText(QApplication::translate("MainWindow", "Change &workspace", 0, QApplication::UnicodeUTF8));
-        actionRename->setText(QApplication::translate("MainWindow", "&Rename", 0, QApplication::UnicodeUTF8));
-        actionRename->setShortcut(QApplication::translate("MainWindow", "F2", 0, QApplication::UnicodeUTF8));
-        actionRemove->setText(QApplication::translate("MainWindow", "R&emove", 0, QApplication::UnicodeUTF8));
-        actionRemove->setShortcut(QApplication::translate("MainWindow", "Del", 0, QApplication::UnicodeUTF8));
-        actionNewModel->setText(QApplication::translate("MainWindow", "New &model", 0, QApplication::UnicodeUTF8));
-        actionNewModel->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0, QApplication::UnicodeUTF8));
-        actionModelBuilder->setText(QApplication::translate("MainWindow", "&Model builder", 0, QApplication::UnicodeUTF8));
-        actionModelBuilder->setShortcut(QApplication::translate("MainWindow", "Ctrl+B", 0, QApplication::UnicodeUTF8));
-        actionResetViews->setText(QApplication::translate("MainWindow", "Reset views", 0, QApplication::UnicodeUTF8));
-        actionBuilder->setText(QApplication::translate("MainWindow", "Model Builder", 0, QApplication::UnicodeUTF8));
-        modelFile->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        buttonDefault->setText(QApplication::translate("MainWindow", "Default Values", 0, QApplication::UnicodeUTF8));
-        menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0, QApplication::UnicodeUTF8));
-        menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0, QApplication::UnicodeUTF8));
-        menuProject->setTitle(QApplication::translate("MainWindow", "&Project", 0, QApplication::UnicodeUTF8));
-        menuEdit->setTitle(QApplication::translate("MainWindow", "&Tools", 0, QApplication::UnicodeUTF8));
-        menuView->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
-        explorerDock->setWindowTitle(QApplication::translate("MainWindow", "Projects", 0, QApplication::UnicodeUTF8));
-        outputDock->setWindowTitle(QApplication::translate("MainWindow", "Console", 0, QApplication::UnicodeUTF8));
-        clearButton->setText(QApplication::translate("MainWindow", "Clear Console", 0, QApplication::UnicodeUTF8));
-        run_stopButton->setText(QApplication::translate("MainWindow", "Run", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "DengueME", 0));
+        actionAbout->setText(QApplication::translate("MainWindow", "&About", 0));
+        actionAbout->setShortcut(QApplication::translate("MainWindow", "F1", 0));
+        actionExit->setText(QApplication::translate("MainWindow", "E&xit", 0));
+        actionSave->setText(QApplication::translate("MainWindow", "&Save", 0));
+        actionSave->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", 0));
+        actionRun->setText(QApplication::translate("MainWindow", "&Run", 0));
+        actionRun->setShortcut(QApplication::translate("MainWindow", "F9, Ctrl+R", 0));
+        actionProject->setText(QApplication::translate("MainWindow", "Project", 0));
+        actionModel->setText(QApplication::translate("MainWindow", "Model", 0));
+        actionNewProject->setText(QApplication::translate("MainWindow", "New &project", 0));
+        actionNewProject->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", 0));
+        actionEpidemiological->setText(QApplication::translate("MainWindow", "E&pidemiological", 0));
+        actionCoupled->setText(QApplication::translate("MainWindow", "&Coupled", 0));
+        actionIntegrated->setText(QApplication::translate("MainWindow", "&Integrated", 0));
+        actionTemporal->setText(QApplication::translate("MainWindow", "&Temporal", 0));
+        actionCut->setText(QApplication::translate("MainWindow", "Cut", 0));
+        actionCut->setShortcut(QApplication::translate("MainWindow", "Ctrl+X", 0));
+        actionCopy->setText(QApplication::translate("MainWindow", "Copy", 0));
+        actionCopy->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", 0));
+        actionPaste->setText(QApplication::translate("MainWindow", "Paste", 0));
+        actionPaste->setShortcut(QApplication::translate("MainWindow", "Ctrl+V", 0));
+        actionOptions->setText(QApplication::translate("MainWindow", "&Options", 0));
+        actionClose->setText(QApplication::translate("MainWindow", "&Close model ", 0));
+        actionClose->setShortcut(QApplication::translate("MainWindow", "Ctrl+W", 0));
+        actionRunByStep->setText(QApplication::translate("MainWindow", "Run &step by step", 0));
+        actionRunByStep->setShortcut(QApplication::translate("MainWindow", "F10", 0));
+        actionSetWorkspace->setText(QApplication::translate("MainWindow", "Change &workspace", 0));
+        actionRename->setText(QApplication::translate("MainWindow", "&Rename", 0));
+        actionRename->setShortcut(QApplication::translate("MainWindow", "F2", 0));
+        actionRemove->setText(QApplication::translate("MainWindow", "R&emove", 0));
+        actionRemove->setShortcut(QApplication::translate("MainWindow", "Del", 0));
+        actionNewModel->setText(QApplication::translate("MainWindow", "New &model", 0));
+        actionNewModel->setShortcut(QApplication::translate("MainWindow", "Ctrl+N", 0));
+        actionModelBuilder->setText(QApplication::translate("MainWindow", "&Model builder", 0));
+        actionModelBuilder->setShortcut(QApplication::translate("MainWindow", "Ctrl+B", 0));
+        actionResetViews->setText(QApplication::translate("MainWindow", "Reset views", 0));
+        actionBuilder->setText(QApplication::translate("MainWindow", "Model Builder", 0));
+        actionSynchronize->setText(QApplication::translate("MainWindow", "Synchronize", 0));
+        actionSynchronize->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
+        modelFile->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        buttonDefault->setText(QApplication::translate("MainWindow", "Default Values", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "&Help", 0));
+        menuProject->setTitle(QApplication::translate("MainWindow", "&Project", 0));
+        menuEdit->setTitle(QApplication::translate("MainWindow", "&Tools", 0));
+        menuView->setTitle(QApplication::translate("MainWindow", "Window", 0));
+        explorerDock->setWindowTitle(QApplication::translate("MainWindow", "Projects", 0));
+        outputDock->setWindowTitle(QApplication::translate("MainWindow", "Console", 0));
+        clearButton->setText(QApplication::translate("MainWindow", "Clear Console", 0));
+        run_stopButton->setText(QApplication::translate("MainWindow", "Run", 0));
     } // retranslateUi
 
 };

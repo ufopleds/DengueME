@@ -2,8 +2,7 @@
 #include "filenamepage.h"
 
 NewProject::NewProject(QString workspace, QWidget *parent)
-    : QWizard(parent)
-{
+    : QWizard(parent){
          this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setOption(QWizard::NoBackButtonOnLastPage);
     setPage(Page_Filename, new FilenamePage(workspace));
@@ -17,8 +16,7 @@ NewProject::NewProject(QString workspace, QWidget *parent)
     setWindowTitle(tr("New project"));
 }
 
-void NewProject::accept()
-{
+void NewProject::accept(){
     emit accepted(field("name").toString());
     QWizard::accept();
 }

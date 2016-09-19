@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'doublespinboxrules.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,17 +10,17 @@
 #define UI_DOUBLESPINBOXRULES_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QDoubleSpinBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -42,32 +42,32 @@ public:
     void setupUi(QDialog *DoubleSpinBoxRules)
     {
         if (DoubleSpinBoxRules->objectName().isEmpty())
-            DoubleSpinBoxRules->setObjectName(QString::fromUtf8("DoubleSpinBoxRules"));
+            DoubleSpinBoxRules->setObjectName(QStringLiteral("DoubleSpinBoxRules"));
         DoubleSpinBoxRules->resize(400, 193);
         DoubleSpinBoxRules->setMinimumSize(QSize(400, 0));
         verticalLayout = new QVBoxLayout(DoubleSpinBoxRules);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
         label = new QLabel(DoubleSpinBoxRules);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         precision = new QSpinBox(DoubleSpinBoxRules);
-        precision->setObjectName(QString::fromUtf8("precision"));
+        precision->setObjectName(QStringLiteral("precision"));
         precision->setMaximum(323);
 
         formLayout->setWidget(0, QFormLayout::FieldRole, precision);
 
         label_2 = new QLabel(DoubleSpinBoxRules);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
         minimum = new QDoubleSpinBox(DoubleSpinBoxRules);
-        minimum->setObjectName(QString::fromUtf8("minimum"));
+        minimum->setObjectName(QStringLiteral("minimum"));
         QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -77,26 +77,26 @@ public:
         formLayout->setWidget(1, QFormLayout::FieldRole, minimum);
 
         label_3 = new QLabel(DoubleSpinBoxRules);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
 
         maximum = new QDoubleSpinBox(DoubleSpinBoxRules);
-        maximum->setObjectName(QString::fromUtf8("maximum"));
+        maximum->setObjectName(QStringLiteral("maximum"));
         sizePolicy.setHeightForWidth(maximum->sizePolicy().hasHeightForWidth());
         maximum->setSizePolicy(sizePolicy);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, maximum);
 
         step = new QDoubleSpinBox(DoubleSpinBoxRules);
-        step->setObjectName(QString::fromUtf8("step"));
+        step->setObjectName(QStringLiteral("step"));
         sizePolicy.setHeightForWidth(step->sizePolicy().hasHeightForWidth());
         step->setSizePolicy(sizePolicy);
 
         formLayout->setWidget(3, QFormLayout::FieldRole, step);
 
         label_4 = new QLabel(DoubleSpinBoxRules);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         formLayout->setWidget(3, QFormLayout::LabelRole, label_4);
 
@@ -104,7 +104,7 @@ public:
         verticalLayout->addLayout(formLayout);
 
         buttonBox = new QDialogButtonBox(DoubleSpinBoxRules);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -124,11 +124,11 @@ public:
 
     void retranslateUi(QDialog *DoubleSpinBoxRules)
     {
-        DoubleSpinBoxRules->setWindowTitle(QApplication::translate("DoubleSpinBoxRules", "Double Spin Box Settings", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("DoubleSpinBoxRules", "Precision:", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("DoubleSpinBoxRules", "Mininum:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("DoubleSpinBoxRules", "Maximum:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("DoubleSpinBoxRules", "Single step:", 0, QApplication::UnicodeUTF8));
+        DoubleSpinBoxRules->setWindowTitle(QApplication::translate("DoubleSpinBoxRules", "Double Spin Box Settings", 0));
+        label->setText(QApplication::translate("DoubleSpinBoxRules", "Precision:", 0));
+        label_2->setText(QApplication::translate("DoubleSpinBoxRules", "Mininum:", 0));
+        label_3->setText(QApplication::translate("DoubleSpinBoxRules", "Maximum:", 0));
+        label_4->setText(QApplication::translate("DoubleSpinBoxRules", "Single step:", 0));
     } // retranslateUi
 
 };

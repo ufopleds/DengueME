@@ -1,7 +1,7 @@
 #ifndef GROUPLIST_H
 #define GROUPLIST_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtXml>
 #include "group.h"
 

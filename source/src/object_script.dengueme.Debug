@@ -32,6 +32,10 @@ INPUT(
 ./debug\tests.o
 ./debug\descriptionwindow.o
 ./debug\openmodel.o
+./debug\syncmodels.o
+./debug\downloadmanager.o
+./debug\downloadhttp.o
+./debug\qrc_Resource.o
 ./debug\moc_mainwindow.o
 ./debug\moc_newproject.o
 ./debug\moc_observer.o
@@ -61,5 +65,7 @@ INPUT(
 ./debug\moc_modelview.o
 ./debug\moc_descriptionwindow.o
 ./debug\moc_openmodel.o
-./debug\qrc_Resource.o
+./debug\moc_syncmodels.o
+./debug\moc_downloadmanager.o
+./debug\moc_downloadhttp.o
 );

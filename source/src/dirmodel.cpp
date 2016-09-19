@@ -105,11 +105,11 @@ bool DirModel::removeDir(QString dirName)
             if (info.isDir()) {
 
                 result = removeDir(info.absoluteFilePath());
-                    fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
+                fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
             }
             else {
                 result = QFile::remove(info.absoluteFilePath());
-                     fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
+                fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
             }
 
             if (!result) {
@@ -120,10 +120,11 @@ bool DirModel::removeDir(QString dirName)
         fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
         result = dir.rmdir(dirName);
     }
-            qDebug()<< result;
+    qDebug()<< result;
     return result;
 }
 bool DirModel::remove(QModelIndex index){
+
     if (!index.isValid()) return false;
 
     return remove_recursively(filePath(index));

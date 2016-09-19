@@ -4,10 +4,9 @@
 #
 #-------------------------------------------------
 
-QT     += core gui xml
-CONFIG += help
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core xml network
+QT += help
+QT += widgets
 
 TARGET = dengueme
 TEMPLATE = app
@@ -62,7 +61,10 @@ SOURCES += main.cpp \
     editor/views/modelview.cpp \
     tests.cpp \
     descriptionwindow.cpp \
-    openmodel.cpp
+    openmodel.cpp \
+    syncmodels.cpp \
+    downloadmanager.cpp \
+    downloadhttp.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -97,7 +99,10 @@ HEADERS  += \
     editor/views/modelview.h \
     tests.h \
     descriptionwindow.h \
-    openmodel.h
+    openmodel.h \
+    syncmodels.h \
+    downloadmanager.h \
+    downloadhttp.h
 
 FORMS    += \
     mainwindow.ui \
@@ -118,7 +123,8 @@ FORMS    += \
     editor.ui \
     editor/views/modelview.ui \
     descriptionwindow.ui \
-    openmodel.ui
+    openmodel.ui \
+    syncmodels.ui
 
 RESOURCES += \
     Resource.qrc

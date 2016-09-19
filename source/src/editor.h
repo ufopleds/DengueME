@@ -1,7 +1,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include "editor/grouplist.h"
 #include "editor/components/database.h"
@@ -31,7 +31,7 @@ private:
     QWidget *contents;
     Ui::Editor *ui;
     QString modelFile;
-
+    int renameFlag = 0;
     QFrame *view_results;
     QWidget *view_parameters;
     QFrame *view_database;

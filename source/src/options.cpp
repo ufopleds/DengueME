@@ -6,8 +6,8 @@
 
 Options::Options(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Options)
-{
+    ui(new Ui::Options){
+
     ui->setupUi(this);
      this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     ui->lineEdit->setText(dengueme::settingsFile.value("workspace").toString());
@@ -47,8 +47,7 @@ void Options::browseTerraME() {
         ui->lineEdit_2->setText(path);
 }
 
-void Options::browseRscript()
-{
+void Options::browseRscript(){
     QString path(QFileDialog::getOpenFileName(this,"Rscript Path",ui->lineEdit_3->text(),"TerraME Executable (*.*)"));
     if (!path.isEmpty())
         ui->lineEdit_3->setText(path);

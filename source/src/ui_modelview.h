@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'modelview.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,19 +10,19 @@
 #define UI_MODELVIEW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QFrame>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -46,18 +46,18 @@ public:
     void setupUi(QFrame *ModelView)
     {
         if (ModelView->objectName().isEmpty())
-            ModelView->setObjectName(QString::fromUtf8("ModelView"));
+            ModelView->setObjectName(QStringLiteral("ModelView"));
         ModelView->resize(451, 282);
         ModelView->setAutoFillBackground(true);
         ModelView->setFrameShape(QFrame::StyledPanel);
         ModelView->setFrameShadow(QFrame::Sunken);
         verticalLayout = new QVBoxLayout(ModelView);
         verticalLayout->setSpacing(0);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label_2 = new QLabel(ModelView);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
         QFont font;
         font.setBold(true);
         font.setWeight(75);
@@ -66,14 +66,14 @@ public:
         horizontalLayout->addWidget(label_2);
 
         modelInfo = new QLabel(ModelView);
-        modelInfo->setObjectName(QString::fromUtf8("modelInfo"));
+        modelInfo->setObjectName(QStringLiteral("modelInfo"));
         modelInfo->setEnabled(false);
         modelInfo->setMargin(5);
 
         horizontalLayout->addWidget(modelInfo);
 
         modelType = new QLabel(ModelView);
-        modelType->setObjectName(QString::fromUtf8("modelType"));
+        modelType->setObjectName(QStringLiteral("modelType"));
         modelType->setEnabled(false);
         modelType->setMargin(5);
 
@@ -84,7 +84,7 @@ public:
         horizontalLayout->addItem(horizontalSpacer);
 
         buttonAdd = new QPushButton(ModelView);
-        buttonAdd->setObjectName(QString::fromUtf8("buttonAdd"));
+        buttonAdd->setObjectName(QStringLiteral("buttonAdd"));
 
         horizontalLayout->addWidget(buttonAdd);
 
@@ -92,7 +92,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         list = new QListWidget(ModelView);
-        list->setObjectName(QString::fromUtf8("list"));
+        list->setObjectName(QStringLiteral("list"));
         list->setEditTriggers(QAbstractItemView::NoEditTriggers);
         list->setAlternatingRowColors(true);
         list->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -100,25 +100,25 @@ public:
         verticalLayout->addWidget(list);
 
         formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setContentsMargins(-1, 6, -1, -1);
         label = new QLabel(ModelView);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         label_3 = new QLabel(ModelView);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_3);
 
         interpreter = new QComboBox(ModelView);
-        interpreter->setObjectName(QString::fromUtf8("interpreter"));
+        interpreter->setObjectName(QStringLiteral("interpreter"));
 
         formLayout->setWidget(1, QFormLayout::FieldRole, interpreter);
 
         mainFile = new QComboBox(ModelView);
-        mainFile->setObjectName(QString::fromUtf8("mainFile"));
+        mainFile->setObjectName(QStringLiteral("mainFile"));
 
         formLayout->setWidget(0, QFormLayout::FieldRole, mainFile);
 
@@ -133,17 +133,17 @@ public:
 
     void retranslateUi(QFrame *ModelView)
     {
-        ModelView->setWindowTitle(QApplication::translate("ModelView", "Form", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("ModelView", "Model files", 0, QApplication::UnicodeUTF8));
-        modelInfo->setText(QApplication::translate("ModelView", "Type", 0, QApplication::UnicodeUTF8));
-        modelType->setText(QApplication::translate("ModelView", "Category", 0, QApplication::UnicodeUTF8));
-        buttonAdd->setText(QApplication::translate("ModelView", "Add", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("ModelView", "Main file:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("ModelView", "Interpreter:", 0, QApplication::UnicodeUTF8));
+        ModelView->setWindowTitle(QApplication::translate("ModelView", "Form", 0));
+        label_2->setText(QApplication::translate("ModelView", "Model files", 0));
+        modelInfo->setText(QApplication::translate("ModelView", "Type", 0));
+        modelType->setText(QApplication::translate("ModelView", "Category", 0));
+        buttonAdd->setText(QApplication::translate("ModelView", "Add", 0));
+        label->setText(QApplication::translate("ModelView", "Main file:", 0));
+        label_3->setText(QApplication::translate("ModelView", "Interpreter:", 0));
         interpreter->clear();
         interpreter->insertItems(0, QStringList()
-         << QApplication::translate("ModelView", "TerraME", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ModelView", "Rscript", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ModelView", "TerraME", 0)
+         << QApplication::translate("ModelView", "Rscript", 0)
         );
     } // retranslateUi
 

@@ -1,5 +1,5 @@
 #include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 
 #include "dengueme.h"
 #include "newmodel.h"
@@ -18,8 +18,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget *parent) :
     setWindowTitle(tr("New model"));
 }
 
-void NewModel::accept()
-{
+void NewModel::accept(){
     QString category = property("category").toString();
     QString type = property("type").toString();
     QString project = property("project").toString();
@@ -34,7 +33,7 @@ void NewModel::accept()
 TypePage::TypePage() {
     setTitle(tr("Type"));
     setSubTitle(tr("Specify the type of the new model"));
-//    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/ok.png"));
+  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/ok.png"));
 
     QList<QPair<QString, QStringList> > modelTypes = dengueme::model_types();
 
@@ -158,8 +157,7 @@ void ProjectPage::itemChanged() {
     emit completeChanged();
 }
 
-void ProjectPage::newProject()
-{
+void ProjectPage::newProject(){
     newproject->hide();
     projects->hide();
 
@@ -179,8 +177,7 @@ void ProjectPage::newProject()
     projects->show();
 }
 
-void ProjectPage::loadWorkspace()
-{
+void ProjectPage::loadWorkspace(){
     projects->clear();
     QDir dir(workspace);
     foreach(QFileInfo x, dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
@@ -195,10 +192,9 @@ void ProjectPage::loadWorkspace()
 }
 
 NamePage::NamePage(QString workspace)
-    : subtitle(tr("Specify a unique name to identify your project in the workspace.")),
+    : subtitle(tr("Specify a unique name to identify your model in the workspace.")),
       workspace(workspace),
-      state(dengueme::EmptyName)
-{
+      state(dengueme::EmptyName){
 
     setTitle(tr("Specify a name"));
     setSubTitle(subtitle);
@@ -234,7 +230,7 @@ void NamePage::validateProject(QString name) {
     case dengueme::UnallowedChar:
         projectLineEdit->setText(dengueme::purgeName(name));
         QToolTip::showText(projectLineEdit->mapToGlobal(QPoint(0, projectLineEdit->height())),
-                           tr("The project name can contain only\nalphanumeric chars, hyphen (-),"
+                           tr("The file name can contain only\nalphanumeric chars, hyphen (-),"
                               " \nunderscore (_) and dot (.)."));
         break;
 
@@ -242,7 +238,7 @@ void NamePage::validateProject(QString name) {
         if (state != dengueme::FileExists) {
             state = dengueme::FileExists;
             setSubTitle(tr("A file with that name already exists."));
-            setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
+            setPixmap(QWizard::LogoPixmap, QPixmap(":/Resources/error.png"));
         }
         break;
 
@@ -256,8 +252,7 @@ void NamePage::validateProject(QString name) {
     }
 }
 
-void NamePage::setWorkspace(QString path)
-{
+void NamePage::setWorkspace(QString path){
     workspace = path;
 }
 

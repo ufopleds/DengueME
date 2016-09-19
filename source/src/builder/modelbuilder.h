@@ -1,7 +1,7 @@
 #ifndef MODELBUILDER_H
 #define MODELBUILDER_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <string>
 namespace Ui {
 class ModelBuilder;

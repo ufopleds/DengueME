@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'newproject.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,21 +10,21 @@
 #define UI_NEWPROJECT_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListView>
-#include <QtGui/QListWidget>
-#include <QtGui/QRadioButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
-#include <QtGui/QWizard>
-#include <QtGui/QWizardPage>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QWizard>
+#include <QtWidgets/QWizardPage>
 
 QT_BEGIN_NAMESPACE
 
@@ -63,27 +63,27 @@ public:
     void setupUi(QWizard *NewProject)
     {
         if (NewProject->objectName().isEmpty())
-            NewProject->setObjectName(QString::fromUtf8("NewProject"));
+            NewProject->setObjectName(QStringLiteral("NewProject"));
         NewProject->resize(497, 300);
         NewProject->setWizardStyle(QWizard::ClassicStyle);
         wizardPage1 = new QWizardPage();
-        wizardPage1->setObjectName(QString::fromUtf8("wizardPage1"));
+        wizardPage1->setObjectName(QStringLiteral("wizardPage1"));
         verticalLayout_2 = new QVBoxLayout(wizardPage1);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         radioButton_newProject = new QRadioButton(wizardPage1);
         buttonGroup = new QButtonGroup(NewProject);
-        buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
+        buttonGroup->setObjectName(QStringLiteral("buttonGroup"));
         buttonGroup->addButton(radioButton_newProject);
-        radioButton_newProject->setObjectName(QString::fromUtf8("radioButton_newProject"));
+        radioButton_newProject->setObjectName(QStringLiteral("radioButton_newProject"));
         radioButton_newProject->setChecked(true);
 
         verticalLayout->addWidget(radioButton_newProject);
 
         radioButton_newModel = new QRadioButton(wizardPage1);
         buttonGroup->addButton(radioButton_newModel);
-        radioButton_newModel->setObjectName(QString::fromUtf8("radioButton_newModel"));
+        radioButton_newModel->setObjectName(QStringLiteral("radioButton_newModel"));
 
         verticalLayout->addWidget(radioButton_newModel);
 
@@ -92,22 +92,22 @@ public:
 
         NewProject->addPage(wizardPage1);
         wizardPage = new QWizardPage();
-        wizardPage->setObjectName(QString::fromUtf8("wizardPage"));
+        wizardPage->setObjectName(QStringLiteral("wizardPage"));
         verticalLayout_8 = new QVBoxLayout(wizardPage);
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         widget_newProject = new QWidget(wizardPage);
-        widget_newProject->setObjectName(QString::fromUtf8("widget_newProject"));
+        widget_newProject->setObjectName(QStringLiteral("widget_newProject"));
         verticalLayout_4 = new QVBoxLayout(widget_newProject);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         label = new QLabel(widget_newProject);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
         lineEdit_projectName = new QLineEdit(widget_newProject);
-        lineEdit_projectName->setObjectName(QString::fromUtf8("lineEdit_projectName"));
+        lineEdit_projectName->setObjectName(QStringLiteral("lineEdit_projectName"));
         lineEdit_projectName->setMaximumSize(QSize(250, 300));
 
         horizontalLayout->addWidget(lineEdit_projectName);
@@ -123,18 +123,18 @@ public:
         verticalLayout_8->addWidget(widget_newProject);
 
         widget_newModel = new QWidget(wizardPage);
-        widget_newModel->setObjectName(QString::fromUtf8("widget_newModel"));
+        widget_newModel->setObjectName(QStringLiteral("widget_newModel"));
         verticalLayout_7 = new QVBoxLayout(widget_newModel);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
         verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         label_4 = new QLabel(widget_newModel);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         verticalLayout_3->addWidget(label_4);
 
         listView_projects = new QListView(widget_newModel);
-        listView_projects->setObjectName(QString::fromUtf8("listView_projects"));
+        listView_projects->setObjectName(QStringLiteral("listView_projects"));
 
         verticalLayout_3->addWidget(listView_projects);
 
@@ -146,18 +146,18 @@ public:
 
         NewProject->addPage(wizardPage);
         wizardPage_2 = new QWizardPage();
-        wizardPage_2->setObjectName(QString::fromUtf8("wizardPage_2"));
+        wizardPage_2->setObjectName(QStringLiteral("wizardPage_2"));
         verticalLayout_6 = new QVBoxLayout(wizardPage_2);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_2 = new QLabel(wizardPage_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         horizontalLayout_2->addWidget(label_2);
 
         lineEdit_modelName = new QLineEdit(wizardPage_2);
-        lineEdit_modelName->setObjectName(QString::fromUtf8("lineEdit_modelName"));
+        lineEdit_modelName->setObjectName(QStringLiteral("lineEdit_modelName"));
         lineEdit_modelName->setMaximumSize(QSize(300, 300));
 
         horizontalLayout_2->addWidget(lineEdit_modelName);
@@ -170,9 +170,9 @@ public:
         verticalLayout_6->addLayout(horizontalLayout_2);
 
         verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         label_3 = new QLabel(wizardPage_2);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         verticalLayout_5->addWidget(label_3);
 
@@ -181,7 +181,7 @@ public:
         new QListWidgetItem(listWidget_modelType);
         new QListWidgetItem(listWidget_modelType);
         new QListWidgetItem(listWidget_modelType);
-        listWidget_modelType->setObjectName(QString::fromUtf8("listWidget_modelType"));
+        listWidget_modelType->setObjectName(QStringLiteral("listWidget_modelType"));
 
         verticalLayout_5->addWidget(listWidget_modelType);
 
@@ -197,24 +197,24 @@ public:
 
     void retranslateUi(QWizard *NewProject)
     {
-        NewProject->setWindowTitle(QApplication::translate("NewProject", "Wizard", 0, QApplication::UnicodeUTF8));
-        radioButton_newProject->setText(QApplication::translate("NewProject", "Create a new Project", 0, QApplication::UnicodeUTF8));
-        radioButton_newModel->setText(QApplication::translate("NewProject", "Create a new Model in an existing Project", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("NewProject", "Project name:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("NewProject", "Select a project to create a new Model:", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("NewProject", "Model name:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("NewProject", "Model type:", 0, QApplication::UnicodeUTF8));
+        NewProject->setWindowTitle(QApplication::translate("NewProject", "Wizard", 0));
+        radioButton_newProject->setText(QApplication::translate("NewProject", "Create a new Project", 0));
+        radioButton_newModel->setText(QApplication::translate("NewProject", "Create a new Model in an existing Project", 0));
+        label->setText(QApplication::translate("NewProject", "Project name:", 0));
+        label_4->setText(QApplication::translate("NewProject", "Select a project to create a new Model:", 0));
+        label_2->setText(QApplication::translate("NewProject", "Model name:", 0));
+        label_3->setText(QApplication::translate("NewProject", "Model type:", 0));
 
         const bool __sortingEnabled = listWidget_modelType->isSortingEnabled();
         listWidget_modelType->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = listWidget_modelType->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("NewProject", "Coupled", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem->setText(QApplication::translate("NewProject", "Coupled", 0));
         QListWidgetItem *___qlistwidgetitem1 = listWidget_modelType->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("NewProject", "Epidemiological", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem1->setText(QApplication::translate("NewProject", "Epidemiological", 0));
         QListWidgetItem *___qlistwidgetitem2 = listWidget_modelType->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("NewProject", "Integrated", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem2->setText(QApplication::translate("NewProject", "Integrated", 0));
         QListWidgetItem *___qlistwidgetitem3 = listWidget_modelType->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("NewProject", "Temporal", 0, QApplication::UnicodeUTF8));
+        ___qlistwidgetitem3->setText(QApplication::translate("NewProject", "Temporal", 0));
         listWidget_modelType->setSortingEnabled(__sortingEnabled);
 
     } // retranslateUi

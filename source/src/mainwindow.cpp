@@ -14,7 +14,10 @@
 #include "workspacemodel.h"
 #include "descriptionwindow.h"
 #include "dirmodel.h"
+#include "syncmodels.h"
 #include <QDebug>
+
+
 //Primary Window
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -26,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     ui->treeView->setDirModel(new WorkspaceModel);
     ui->treeView->setWorkspace(dengueme::config("workspace"));
     ui->treeView->expandAll();
-     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setMinimumSize(760,560);
     setState(Browsing);
     if (dengueme::config("mainwindow/defaultstate").isNull()) {
@@ -46,13 +49,15 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->actionNewModel,     SIGNAL(triggered()), SLOT(actionNewModel()));
     connect(ui->actionNewProject,   SIGNAL(triggered()), SLOT(actionNewProject()));
 
-   connect(ui->actionBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
+    connect(ui->actionBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
     connect(ui->actionSave,         SIGNAL(triggered()), SLOT(actionSave()));
     connect(ui->actionClose,        SIGNAL(triggered()), SLOT(actionClose()));
     connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
     connect(ui->actionRunByStep,    SIGNAL(triggered()), SLOT(actionRunByStep()));
     connect(ui->actionRemove,       SIGNAL(triggered()), SLOT(actionRemove()));
     connect(ui->actionRename,       SIGNAL(triggered()), SLOT(actionRename()));
+    connect(ui->actionSynchronize,       SIGNAL(triggered()), SLOT(actionSync()));
+
 
     connect(ui->actionAbout,        SIGNAL(triggered()), SLOT(actionAbout()));
     connect(ui->actionSetWorkspace, SIGNAL(triggered()), SLOT(actionSetWorkspace()));
@@ -63,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->treeView, SIGNAL(activated(QModelIndex)), SLOT(modelActivated(QModelIndex)));
     connect(ui->treeView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(workspaceContextMenu(QPoint)));
 
-   connect(ui->editor, SIGNAL(renamed(QString)), ui->modelFile, SLOT(setText(QString)));
+    connect(ui->editor, SIGNAL(renamed(QString)), ui->modelFile, SLOT(setText(QString)));
     connect(ui->editor, SIGNAL(closed()),                SLOT(onModelClosed()));
     connect(ui->editor, SIGNAL(output(int,QString)),     SLOT(output(int,QString)));
     connect(ui->editor, SIGNAL(interpreterStarted()),    SLOT(onModelStarted()));
@@ -83,7 +88,10 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
         connect(ui->outputDock, SIGNAL(visibilityChanged(bool)), output, SLOT(setChecked(bool)));
         connect(output, SIGNAL(toggled(bool)), ui->outputDock, SLOT(setVisible(bool)));
     }
-   ///TODO - Shortcuts
+
+
+
+    ///TODO - Shortcuts
     new QShortcut(QKeySequence("Ctrl+F2"),this,SLOT(runUnitTests()));
 
     ///TODO - Shortcuts
@@ -199,7 +207,7 @@ void MainWindow::actionNewProject() {
 }
 
 void MainWindow::actionSave() {
-     ui->editor->save();
+    ui->editor->save();
 }
 
 void MainWindow::actionDefault() {
@@ -241,6 +249,8 @@ void MainWindow::actionDefault() {
 
 }
 
+
+
 void MainWindow::actionClose() {
     ui->editor->close(0);
 }
@@ -249,26 +259,34 @@ void MainWindow::actionRemove() {
     QModelIndex index = ui->treeView->currentIndex();
     if (!index.isValid()) return;
 
-    ui->editor->close(2);
-    ui->treeView->askDelete(index);
+
+    if(ui->treeView->askDelete(index)){
+        ui->editor->close(2);
+    }
 
 
+
+}
+
+void MainWindow::actionSync(){
+    SyncModels *sync = new SyncModels(this);
+    sync->exec();
 }
 
 void MainWindow::actionRename() {
     QModelIndex index = ui->treeView->currentIndex();
     if (!index.isValid()) return;
 
-   QString newPath = ui->treeView->askRename(index);
-   if(newPath != "false"){
-      QFileInfo info = ui->treeView->fileInfo(index);
-      newPath = info.path()+ '/' + newPath + ".xml";
-       ui->modelFile->setText( newPath);
-       ui->editor->updateModelInfo(newPath);
-   }
+    QString newPath = ui->treeView->askRename(index);
+    if(newPath != "false"){
+        QFileInfo info = ui->treeView->fileInfo(index);
+        newPath = info.path()+ '/' + newPath + ".xml";
+        ui->modelFile->setText(newPath);
+        ui->editor->updateModelInfo(newPath);
+    }
 
 }
-/// TODO - Study Run to R
+
 void MainWindow::actionRun() {
     if(ui->editorView->isVisible()) {
         setState(Running);
@@ -276,8 +294,8 @@ void MainWindow::actionRun() {
         else ui->editor->stopModel();
     }
 }
-/// TODO - Study Run to R
-///TODO - Step by Step
+
+
 void MainWindow::actionRunByStep() {
     if(ui->editorView->isVisible()) {
         setState(Running);
@@ -285,7 +303,7 @@ void MainWindow::actionRunByStep() {
         else ui->editor->stopModel();
     }
 }
-///TODO - Step by Step
+
 void MainWindow::actionOptions() {
     Options(this).exec();
 }
@@ -307,7 +325,7 @@ void MainWindow::actionModelBuilder() {
 
 
 void MainWindow::actionResetViews() {
-    restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toAscii()));
+    restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toLatin1()));
 }
 
 void MainWindow::onModelStarted() {
@@ -348,7 +366,7 @@ void MainWindow::newModel(QString category, QString type, QString project, QStri
     QString dest = QDir::toNativeSeparators(dengueme::config("workspace") + "/" + project + "/" + name + ".xml");
 
     if ((false && dengueme::createDemo(type, dest,category))
-        || (true && dengueme::createModel(dest, type, category)))
+            || (true && dengueme::createModel(dest, type, category)))
         if (ui->editor->loadModel(dest, false)){
             setState(Editing);
         }
@@ -367,28 +385,7 @@ void MainWindow::onHelpRequested() {
     DescriptionWindow *description = new DescriptionWindow(this,ui->editor->modelDescription);
     description->show();
 
-    /*if (! helpHasBeenCreated) {
-        helpHasBeenCreated= true;
-        QVBoxLayout *verticalLayout= new QVBoxLayout(helpDialog);
-        QPushButton *closeButton= new QPushButton(helpDialog);
 
-        helpDialog->resize(600,400);
-        helpDialog->setWindowIcon(QIcon(":/img/Resources/img/icon_information.png"));
-
-        closeButton->setText(tr("Close"));
-        closeButton->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
-
-        verticalLayout->addWidget(helpText);
-        verticalLayout->addWidget(closeButton);
-        verticalLayout->setAlignment(closeButton,Qt::AlignRight);
-
-        helpDialog->connect(closeButton,SIGNAL(clicked()),helpDialog,SLOT(hide()));
-    }
-
-    helpDialog->setWindowTitle(title + " - " + tr("DengueME Help"));
-    helpText->displayHelp(content);
-
-    helpDialog->show();*/
 }
 
 void MainWindow::runUnitTests()

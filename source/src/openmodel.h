@@ -2,7 +2,7 @@
 #define OPENMODEL_H
 
 
-#include <QtGui>
+#include <QtWidgets>
 #include <string>
 
 namespace Ui {

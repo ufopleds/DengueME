@@ -24,6 +24,10 @@ int main(int argc, char *argv[]) {
         dengueme::saveconfig("terrame/gui","true");
         dengueme::setconfig("terrame/gui","true");
     }
+    if(dengueme::config("modelsVersion").isEmpty()){
+        dengueme::saveconfig("modelsVersion","v0.1");
+        dengueme::setconfig("modelsVersion","v0.1");
+    }
 
     ///TODO - Translator
     if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "Default") {
