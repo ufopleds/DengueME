@@ -1,7 +1,7 @@
 #ifndef COMBOBOXRULES_H
 #define COMBOBOXRULES_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 namespace Ui {
 class ComboBoxRules;

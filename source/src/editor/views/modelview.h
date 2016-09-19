@@ -2,7 +2,7 @@
 #define MODELVIEW_H
 
 #include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 #include <QtXml>
 
 namespace Ui {

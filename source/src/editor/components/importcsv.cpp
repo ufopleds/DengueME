@@ -18,7 +18,7 @@ ImportCsv::ImportCsv(QWidget *parent) :
     QAction *actionFloating = new QAction(tr("&Floating point"),menu);
     QAction *actionCombobox = new QAction(tr("C&ombobox"),menu);
     QAction *actionCsv = new QAction(tr("Csv"),menu);
-    QAction *actionClone = new QAction(tr("Clone"),menu);
+
 
 
     actionCsv->setCheckable(true);
@@ -86,6 +86,9 @@ void ImportCsv::setEditMode(bool enable)
     ui->var->setVisible(enable);
     ui->line->setVisible(enable);
     ui->label->setReadOnly(!enable);
+    ui->toolClone->setVisible(enable);
+    ui->toolDelete->setVisible(enable);
+    ui->toolOptions->setVisible(enable);
 
     if (enable) {
         ui->textEdit->setToolTip("Default value");

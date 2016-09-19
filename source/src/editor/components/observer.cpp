@@ -2,7 +2,7 @@
 #include "observer.h"
 #include "ui_observer.h"
 
-#include <QtGui>
+#include <QtWidgets>
 
 Observer::Observer(QWidget *parent) :
     QWidget(parent),

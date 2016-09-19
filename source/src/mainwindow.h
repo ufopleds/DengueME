@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 #include "helpbrowser.h"
 
 namespace Ui {
@@ -48,6 +48,7 @@ public slots:
     void actionRename();
     void actionRun();
     void actionRunByStep();
+    void actionSync();
 
     void actionOptions();
     void actionAbout();

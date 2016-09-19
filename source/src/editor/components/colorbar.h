@@ -1,7 +1,7 @@
 #ifndef COLORBAR_H
 #define COLORBAR_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 namespace Ui {
 class ColorBar;

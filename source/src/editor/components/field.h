@@ -1,7 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtXml>
 #include "../component.h"
 

@@ -1,26 +1,28 @@
 #include <QFileDialog>
 #include <QDesktopServices>
 #include <QHBoxLayout>
-
+#include <QDebug>
 #include "changeworkspace.h"
 #include "dengueme.h"
 
 using namespace detail;
 
 ChangeWorkspace::ChangeWorkspace(QWidget *parent) :
-    QWizard(parent)
-{
-     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    QWizard(parent){
+
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     setPage(Page_SelectWorkspace, new SelectPage(this));
     setStartId(Page_SelectWorkspace);
     setOption(QWizard::NoBackButtonOnLastPage);
- //   setPixmap(QWizard::LogoPixmap, QPixmap(":/Resources/logo.png"));
     setWindowTitle(tr("Workspace Directory"));
 
 }
 
 void ChangeWorkspace::accept() {
+
     QString path(field("path").toString());
+
     if (field("setDefault").toBool()) {
         dengueme::setconfig("workspace", path);
         dengueme::saveconfig("workspace", path);
@@ -34,19 +36,19 @@ void ChangeWorkspace::accept() {
 }
 
 SelectPage::SelectPage(QWidget *parent)
-    : QWizardPage(parent)
-{
+    : QWizardPage(parent){
+
     setTitle(tr("Workpace"));
     setSubTitle(tr("Specify the workspace path."));
 
     pathLabel = new QLabel(tr("&Workspace path:"));
 
-   pathLineEdit = new QLineEdit(
+    pathLineEdit = new QLineEdit(
                 dengueme::config("workspace").isEmpty() ?
-                    QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "/dengueme_workspace"
+                    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)+ "/dengueme_workspace"
                   :
                     dengueme::config("workspace")
-                );
+                    );
     pathLabel->setBuddy(pathLineEdit);
     connect(pathLineEdit, SIGNAL(textChanged(QString)), SLOT(validate(QString)));
     registerField("path", pathLineEdit);

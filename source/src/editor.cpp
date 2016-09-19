@@ -24,7 +24,7 @@ Editor::Editor(QWidget *parent) :
     connect(&interpreter, SIGNAL(readyReadStandardOutput()), SLOT(readyReadStandardOutput()));
     connect(&interpreter, SIGNAL(readyReadStandardError()), SLOT(readyReadStandardError()));
     connect(&interpreter, SIGNAL(finished(int)), SLOT(onInterpreterFinished(int)));
-//    connect(&interpreter, SIGNAL(started()), SLOT());
+    //    connect(&interpreter, SIGNAL(started()), SLOT());
 
     parametersGroup = new GroupList;
     view_model = new ModelView;
@@ -73,18 +73,18 @@ Editor::Editor(QWidget *parent) :
         simulationGroup->setLabel(tr("Simulation"));
         layout->addWidget(simulationGroup);
 
-         ///TODO  - Observers
+        ///TODO  - Observers
 
         QGroupBox *group = new QGroupBox(tr("Observer"));
         QVBoxLayout *groupLayout = new QVBoxLayout(group);
         groupLayout->addWidget(observer = new Observer);
         enableObserver = new QCheckBox(tr("Use observer"));
         connect(enableObserver, SIGNAL(toggled(bool)), group, SLOT(setVisible(bool)));
-        group->setVisible(false);      
+        group->setVisible(false);
         layout->addWidget(enableObserver);
         layout->addWidget(group);
 
-          ///TODO - Observers
+        ///TODO - Observers
 
         layout->addStretch(1);
     }
@@ -99,6 +99,7 @@ Editor::Editor(QWidget *parent) :
         view_results->setLayout(new QVBoxLayout);
         view_results->layout()->addWidget(cont);
         view_results->layout()->setMargin(0);
+
 
         QVBoxLayout *layout = new QVBoxLayout(cont);
         resultsGroup = new Group;
@@ -173,7 +174,7 @@ void Editor::setEditModeEnabled(bool enable){
 
     viewmap[ViewModel].visible = enable;
 
-     resultsGroup->setEditMode(enable);
+    resultsGroup->setEditMode(enable);
     parametersGroup->setEditMode(enable);
     simulationGroup->setEditMode(enable);
     enableResults->setVisible(enable);
@@ -192,31 +193,35 @@ void Editor::stopModel(){
 }
 QString Editor::loadDescription(QDomElement par){
     modelDescription += "";
-     for (QDomElement node = par.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
-         if (node.tagName().compare("groupbox", Qt::CaseInsensitive) == 0){
-             for (QDomElement child = node.firstChildElement(); !child.isNull(); child = child.nextSiblingElement()) {
-                 if (child.nodeName() == "field") {
-                        modelDescription+=child.attribute("label") + ": "+ child.attribute("description") + "\n";
-                 }
-              }
-         }
+    for (QDomElement node = par.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
+        if (node.tagName().compare("groupbox", Qt::CaseInsensitive) == 0){
+            for (QDomElement child = node.firstChildElement(); !child.isNull(); child = child.nextSiblingElement()) {
+                if (child.nodeName() == "field") {
+                    modelDescription+=child.attribute("label") + ": "+ child.attribute("description") + "\n";
+                }
+            }
+        }
         else{
             modelDescription+=node.attribute("label") + ": "+ node.attribute("description") + "\n";
 
-         }
-     }
-     return modelDescription;
+        }
+    }
+    return modelDescription;
 }
 ///BUG
 bool Editor::loadModel(QString filename, bool editMode){
 
-    if (!modelFile.isEmpty() && !close(0)){
-        QMessageBox messageBox;
-        messageBox.critical(0,"Error","Model already exists in your workspace!");
-        messageBox.setFixedSize(500,200);
-        return false;
 
+    if(renameFlag==0){
+        if (!modelFile.isEmpty() && !close(0)){
+            QMessageBox messageBox;
+            messageBox.critical(0,"Error","Model already exists in your workspace!");
+            messageBox.setFixedSize(500,200);
+            return false;
+
+        }
     }
+    renameFlag =0;
 
     QFileInfo info(filename);
     QFile file(filename);
@@ -251,7 +256,7 @@ bool Editor::loadModel(QString filename, bool editMode){
     QDomElement sim = root.firstChildElement("simulation");
     QDomElement obsEl = root.firstChildElement("Observer");
     QDomElement res = root.firstChildElement("results");
-     loadDescription(par);
+    loadDescription(par);
     loadDescription(sim);
     viewmap[ViewDatabase].visible = !datEl.isNull();
     database->setXml(datEl);
@@ -298,8 +303,8 @@ void Editor::execModel(bool stepByStep){
         QTextStream out(&input);
 
         //.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
-      out <<  "print(\'LOADING INPUT FILE AND RUNNING MODEL\')\n";
-      out << "io.flush();";
+        out <<  "print(\'LOADING INPUT FILE AND RUNNING MODEL\')\n";
+        out << "io.flush();\n";
         if (enableDatabase->isChecked())
             out << database->outData();
 
@@ -358,20 +363,20 @@ void Editor::execModel(bool stepByStep){
 
 void Editor::updateModelInfo(QString newPath){
     modelFile = newPath;
+    renameFlag = 1;
 }
 
 bool Editor::close(int del){
     if (modelFile.isEmpty()) return true;
 
-   if(del==1){
-       emit closed();
+    if(del==1){
+        emit closed();
         return true;
-   }
-   if(del==2){
-       clearModel();
-       return true;
-   }
-
+    }
+    if(del==2){
+        clearModel();
+        return true;
+    }
     QMessageBox::StandardButton opt = QMessageBox::question(this, tr("Close model"),
                                                             tr("Save model before closing?"),
                                                             QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -382,7 +387,7 @@ bool Editor::close(int del){
     case QMessageBox::Save:
         save();
 
-    //Fallthrough
+        //Fallthrough
     case QMessageBox::Discard:
         clearModel();
         return true;

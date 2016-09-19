@@ -63,5 +63,6 @@
         <file>Resources/components.png</file>
         <file>Resources/clone.png</file>
         <file>Resources/builderTool.png</file>
+        <file>Resources/close.png</file>
     </qresource>
 </RCC>

@@ -32,6 +32,10 @@ INPUT(
 ./release\tests.o
 ./release\descriptionwindow.o
 ./release\openmodel.o
+./release\syncmodels.o
+./release\downloadmanager.o
+./release\downloadhttp.o
+./release\qrc_Resource.o
 ./release\moc_mainwindow.o
 ./release\moc_newproject.o
 ./release\moc_observer.o
@@ -61,5 +65,7 @@ INPUT(
 ./release\moc_modelview.o
 ./release\moc_descriptionwindow.o
 ./release\moc_openmodel.o
-./release\qrc_Resource.o
+./release\moc_syncmodels.o
+./release\moc_downloadmanager.o
+./release\moc_downloadhttp.o
 );

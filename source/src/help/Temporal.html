@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Coupled Model</title>
+  </head>
+  <body>
+   <h2>Path</h2>
+    <p>
+     <b>Results Path:</b> Informe o nome da pasta na qual os resultados da simulação serão armazenados. Se você desejar manter os resultados de uma simulação, altere o nome desta pasta antes de executar novamente o modelo.
+    </p>
+   <h2>Simulation</h2>
+    <p>
+     <b>Debug mode:</b> Simulação em modo de depuração. Exibe informações detalhadas durante a execução do modelo. Em geral, essa opção é utilizada para testes.
+    </p>
+    <p>
+     <b>Simulation start/end time:</b> Informe o intervalo de tempo (tempo inicial e tempo final) da simulação.
+    </p>
+    <p>
+     <b>Save results start/end time:</b> Informe o intervalo de tempo (tempo inicial e tempo final) no qual os resultados serão armazenados.
+    </p>
+   <h2>Logfile</h2>
+    <p>
+     <b>Name of results file:</b> Informe o nome do arquivo .csv que armazenará os resultados da simulação.
+    </p>
+   <h2>ODE</h2>
+    <p>
+     <b>Step:</b> Informe o passo de integração das Equações Diferenciais Ordinárias (EDOs) do modelo.
+    </p>
+   <h2>Constants</h2>
+    <h3>Carrying capacity (K):</h3>
+     <p>
+      Informe a capacidade de suporte para o modelo. Essa constante está presente no termo logístico que controla o crescimento da população. Em geral é baseado em características ambientais do local de estudo.
+     </p>
+    <h3>Mortality Rates:</h3>
+     <p>
+      <b>Eggs:</b> Informe a taxa de mortalidade natural da população de ovos.
+     </p>
+     <p>
+      <b>Larvae:</b> Informe a taxa de mortalidade natural da população de larvas.
+     </p>
+     <p>
+      <b>Pupae:</b> Informe a taxa de mortalidade natural da população de pupas.
+     </p>
+     <p>
+      <b>Mosquitoes:</b> Informe a taxa de mortalidade natural da população de adultos.
+     </p>
+    <h3>Development Rates:</h3>
+     <p>
+      <b>Eggs:</b> Informe a taxa de desenvolvimento de ovos.
+     </p>
+     <p>
+      <b>Larvae:</b> Taxa de desenvolvimento de larvas.
+     </p>
+     <p>
+      <b>Pupae:</b> Taxa de desenvolvimento de pupas.
+     </p>
+    <h3>Temperature time series:</h3>
+     <p>
+      Informe a temperatura (constante) ou a série temporal de temperatura da região estudada. Se a temperatura for constante ao longo do tempo basta informar o valor desejado. Caso a temperatura seja dada por uma série temporal, é necessário informar os valores das temperaturas separados por vírgula. Neste caso, também é possível importar os valores de temperatura armazenados em um arquivo .csv (sem cabeçalho) através do botão "import from csv". É possível obter estes dados de fontes públicas, por exemplo, INMET e CPTEC.
+     </p>
+   <h2>Cell attributes information</h2>
+    <p>
+     <b>Eggs:</b> informe o valor inicial de ovos ou deixe em branco para utilizar os valores da amostra informados no campo 'Data'.
+    </p>
+    <p>
+     <b>Larvae:</b> informe o valor inicial de larvas.
+    </p>
+    <p>
+     <b>Pupae:</b> informe o valor inicial de pupas.
+    </p>
+    <p>
+     <b>Adults:</b> informe o valor inicial de mosquitos.
+    </p>
+  </body>
+</html>
+

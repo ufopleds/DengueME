@@ -1,7 +1,7 @@
 #ifndef GROUP_H
 #define GROUP_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtXml>
 
 #include "component.h"

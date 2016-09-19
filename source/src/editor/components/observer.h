@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtXml>
-
+#include <QtWidgets>
 #include "colorbar.h"
 
 namespace Ui {

@@ -13,28 +13,23 @@ WorkspaceView::WorkspaceView(QWidget *parent)
 WorkspaceView::~WorkspaceView()
 { }
 
-void WorkspaceView::setWorkspace(QString workspace)
-{
+void WorkspaceView::setWorkspace(QString workspace){
     model->setDir(workspace);
 }
 
-QString WorkspaceView::filePath(QModelIndex index)
-{
+QString WorkspaceView::filePath(QModelIndex index){
     return model->filePath(index);
 }
 
-QFileInfo WorkspaceView::fileInfo(QModelIndex index)
-{
+QFileInfo WorkspaceView::fileInfo(QModelIndex index){
     return model->fileInfo(index);
 }
 
-QModelIndex WorkspaceView::indexFromPath(QString path)
-{
+QModelIndex WorkspaceView::indexFromPath(QString path){
     return model->indexFromPath(path);
 }
 
-bool WorkspaceView::askDelete(QModelIndex index)
-{
+bool WorkspaceView::askDelete(QModelIndex index){
     if (!index.isValid()) return false;
 
     QFileInfo fileinfo = fileInfo(index);
@@ -61,16 +56,15 @@ bool WorkspaceView::askDelete(QModelIndex index)
 
     model->removeDir(path);
 
-      path = fileinfo.absoluteFilePath();
-     path.replace(".xml", "_input.lua");
+    path = fileinfo.absoluteFilePath();
+    path.replace(".xml", "_input.lua");
 
     model->remove_recursively(path);
 
     return true;
 }
 
-QString WorkspaceView::askRename(QModelIndex index)
-{
+QString WorkspaceView::askRename(QModelIndex index){
     QFileInfo info = fileInfo(index);
     RenameWizard *w = new RenameWizard(info.path(),info.baseName(),info.isDir(),this);
     if (w->exec()) {
@@ -81,7 +75,7 @@ QString WorkspaceView::askRename(QModelIndex index)
             if (QFile::rename(oldpath, newpath))
                 return newpath;
         } else {
-           {
+            {
                 QString oldpath = info.filePath();
                 QString newpath = info.path() + '/' + newname + ".xml";
                 if (!QFile::rename(oldpath, newpath))
@@ -100,8 +94,7 @@ QString WorkspaceView::askRename(QModelIndex index)
     return "false";
 }
 
-void WorkspaceView::setDirModel(DirModel *model)
-{
+void WorkspaceView::setDirModel(DirModel *model){
     if (this->model) return;
 
     this->model = model;
@@ -110,8 +103,7 @@ void WorkspaceView::setDirModel(DirModel *model)
     QTreeView::setModel(model);
 }
 
-void WorkspaceView::onModelUpdated()
-{
+void WorkspaceView::onModelUpdated(){
     setCurrentIndex(indexFromPath(selected));
     foreach(QString path, expanded) {
         expand(indexFromPath(path));
@@ -120,8 +112,7 @@ void WorkspaceView::onModelUpdated()
     selected = "";
 }
 
-void WorkspaceView::onModelToUpdate()
-{
+void WorkspaceView::onModelToUpdate(){
     expanded.clear();
     selected = filePath(currentIndex());
     for (int i = 0; i < model->rowCount(); ++i) {

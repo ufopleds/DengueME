@@ -1,4 +1,4 @@
-#include <QDebug>
+
 
 #include "dengueme.h"
 #include "mainwindow.h"
@@ -12,7 +12,7 @@ namespace dengueme {
     QHash<QString, QVariant> loadSettings() {
         QHash<QString, QVariant> settingsTable;
         foreach (QString x, settingsFile.allKeys())
-                    settingsTable[x] = settingsFile.value(x);
+            settingsTable[x] = settingsFile.value(x);
         return settingsTable;
     }
 
@@ -61,12 +61,12 @@ namespace dengueme {
         if (! file.exists() && flags & QFile::WriteOnly) {
             QDir dir;
             if (! dir.mkpath(QFileInfo(file).path())) {
-    //            emit output(3,"Failed to create file: " + file.fileName());
+                //            emit output(3,"Failed to create file: " + file.fileName());
                 return false;
             }
         }
         if (! file.open(flags)) {
-    //        emit output(3,"Failed to open file: " + file.fileName());
+            //        emit output(3,"Failed to open file: " + file.fileName());
             return false;
         }
         return true;
@@ -151,7 +151,9 @@ namespace dengueme {
             modeldir.setCurrent(default_dir);
             dengueme::copyFile(default_model.filePath(), dest, true);
         } else {
-            QString user_models_dir = QDesktopServices::storageLocation(QDesktopServices::DataLocation) + '/' + category + '/' + type;
+            QString user_models_dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme" + '/' + category + '/' + type;
+
+
             QFileInfo user_model(user_models_dir + '/' + type + ".xml");
 
             if (user_model.exists()) {
@@ -168,8 +170,7 @@ namespace dengueme {
     //Model Interface Lists
     QList<QPair<QString, QStringList> > model_types() {
 
-        QString user_models = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
-
+        QString user_models =QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme";
         QDir ent_usr_dir(user_models + "/vector");
         QDir epi_usr_dir(user_models + "/transmission");
 

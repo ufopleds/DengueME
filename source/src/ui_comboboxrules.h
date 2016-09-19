@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'comboboxrules.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,17 +10,17 @@
 #define UI_COMBOBOXRULES_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QListWidget>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QToolButton>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QToolButton>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -39,15 +39,15 @@ public:
     void setupUi(QDialog *ComboBoxRules)
     {
         if (ComboBoxRules->objectName().isEmpty())
-            ComboBoxRules->setObjectName(QString::fromUtf8("ComboBoxRules"));
+            ComboBoxRules->setObjectName(QStringLiteral("ComboBoxRules"));
         ComboBoxRules->resize(400, 169);
         ComboBoxRules->setMinimumSize(QSize(400, 0));
         verticalLayout = new QVBoxLayout(ComboBoxRules);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         list = new QListWidget(ComboBoxRules);
-        list->setObjectName(QString::fromUtf8("list"));
+        list->setObjectName(QStringLiteral("list"));
         list->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
         list->setDragEnabled(true);
         list->setDragDropMode(QAbstractItemView::InternalMove);
@@ -55,19 +55,19 @@ public:
         horizontalLayout->addWidget(list);
 
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         add = new QToolButton(ComboBoxRules);
-        add->setObjectName(QString::fromUtf8("add"));
+        add->setObjectName(QStringLiteral("add"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8(":/Resources/plus"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/Resources/plus"), QSize(), QIcon::Normal, QIcon::Off);
         add->setIcon(icon);
 
         verticalLayout_2->addWidget(add);
 
         del = new QToolButton(ComboBoxRules);
-        del->setObjectName(QString::fromUtf8("del"));
+        del->setObjectName(QStringLiteral("del"));
         QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/Resources/minus.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/Resources/minus.png"), QSize(), QIcon::Normal, QIcon::Off);
         del->setIcon(icon1);
 
         verticalLayout_2->addWidget(del);
@@ -83,7 +83,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         buttonBox = new QDialogButtonBox(ComboBoxRules);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -99,9 +99,9 @@ public:
 
     void retranslateUi(QDialog *ComboBoxRules)
     {
-        ComboBoxRules->setWindowTitle(QApplication::translate("ComboBoxRules", "Dialog", 0, QApplication::UnicodeUTF8));
-        add->setText(QApplication::translate("ComboBoxRules", "+", 0, QApplication::UnicodeUTF8));
-        del->setText(QApplication::translate("ComboBoxRules", "-", 0, QApplication::UnicodeUTF8));
+        ComboBoxRules->setWindowTitle(QApplication::translate("ComboBoxRules", "Dialog", 0));
+        add->setText(QApplication::translate("ComboBoxRules", "+", 0));
+        del->setText(QApplication::translate("ComboBoxRules", "-", 0));
     } // retranslateUi
 
 };

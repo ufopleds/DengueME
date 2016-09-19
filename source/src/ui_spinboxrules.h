@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'spinboxrules.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.6
+** Created by: Qt User Interface Compiler version 5.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,16 +10,16 @@
 #define UI_SPINBOXRULES_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -37,30 +37,30 @@ public:
     void setupUi(QDialog *SpinBoxRules)
     {
         if (SpinBoxRules->objectName().isEmpty())
-            SpinBoxRules->setObjectName(QString::fromUtf8("SpinBoxRules"));
+            SpinBoxRules->setObjectName(QStringLiteral("SpinBoxRules"));
         SpinBoxRules->resize(400, 129);
         SpinBoxRules->setMinimumSize(QSize(400, 0));
         verticalLayout = new QVBoxLayout(SpinBoxRules);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setObjectName(QStringLiteral("formLayout"));
         minimum = new QSpinBox(SpinBoxRules);
-        minimum->setObjectName(QString::fromUtf8("minimum"));
+        minimum->setObjectName(QStringLiteral("minimum"));
 
         formLayout->setWidget(0, QFormLayout::FieldRole, minimum);
 
         label = new QLabel(SpinBoxRules);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         formLayout->setWidget(0, QFormLayout::LabelRole, label);
 
         label_2 = new QLabel(SpinBoxRules);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
 
         maximum = new QSpinBox(SpinBoxRules);
-        maximum->setObjectName(QString::fromUtf8("maximum"));
+        maximum->setObjectName(QStringLiteral("maximum"));
 
         formLayout->setWidget(1, QFormLayout::FieldRole, maximum);
 
@@ -68,7 +68,7 @@ public:
         verticalLayout->addLayout(formLayout);
 
         buttonBox = new QDialogButtonBox(SpinBoxRules);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -86,9 +86,9 @@ public:
 
     void retranslateUi(QDialog *SpinBoxRules)
     {
-        SpinBoxRules->setWindowTitle(QApplication::translate("SpinBoxRules", "Dialog", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("SpinBoxRules", "Minimum:", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("SpinBoxRules", "Maximum:", 0, QApplication::UnicodeUTF8));
+        SpinBoxRules->setWindowTitle(QApplication::translate("SpinBoxRules", "Dialog", 0));
+        label->setText(QApplication::translate("SpinBoxRules", "Minimum:", 0));
+        label_2->setText(QApplication::translate("SpinBoxRules", "Maximum:", 0));
     } // retranslateUi
 
 };

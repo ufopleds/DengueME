@@ -1,7 +1,7 @@
 #ifndef IMPORTCSV_H
 #define IMPORTCSV_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QtXml>
 #include "../component.h"
 

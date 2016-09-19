@@ -1,0 +1,22 @@
+<xmlmodel>
+  <script interpreter="TerraME">
+    <file>sir_basic_model.lua</file>
+    <main>sir_basic_model.lua</main>
+    <modelcategory>transmission</modelcategory>
+    <modeltype>sir_basic_model</modeltype>
+  </script>
+  <parameters>
+    <groupbox label="Population">
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of susceptible humans [1-999999999]" id="susceptible" label="Susceptible">9999</field>
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of infected humans [1-999999999]" id="infected" label="Infected">1</field>
+      <field minimum="0" maximum="1e+06" type="spinbox" description=" number of recovered humans [1-999999999]" id="recovered" label="Recovered">0</field>
+    </groupbox>
+    <groupbox label="Rates">
+      <field minimum="0" maximum="1e+06" precision="2" description="infection rate [0-100]" type="doublespinbox" id="infection_rate" step="0.1" label="Infection rate">1.06</field>
+      <field minimum="0" maximum="1e+06" precision="2" description="recovery rate [0-1]" type="doublespinbox" id="recovery_rate" step="0.1" label="Recovery rate">0.25</field>
+    </groupbox>
+  </parameters>
+  <simulation label="Simulation">
+    <field minimum="0" maximum="1e+06" type="spinbox" description="simulation steps [0-999999999]" id="steps" label="Steps">120</field>
+  </simulation>
+</xmlmodel>

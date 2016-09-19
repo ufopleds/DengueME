@@ -4,7 +4,7 @@
 #include "builderdirmodel.h"
 #include "../dengueme.h"
 #include "openmodel.h"
-
+#include <QDebug>
 
 ModelBuilder::ModelBuilder(QWidget *parent) :
     QMainWindow(parent),
@@ -12,13 +12,16 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
 {
     ui->setupUi(this);
      this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    QDir dir(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+      QString user_models = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme";
+
+      qDebug() << user_models;
+    QDir dir(user_models);
     dir.mkpath("vector");
     dir.mkpath("transmission");
 
     BuilderDirModel *model = new BuilderDirModel;
     ui->listView->setDirModel(model);
-    ui->listView->setWorkspace(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+    ui->listView->setWorkspace(user_models);
     connect(model, SIGNAL(updated()), ui->listView, SLOT(expandAll()));
     connect(ui->listView, SIGNAL(collapsed(QModelIndex)), ui->listView, SLOT(expand(QModelIndex)));
     ui->listView->expandAll();
@@ -101,7 +104,7 @@ void ModelBuilder::selectionChanged(const QModelIndex &current, const QModelInde
     if (!current.isValid()) return;
 
     QFileInfo info = ui->listView->fileInfo(current);
-    if (info.dir().canonicalPath() != QDir(QDesktopServices::storageLocation(QDesktopServices::DataLocation)).canonicalPath()) {
+    if (info.dir().canonicalPath() != QDir( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme").canonicalPath()) {
         ui->toolBar->addAction(ui->actionEdit);
         ui->actionEdit->setEnabled(true);
 
@@ -143,12 +146,12 @@ void ModelBuilder::newModel() {
     if (!ui->editor->close(0))
         return;
 
-    NewModelWizard *n = new NewModelWizard(QDesktopServices::storageLocation(QDesktopServices::DataLocation),QString(),this);
+    NewModelWizard *n = new NewModelWizard( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme",QString(),this);
     if (!n->exec()) return;
 
     QString proj = n->property("project").toString();
     QString name = n->field("name").toString();
-    QString dest = QDir::toNativeSeparators(QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "/" + proj + "/" + name + "/" + name + ".xml");
+    QString dest = QDir::toNativeSeparators( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme" + "/" + proj + "/" + name + "/" + name + ".xml");
 
     dengueme::createEmptyModel(dest);
     dengueme::setProject(proj);
