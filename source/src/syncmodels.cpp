@@ -35,7 +35,7 @@ SyncModels::SyncModels(QWidget *parent) :
 void SyncModels::downloadAction(){
 
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
-    addLine("Updating models...");
+    addLine(tr("Updating models..."));
 
     QUrl url("https://codeload.github.com/ufopleds/DengueMELib/zip/models_"+version);
     mManager->download(url);
@@ -45,16 +45,16 @@ void SyncModels::downloadAction(){
 void SyncModels::checkNewModel(){
     ui->progressBar->setValue(0);
     qDebug() << ABS_APP_DIR;
-
+    ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
     QUrl url("https://github.com/ufopleds/DengueMELib/releases/latest");
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
     _pManager = new QNetworkAccessManager(this);
     _CurrentRequest = QNetworkRequest(url);
 
     _pCurrentReply = _pManager->head(_CurrentRequest);
-    addLine("Checking for updates");
+    addLine(tr("Checking for updates"));
 
-    _Timer.setInterval(5000);
+    _Timer.setInterval(10000);
     _Timer.setSingleShot(true);
     connect(&_Timer, SIGNAL(timeout()), this, SLOT(timeout()));
     _Timer.start();
@@ -81,34 +81,39 @@ void SyncModels::finishedHead(){
     }
 
     if(!version.isEmpty()){
- if(actualVersion >= version){
-            addLine("Your models are up to date.");
+        if(actualVersion >= version){
+            addLine(tr("Your models are up to date."));
             QString actualVersion = dengueme::config("modelsVersion") ;
-            addLine("Your current version is:  "+actualVersion);
+            addLine(tr("Your current version is:  ")+actualVersion);
             _pCurrentReply->abort();
             ui->downloadButton->setEnabled(false);
         }else if(actualVersion < version){
-            addLine("Your models are not up to date. \nNew version: "+version);
+            addLine(tr("Your models are not up to date. \nNew version: ")+version);
             _pCurrentReply->abort();
             ui->downloadButton->setEnabled(true);
             ui->downloadButton->setFocus();
-       }
+        }
     }else{
-        addLine("Connection Closed. Try Again.");
+        addLine(tr("Connection Closed."));
         _pCurrentReply->abort();
     }
 
     if(QDir(ABS_APP_DIR+"/Models").entryInfoList(QDir::NoDotAndDotDot|QDir::AllEntries).count() == 0)    {
-         ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
-       addLine("Your models folder is empty or misssing. Please download it.");
-       ui->downloadButton->setEnabled(true);
+        ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
+        addLine(tr("Your models folder is empty or misssing. Please download it."));
+        ui->downloadButton->setEnabled(true);
     }
 
 
 }
 
 void SyncModels::timeout(){
-    addLine("Timeout");
+    ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
+    addLine(tr("Timeout, Sorry for the incovenience"));
+    addLine(tr("You may download the models from the website"));
+    addLine(tr("And extract the Models folder into the DengueME folder "));
+    addLine("https://github.com/ufopleds/DengueMELib/releases/latest");
+    addLine(tr("Or try again."));
 }
 
 void SyncModels::updateAction(){
@@ -129,10 +134,10 @@ void SyncModels::progress(int nPercentage){
 }
 
 void SyncModels::finished(){
-    addLine("Download completed.");
-    addLine("Models library updated. New version: "+version);
-    addLine("A zip file was downloaded into the DengueME main directory.");
-    addLine("Please extract this file directly into the DengueME folder.");
+    addLine(tr("Download completed."));
+    addLine(tr("Models library updated. New version: ")+version);
+    addLine(tr("A zip file was downloaded into the DengueME main directory."));
+    addLine(tr("Please extract this file directly into the DengueME folder."));
 
     dengueme::saveconfig("modelsVersion",version);
     dengueme::setconfig("modelsVersion",version);
@@ -149,9 +154,19 @@ void SyncModels::finished(){
 void SyncModels::error(QNetworkReply::NetworkError code){
 
     if(code == 3){
-        addLine("No internet connection.");
+        ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
+        addLine(tr("No internet connection."));
+        addLine(tr("You may download the models from the website"));
+        addLine(tr("And extract the Models folder into the DengueME folder "));
+        addLine("https://github.com/ufopleds/DengueMELib/releases/latest");
+        addLine(tr("Or try again."));
     }else{
+        ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
         addLine(_pCurrentReply->errorString());
+        addLine(tr("You may download the models from the website"));
+        addLine(tr("And extract the Models folder into the DengueME folder "));
+        addLine(tr("https://github.com/ufopleds/DengueMELib/releases/latest"));
+        addLine(tr("Or try again."));
     }
 
 }

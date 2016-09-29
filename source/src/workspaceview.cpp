@@ -38,11 +38,11 @@ bool WorkspaceView::askDelete(QModelIndex index){
 
     if (fileinfo.isDir()) {
         opt = QMessageBox::question(this,tr("Delete folder"),
-                                    "Are you sure you want to delete the project '" + fileinfo.baseName() + "' and all its content? This will delete all model related files from your disk <b>permanently</b>",
+                                    tr("Are you sure you want to delete the project '") + fileinfo.baseName() + tr("' and all its content? This will delete all model related files from your disk <b>permanently</b>"),
                                     QMessageBox::Yes | QMessageBox::No);
     } else if (fileinfo.isFile() ) {
         opt = QMessageBox::question(this,tr("Delete model"),
-                                    "Are you sure you want to delete the model '" + fileinfo.baseName() + "? This will delete all model related files from your disk <b>permanently</b>",
+                                    tr("Are you sure you want to delete the model '") + fileinfo.baseName() +tr( "? This will delete all model related files from your disk <b>permanently</b>"),
                                     QMessageBox::Yes | QMessageBox::No);
     }    else
         return false;

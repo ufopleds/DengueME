@@ -10,7 +10,7 @@ QT += widgets
 
 TARGET = dengueme
 TEMPLATE = app
-TRANSLATIONS = dengueme_pt.ts
+TRANSLATIONS = portuguese.ts
 
 help.commands += $$[QT_INSTALL_BINS]/qcollectiongenerator help/dengueme.qhcp
 

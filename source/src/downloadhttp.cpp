@@ -111,7 +111,7 @@ void DownloadHTTP::finishedHead(){
 void DownloadHTTP::finished(){
 
     int size =_pFile->size();
-    qDebug() <<  "Total";
+
 
     if(size !=_nDownloadSize){
         _Timer.stop();
@@ -119,7 +119,7 @@ void DownloadHTTP::finished(){
         QFile::remove(_pFile->fileName());
         _pFile = NULL;
         _pCurrentReply = 0;
-        addLine("Corrupted file. Please try again.");
+        addLine(tr("Corrupted file. Please try again."));
         emit timeout();
     }else{
         _Timer.stop();
@@ -152,5 +152,5 @@ void DownloadHTTP::error(QNetworkReply::NetworkError code){
 
 
 void DownloadHTTP::timeout(){
-    addLine("Timeout");
+    addLine(tr("Timeout"));
 }

@@ -7,7 +7,6 @@ DescriptionWindow::DescriptionWindow(QWidget *parent,QString description) :
     ui(new Ui::DescriptionWindow){
 
     ui->setupUi(this);
-
      ui->textBrowser->setText(description);
      this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 

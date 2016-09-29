@@ -45,6 +45,7 @@ public:
     QLineEdit *lineEdit;
     QPushButton *pushButton;
     QCheckBox *checkBox;
+    QLabel *languageMessage;
     QWidget *tab_2;
     QFormLayout *formLayout_3;
     QLabel *label_2;
@@ -79,7 +80,7 @@ public:
         label_5 = new QLabel(tab);
         label_5->setObjectName(QStringLiteral("label_5"));
 
-        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_5);
+        formLayout_2->setWidget(5, QFormLayout::LabelRole, label_5);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
@@ -94,7 +95,7 @@ public:
         horizontalLayout_4->addWidget(comboBox);
 
 
-        formLayout_2->setLayout(4, QFormLayout::FieldRole, horizontalLayout_4);
+        formLayout_2->setLayout(5, QFormLayout::FieldRole, horizontalLayout_4);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
@@ -122,6 +123,11 @@ public:
 
 
         formLayout_2->setLayout(2, QFormLayout::FieldRole, verticalLayout_3);
+
+        languageMessage = new QLabel(tab);
+        languageMessage->setObjectName(QStringLiteral("languageMessage"));
+
+        formLayout_2->setWidget(6, QFormLayout::FieldRole, languageMessage);
 
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
@@ -199,6 +205,7 @@ public:
         label_5->setText(QApplication::translate("Options", "Language:", 0));
         pushButton->setText(QApplication::translate("Options", "Browse", 0));
         checkBox->setText(QApplication::translate("Options", "Prompt for workspace on startup", 0));
+        languageMessage->setText(QApplication::translate("Options", "TextLabel", 0));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Options", "General", 0));
         label_2->setText(QApplication::translate("Options", "TerraME:", 0));
         pushButton_2->setText(QApplication::translate("Options", "Browse", 0));

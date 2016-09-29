@@ -104,7 +104,7 @@ Editor::Editor(QWidget *parent) :
         QVBoxLayout *layout = new QVBoxLayout(cont);
         resultsGroup = new Group;
         resultsGroup->setRemovable(false);
-        resultsGroup->setLabel("Results");
+        resultsGroup->setLabel(tr("Results"));
         resultsGroup->layout()->setMargin(0);
 
         enableResults = new QCheckBox(tr("Use results view"));
@@ -117,12 +117,11 @@ Editor::Editor(QWidget *parent) :
         layout->addStretch(1);
     }
 
-    viewmap.insert(ViewModel,      ViewData(tr("Model"),      view_model));
-
-    viewmap.insert(ViewDatabase,   ViewData(tr("Database"),   view_database));
-    viewmap.insert(ViewParameters, ViewData(tr("Parameters"), view_parameters));
-    viewmap.insert(ViewSimulation, ViewData(tr("Simulation"), view_simulation));
-    viewmap.insert(ViewResults,    ViewData(tr("Results"),    view_results));
+    viewmap.insert(ViewModel,      ViewData(tr("Model"), "model" ,    view_model));
+    viewmap.insert(ViewDatabase,   ViewData(tr("Database"),  "database", view_database));
+    viewmap.insert(ViewParameters, ViewData(tr("Parameters"), "parameters",view_parameters));
+    viewmap.insert(ViewSimulation, ViewData(tr("Simulation"),"simulation", view_simulation));
+    viewmap.insert(ViewResults,    ViewData(tr("Results"),  "results",  view_results));
 
     ///TODO - Interpreter new Window
     ///IDEA - Show just model, add a OK button, after pressed get all the information and show the right views
@@ -147,19 +146,19 @@ void Editor::setupViews(){
     if (editMode) {
         foreach(ViewData x, viewmap)
             if (x.visibleEM)
-                addView(x.name, x.widget);
+                addView(x.variableName, x.widget,x.name);
     } else {
         foreach(ViewData x, viewmap)
             if (x.visible)
-                addView(x.name, x.widget);
+                addView(x.variableName, x.widget,x.name);
     }
 }
 
-void Editor::addView(QString name, QWidget *content){
+void Editor::addView(QString variableName, QWidget *content,QString name){
 
 
     QListWidgetItem *item = new QListWidgetItem(ui->list);
-    item->setIcon(QIcon(":/img/Resources/" + name.toLower() + ".png"));
+    item->setIcon(QIcon(":/img/Resources/" + variableName + ".png"));
 
     item->setText(name);
     item->setTextAlignment(Qt::AlignHCenter);
@@ -208,17 +207,13 @@ QString Editor::loadDescription(QDomElement par){
     }
     return modelDescription;
 }
-///BUG
+
 bool Editor::loadModel(QString filename, bool editMode){
 
 
     if(renameFlag==0){
         if (!modelFile.isEmpty() && !close(0)){
-            QMessageBox messageBox;
-            messageBox.critical(0,"Error","Model already exists in your workspace!");
-            messageBox.setFixedSize(500,200);
             return false;
-
         }
     }
     renameFlag =0;
@@ -377,10 +372,20 @@ bool Editor::close(int del){
         clearModel();
         return true;
     }
-    QMessageBox::StandardButton opt = QMessageBox::question(this, tr("Close model"),
+    /*QMessageBox::StandardButton opt = QMessageBox::question(this, tr("Close model"),
                                                             tr("Save model before closing?"),
                                                             QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-    switch (opt) {
+*/
+    QMessageBox msgBox(
+                QMessageBox::Question,
+               tr("Close model"),
+                 tr("Save model before closing?"),
+                 QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+
+    msgBox.setButtonText(QMessageBox::Save, trUtf8("Save"));
+    msgBox.setButtonText(QMessageBox::Discard, trUtf8("Discard"));
+    msgBox.setButtonText(QMessageBox::Cancel, trUtf8("Cancel"));
+    switch (msgBox.exec()) {
     case QMessageBox::Cancel:
         return false;
 
@@ -456,7 +461,7 @@ bool Editor::saveAs(){
         return false;
 
     QFileInfo fileinfo(modelFile);
-    QString name = QFileDialog::getSaveFileName(this, "Save as...", fileinfo.path(), "*.xml");
+    QString name = QFileDialog::getSaveFileName(this, tr("Save as..."), fileinfo.path(), "*.xml");
     if (name.isNull())
         return false;
 

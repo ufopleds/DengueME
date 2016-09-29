@@ -69,6 +69,10 @@ public:
         listView = new QListView(verticalLayoutWidget);
         listView->setObjectName(QStringLiteral("listView"));
         listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        listView->setTabKeyNavigation(true);
+        listView->setProperty("showDropIndicator", QVariant(false));
+        listView->setSelectionMode(QAbstractItemView::ContiguousSelection);
+        listView->setViewMode(QListView::ListMode);
 
         verticalLayout->addWidget(listView);
 
@@ -93,8 +97,6 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        verticalLayoutWidget->raise();
-        label->raise();
 
         retranslateUi(SyncModels);
         QObject::connect(cancelButton, SIGNAL(clicked()), SyncModels, SLOT(close()));

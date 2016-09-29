@@ -14,7 +14,6 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
      this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
       QString user_models = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme";
 
-      qDebug() << user_models;
     QDir dir(user_models);
     dir.mkpath("vector");
     dir.mkpath("transmission");
@@ -26,7 +25,7 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
     connect(ui->listView, SIGNAL(collapsed(QModelIndex)), ui->listView, SLOT(expand(QModelIndex)));
     ui->listView->expandAll();
 
-    setWindowTitle("DengueME Model Builder");
+    setWindowTitle(tr("DengueME Model Builder"));
     connect(ui->listView, SIGNAL(activated(QModelIndex)), SLOT(modelActivated(QModelIndex)));
     connect(ui->listView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), SLOT(selectionChanged(QModelIndex,QModelIndex)));
     connect(ui->editor, SIGNAL(closed()), SLOT(onModelClosed()));
@@ -51,7 +50,7 @@ void ModelBuilder::openModelWizard(){
       if(openWizard->exec() == QDialog::Accepted){
 
           QFileInfo modelinfo(openWizard->getFilePath() + QDir::separator() +openWizard->getFileName() + ".xml");
-          qDebug() << modelinfo.filePath();
+       
            if (modelinfo.isFile()) {
               if (!ui->editor->loadModel(modelinfo.filePath(), true))
                   return;
@@ -79,7 +78,7 @@ void ModelBuilder::modelActivated(QModelIndex index)
 {
 
     QFileInfo modelinfo(ui->listView->filePath(index) + QDir::separator() + ui->listView->fileInfo(index).fileName() + ".xml");
-    qDebug() << modelinfo.filePath();
+
     if (modelinfo.isFile()) {
         if (!ui->editor->loadModel(modelinfo.filePath(), true))
             return;

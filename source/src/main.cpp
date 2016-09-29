@@ -4,10 +4,27 @@
 #include "changeworkspace.h"
 #include "mainwindow.h"
 #include "newmodel.h"
-
+#include <QDebug>
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
+    /// TODO - Linux folder share, like models folder
+    /* To generate the translate file, please use these commands in terminal
+     * lupdate -pro DengueME.pro -ts languageName.ts
+     * open the .ts file on QTLinguistic.
+     * after translated everything
+     * use lrelease languageName.ts
+     * a .qm file will be created, put this file on the translations folder
+    */
+    QDir dir(QCoreApplication::applicationDirPath() + "/translations/");
+       if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "English") {
+           QTranslator translator;
+           translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
+           app.installTranslator(&translator);
+       }
+      QTranslator translator;
+       translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
+       app.installTranslator(&translator);
 
     //Finds workspace based on settings file, if not defined, creates a new Folder
     if (dengueme::config("prompt_workspace") == "true" || dengueme::config("workspace").isEmpty() || !QDir(dengueme::config("workspace")).exists()) {
@@ -29,16 +46,7 @@ int main(int argc, char *argv[]) {
         dengueme::setconfig("modelsVersion","v0.1");
     }
 
-    ///TODO - Translator
-    if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "Default") {
-        QTranslator translator;
-        translator.load(QString("translations/") + dengueme::config("locale"));
-        app.installTranslator(&translator);
-    }
-    QTranslator translator;
-    translator.load(QString("translations/") + dengueme::config("locale"));
-    app.installTranslator(&translator);
-    ///TODO - Translator
+
 
     (new MainWindow)->show();
 

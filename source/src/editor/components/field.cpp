@@ -100,9 +100,9 @@ Field::Field(QWidget *parent) :
     connect(ui->toolOptions,   SIGNAL(clicked()), SLOT(onActionOptions()));
    connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
     connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
-    ui->toolOptions->setToolTip("Options");
-    ui->toolDelete->setToolTip("Delete");
-    ui->toolClone->setToolTip("Clone");
+    ui->toolOptions->setToolTip(tr("Options"));
+    ui->toolDelete->setToolTip(tr("Delete"));
+    ui->toolClone->setToolTip(tr("Clone"));
     updateMenu();
 }
 
@@ -571,7 +571,7 @@ void Field::onActionClone(){
 void Field::onActionDelete()
 {
     int opt = QMessageBox::question(this,tr("Remove Field"),
-                                    "This action will remove this field. Do you want to continue?",
+                                    tr("This action will remove this field. Do you want to continue?"),
                                     QMessageBox::Yes | QMessageBox::No);
 
 

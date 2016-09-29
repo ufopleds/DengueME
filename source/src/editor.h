@@ -52,9 +52,10 @@ private:
 
     struct ViewData {
         ViewData() : widget(NULL), visible(true), visibleEM(true) {}
-        ViewData(QString n, QWidget *w)
-            : name(n), widget(w), visible(true), visibleEM(true) {}
+        ViewData(QString n,QString d, QWidget *w)
+            : name(n), variableName(d),widget(w), visible(true), visibleEM(true) {}
         QString name;
+        QString variableName;
         QWidget *widget;
         bool visible, visibleEM;
     };
@@ -63,7 +64,7 @@ private:
     QDomDocument modelXml;
 
     void setupViews();
-    void addView(QString name, QWidget *content);
+    void addView(QString variableName, QWidget *content, QString name);
     void setEditModeEnabled(bool enable);
 
 public slots:

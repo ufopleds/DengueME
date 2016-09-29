@@ -16,6 +16,8 @@ NewModel::NewModel(QString workspace, QString project, QWidget *parent) :
     addPage(new NamePage(workspace));
     setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
     setWindowTitle(tr("New model"));
+    this->setButtonText(QWizard::NextButton,tr("Next"));
+    this->setButtonText(QWizard::CancelButton,tr("Cancel"));
 }
 
 void NewModel::accept(){

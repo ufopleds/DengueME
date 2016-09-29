@@ -14,6 +14,8 @@ NewProject::NewProject(QString workspace, QWidget *parent)
   setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
 //    connect(this, SIGNAL(helpRequested()), this, SLOT(showHelp()));
     setWindowTitle(tr("New project"));
+    this->setButtonText(QWizard::FinishButton,tr("Finish"));
+    this->setButtonText(QWizard::CancelButton,tr("Cancel"));
 }
 
 void NewProject::accept(){
