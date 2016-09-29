@@ -30,9 +30,11 @@ public:
     QVBoxLayout *verticalLayout;
     QFrame *frame;
     QLabel *label;
+    QLabel *label_6;
     QLabel *label_5;
     QLabel *label_2;
     QLabel *label_4;
+    QLabel *label_7;
     QLabel *label_3;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
@@ -43,13 +45,14 @@ public:
     {
         if (About->objectName().isEmpty())
             About->setObjectName(QStringLiteral("About"));
-        About->resize(420, 284);
+        About->resize(420, 353);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(About->sizePolicy().hasHeightForWidth());
         About->setSizePolicy(sizePolicy);
-        About->setMaximumSize(QSize(420, 284));
+        About->setMinimumSize(QSize(420, 353));
+        About->setMaximumSize(QSize(420, 353));
         QIcon icon;
         icon.addFile(QStringLiteral(":/img/Resources/about.png"), QSize(), QIcon::Normal, QIcon::Off);
         About->setWindowIcon(icon);
@@ -82,6 +85,11 @@ public:
 
         verticalLayout->addWidget(label);
 
+        label_6 = new QLabel(About);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        verticalLayout->addWidget(label_6);
+
         label_5 = new QLabel(About);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setOpenExternalLinks(true);
@@ -100,6 +108,11 @@ public:
         label_4->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
         verticalLayout->addWidget(label_4);
+
+        label_7 = new QLabel(About);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        verticalLayout->addWidget(label_7);
 
         label_3 = new QLabel(About);
         label_3->setObjectName(QStringLiteral("label_3"));
@@ -136,10 +149,12 @@ public:
     void retranslateUi(QDialog *About)
     {
         About->setWindowTitle(QApplication::translate("About", "About", 0));
-        label->setText(QApplication::translate("About", "<b>DengueME</b> is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.", 0));
-        label_5->setText(QApplication::translate("About", "<b>Lab WebSite:</b> <a href=\"http://www.leds.ufop.br/\">http://www.leds.ufop.br/ </a>", 0));
-        label_2->setText(QApplication::translate("About", "<html><head/><body><p>This software is distributed under the &quot;<span style=\" font-weight:600;\">BSD - 2 Clause</span>&quot; license. </p></body></html>", 0));
-        label_4->setText(QApplication::translate("About", "<b>GitHub:</b>  <a href=\"https://github.com/ufopleds/dengueme\">https://github.com/ufopleds/dengueme </a>", 0));
+        label->setText(QApplication::translate("About", "<b> DengueME</b> is a software framework designed to support modeling and simulation of the spatiotemporal dynamics of dengue transmission and vector ecology.", 0));
+        label_6->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Version</span>: 0.65. <span style=\" font-weight:600;\">Date: </span>9/27/2016</p></body></html>", 0));
+        label_5->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">URL :</span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/dengueme </span></a></p></body></html>", 0));
+        label_2->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">License</span>: BSD - 2 Clause</p></body></html>", 0));
+        label_4->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Source Code:</span><a href=\"https://github.com/ufopleds/dengueme\"><span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/ufopleds/dengueme </span></a></p></body></html>", 0));
+        label_7->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Author: LEDS/UFOP  </span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/</span></a></p></body></html>", 0));
         label_3->setText(QApplication::translate("About", "<b>Icons:</b> <a href=\" https://icons8.com/web-app/\">https://icons8.com</a>", 0));
         pushButton->setText(QApplication::translate("About", "Close", 0));
     } // retranslateUi

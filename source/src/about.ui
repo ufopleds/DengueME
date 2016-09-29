@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>420</width>
-    <height>284</height>
+    <height>353</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,10 +16,16 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>420</width>
+    <height>353</height>
+   </size>
+  </property>
   <property name="maximumSize">
    <size>
     <width>420</width>
-    <height>284</height>
+    <height>353</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -67,7 +73,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;b&gt;DengueME&lt;/b&gt; is developed through a partnership between LEDS/UFOP, TerraLAB/UFOP, Fiocruz and INPE.</string>
+      <string>&lt;b&gt; DengueME&lt;/b&gt; is a software framework designed to support modeling and simulation of the spatiotemporal dynamics of dengue transmission and vector ecology.</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -87,9 +93,16 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Version&lt;/span&gt;: 0.65. &lt;span style=&quot; font-weight:600;&quot;&gt;Date: &lt;/span&gt;9/27/2016&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>&lt;b&gt;Lab WebSite:&lt;/b&gt; &lt;a href=&quot;http://www.leds.ufop.br/&quot;&gt;http://www.leds.ufop.br/ &lt;/a&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;URL :&lt;/span&gt;&lt;a href=&quot;http://www.leds.ufop.br/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.leds.ufop.br/dengueme &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>
@@ -102,20 +115,27 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This software is distributed under the &amp;quot;&lt;span style=&quot; font-weight:600;&quot;&gt;BSD - 2 Clause&lt;/span&gt;&amp;quot; license. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;License&lt;/span&gt;: BSD - 2 Clause&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>&lt;b&gt;GitHub:&lt;/b&gt;  &lt;a href=&quot;https://github.com/ufopleds/dengueme&quot;&gt;https://github.com/ufopleds/dengueme &lt;/a&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Source Code:&lt;/span&gt;&lt;a href=&quot;https://github.com/ufopleds/dengueme&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;https://github.com/ufopleds/dengueme &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>
      </property>
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Author: LEDS/UFOP  &lt;/span&gt;&lt;a href=&quot;http://www.leds.ufop.br/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;http://www.leds.ufop.br/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>

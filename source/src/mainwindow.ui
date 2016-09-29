@@ -108,8 +108,8 @@
             <string notr="true">border: none;</string>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>Resources/close.png</normaloff>Resources/close.png</iconset>
+            <iconset resource="Resource.qrc">
+             <normaloff>:/Resources/close.png</normaloff>:/Resources/close.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -172,8 +172,8 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionOptions"/>
-    <addaction name="actionSetWorkspace"/>
     <addaction name="actionModelBuilder"/>
+    <addaction name="actionSetWorkspace"/>
     <addaction name="actionSynchronize"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -468,8 +468,8 @@
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset>
-     <normaloff>Resources/close.png</normaloff>Resources/close.png</iconset>
+    <iconset resource="Resource.qrc">
+     <normaloff>:/Resources/close.png</normaloff>:/Resources/close.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Close model </string>

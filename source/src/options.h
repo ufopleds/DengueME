@@ -19,6 +19,7 @@ private slots:
     void browseTerraME();
     void browseRscript();
     void accept();
+    void languageMessage();
 
 private:
     Ui::Options *ui;

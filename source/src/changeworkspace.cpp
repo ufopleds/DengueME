@@ -16,7 +16,8 @@ ChangeWorkspace::ChangeWorkspace(QWidget *parent) :
     setStartId(Page_SelectWorkspace);
     setOption(QWizard::NoBackButtonOnLastPage);
     setWindowTitle(tr("Workspace Directory"));
-
+    this->setButtonText(QWizard::FinishButton,  tr("Finish"));
+    this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
 }
 
 void ChangeWorkspace::accept() {

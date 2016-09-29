@@ -155,7 +155,7 @@ public:
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QStringLiteral("actionClose"));
         QIcon icon6;
-        icon6.addFile(QStringLiteral("Resources/close.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QStringLiteral(":/Resources/close.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClose->setIcon(icon6);
         actionRunByStep = new QAction(MainWindow);
         actionRunByStep->setObjectName(QStringLiteral("actionRunByStep"));
@@ -367,8 +367,8 @@ public:
         menuProject->addAction(actionRun);
         menuProject->addAction(actionRunByStep);
         menuEdit->addAction(actionOptions);
-        menuEdit->addAction(actionSetWorkspace);
         menuEdit->addAction(actionModelBuilder);
+        menuEdit->addAction(actionSetWorkspace);
         menuEdit->addAction(actionSynchronize);
         menuView->addAction(actionResetViews);
         mainToolBar->addAction(actionNewProject);

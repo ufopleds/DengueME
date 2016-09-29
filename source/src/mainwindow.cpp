@@ -241,10 +241,21 @@ void MainWindow::actionDefault() {
 
         QString original_dir = DEFAULT_MODELS_DIR + modelcategory + '/' + modeltype;
         QFileInfo original_file(original_dir + '/' + modeltype+ ".xml");
-        dengueme::copy(original_file.absoluteFilePath(),path,true);
-        QModelIndex index = ui->treeView->indexFromPath(path);
+        if(original_file.exists()){
+            dengueme::copy(original_file.absoluteFilePath(),path,true);
+            QModelIndex index = ui->treeView->indexFromPath(path);
+            modelActivated(index);
+        }
+        QString appData = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme/"+ modelcategory + '/' + modeltype;
+        QFileInfo app_data(appData+ '/' + modeltype+ ".xml");
+        if(app_data.exists()){
+            dengueme::copy(app_data.absoluteFilePath(),path,true);
+            QModelIndex index = ui->treeView->indexFromPath(path);
+            modelActivated(index);
+        }
 
-        modelActivated(index);
+
+
     }
 
 }
