@@ -113,14 +113,14 @@ bool DirModel::removeDir(QString dirName)
             }
 
             if (!result) {
-                qDebug()<< result;
+
                 return result;
             }
         }
         fsw->removePath(dir.path());  // windows issue: https://bugreports.qt.io/browse/QTBUG-2331
         result = dir.rmdir(dirName);
     }
-    qDebug()<< result;
+
     return result;
 }
 bool DirModel::remove(QModelIndex index){

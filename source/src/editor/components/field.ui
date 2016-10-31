@@ -23,7 +23,7 @@
       <string notr="true">QLineEdit { background-color:transparent; }</string>
      </property>
      <property name="frame">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="placeholderText">
       <string>Variable...</string>
@@ -46,7 +46,7 @@
       <string notr="true">QLineEdit { background-color:transparent; }</string>
      </property>
      <property name="frame">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="placeholderText">
       <string>Label...</string>
@@ -69,6 +69,9 @@
       <string notr="true">QLineEdit { background-color:transparent; }</string>
      </property>
      <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="dragEnabled">
       <bool>false</bool>
      </property>
      <property name="placeholderText">

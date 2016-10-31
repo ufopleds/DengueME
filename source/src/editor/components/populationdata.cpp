@@ -36,7 +36,7 @@ struct CBField : public Component {
     }
 
     virtual QString genR() {
-        return genLua();
+      return var + " = " + (cbox->isChecked() ? "true" : "false") + '\n';
     }
 };
 

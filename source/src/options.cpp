@@ -40,7 +40,7 @@ Options::~Options() {
 }
 void Options::languageMessage() {
     ui->languageMessage->setVisible(true);
-    ui->languageMessage->setText("You must reload DengueME to apply the language change.");
+    ui->languageMessage->setText("<font face=\"Monospace\"  color=\"Red\" >You must reload DengueME to apply the language change.");
 }
 
 void Options::browseWorkspace() {

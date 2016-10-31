@@ -49,7 +49,7 @@ Group::~Group()
 }
 void Group::askRemoveGroup(){
     int opt = QMessageBox::question(this,tr("Remove Group"),
-                                    "This action will remove the group and all its fields. Do you want to continue?",
+                                    tr("This action will remove the group and all its fields. Do you want to continue?"),
                                     QMessageBox::Yes | QMessageBox::No);
 
 
@@ -171,7 +171,7 @@ void Group::removeField(){
 void Group::cloneField(){
         QObject *field = QObject::sender();
         /// TODO - MELHORAR CLONE
-        qDebug() <<   QObject::sender()->objectName();
+
          if("Text" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
             addText();
         }

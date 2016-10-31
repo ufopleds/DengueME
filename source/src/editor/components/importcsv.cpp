@@ -177,7 +177,7 @@ void ImportCsv::onActionDelete( )
 {
 
     int opt = QMessageBox::question(this,tr("Remove Field"),
-                                    "This action will remove this field. Do you want to continue?",
+                                    tr("This action will remove this field. Do you want to continue?"),
                                     QMessageBox::Yes | QMessageBox::No);
 
     if(opt == QMessageBox::Yes){

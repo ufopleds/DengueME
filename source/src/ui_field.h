@@ -48,7 +48,7 @@ public:
         var = new QLineEdit(Field);
         var->setObjectName(QStringLiteral("var"));
         var->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
-        var->setFrame(false);
+        var->setFrame(true);
 
         horizontalLayout->addWidget(var);
 
@@ -62,7 +62,7 @@ public:
         label = new QLineEdit(Field);
         label->setObjectName(QStringLiteral("label"));
         label->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
-        label->setFrame(false);
+        label->setFrame(true);
 
         horizontalLayout->addWidget(label);
 
@@ -76,7 +76,8 @@ public:
         descript = new QLineEdit(Field);
         descript->setObjectName(QStringLiteral("descript"));
         descript->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
-        descript->setFrame(false);
+        descript->setFrame(true);
+        descript->setDragEnabled(false);
 
         horizontalLayout->addWidget(descript);
 

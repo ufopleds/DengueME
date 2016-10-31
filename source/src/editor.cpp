@@ -338,11 +338,12 @@ void Editor::execModel(bool stepByStep){
 
         out << "BASE_PATH = \"" + dir + "\"\n";
         out << "SCRIPT_PATH =\"" + view_model->scriptDir() + "\"\n";
-        out << "source(paste0(SCRIPT_PATH, \"/" << view_model->mainScript() << "\"))\n";
-
+        out <<"setwd(SCRIPT_PATH) # Path that all plots will be saved. R Workspace. \n";
+        out << "source(paste0(SCRIPT_PATH, \"/" << view_model->mainScript() << "\"))\n";        
         input.close();
 
         QStringList args;
+
         args << input.fileName();
 
         interpreter.start(dengueme::config("rscript"), args);
@@ -469,7 +470,7 @@ bool Editor::saveAs(){
     emit renamed(modelFile);
     return save();
 }
-
+///TODO ERROR
 void Editor::readyReadStandardError(){
     emit output (3, interpreter.readAllStandardError());
 }
@@ -481,6 +482,9 @@ void Editor::readyReadStandardOutput(){
 //Interpreter Functions - TerraME or R
 ///TODO - R Interpreter
 void Editor::onInterpreterFinished(int exitCode){
+
+    if(exitCode == 0 && interpreter.exitStatus() == QProcess::NormalExit)
+        emit output(1,"SIMULATION CONCLUDED");
     interpreter.close();
     emit interpreterStopped(exitCode);
 }

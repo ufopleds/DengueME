@@ -39,7 +39,7 @@
     <message>
         <location filename="about.ui" line="118"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;License&lt;/span&gt;: BSD - 2 Clause&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Licença&lt;/span&gt;: BSD - 2 Clause&lt;/p&gt;&lt;/body&gt;&lt;/htm&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Licença&lt;/span&gt;: BSD - 2 Clause&lt;/p&gt;&lt;/body&gt;&lt;/htm&gt;</translation>
     </message>
     <message>
         <location filename="about.ui" line="125"/>
@@ -346,7 +346,7 @@
         <translation>Parâmetros</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="464"/>
+        <location filename="editor.cpp" line="465"/>
         <source>Save as...</source>
         <translation>Salvar como...</translation>
     </message>
@@ -357,37 +357,37 @@
         <translation>Resultados</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="381"/>
+        <location filename="editor.cpp" line="382"/>
         <source>Close model</source>
         <translation>Fechar modelo</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="382"/>
+        <location filename="editor.cpp" line="383"/>
         <source>Save model before closing?</source>
         <translation>Salvar modelo antes de fechar?</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="385"/>
+        <location filename="editor.cpp" line="386"/>
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="386"/>
+        <location filename="editor.cpp" line="387"/>
         <source>Discard</source>
         <translation>Descartar</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="387"/>
+        <location filename="editor.cpp" line="388"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="421"/>
+        <location filename="editor.cpp" line="422"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="editor.cpp" line="421"/>
+        <location filename="editor.cpp" line="422"/>
         <source>Failed to save model.</source>
         <translation>Falha ao salvar modelo.</translation>
     </message>
@@ -522,12 +522,12 @@
         <translation>Clonar</translation>
     </message>
     <message>
-        <location filename="editor/components/field.cpp" line="573"/>
+        <location filename="editor/components/field.cpp" line="633"/>
         <source>Remove Field</source>
         <translation>Remover campo</translation>
     </message>
     <message>
-        <location filename="editor/components/field.cpp" line="574"/>
+        <location filename="editor/components/field.cpp" line="634"/>
         <source>This action will remove this field. Do you want to continue?</source>
         <translation>Essa ação irá remover esse campo. Deseja continuar?</translation>
     </message>
@@ -598,6 +598,11 @@ underscore (_) and dot (.).</source>
         <location filename="editor/group.cpp" line="51"/>
         <source>Remove Group</source>
         <translation>Remover grupo</translation>
+    </message>
+    <message>
+        <location filename="editor/group.cpp" line="52"/>
+        <source>This action will remove the group and all its fields. Do you want to continue?</source>
+        <translation>Essa ação ira remover o grupo e todos seus campos. Você deseja continuar? </translation>
     </message>
 </context>
 <context>
@@ -745,6 +750,11 @@ p, li { white-space: pre-wrap; }
         <source>Remove Field</source>
         <translation>Remover campo</translation>
     </message>
+    <message>
+        <location filename="editor/components/importcsv.cpp" line="180"/>
+        <source>This action will remove this field. Do you want to continue?</source>
+        <translation>Essa ação irá remover este campo. Deseja continuar?</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -805,7 +815,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.ui" line="334"/>
-        <location filename="mainwindow.cpp" line="354"/>
+        <location filename="mainwindow.cpp" line="366"/>
         <source>Run</source>
         <translation>Executar</translation>
     </message>
@@ -1005,37 +1015,48 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="580"/>
+        <source>Open in Explorer</source>
+        <oldsource>Open in Exporer</oldsource>
+        <translation>Abrir diretório </translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="82"/>
         <source>Output</source>
         <translation>Saída</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="162"/>
+        <location filename="mainwindow.cpp" line="163"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="165"/>
+        <location filename="mainwindow.cpp" line="166"/>
         <source>Add model</source>
         <translation>Adicionar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="214"/>
+        <location filename="mainwindow.cpp" line="215"/>
         <source>Reset Model</source>
         <translation>Resetar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="343"/>
+        <location filename="mainwindow.cpp" line="216"/>
+        <source>This action will reset all changes that you made so far. Do you want to continue?</source>
+        <translation>Essa ação ira apagar todas as mudanças realizadas. Deseja continuar?</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="355"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="390"/>
+        <location filename="mainwindow.cpp" line="403"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="390"/>
+        <location filename="mainwindow.cpp" line="403"/>
         <source>Error creating project folder.</source>
         <translation>Erro ao criar projeto.</translation>
     </message>
@@ -1431,54 +1452,54 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Options</name>
     <message>
-        <location filename="options.ui" line="14"/>
+        <location filename="options.ui" line="26"/>
         <source>Options</source>
         <translation>Opções</translation>
     </message>
     <message>
-        <location filename="options.ui" line="24"/>
+        <location filename="options.ui" line="36"/>
         <source>General</source>
         <translation>DengueME</translation>
     </message>
     <message>
-        <location filename="options.ui" line="33"/>
+        <location filename="options.ui" line="45"/>
         <source>Workspace:</source>
         <translation>Workspace:</translation>
     </message>
     <message>
-        <location filename="options.ui" line="40"/>
+        <location filename="options.ui" line="52"/>
         <source>Language:</source>
         <translation>Idioma:</translation>
     </message>
     <message>
-        <location filename="options.ui" line="74"/>
-        <location filename="options.ui" line="118"/>
-        <location filename="options.ui" line="132"/>
+        <location filename="options.ui" line="86"/>
+        <location filename="options.ui" line="138"/>
+        <location filename="options.ui" line="152"/>
         <source>Browse</source>
         <translation>Procurar</translation>
     </message>
     <message>
-        <location filename="options.ui" line="83"/>
+        <location filename="options.ui" line="95"/>
         <source>Prompt for workspace on startup</source>
         <translation>Escolher workspace ao iniciar DengueME</translation>
     </message>
     <message>
-        <location filename="options.ui" line="92"/>
+        <location filename="options.ui" line="109"/>
         <source>TextLabel</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="options.ui" line="100"/>
+        <location filename="options.ui" line="120"/>
         <source>Run</source>
         <translation>Execução</translation>
     </message>
     <message>
-        <location filename="options.ui" line="106"/>
+        <location filename="options.ui" line="126"/>
         <source>TerraME:</source>
         <translation>TerraME:</translation>
     </message>
     <message>
-        <location filename="options.ui" line="141"/>
+        <location filename="options.ui" line="161"/>
         <source>Rscript:</source>
         <translation>RScript:</translation>
     </message>

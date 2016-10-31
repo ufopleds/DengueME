@@ -44,7 +44,7 @@ void SyncModels::downloadAction(){
 }
 void SyncModels::checkNewModel(){
     ui->progressBar->setValue(0);
-    qDebug() << ABS_APP_DIR;
+
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
     QUrl url("https://github.com/ufopleds/DengueMELib/releases/latest");
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());

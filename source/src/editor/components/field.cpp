@@ -412,7 +412,67 @@ QString Field::genLua()
 
 QString Field::genR()
 {
-    return genLua();
+    if (!type || !widget) return QString();
+
+    QString ret = ui->var->text() + " = ";
+
+    switch (type) {
+    case Integer: {
+        QSpinBox *field = dynamic_cast<QSpinBox *>(widget);
+        if (field)
+            ret += QString::number(field->value());
+           ret+= " # "+ ui->descript->text();
+
+        break;
+    }
+    case Boolean: {
+        EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
+        if (field){
+              ret += field->isChecked() ? "true" : "false";
+               ret+= " #"+ui->descript->text();
+        }
+        break;
+    }
+    case Floating: {
+        QDoubleSpinBox *field = dynamic_cast<QDoubleSpinBox *>(widget);
+        if (field)
+            ret += QString::number(field->value(), 'f', attr["precision"].toInt());
+           ret+= " # "+ui->descript->text();
+        break;
+    }
+    case Text: {
+        QLineEdit *field = dynamic_cast<QLineEdit *>(widget);
+        if (field) {
+            ret += "\"";
+            ret += field->text().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
+            ret += "\"";
+            ret+= " # "+ui->descript->text();
+        }
+        break;
+    }
+    case Checkbox: {
+        EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
+        if (field){
+            ret += field->isChecked() ? "true" : "false";
+           ret+= " # "+ui->descript->text();
+        }
+        break;
+    }
+    case Combobox: {
+        QComboBox *field = dynamic_cast<QComboBox *>(widget);
+        if (field) {
+            ret += "\"";
+            ret += field->currentText().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
+            ret += "\"";
+           ret+= " #"+ui->descript->text();
+        }
+        break;
+    }
+    default: break;
+    }
+
+    ret += "\n";
+    return ret;
 }
 
 void Field::updateMenu()

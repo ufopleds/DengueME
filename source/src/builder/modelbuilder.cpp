@@ -156,6 +156,7 @@ void ModelBuilder::newModel() {
     dengueme::setProject(proj);
     ui->editor->loadModel(dest, true);
     ui->modelFile->setText(ui->editor->getModelFile());
+    ui->actionSave->setEnabled(true);
     ui->stackedWidget->setCurrentIndex(1);
 
 

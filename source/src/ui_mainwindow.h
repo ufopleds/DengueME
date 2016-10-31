@@ -61,6 +61,7 @@ public:
     QAction *actionResetViews;
     QAction *actionBuilder;
     QAction *actionSynchronize;
+    QAction *actionOpenExplorer;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QWidget *editorView;
@@ -196,6 +197,8 @@ public:
         actionBuilder->setIcon(icon11);
         actionSynchronize = new QAction(MainWindow);
         actionSynchronize->setObjectName(QStringLiteral("actionSynchronize"));
+        actionOpenExplorer = new QAction(MainWindow);
+        actionOpenExplorer->setObjectName(QStringLiteral("actionOpenExplorer"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -429,6 +432,7 @@ public:
         actionBuilder->setText(QApplication::translate("MainWindow", "Model Builder", 0));
         actionSynchronize->setText(QApplication::translate("MainWindow", "Synchronize", 0));
         actionSynchronize->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", 0));
+        actionOpenExplorer->setText(QApplication::translate("MainWindow", "Open in Explorer", 0));
         modelFile->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         buttonDefault->setText(QApplication::translate("MainWindow", "Default Values", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", 0));

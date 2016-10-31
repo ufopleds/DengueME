@@ -575,6 +575,11 @@
     <string>Ctrl+P</string>
    </property>
   </action>
+  <action name="actionOpenExplorer">
+   <property name="text">
+    <string>Open in Explorer</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

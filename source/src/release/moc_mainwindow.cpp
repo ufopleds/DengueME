@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[38];
-    char stringdata0[439];
+    QByteArrayData data[39];
+    char stringdata0[458];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,19 +54,20 @@ QT_MOC_LITERAL(21, 253, 12), // "actionRename"
 QT_MOC_LITERAL(22, 266, 9), // "actionRun"
 QT_MOC_LITERAL(23, 276, 15), // "actionRunByStep"
 QT_MOC_LITERAL(24, 292, 10), // "actionSync"
-QT_MOC_LITERAL(25, 303, 13), // "actionOptions"
-QT_MOC_LITERAL(26, 317, 11), // "actionAbout"
-QT_MOC_LITERAL(27, 329, 18), // "actionSetWorkspace"
-QT_MOC_LITERAL(28, 348, 18), // "actionModelBuilder"
-QT_MOC_LITERAL(29, 367, 16), // "actionResetViews"
-QT_MOC_LITERAL(30, 384, 6), // "output"
-QT_MOC_LITERAL(31, 391, 3), // "lvl"
-QT_MOC_LITERAL(32, 395, 4), // "text"
-QT_MOC_LITERAL(33, 400, 8), // "newModel"
-QT_MOC_LITERAL(34, 409, 8), // "category"
-QT_MOC_LITERAL(35, 418, 4), // "type"
-QT_MOC_LITERAL(36, 423, 4), // "name"
-QT_MOC_LITERAL(37, 428, 10) // "newProject"
+QT_MOC_LITERAL(25, 303, 18), // "actionOpenExplorer"
+QT_MOC_LITERAL(26, 322, 13), // "actionOptions"
+QT_MOC_LITERAL(27, 336, 11), // "actionAbout"
+QT_MOC_LITERAL(28, 348, 18), // "actionSetWorkspace"
+QT_MOC_LITERAL(29, 367, 18), // "actionModelBuilder"
+QT_MOC_LITERAL(30, 386, 16), // "actionResetViews"
+QT_MOC_LITERAL(31, 403, 6), // "output"
+QT_MOC_LITERAL(32, 410, 3), // "lvl"
+QT_MOC_LITERAL(33, 414, 4), // "text"
+QT_MOC_LITERAL(34, 419, 8), // "newModel"
+QT_MOC_LITERAL(35, 428, 8), // "category"
+QT_MOC_LITERAL(36, 437, 4), // "type"
+QT_MOC_LITERAL(37, 442, 4), // "name"
+QT_MOC_LITERAL(38, 447, 10) // "newProject"
 
     },
     "MainWindow\0clickedByUser\0\0action\0"
@@ -77,7 +78,8 @@ QT_MOC_LITERAL(37, 428, 10) // "newProject"
     "project\0actionNewProject\0actionSave\0"
     "actionClose\0actionRemove\0actionRename\0"
     "actionRun\0actionRunByStep\0actionSync\0"
-    "actionOptions\0actionAbout\0actionSetWorkspace\0"
+    "actionOpenExplorer\0actionOptions\0"
+    "actionAbout\0actionSetWorkspace\0"
     "actionModelBuilder\0actionResetViews\0"
     "output\0lvl\0text\0newModel\0category\0"
     "type\0name\0newProject"
@@ -90,7 +92,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      27,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -98,35 +100,36 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  149,    2, 0x06 /* Public */,
+       1,    1,  154,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,  152,    2, 0x08 /* Private */,
-       5,    0,  153,    2, 0x08 /* Private */,
-       6,    1,  154,    2, 0x08 /* Private */,
-       8,    1,  157,    2, 0x08 /* Private */,
-      10,    1,  160,    2, 0x08 /* Private */,
-      12,    0,  163,    2, 0x08 /* Private */,
-      13,    0,  164,    2, 0x08 /* Private */,
-      14,    0,  165,    2, 0x0a /* Public */,
-      15,    1,  166,    2, 0x0a /* Public */,
-      15,    0,  169,    2, 0x2a /* Public | MethodCloned */,
-      17,    0,  170,    2, 0x0a /* Public */,
-      18,    0,  171,    2, 0x0a /* Public */,
-      19,    0,  172,    2, 0x0a /* Public */,
-      20,    0,  173,    2, 0x0a /* Public */,
-      21,    0,  174,    2, 0x0a /* Public */,
-      22,    0,  175,    2, 0x0a /* Public */,
-      23,    0,  176,    2, 0x0a /* Public */,
-      24,    0,  177,    2, 0x0a /* Public */,
-      25,    0,  178,    2, 0x0a /* Public */,
-      26,    0,  179,    2, 0x0a /* Public */,
-      27,    0,  180,    2, 0x0a /* Public */,
-      28,    0,  181,    2, 0x0a /* Public */,
-      29,    0,  182,    2, 0x0a /* Public */,
-      30,    2,  183,    2, 0x0a /* Public */,
-      33,    4,  188,    2, 0x0a /* Public */,
-      37,    1,  197,    2, 0x0a /* Public */,
+       4,    0,  157,    2, 0x08 /* Private */,
+       5,    0,  158,    2, 0x08 /* Private */,
+       6,    1,  159,    2, 0x08 /* Private */,
+       8,    1,  162,    2, 0x08 /* Private */,
+      10,    1,  165,    2, 0x08 /* Private */,
+      12,    0,  168,    2, 0x08 /* Private */,
+      13,    0,  169,    2, 0x08 /* Private */,
+      14,    0,  170,    2, 0x0a /* Public */,
+      15,    1,  171,    2, 0x0a /* Public */,
+      15,    0,  174,    2, 0x2a /* Public | MethodCloned */,
+      17,    0,  175,    2, 0x0a /* Public */,
+      18,    0,  176,    2, 0x0a /* Public */,
+      19,    0,  177,    2, 0x0a /* Public */,
+      20,    0,  178,    2, 0x0a /* Public */,
+      21,    0,  179,    2, 0x0a /* Public */,
+      22,    0,  180,    2, 0x0a /* Public */,
+      23,    0,  181,    2, 0x0a /* Public */,
+      24,    0,  182,    2, 0x0a /* Public */,
+      25,    0,  183,    2, 0x0a /* Public */,
+      26,    0,  184,    2, 0x0a /* Public */,
+      27,    0,  185,    2, 0x0a /* Public */,
+      28,    0,  186,    2, 0x0a /* Public */,
+      29,    0,  187,    2, 0x0a /* Public */,
+      30,    0,  188,    2, 0x0a /* Public */,
+      31,    2,  189,    2, 0x0a /* Public */,
+      34,    4,  194,    2, 0x0a /* Public */,
+      38,    1,  203,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -155,9 +158,10 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   31,   32,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   34,   35,   16,   36,
-    QMetaType::Void, QMetaType::QString,   36,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,   32,   33,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,   35,   36,   16,   37,
+    QMetaType::Void, QMetaType::QString,   37,
 
        0        // eod
 };
@@ -187,14 +191,15 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 16: _t->actionRun(); break;
         case 17: _t->actionRunByStep(); break;
         case 18: _t->actionSync(); break;
-        case 19: _t->actionOptions(); break;
-        case 20: _t->actionAbout(); break;
-        case 21: _t->actionSetWorkspace(); break;
-        case 22: _t->actionModelBuilder(); break;
-        case 23: _t->actionResetViews(); break;
-        case 24: _t->output((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 25: _t->newModel((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
-        case 26: _t->newProject((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 19: _t->actionOpenExplorer(); break;
+        case 20: _t->actionOptions(); break;
+        case 21: _t->actionAbout(); break;
+        case 22: _t->actionSetWorkspace(); break;
+        case 23: _t->actionModelBuilder(); break;
+        case 24: _t->actionResetViews(); break;
+        case 25: _t->output((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 26: _t->newModel((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4]))); break;
+        case 27: _t->newProject((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -235,13 +240,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 28;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 28)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 27;
+        _id -= 28;
     }
     return _id;
 }

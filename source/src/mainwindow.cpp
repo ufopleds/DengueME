@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->actionRemove,       SIGNAL(triggered()), SLOT(actionRemove()));
     connect(ui->actionRename,       SIGNAL(triggered()), SLOT(actionRename()));
     connect(ui->actionSynchronize,       SIGNAL(triggered()), SLOT(actionSync()));
-
+    connect(ui->actionOpenExplorer, SIGNAL(triggered()),SLOT(actionOpenExplorer()));
 
     connect(ui->actionAbout,        SIGNAL(triggered()), SLOT(actionAbout()));
     connect(ui->actionSetWorkspace, SIGNAL(triggered()), SLOT(actionSetWorkspace()));
@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->treeView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(workspaceContextMenu(QPoint)));
 
     connect(ui->editor, SIGNAL(renamed(QString)), ui->modelFile, SLOT(setText(QString)));
-    connect(ui->editor, SIGNAL(closed()),                SLOT(onModelClosed()));
+    connect(ui->editor, SIGNAL(closed()),   SLOT(onModelClosed()));
     connect(ui->editor, SIGNAL(output(int,QString)),     SLOT(output(int,QString)));
     connect(ui->editor, SIGNAL(interpreterStarted()),    SLOT(onModelStarted()));
     connect(ui->editor, SIGNAL(interpreterStopped(int)), SLOT(onModelStopped(int)));
@@ -139,6 +139,7 @@ void MainWindow::setState(State state) {
         break;
     }
 }
+// MENU BOTAO DIREITO
 
 void MainWindow::workspaceContextMenu(const QPoint& point) {
     QModelIndex index = ui->treeView->indexAt(point);
@@ -147,12 +148,12 @@ void MainWindow::workspaceContextMenu(const QPoint& point) {
 
     QPoint globalPos = ui->treeView->mapToGlobal(point);
 
-    enum Action { Open, Close , AddNew, Rename, Remove };
+    enum Action { Open, Close , AddNew, Rename, Remove, OpenExplorer };
 
     QMenu menu;
     QMap<int, QAction *> actions;
     QFileInfo info = ui->treeView->fileInfo(index);
-
+    actions.insert(OpenExplorer, ui->actionOpenExplorer);
     actions.insert(Rename, ui->actionRename);
     actions.insert(Remove, ui->actionRemove);
 
@@ -212,7 +213,7 @@ void MainWindow::actionSave() {
 
 void MainWindow::actionDefault() {
     int opt = QMessageBox::question(this,tr("Reset Model"),
-                                    "This action will reset all changes that you made so far. Do you want to continue?",
+                                    tr("This action will reset all changes that you made so far. Do you want to continue?"),
                                     QMessageBox::Yes | QMessageBox::No);
 
 
@@ -253,9 +254,6 @@ void MainWindow::actionDefault() {
             QModelIndex index = ui->treeView->indexFromPath(path);
             modelActivated(index);
         }
-
-
-
     }
 
 }
@@ -264,6 +262,17 @@ void MainWindow::actionDefault() {
 
 void MainWindow::actionClose() {
     ui->editor->close(0);
+}
+void MainWindow::actionOpenExplorer(){
+
+    QModelIndex index = ui->treeView->currentIndex();
+    if (!index.isValid()) return;
+
+    QFileInfo fileinfo =ui->treeView->fileInfo(index);
+    QString path = fileinfo.absolutePath()+"/"+fileinfo.baseName()+"_scripts";
+
+    QUrl url = path;
+    QDesktopServices::openUrl(url);
 }
 
 void MainWindow::actionRemove() {
@@ -341,7 +350,7 @@ void MainWindow::actionResetViews() {
 
 void MainWindow::onModelStarted() {
     ui->run_stopButton->setText(tr("Stop"));
-
+    output(1,"LOADING MODEL...");
 
 }
 
@@ -357,6 +366,7 @@ void MainWindow::onModelStopped(int exitCode) {
 
 void MainWindow::output(int lvl, QString text) {
     setState(Running);
+
     text = text.replace('\n', "<br>").replace(' ', "&nbsp;");
     switch (lvl) {
     default:

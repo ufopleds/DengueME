@@ -62,7 +62,13 @@ public:
     {
         if (Options->objectName().isEmpty())
             Options->setObjectName(QStringLiteral("Options"));
-        Options->resize(398, 298);
+        Options->resize(396, 298);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(Options->sizePolicy().hasHeightForWidth());
+        Options->setSizePolicy(sizePolicy);
+        Options->setMaximumSize(QSize(396, 298));
         verticalLayout = new QVBoxLayout(Options);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabWidget = new QTabWidget(Options);
@@ -86,11 +92,11 @@ public:
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         comboBox = new QComboBox(tab);
         comboBox->setObjectName(QStringLiteral("comboBox"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
-        comboBox->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(comboBox->sizePolicy().hasHeightForWidth());
+        comboBox->setSizePolicy(sizePolicy1);
 
         horizontalLayout_4->addWidget(comboBox);
 
@@ -126,6 +132,10 @@ public:
 
         languageMessage = new QLabel(tab);
         languageMessage->setObjectName(QStringLiteral("languageMessage"));
+        QFont font;
+        font.setPointSize(8);
+        languageMessage->setFont(font);
+        languageMessage->setTextFormat(Qt::AutoText);
 
         formLayout_2->setWidget(6, QFormLayout::FieldRole, languageMessage);
 

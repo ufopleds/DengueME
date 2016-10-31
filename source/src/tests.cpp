@@ -32,7 +32,7 @@ QString MainWindow_UnitTests::menu_signals(MainWindow *mw) {
         foreach(QAction *b, a->menu()->actions()) {
             int n = (b->*&QObject_rec::receivers)(SIGNAL(triggered()));
             n -= mw->ui->mainToolBar->actions().contains(b)? 1: 0;
-            qDebug() << a->text() + " -> " + b->text() << n;
+
             if (!b->text().isEmpty()) {
                 if (n < 2)
                     ret += a->text() + " -> " + b->text() + " not connected.\n";

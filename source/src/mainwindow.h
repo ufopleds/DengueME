@@ -49,6 +49,7 @@ public slots:
     void actionRun();
     void actionRunByStep();
     void actionSync();
+    void actionOpenExplorer();
 
     void actionOptions();
     void actionAbout();

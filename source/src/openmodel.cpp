@@ -21,7 +21,7 @@ OpenModel::OpenModel(QWidget *parent) :
     connect(model, SIGNAL(updated()), ui->listView, SLOT(expandAll()));
     connect(ui->listView, SIGNAL(collapsed(QModelIndex)), ui->listView, SLOT(expand(QModelIndex)));
     ui->listView->expandAll();
-    qDebug()<< ui->listView->rootIndex();
+
   connect(ui->listView, SIGNAL(activated(QModelIndex)), SLOT(setIndex()));*/
 
 
