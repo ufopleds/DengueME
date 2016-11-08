@@ -15,7 +15,7 @@ Please, go to our wiki to find more information about [Installing](https://githu
 ## Using
 Please,  go to our wiki to find more information about [Usage](https://github.com/ufopleds/DengueME/wiki/How-to-Use).
 ## Examples
-Please, go to our wiki to find some simple examples using models that come within the tool: [SIR Example](https://github.com/ufopleds/DengueME/wiki/Example%3A-Sir-Basic-Model) [SirSI Example](https://github.com/ufopleds/DengueME/wiki/Example%3A-SirSI-Model)
+Please, go to our wiki to find some simple examples using models that come within the tool: [SIR Example](https://github.com/ufopleds/DengueME/wiki/Example%3A-Sir-Basic-Model) ,[SirSI Example](https://github.com/ufopleds/DengueME/wiki/Example%3A-SirSI-Model)
 ## How to contribute
 Please, go to our wiki to find more information about [How to Contribute](https://github.com/ufopleds/DengueME/wiki/How-to-contribute)
 ## Reporting Bugs
