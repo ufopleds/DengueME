@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
@@ -29,7 +30,10 @@ class Ui_Group
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
+    QCheckBox *useGroup;
     QLineEdit *label;
+    QLineEdit *observerID;
+    QSpacerItem *horizontalSpacer_2;
     QToolButton *addField;
     QSpacerItem *horizontalSpacer;
     QToolButton *removeGroup;
@@ -39,18 +43,35 @@ public:
     {
         if (Group->objectName().isEmpty())
             Group->setObjectName(QStringLiteral("Group"));
-        Group->resize(450, 112);
+        Group->resize(450, 115);
         verticalLayout = new QVBoxLayout(Group);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        useGroup = new QCheckBox(Group);
+        useGroup->setObjectName(QStringLiteral("useGroup"));
+        useGroup->setEnabled(true);
+
+        horizontalLayout->addWidget(useGroup);
+
         label = new QLineEdit(Group);
         label->setObjectName(QStringLiteral("label"));
         label->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
         label->setFrame(false);
 
         horizontalLayout->addWidget(label);
+
+        observerID = new QLineEdit(Group);
+        observerID->setObjectName(QStringLiteral("observerID"));
+        observerID->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
+        observerID->setFrame(false);
+
+        horizontalLayout->addWidget(observerID);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
 
         addField = new QToolButton(Group);
         addField->setObjectName(QStringLiteral("addField"));
@@ -100,10 +121,12 @@ public:
     void retranslateUi(QWidget *Group)
     {
         Group->setWindowTitle(QApplication::translate("Group", "Form", 0));
+        useGroup->setText(QApplication::translate("Group", "Use chart:", 0));
 #ifndef QT_NO_TOOLTIP
         label->setToolTip(QApplication::translate("Group", "Group name", 0));
 #endif // QT_NO_TOOLTIP
         label->setText(QApplication::translate("Group", "New group", 0));
+        observerID->setText(QApplication::translate("Group", "New groupID", 0));
         addField->setText(QApplication::translate("Group", "Add field", 0));
         removeGroup->setText(QApplication::translate("Group", "Remove group", 0));
     } // retranslateUi

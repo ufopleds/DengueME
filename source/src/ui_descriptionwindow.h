@@ -30,21 +30,25 @@ public:
     {
         if (DescriptionWindow->objectName().isEmpty())
             DescriptionWindow->setObjectName(QStringLiteral("DescriptionWindow"));
-        DescriptionWindow->resize(484, 364);
-        DescriptionWindow->setMinimumSize(QSize(484, 364));
-        DescriptionWindow->setMaximumSize(QSize(484, 364));
+        DescriptionWindow->resize(500, 380);
+        DescriptionWindow->setMinimumSize(QSize(500, 380));
+        DescriptionWindow->setMaximumSize(QSize(500, 380));
         QFont font;
         font.setPointSize(9);
         DescriptionWindow->setFont(font);
         QIcon icon;
         icon.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
         DescriptionWindow->setWindowIcon(icon);
+        DescriptionWindow->setSizeGripEnabled(false);
         pushButton = new QPushButton(DescriptionWindow);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(400, 330, 75, 23));
+        pushButton->setGeometry(QRect(420, 350, 75, 23));
         textBrowser = new QTextBrowser(DescriptionWindow);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(0, 0, 481, 321));
+        textBrowser->setGeometry(QRect(10, 10, 481, 321));
+        textBrowser->setAutoFillBackground(false);
+        textBrowser->setFrameShape(QFrame::Box);
+        textBrowser->setFrameShadow(QFrame::Sunken);
 
         retranslateUi(DescriptionWindow);
         QObject::connect(pushButton, SIGNAL(clicked()), DescriptionWindow, SLOT(close()));

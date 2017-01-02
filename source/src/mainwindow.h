@@ -3,6 +3,7 @@
 
 #include <QtCore>
 #include <QtWidgets>
+
 #include "helpbrowser.h"
 
 namespace Ui {
@@ -36,7 +37,7 @@ private slots:
     void workspaceContextMenu(const QPoint &point);
     void modelActivated(QModelIndex index);
     void onHelpRequested();
-    void runUnitTests();
+
 
 public slots:
     void actionDefault();
@@ -47,7 +48,6 @@ public slots:
     void actionRemove();
     void actionRename();
     void actionRun();
-    void actionRunByStep();
     void actionSync();
     void actionOpenExplorer();
 

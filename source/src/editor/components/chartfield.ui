@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChartField</class>
+ <widget class="QWidget" name="ChartField">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>953</width>
+    <height>97</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+   <item>
+    <widget class="QCheckBox" name="checkUse">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Plot this variable</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line1">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labelSelect">
+       <property name="text">
+        <string>Select(ID):</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="selectId">
+       <property name="toolTip">
+        <string>select</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit { background-color:transparent; }</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Select...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labelUserLabel">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>User Label:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="userLabel">
+       <property name="toolTip">
+        <string>id</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit { background-color:transparent; }</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="placeholderText">
+        <string>User label...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labelChartLabel">
+       <property name="text">
+        <string>Chart Variable Label:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="chartLabel">
+       <property name="toolTip">
+        <string>label</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit { background-color:transparent; }</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Label...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line4">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labelStyle">
+       <property name="text">
+        <string>Style:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="style">
+       <item>
+        <property name="text">
+         <string>none</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lines</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>dots</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>steps</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>sticks</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line5">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="leftMargin">
+      <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>6</number>
+     </property>
+     <property name="rightMargin">
+      <number>6</number>
+     </property>
+     <property name="bottomMargin">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labelColor">
+       <property name="text">
+        <string>Color:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="color">
+       <item>
+        <property name="text">
+         <string>blue</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkBlue</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>cyan</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightCyan</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkCyan</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>magenta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightMagenta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkMagenta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>purple</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightPurple</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkPurple</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>green</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightGreen</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkGreen</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>yellow</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>red</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightRed</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkRed</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>black</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>orange</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightOrange</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkOrange</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>brown</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightBrown</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkBrown</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>gray</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>lightGray</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>darkGray</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line6">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QWidget" name="container" native="true">
+     <property name="toolTip">
+      <string>Default value</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolClone">
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../Resource.qrc">
+       <normaloff>:/Resources/clone.png</normaloff>:/Resources/clone.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl++</string>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::InstantPopup</enum>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolDelete">
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../Resource.qrc">
+       <normaloff>:/img/Resources/Trash-52 (2).png</normaloff>:/img/Resources/Trash-52 (2).png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl+Del</string>
+     </property>
+     <property name="toolButtonStyle">
+      <enum>Qt::ToolButtonIconOnly</enum>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>checkUse</tabstop>
+  <tabstop>toolClone</tabstop>
+  <tabstop>toolDelete</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../Resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

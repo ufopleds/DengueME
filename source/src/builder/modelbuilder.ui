@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
+    <width>1000</width>
     <height>600</height>
    </rect>
   </property>
@@ -82,22 +82,8 @@
             <property name="text">
              <string>TextLabel</string>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="buttonHelp">
-            <property name="styleSheet">
-             <string notr="true">border: none;</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Resource.qrc">
-              <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
           </item>
@@ -134,7 +120,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
+     <width>1000</width>
      <height>21</height>
     </rect>
    </property>
@@ -146,6 +132,7 @@
     <addaction name="separator"/>
     <addaction name="actionEdit"/>
     <addaction name="actionSave"/>
+    <addaction name="actionHelp"/>
     <addaction name="separator"/>
     <addaction name="actionDelete"/>
     <addaction name="separator"/>
@@ -219,6 +206,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="../Resource.qrc">
+     <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>

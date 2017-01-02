@@ -48,7 +48,7 @@ QString ModelView::scriptDir()
 {
     return _scriptDir;
 }
-
+//XML TIAGO
 QDomDocument ModelView::getXml()
 {
     QDomDocument doc;
@@ -80,7 +80,7 @@ QDomDocument ModelView::getXml()
     doc.appendChild(root);
     return doc;
 }
-
+//XML TIAGO
 void ModelView::setXml(QDomElement node)
 {
     ui->list->clear();

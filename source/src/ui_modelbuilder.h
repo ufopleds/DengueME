@@ -37,6 +37,7 @@ public:
     QAction *actionDelete;
     QAction *actionNew;
     QAction *actionEdit;
+    QAction *actionHelp;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QStackedWidget *stackedWidget;
@@ -47,7 +48,6 @@ public:
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *modelFile;
-    QToolButton *buttonHelp;
     QToolButton *buttonClose;
     Editor *editor;
     QMenuBar *menubar;
@@ -59,7 +59,7 @@ public:
         if (ModelBuilder->objectName().isEmpty())
             ModelBuilder->setObjectName(QStringLiteral("ModelBuilder"));
         ModelBuilder->setWindowModality(Qt::WindowModal);
-        ModelBuilder->resize(900, 600);
+        ModelBuilder->resize(1000, 600);
         actionExit = new QAction(ModelBuilder);
         actionExit->setObjectName(QStringLiteral("actionExit"));
         QIcon icon;
@@ -85,6 +85,11 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/img/Resources/open.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionEdit->setIcon(icon4);
+        actionHelp = new QAction(ModelBuilder);
+        actionHelp->setObjectName(QStringLiteral("actionHelp"));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionHelp->setIcon(icon5);
         centralwidget = new QWidget(ModelBuilder);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -117,18 +122,9 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         modelFile = new QLabel(page_2);
         modelFile->setObjectName(QStringLiteral("modelFile"));
+        modelFile->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
         horizontalLayout_2->addWidget(modelFile);
-
-        buttonHelp = new QToolButton(page_2);
-        buttonHelp->setObjectName(QStringLiteral("buttonHelp"));
-        buttonHelp->setStyleSheet(QStringLiteral("border: none;"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
-        buttonHelp->setIcon(icon5);
-        buttonHelp->setIconSize(QSize(24, 24));
-
-        horizontalLayout_2->addWidget(buttonHelp);
 
         buttonClose = new QToolButton(page_2);
         buttonClose->setObjectName(QStringLiteral("buttonClose"));
@@ -154,7 +150,7 @@ public:
         ModelBuilder->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ModelBuilder);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 900, 21));
+        menubar->setGeometry(QRect(0, 0, 1000, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         ModelBuilder->setMenuBar(menubar);
@@ -167,6 +163,7 @@ public:
         menuFile->addSeparator();
         menuFile->addAction(actionEdit);
         menuFile->addAction(actionSave);
+        menuFile->addAction(actionHelp);
         menuFile->addSeparator();
         menuFile->addAction(actionDelete);
         menuFile->addSeparator();
@@ -193,6 +190,7 @@ public:
         actionNew->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+N", 0));
         actionEdit->setText(QApplication::translate("ModelBuilder", "&Open", 0));
         actionEdit->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+P", 0));
+        actionHelp->setText(QApplication::translate("ModelBuilder", "Help", 0));
         modelFile->setText(QApplication::translate("ModelBuilder", "TextLabel", 0));
         menuFile->setTitle(QApplication::translate("ModelBuilder", "Fi&le", 0));
         toolBar->setWindowTitle(QApplication::translate("ModelBuilder", "toolBar", 0));

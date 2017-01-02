@@ -25,11 +25,12 @@ public:
 private slots:
     void openCsv();
     void onActionDelete();
-    void onMorphBoolean( );
+   /* void onMorphBoolean( );
     void onMorphCombobox();
     void onMorphText();
     void onMorphInteger();
-    void onMorphFloat();
+    void onMorphFloat();*/
+    void onMorph(QString);
 
 
     void onActionClone();

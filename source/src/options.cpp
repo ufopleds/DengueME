@@ -1,15 +1,19 @@
-#include "dengueme.h"
-#include "options.h"
-#include "ui_options.h"
 #include <QTranslator>
 #include <QFileDialog>
 #include <QDebug>
+
+#include "dengueme.h"
+#include "options.h"
+#include "ui_options.h"
+
 Options::Options(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Options){
 
     ui->setupUi(this);
-     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     ui->lineEdit->setText(dengueme::settingsFile.value("workspace").toString());
     ui->lineEdit_2->setText(dengueme::settingsFile.value("terrame").toString());
     ui->lineEdit_3->setText(dengueme::settingsFile.value("rscript").toString());
@@ -60,7 +64,7 @@ void Options::browseRscript(){
     if (!path.isEmpty())
         ui->lineEdit_3->setText(path);
 }
-//Save all the configs in the defautt config file
+
 void Options::accept() {
 
     dengueme::saveconfig("workspace",ui->lineEdit->text());

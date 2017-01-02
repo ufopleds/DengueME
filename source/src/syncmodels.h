@@ -11,7 +11,9 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QProcess>
+
 #include "downloadmanager.h"
+
 namespace Ui {
 class SyncModels;
 }

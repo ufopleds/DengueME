@@ -32,6 +32,10 @@
         <file>Resources/builderTool.png</file>
         <file>Resources/Trash-52 (1).png</file>
         <file>Resources/Trash-52 (2).png</file>
+        <file>Resources/stop.png</file>
+        <file>Resources/leftDArrow.png</file>
+        <file>Resources/rightDArrow.png</file>
+        <file>Resources/download.png</file>
     </qresource>
     <qresource prefix="/">
         <file>Resources/simulation.png</file>
@@ -64,5 +68,9 @@
         <file>Resources/clone.png</file>
         <file>Resources/builderTool.png</file>
         <file>Resources/close.png</file>
+        <file>Resources/stop.png</file>
+        <file>Resources/leftDArrow.png</file>
+        <file>Resources/rightDArrow.png</file>
+        <file>Resources/download.png</file>
     </qresource>
 </RCC>

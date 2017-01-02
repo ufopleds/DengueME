@@ -71,6 +71,7 @@ public:
     QPushButton *buttonDefault;
     QToolButton *buttonHelp;
     QToolButton *buttonClose;
+    QSpacerItem *horizontalSpacer_2;
     Editor *editor;
     QStatusBar *statusBar;
     QMenuBar *menuBar;
@@ -165,38 +166,44 @@ public:
         actionRunByStep->setIcon(icon7);
         actionSetWorkspace = new QAction(MainWindow);
         actionSetWorkspace->setObjectName(QStringLiteral("actionSetWorkspace"));
+        QIcon icon8;
+        icon8.addFile(QStringLiteral(":/img/Resources/folder.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSetWorkspace->setIcon(icon8);
         actionRename = new QAction(MainWindow);
         actionRename->setObjectName(QStringLiteral("actionRename"));
-        QIcon icon8;
-        icon8.addFile(QStringLiteral(":/img/Resources/rename.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionRename->setIcon(icon8);
+        QIcon icon9;
+        icon9.addFile(QStringLiteral(":/img/Resources/rename.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRename->setIcon(icon9);
         actionRemove = new QAction(MainWindow);
         actionRemove->setObjectName(QStringLiteral("actionRemove"));
-        QIcon icon9;
-        icon9.addFile(QStringLiteral(":/img/Resources/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionRemove->setIcon(icon9);
+        QIcon icon10;
+        icon10.addFile(QStringLiteral(":/img/Resources/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionRemove->setIcon(icon10);
         actionNewModel = new QAction(MainWindow);
         actionNewModel->setObjectName(QStringLiteral("actionNewModel"));
-        QIcon icon10;
-        icon10.addFile(QStringLiteral(":/img/Resources/model-new.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionNewModel->setIcon(icon10);
+        QIcon icon11;
+        icon11.addFile(QStringLiteral(":/img/Resources/model-new.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionNewModel->setIcon(icon11);
         actionModelBuilder = new QAction(MainWindow);
         actionModelBuilder->setObjectName(QStringLiteral("actionModelBuilder"));
-        QIcon icon11;
-        icon11.addFile(QStringLiteral(":/img/Resources/builderTool.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionModelBuilder->setIcon(icon11);
+        QIcon icon12;
+        icon12.addFile(QStringLiteral(":/img/Resources/builderTool.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionModelBuilder->setIcon(icon12);
         actionResetViews = new QAction(MainWindow);
         actionResetViews->setObjectName(QStringLiteral("actionResetViews"));
-        QIcon icon12;
-        icon12.addFile(QStringLiteral(":/img/Resources/Synchronize-64.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionResetViews->setIcon(icon12);
+        QIcon icon13;
+        icon13.addFile(QStringLiteral(":/img/Resources/Synchronize-64.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionResetViews->setIcon(icon13);
         actionBuilder = new QAction(MainWindow);
         actionBuilder->setObjectName(QStringLiteral("actionBuilder"));
         actionBuilder->setCheckable(false);
         actionBuilder->setEnabled(true);
-        actionBuilder->setIcon(icon11);
+        actionBuilder->setIcon(icon12);
         actionSynchronize = new QAction(MainWindow);
         actionSynchronize->setObjectName(QStringLiteral("actionSynchronize"));
+        QIcon icon14;
+        icon14.addFile(QStringLiteral(":/Resources/download.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSynchronize->setIcon(icon14);
         actionOpenExplorer = new QAction(MainWindow);
         actionOpenExplorer->setObjectName(QStringLiteral("actionOpenExplorer"));
         centralWidget = new QWidget(MainWindow);
@@ -237,9 +244,9 @@ public:
         buttonHelp = new QToolButton(editorView);
         buttonHelp->setObjectName(QStringLiteral("buttonHelp"));
         buttonHelp->setStyleSheet(QStringLiteral("border: none;"));
-        QIcon icon13;
-        icon13.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
-        buttonHelp->setIcon(icon13);
+        QIcon icon15;
+        icon15.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        buttonHelp->setIcon(icon15);
         buttonHelp->setIconSize(QSize(24, 24));
 
         horizontalLayout_2->addWidget(buttonHelp);
@@ -251,6 +258,10 @@ public:
         buttonClose->setIconSize(QSize(18, 18));
 
         horizontalLayout_2->addWidget(buttonClose);
+
+        horizontalSpacer_2 = new QSpacerItem(5, 5, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);

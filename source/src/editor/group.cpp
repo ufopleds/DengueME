@@ -3,8 +3,8 @@
 #include <QDebug>
 Group::Group(QWidget *parent) :
     Component(parent),
-    ui(new Ui::Group)
-{
+    ui(new Ui::Group){
+
     ui->setupUi(this);
     defaultHeight = height();
     setMinimumHeight(height());
@@ -40,13 +40,16 @@ Group::Group(QWidget *parent) :
     connect(combobox, SIGNAL(triggered()), SLOT(addCombobox()));
     connect(csv,      SIGNAL(triggered()), SLOT(addCsv()));
 
+
+    ui->useGroup->setVisible(false);
+    ui->useGroup->setEnabled(false);
     ui->addField->setMenu(menu);
 }
 
-Group::~Group()
-{
+Group::~Group(){
     delete ui;
 }
+
 void Group::askRemoveGroup(){
     int opt = QMessageBox::question(this,tr("Remove Group"),
                                     tr("This action will remove the group and all its fields. Do you want to continue?"),

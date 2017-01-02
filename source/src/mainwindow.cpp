@@ -15,24 +15,28 @@
 #include "descriptionwindow.h"
 #include "dirmodel.h"
 #include "syncmodels.h"
-#include <QDebug>
 
 
-//Primary Window
+
+
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     ui(new Ui::MainWindow),
     helpDialog(new QDialog(this)),
     helpText(new HelpBrowser("dengueme.qhc",helpDialog)),
-    helpHasBeenCreated(false)
-{
+    helpHasBeenCreated(false){
+
     ui->setupUi(this);
+
     ui->treeView->setDirModel(new WorkspaceModel);
     ui->treeView->setWorkspace(dengueme::config("workspace"));
     ui->treeView->expandAll();
+
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setMinimumSize(760,560);
     setState(Browsing);
+
     if (dengueme::config("mainwindow/defaultstate").isNull()) {
+
         QByteArray state = saveState().toBase64();
         dengueme::saveconfig("mainwindow/defaultstate", state);
         dengueme::setconfig("mainwindow/defaultstate", state);
@@ -41,6 +45,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     restoreGeometry(QByteArray::fromBase64(dengueme::config("mainwindow/geometry").toLocal8Bit()));
     restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toLocal8Bit()));
     setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+
+    ui->actionRunByStep->setEnabled(false);
+    ui->actionRunByStep->setVisible(false);
 
     connect(ui->buttonHelp, SIGNAL(clicked()),SLOT(onHelpRequested()));
     connect(ui->actionExit,         SIGNAL(triggered()), SLOT(close()));
@@ -53,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
     connect(ui->actionSave,         SIGNAL(triggered()), SLOT(actionSave()));
     connect(ui->actionClose,        SIGNAL(triggered()), SLOT(actionClose()));
     connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
-    connect(ui->actionRunByStep,    SIGNAL(triggered()), SLOT(actionRunByStep()));
     connect(ui->actionRemove,       SIGNAL(triggered()), SLOT(actionRemove()));
     connect(ui->actionRename,       SIGNAL(triggered()), SLOT(actionRename()));
     connect(ui->actionSynchronize,       SIGNAL(triggered()), SLOT(actionSync()));
@@ -89,12 +95,6 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
         connect(output, SIGNAL(toggled(bool)), ui->outputDock, SLOT(setVisible(bool)));
     }
 
-
-
-    ///TODO - Shortcuts
-    new QShortcut(QKeySequence("Ctrl+F2"),this,SLOT(runUnitTests()));
-
-    ///TODO - Shortcuts
 }
 
 MainWindow::~MainWindow() {
@@ -102,6 +102,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
+
     if (ui->editor->close(0)) {
         dengueme::saveconfig("mainwindow/geometry", saveGeometry().toBase64());
         dengueme::saveconfig("mainwindow/state", saveState().toBase64());
@@ -111,6 +112,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 void MainWindow::setState(State state) {
+
     switch (state) {
     case Editing:
         ui->editorView->show();
@@ -118,7 +120,6 @@ void MainWindow::setState(State state) {
         ui->actionRun->setEnabled(true);
         ui->actionModelBuilder->setEnabled(true);
         ui->actionBuilder->setEnabled(true);
-        ui->actionRunByStep->setEnabled(true);
         ui->actionClose->setEnabled(true);
         ui->actionSave->setEnabled(true);
         break;
@@ -139,7 +140,7 @@ void MainWindow::setState(State state) {
         break;
     }
 }
-// MENU BOTAO DIREITO
+
 
 void MainWindow::workspaceContextMenu(const QPoint& point) {
     QModelIndex index = ui->treeView->indexAt(point);
@@ -157,13 +158,17 @@ void MainWindow::workspaceContextMenu(const QPoint& point) {
     actions.insert(Rename, ui->actionRename);
     actions.insert(Remove, ui->actionRemove);
 
-    if (info.absoluteFilePath() == ui->editor->getModelFile())
+    if (info.absoluteFilePath() == ui->editor->getModelFile()){
         actions.insert(Close, ui->actionClose);
+
+    }
     else
         actions.insert(Open, new QAction(tr("Open"), &menu));
 
-    if (info.isDir())
+    if (info.isDir()){
         actions.insert(AddNew, new QAction(tr("Add model"), &menu));
+
+    }
 
     menu.addActions(actions.values());
 
@@ -184,6 +189,7 @@ void MainWindow::workspaceContextMenu(const QPoint& point) {
 }
 
 void MainWindow::modelActivated(QModelIndex index) {
+
     QFileInfo modelinfo(ui->treeView->fileInfo(index));
 
     if (modelinfo.isFile()) {
@@ -195,6 +201,7 @@ void MainWindow::modelActivated(QModelIndex index) {
     }
 }
 void MainWindow::actionNewModel(QString project) {
+
     NewModel n(dengueme::config("workspace"),project);
     connect(&n, SIGNAL(accepted(QString,QString,QString,QString)),
             SLOT(newModel(QString,QString,QString,QString)));
@@ -202,6 +209,7 @@ void MainWindow::actionNewModel(QString project) {
 }
 
 void MainWindow::actionNewProject() {
+
     NewProject n(dengueme::config("workspace"),this);
     connect(&n, SIGNAL(accepted(QString)), SLOT(newProject(QString)));
     n.exec();
@@ -212,6 +220,7 @@ void MainWindow::actionSave() {
 }
 
 void MainWindow::actionDefault() {
+
     int opt = QMessageBox::question(this,tr("Reset Model"),
                                     tr("This action will reset all changes that you made so far. Do you want to continue?"),
                                     QMessageBox::Yes | QMessageBox::No);
@@ -221,7 +230,7 @@ void MainWindow::actionDefault() {
         QString path = ui->modelFile->text();
 
         QFile file(path);
-        QStringList dirList = path.split("/");
+
         QDomDocument modelXml;
         file.open(QFile::ReadOnly);
 
@@ -268,32 +277,37 @@ void MainWindow::actionOpenExplorer(){
     QModelIndex index = ui->treeView->currentIndex();
     if (!index.isValid()) return;
 
-    QFileInfo fileinfo =ui->treeView->fileInfo(index);
-    QString path = fileinfo.absolutePath()+"/"+fileinfo.baseName()+"_scripts";
-
+    QFileInfo fileInfo =ui->treeView->fileInfo(index);
+    QString path="";
+    if (fileInfo.isDir()){
+        path = fileInfo.absolutePath();
+    }else{
+        path = fileInfo.absolutePath()+"/"+fileInfo.baseName()+"_scripts";
+    }
+    qDebug()<<path;
     QUrl url = path;
     QDesktopServices::openUrl(url);
 }
 
 void MainWindow::actionRemove() {
-    QModelIndex index = ui->treeView->currentIndex();
-    if (!index.isValid()) return;
 
+    QModelIndex index = ui->treeView->currentIndex();
+
+    if (!index.isValid()) return;
 
     if(ui->treeView->askDelete(index)){
         ui->editor->close(2);
     }
-
-
-
 }
 
 void MainWindow::actionSync(){
+
     SyncModels *sync = new SyncModels(this);
     sync->exec();
 }
 
 void MainWindow::actionRename() {
+
     QModelIndex index = ui->treeView->currentIndex();
     if (!index.isValid()) return;
 
@@ -315,14 +329,6 @@ void MainWindow::actionRun() {
     }
 }
 
-
-void MainWindow::actionRunByStep() {
-    if(ui->editorView->isVisible()) {
-        setState(Running);
-        if(! ui->editor->isRunning()) ui->editor->execModel(true);
-        else ui->editor->stopModel();
-    }
-}
 
 void MainWindow::actionOptions() {
     Options(this).exec();
@@ -349,9 +355,11 @@ void MainWindow::actionResetViews() {
 }
 
 void MainWindow::onModelStarted() {
-    ui->run_stopButton->setText(tr("Stop"));
-    output(1,"LOADING MODEL...");
 
+    ui->run_stopButton->setText(tr("Stop"));
+    ui->actionRun->setIcon( QIcon(":/Resources/stop.png"));
+
+    output(1,tr("LOADING MODEL..."));
 }
 
 void MainWindow::onModelClosed()
@@ -360,11 +368,14 @@ void MainWindow::onModelClosed()
 }
 
 void MainWindow::onModelStopped(int exitCode) {
+
     ui->run_stopButton->setText(tr("Run"));
-    output (1, "Process exited with code " + QString::number(exitCode));
+    ui->actionRun->setIcon( QIcon(":/Resources/run.png"));
+    output (1, tr("TerraME process exited with code ") + QString::number(exitCode));
 }
 
 void MainWindow::output(int lvl, QString text) {
+
     setState(Running);
 
     text = text.replace('\n', "<br>").replace(' ', "&nbsp;");
@@ -382,8 +393,8 @@ void MainWindow::output(int lvl, QString text) {
     }
 }
 
-void MainWindow::newModel(QString category, QString type, QString project, QString name)
-{
+void MainWindow::newModel(QString category, QString type, QString project, QString name){
+
     QString dest = QDir::toNativeSeparators(dengueme::config("workspace") + "/" + project + "/" + name + ".xml");
 
     if ((false && dengueme::createDemo(type, dest,category))
@@ -393,8 +404,8 @@ void MainWindow::newModel(QString category, QString type, QString project, QStri
         }
 }
 
-void MainWindow::newProject(QString name)
-{
+void MainWindow::newProject(QString name){
+
     QDir dir(dengueme::config("workspace") + '/' + name);
     if (!dir.mkpath(dir.path())) {
         QMessageBox::critical(this, tr("Error"), tr("Error creating project folder."));
@@ -403,42 +414,9 @@ void MainWindow::newProject(QString name)
 
 
 void MainWindow::onHelpRequested() {
+
     DescriptionWindow *description = new DescriptionWindow(this,ui->editor->modelDescription);
     description->show();
-
-
 }
 
-void MainWindow::runUnitTests()
-{
-    QTreeWidget *log = new QTreeWidget;
-    log->resize(640,480);
-    log->show();
-    QList<QPair<QString, QString(*)(MainWindow*)> > tests = MainWindow_UnitTests::get_tests();
-    for (QList<QPair<QString, QString(*)(MainWindow*)> >::iterator test = tests.begin();
-         test != tests.end(); ++test) {
-        QTreeWidgetItem *item = new QTreeWidgetItem(QStringList(test->first));
-        log->addTopLevelItem(item);
-        try {
-            QString m = test->second(this);
-            if (!m.isEmpty()) {
-                QLabel *label = new QLabel(m);
-                QTreeWidgetItem *textitem = new QTreeWidgetItem;
-                item->addChild(textitem);
-                item->setTextColor(0,QColor(192,128,0));
-                label->setWordWrap(true);
-                log->setItemWidget(textitem,0,label);
-            }
-        }
-        catch (MainWindow_UnitTests::Error<> e) {
-            QLabel *label = new QLabel(e.get());
-            QTreeWidgetItem *textitem = new QTreeWidgetItem;
-            item->addChild(textitem);
-            item->setTextColor(0,QColor(255,0,0));
-            label->setWordWrap(true);
-            log->setItemWidget(textitem,0,label);
-            break;
-        }
-    }
-}
 

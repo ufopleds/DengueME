@@ -5,37 +5,38 @@
 #include "newmodel.h"
 #include "newproject.h"
 
-
-#include <QDebug>
 NewModel::NewModel(QString workspace, QString project, QWidget *parent) :
-    QWizard(parent)
-{
+    QWizard(parent){
+
     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     addPage(new TypePage());
     addPage(new ProjectPage(workspace, project));
     addPage(new NamePage(workspace));
     setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
     setWindowTitle(tr("New model"));
+
     this->setButtonText(QWizard::NextButton,tr("Next"));
     this->setButtonText(QWizard::CancelButton,tr("Cancel"));
+    this->setFixedSize(this->sizeHint());
 }
 
 void NewModel::accept(){
+
     QString category = property("category").toString();
     QString type = property("type").toString();
     QString project = property("project").toString();
     QString name = field("name").toString();
-
-
 
     emit accepted(category,type,project,name);
     QWizard::accept();
 }
 
 TypePage::TypePage() {
+
     setTitle(tr("Type"));
     setSubTitle(tr("Specify the type of the new model"));
-  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/ok.png"));
+    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/ok.png"));
 
     QList<QPair<QString, QStringList> > modelTypes = dengueme::model_types();
 
@@ -84,6 +85,7 @@ bool TypePage::isComplete() const {
 }
 
 void TypePage::itemChanged() {
+
     modelName->clear();
     QList<QTreeWidgetItem *> selected = modelType->selectedItems();
     if (!selected.isEmpty()) {
@@ -94,8 +96,8 @@ void TypePage::itemChanged() {
         QList<QStringList> names;
 
 
-            names = models.names;
-            i = models.types.indexOf(selected.first()->text(0));
+        names = models.names;
+        i = models.types.indexOf(selected.first()->text(0));
 
 
         wizard()->setProperty("class", cl);
@@ -139,7 +141,8 @@ ProjectPage::ProjectPage(QString workspace, QString project)
     loadWorkspace();
 
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->setMargin(0);
+    layout->setMargin(8);
+
     layout->addWidget(projects);
     layout->addWidget(newproject,0,Qt::AlignRight);
     setLayout(layout);

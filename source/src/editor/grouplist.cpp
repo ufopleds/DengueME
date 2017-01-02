@@ -13,7 +13,7 @@ GroupList::GroupList(QWidget *parent) :
     connect(ui->addGroup, SIGNAL(clicked(bool)), SLOT(addGroup()));
 
     QMenu *menu = new QMenu;
-    QAction *population = new QAction("&Population", menu);
+    QAction *population = new QAction(tr("&Population"), menu);
 
     connect(population, SIGNAL(triggered()), SLOT(addPopulation()));
 
@@ -59,8 +59,7 @@ void GroupList::setXml(QDomNode root)
     }
 }
 
-void GroupList::setEditMode(bool enable)
-{
+void GroupList::setEditMode(bool enable){
     for (int i = 0; i < ui->widgets->count(); ++i) {
         Group *group = dynamic_cast<Group *>(ui->widgets->itemWidget(ui->widgets->item(i)));
         if (group)

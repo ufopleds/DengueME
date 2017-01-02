@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_ModelBuilder_t {
-    QByteArrayData data[15];
-    char stringdata0[155];
+    QByteArrayData data[16];
+    char stringdata0[172];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,16 +41,17 @@ QT_MOC_LITERAL(8, 85, 13), // "onModelClosed"
 QT_MOC_LITERAL(9, 99, 11), // "deleteModel"
 QT_MOC_LITERAL(10, 111, 9), // "editModel"
 QT_MOC_LITERAL(11, 121, 8), // "newModel"
-QT_MOC_LITERAL(12, 130, 10), // "setToolbar"
-QT_MOC_LITERAL(13, 141, 1), // "i"
-QT_MOC_LITERAL(14, 143, 11) // "actionClose"
+QT_MOC_LITERAL(12, 130, 16), // "helpModelBuilder"
+QT_MOC_LITERAL(13, 147, 10), // "setToolbar"
+QT_MOC_LITERAL(14, 158, 1), // "i"
+QT_MOC_LITERAL(15, 160, 11) // "actionClose"
 
     },
     "ModelBuilder\0openModelWizard\0\0"
     "modelActivated\0index\0selectionChanged\0"
     "current\0previous\0onModelClosed\0"
     "deleteModel\0editModel\0newModel\0"
-    "setToolbar\0i\0actionClose"
+    "helpModelBuilder\0setToolbar\0i\0actionClose"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +61,7 @@ static const uint qt_meta_data_ModelBuilder[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      10,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,16 +69,17 @@ static const uint qt_meta_data_ModelBuilder[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   64,    2, 0x08 /* Private */,
-       3,    1,   65,    2, 0x08 /* Private */,
-       5,    2,   68,    2, 0x08 /* Private */,
-       5,    1,   73,    2, 0x28 /* Private | MethodCloned */,
-       8,    0,   76,    2, 0x08 /* Private */,
-       9,    0,   77,    2, 0x08 /* Private */,
-      10,    0,   78,    2, 0x08 /* Private */,
-      11,    0,   79,    2, 0x08 /* Private */,
-      12,    1,   80,    2, 0x08 /* Private */,
-      14,    0,   83,    2, 0x08 /* Private */,
+       1,    0,   69,    2, 0x08 /* Private */,
+       3,    1,   70,    2, 0x08 /* Private */,
+       5,    2,   73,    2, 0x08 /* Private */,
+       5,    1,   78,    2, 0x28 /* Private | MethodCloned */,
+       8,    0,   81,    2, 0x08 /* Private */,
+       9,    0,   82,    2, 0x08 /* Private */,
+      10,    0,   83,    2, 0x08 /* Private */,
+      11,    0,   84,    2, 0x08 /* Private */,
+      12,    0,   85,    2, 0x08 /* Private */,
+      13,    1,   86,    2, 0x08 /* Private */,
+      15,    0,   89,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -88,7 +90,8 @@ static const uint qt_meta_data_ModelBuilder[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   14,
     QMetaType::Void,
 
        0        // eod
@@ -108,8 +111,9 @@ void ModelBuilder::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 5: _t->deleteModel(); break;
         case 6: _t->editModel(); break;
         case 7: _t->newModel(); break;
-        case 8: _t->setToolbar((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->actionClose(); break;
+        case 8: _t->helpModelBuilder(); break;
+        case 9: _t->setToolbar((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->actionClose(); break;
         default: ;
         }
     }
@@ -140,13 +144,13 @@ int ModelBuilder::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }

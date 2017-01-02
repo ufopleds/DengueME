@@ -81,10 +81,7 @@ Field::Field(QWidget *parent) :
     menu->addAction(actionInteger);
     menu->addAction(actionFloating);
     menu->addAction(actionCombobox);
-    //menu->addSeparator();
-   // menu->addAction(actionClone);
-   // menu->addAction(actionOptions);
-   // menu->addAction(actionDelete);
+
 
     ui->options->setMenu(menu);
 
@@ -93,10 +90,7 @@ Field::Field(QWidget *parent) :
     connect(actionText,     SIGNAL(triggered()), SLOT(onActionText()));
     connect(actionInteger,  SIGNAL(triggered()), SLOT(onActionInteger()));
     connect(actionFloating, SIGNAL(triggered()), SLOT(onActionFloating()));
-    connect(actionCombobox, SIGNAL(triggered()), SLOT(onActionCombobox()));
-  //  connect(actionOptions,  SIGNAL(triggered()), SLOT(onActionOptions()));
-    //connect(actionDelete,   SIGNAL(triggered()), SLOT(onActionDelete()));
-    //connect(actionClone,   SIGNAL(triggered()), SLOT(onActionClone()));
+    connect(actionCombobox, SIGNAL(triggered()), SLOT(onActionCombobox())); 
     connect(ui->toolOptions,   SIGNAL(clicked()), SLOT(onActionOptions()));
    connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
     connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
@@ -226,12 +220,7 @@ QDomDocument Field::getXml()
     }
     return ret;
 }
-///TODO - HELP
-/*QString Field::produceDescription(QDomElement node){
-    QString test = "";
-    test+= node.attribute("description");
-}*/
-///TODO - HELP
+
 void Field::setXml(QDomElement node)
 {
     if (node.attribute("type").compare("spinbox") == 0) {
@@ -356,7 +345,7 @@ QString Field::genLua()
         QSpinBox *field = dynamic_cast<QSpinBox *>(widget);
         if (field)
             ret += QString::number(field->value());
-           ret+= "--- "+ ui->descript->text();
+           ret+= " -- "+ ui->descript->text();
 
         break;
     }
@@ -364,7 +353,7 @@ QString Field::genLua()
         EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
         if (field){
               ret += field->isChecked() ? "true" : "false";
-               ret+= "--- "+ui->descript->text();
+               ret+= " -- "+ui->descript->text();
         }
         break;
     }
@@ -372,7 +361,7 @@ QString Field::genLua()
         QDoubleSpinBox *field = dynamic_cast<QDoubleSpinBox *>(widget);
         if (field)
             ret += QString::number(field->value(), 'f', attr["precision"].toInt());
-           ret+= "--- "+ui->descript->text();
+           ret+= " -- "+ui->descript->text();
         break;
     }
     case Text: {
@@ -381,7 +370,8 @@ QString Field::genLua()
             ret += "\"";
             ret += field->text().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
             ret += "\"";
-            ret+= "--- "+ui->descript->text();
+
+            ret+= " -- "+ui->descript->text();
         }
         break;
     }
@@ -389,7 +379,7 @@ QString Field::genLua()
         EditableCheckbox *field = dynamic_cast<EditableCheckbox *>(widget);
         if (field){
             ret += field->isChecked() ? "true" : "false";
-           ret+= "--- "+ui->descript->text();
+           ret+= " -- "+ui->descript->text();
         }
         break;
     }
@@ -399,7 +389,8 @@ QString Field::genLua()
             ret += "\"";
             ret += field->currentText().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
             ret += "\"";
-           ret+= "--- "+ui->descript->text();
+
+           ret+= " -- "+ui->descript->text();
         }
         break;
     }
@@ -407,6 +398,7 @@ QString Field::genLua()
     }
 
     ret += "\n";
+
     return ret;
 }
 

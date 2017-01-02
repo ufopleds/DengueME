@@ -119,6 +119,22 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>5</width>
+             <height>5</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
         </layout>
        </item>
        <item>
@@ -491,6 +507,10 @@
    </property>
   </action>
   <action name="actionSetWorkspace">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/img/Resources/folder.png</normaloff>:/img/Resources/folder.png</iconset>
+   </property>
    <property name="text">
     <string>Change &amp;workspace</string>
    </property>
@@ -568,6 +588,10 @@
    </property>
   </action>
   <action name="actionSynchronize">
+   <property name="icon">
+    <iconset resource="Resource.qrc">
+     <normaloff>:/Resources/download.png</normaloff>:/Resources/download.png</iconset>
+   </property>
    <property name="text">
     <string>Synchronize</string>
    </property>

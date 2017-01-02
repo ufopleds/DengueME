@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>450</width>
-    <height>112</height>
+    <height>115</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,16 @@
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="useGroup">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Use chart:</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLineEdit" name="label">
        <property name="toolTip">
@@ -34,6 +44,32 @@
         <bool>false</bool>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="observerID">
+       <property name="styleSheet">
+        <string notr="true">QLineEdit { background-color:transparent; }</string>
+       </property>
+       <property name="text">
+        <string>New groupID</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QToolButton" name="addField">

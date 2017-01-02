@@ -4,11 +4,12 @@
 #include "changeworkspace.h"
 #include "mainwindow.h"
 #include "newmodel.h"
-#include <QDebug>
+
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    /// TODO - Linux folder share, like models folder
+
+
     /* To generate the translate file, please use these commands in terminal
      * lupdate -pro DengueME.pro -ts languageName.ts
      * open the .ts file on QTLinguistic.
@@ -16,23 +17,23 @@ int main(int argc, char *argv[]) {
      * use lrelease languageName.ts
      * a .qm file will be created, put this file on the translations folder
     */
-    QDir dir(QCoreApplication::applicationDirPath() + "/translations/");
-       if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "English") {
-           QTranslator translator;
-           translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
-           app.installTranslator(&translator);
-       }
-      QTranslator translator;
-       translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
-       app.installTranslator(&translator);
 
-    //Finds workspace based on settings file, if not defined, creates a new Folder
+    QDir dir(QCoreApplication::applicationDirPath() + "/translations/");
+    if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "English") {
+        QTranslator translator;
+        translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
+        app.installTranslator(&translator);
+    }
+    QTranslator translator;
+    translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
+    app.installTranslator(&translator);
+
     if (dengueme::config("prompt_workspace") == "true" || dengueme::config("workspace").isEmpty() || !QDir(dengueme::config("workspace")).exists()) {
         if (ChangeWorkspace().exec() != QDialog::Accepted) return 1;
         QDir dir(dengueme::config("workspace"));
         dir.mkpath(dir.absolutePath());
     }
-    //Finds terraME
+
     if (dengueme::config("terrame").isEmpty()) {
         dengueme::saveconfig("terrame","TerraME");
         dengueme::setconfig("terrame","TerraME");
@@ -45,9 +46,6 @@ int main(int argc, char *argv[]) {
         dengueme::saveconfig("modelsVersion","v0.1");
         dengueme::setconfig("modelsVersion","v0.1");
     }
-
-
-
     (new MainWindow)->show();
 
     return app.exec();

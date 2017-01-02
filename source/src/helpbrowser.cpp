@@ -1,7 +1,7 @@
 #include "helpbrowser.h"
 
 #include <QLibraryInfo>
-//Help window
+
 HelpBrowser::HelpBrowser(QString collectionFile, QWidget *parent)
     : QTextBrowser(parent)
 {
