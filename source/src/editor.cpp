@@ -1,34 +1,33 @@
-#include "editor.h"
-#include "ui_editor.h"
-#include "dengueme.h" //Namespace containing basic control and setting files
-
 #include <QtCore>
 #include <QtXml>
 #include <QDebug>
+
+#include "editor.h"
+#include "ui_editor.h"
+#include "dengueme.h" //Namespace containing basic control and setting files
 
 Editor::Editor(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Editor),
     editMode(true),
-    interpreter(this)
-{
+    interpreter(this){
+
     ui->setupUi(this);
 
     QPalette pallet;
     pallet.setColor(QPalette::Base,this->palette().window().color());
     ui->list->setPalette(pallet);
 
-    //ui->list->setMaximumWidth(104 + qApp->style()->pixelMetric(QStyle::PM_ScrollBarExtent));
     connect(ui->list, SIGNAL(currentRowChanged(int)), ui->stack, SLOT(setCurrentIndex(int)));
-
     connect(&interpreter, SIGNAL(readyReadStandardOutput()), SLOT(readyReadStandardOutput()));
     connect(&interpreter, SIGNAL(readyReadStandardError()), SLOT(readyReadStandardError()));
     connect(&interpreter, SIGNAL(finished(int)), SLOT(onInterpreterFinished(int)));
-    //    connect(&interpreter, SIGNAL(started()), SLOT());
 
     parametersGroup = new GroupList;
+    resultsGroup = new ObserversList;
     view_model = new ModelView;
     view_database = new QFrame;
+
     {
         QWidget *cont = new QWidget;
         cont->setAutoFillBackground(true);
@@ -72,50 +71,11 @@ Editor::Editor(QWidget *parent) :
         simulationGroup->setRemovable(false);
         simulationGroup->setLabel(tr("Simulation"));
         layout->addWidget(simulationGroup);
-
-        ///TODO  - Observers
-
-        QGroupBox *group = new QGroupBox(tr("Observer"));
-        QVBoxLayout *groupLayout = new QVBoxLayout(group);
-        groupLayout->addWidget(observer = new Observer);
-        enableObserver = new QCheckBox(tr("Use observer"));
-        connect(enableObserver, SIGNAL(toggled(bool)), group, SLOT(setVisible(bool)));
-        group->setVisible(false);
-        layout->addWidget(enableObserver);
-        layout->addWidget(group);
-
-        ///TODO - Observers
-
         layout->addStretch(1);
+
     }
 
-    view_results = new QFrame;
-    {
-        QWidget *cont = new QWidget;
-        cont->setAutoFillBackground(true);
-        cont->setBackgroundRole(QPalette::Base);
-
-        view_results->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-        view_results->setLayout(new QVBoxLayout);
-        view_results->layout()->addWidget(cont);
-        view_results->layout()->setMargin(0);
-
-
-        QVBoxLayout *layout = new QVBoxLayout(cont);
-        resultsGroup = new Group;
-        resultsGroup->setRemovable(false);
-        resultsGroup->setLabel(tr("Results"));
-        resultsGroup->layout()->setMargin(0);
-
-        enableResults = new QCheckBox(tr("Use results view"));
-        layout->addWidget(enableResults);
-
-        connect(enableResults, SIGNAL(toggled(bool)), resultsGroup, SLOT(setVisible(bool)));
-        resultsGroup->setVisible(false);
-
-        layout->addWidget(resultsGroup);
-        layout->addStretch(1);
-    }
+    view_results = resultsGroup;
 
     viewmap.insert(ViewModel,      ViewData(tr("Model"), "model" ,    view_model));
     viewmap.insert(ViewDatabase,   ViewData(tr("Database"),  "database", view_database));
@@ -123,10 +83,8 @@ Editor::Editor(QWidget *parent) :
     viewmap.insert(ViewSimulation, ViewData(tr("Simulation"),"simulation", view_simulation));
     viewmap.insert(ViewResults,    ViewData(tr("Results"),  "results",  view_results));
 
-    ///TODO - Interpreter new Window
-    ///IDEA - Show just model, add a OK button, after pressed get all the information and show the right views
     connect(view_model, SIGNAL(interpreterChanged(Interpreter)), SLOT(onInterpreterChanged(Interpreter)));
-    ///TODO - Interpreter new Window
+
 
 }
 
@@ -139,6 +97,7 @@ QString Editor::getModelFile(){
 }
 
 void Editor::setupViews(){
+
     ui->list->clear();
     for (QWidget *w = ui->stack->currentWidget(); w ; w = ui->stack->currentWidget())
         ui->stack->removeWidget(w);
@@ -156,7 +115,6 @@ void Editor::setupViews(){
 
 void Editor::addView(QString variableName, QWidget *content,QString name){
 
-
     QListWidgetItem *item = new QListWidgetItem(ui->list);
     item->setIcon(QIcon(":/img/Resources/" + variableName + ".png"));
 
@@ -169,15 +127,15 @@ void Editor::addView(QString variableName, QWidget *content,QString name){
 }
 
 void Editor::setEditModeEnabled(bool enable){
+
     editMode = enable;
 
     viewmap[ViewModel].visible = enable;
 
-    resultsGroup->setEditMode(enable);
+
     parametersGroup->setEditMode(enable);
     simulationGroup->setEditMode(enable);
-    enableResults->setVisible(enable);
-    enableObserver->setVisible(enable && view_model->interpreter() == view_model->TerraME);
+    resultsGroup->setEditMode(enable);
     enableDatabase->setVisible(enable);
 
     setupViews();
@@ -191,6 +149,7 @@ void Editor::stopModel(){
     interpreter.close();
 }
 QString Editor::loadDescription(QDomElement par){
+
     modelDescription += "";
     for (QDomElement node = par.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
         if (node.tagName().compare("groupbox", Qt::CaseInsensitive) == 0){
@@ -209,7 +168,6 @@ QString Editor::loadDescription(QDomElement par){
 }
 
 bool Editor::loadModel(QString filename, bool editMode){
-
 
     if(renameFlag==0){
         if (!modelFile.isEmpty() && !close(0)){
@@ -249,7 +207,7 @@ bool Editor::loadModel(QString filename, bool editMode){
     QDomElement datEl = root.firstChildElement("Database");
     QDomElement par = root.firstChildElement("parameters");
     QDomElement sim = root.firstChildElement("simulation");
-    QDomElement obsEl = root.firstChildElement("Observer");
+
     QDomElement res = root.firstChildElement("results");
     loadDescription(par);
     loadDescription(sim);
@@ -257,21 +215,16 @@ bool Editor::loadModel(QString filename, bool editMode){
     database->setXml(datEl);
     enableDatabase->setChecked(!datEl.isNull());
 
-
-
     parametersGroup->setXml(par);
     parametersGroup->scrollToTop();
 
-
-    viewmap[ViewSimulation].visible = !sim.isNull() || !obsEl.isNull();
+    viewmap[ViewSimulation].visible = !sim.isNull() ;
     sim.setAttribute("label", "Simulation");
     simulationGroup->setXml(sim);
 
-    observer->setXml(obsEl);
-    enableObserver->setChecked(!obsEl.isNull());
+
 
     viewmap[ViewResults].visible = !res.isNull();
-    enableResults->setChecked(!res.isNull());
     res.setAttribute("label", "Results");
     resultsGroup->setXml(res);
 
@@ -280,8 +233,9 @@ bool Editor::loadModel(QString filename, bool editMode){
     return true;
 }
 
-// Run
+
 void Editor::execModel(bool stepByStep){
+
     if (modelFile.isEmpty())
         return;
 
@@ -297,21 +251,18 @@ void Editor::execModel(bool stepByStep){
         input.open(QFile::WriteOnly | QFile::Truncate);
         QTextStream out(&input);
 
-        //.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
         out <<  "print(\'LOADING INPUT FILE AND RUNNING MODEL\')\n";
         out << "io.flush();\n";
         if (enableDatabase->isChecked())
             out << database->outData();
 
-        if (enableObserver->isChecked())
-            out << observer->outData();
-
-        if (enableResults->isChecked())
-            out << resultsGroup->genLua();
-
+        out<< "\n -- Parameters Variables \n\n";
         out << parametersGroup->genLua();
+        out<< "\n -- Simulation Variables \n\n";
         out << simulationGroup->genLua();
-
+        out <<"\n -- Observers \n\n";
+        out << resultsGroup->genLua();
+        out<< "\n -- Execution Variables \n\n";
         out << "BASE_PATH = \"" + dir + "\"\n";
         out << "SCRIPT_PATH = \"" + view_model->scriptDir() + "\"\n";
         out << "dofile(SCRIPT_PATH .. \"/" << view_model->mainScript() << "\")\n";
@@ -330,16 +281,13 @@ void Editor::execModel(bool stepByStep){
         input.open(QFile::WriteOnly | QFile::Truncate);
         QTextStream out(&input);
 
-        if (enableResults->isChecked())
-            out << resultsGroup->genR();
-
         out << parametersGroup->genR();
         out << simulationGroup->genR();
 
         out << "BASE_PATH = \"" + dir + "\"\n";
         out << "SCRIPT_PATH =\"" + view_model->scriptDir() + "\"\n";
         out <<"setwd(SCRIPT_PATH) # Path that all plots will be saved. R Workspace. \n";
-        out << "source(paste0(SCRIPT_PATH, \"/" << view_model->mainScript() << "\"))\n";        
+        out << "source(paste0(SCRIPT_PATH, \"/" << view_model->mainScript() << "\"))\n";
         input.close();
 
         QStringList args;
@@ -373,15 +321,12 @@ bool Editor::close(int del){
         clearModel();
         return true;
     }
-    /*QMessageBox::StandardButton opt = QMessageBox::question(this, tr("Close model"),
-                                                            tr("Save model before closing?"),
-                                                            QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-*/
+
     QMessageBox msgBox(
                 QMessageBox::Question,
-               tr("Close model"),
-                 tr("Save model before closing?"),
-                 QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+                tr("Close model"),
+                tr("Save model before closing?"),
+                QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
     msgBox.setButtonText(QMessageBox::Save, trUtf8("Save"));
     msgBox.setButtonText(QMessageBox::Discard, trUtf8("Discard"));
@@ -433,21 +378,11 @@ bool Editor::save(){
     sim.firstChildElement().setTagName("simulation");
     root.appendChild(sim);
 
-
-    if (enableResults->isChecked()) {
-        QDomDocument res = resultsGroup->getXml();
-        QDomElement resr = res.firstChildElement();
-        if (!resr.isNull()) {
-            resr.setTagName("results");
-            root.appendChild(res);
-        }
-    }
+    root.appendChild(resultsGroup->getXml());
 
     if (enableDatabase->isChecked())
         root.appendChild(database->getXml());
 
-    if (enableObserver->isChecked())
-        root.appendChild(observer->getXml());
 
     doc.appendChild(root);
 
@@ -470,7 +405,7 @@ bool Editor::saveAs(){
     emit renamed(modelFile);
     return save();
 }
-///TODO ERROR
+
 void Editor::readyReadStandardError(){
     emit output (3, interpreter.readAllStandardError());
 }
@@ -479,29 +414,28 @@ void Editor::readyReadStandardOutput(){
     emit output (1, interpreter.readAllStandardOutput());
 }
 
-//Interpreter Functions - TerraME or R
-///TODO - R Interpreter
+
+
 void Editor::onInterpreterFinished(int exitCode){
 
     if(exitCode == 0 && interpreter.exitStatus() == QProcess::NormalExit)
-        emit output(1,"SIMULATION CONCLUDED");
+        emit output(1,"SIMULATION FINISHED");
     interpreter.close();
     emit interpreterStopped(exitCode);
 }
-/// TODO - INTERPRETER DINAMIC WINDOW
+
 void Editor::onInterpreterChanged(ModelView::Interpreter intr)
 {
     if (intr == ModelView::TerraME) {
-        enableObserver->setVisible(editMode);
+
         viewmap[ViewDatabase].visible = true;
         viewmap[ViewDatabase].visibleEM = true;
 
     } else {
-        enableObserver->setChecked(false);
-        enableObserver->setVisible(false);
+
         viewmap[ViewDatabase].visible = false;
         viewmap[ViewDatabase].visibleEM = false;
     }
     setupViews();
 }
-///TODO - R Interpreter
+

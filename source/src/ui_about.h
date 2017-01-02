@@ -29,17 +29,17 @@ class Ui_About
 public:
     QVBoxLayout *verticalLayout;
     QFrame *frame;
-    QLabel *label;
-    QLabel *label_6;
-    QLabel *label_5;
-    QLabel *label_2;
-    QLabel *label_4;
-    QLabel *label_7;
-    QLabel *label_3;
+    QLabel *textLabel;
+    QLabel *versionLabel;
+    QLabel *siteLabel;
+    QLabel *licenseLabel;
+    QLabel *sourceLabel;
+    QLabel *authorLabel;
+    QLabel *iconsLabel;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton;
+    QPushButton *closeButton;
 
     void setupUi(QDialog *About)
     {
@@ -70,56 +70,56 @@ public:
 
         verticalLayout->addWidget(frame);
 
-        label = new QLabel(About);
-        label->setObjectName(QStringLiteral("label"));
+        textLabel = new QLabel(About);
+        textLabel->setObjectName(QStringLiteral("textLabel"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy1);
-        label->setTextFormat(Qt::AutoText);
-        label->setScaledContents(false);
-        label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        label->setWordWrap(true);
-        label->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+        sizePolicy1.setHeightForWidth(textLabel->sizePolicy().hasHeightForWidth());
+        textLabel->setSizePolicy(sizePolicy1);
+        textLabel->setTextFormat(Qt::AutoText);
+        textLabel->setScaledContents(false);
+        textLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        textLabel->setWordWrap(true);
+        textLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
 
-        verticalLayout->addWidget(label);
+        verticalLayout->addWidget(textLabel);
 
-        label_6 = new QLabel(About);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        versionLabel = new QLabel(About);
+        versionLabel->setObjectName(QStringLiteral("versionLabel"));
 
-        verticalLayout->addWidget(label_6);
+        verticalLayout->addWidget(versionLabel);
 
-        label_5 = new QLabel(About);
-        label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setOpenExternalLinks(true);
-        label_5->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+        siteLabel = new QLabel(About);
+        siteLabel->setObjectName(QStringLiteral("siteLabel"));
+        siteLabel->setOpenExternalLinks(true);
+        siteLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
-        verticalLayout->addWidget(label_5);
+        verticalLayout->addWidget(siteLabel);
 
-        label_2 = new QLabel(About);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        licenseLabel = new QLabel(About);
+        licenseLabel->setObjectName(QStringLiteral("licenseLabel"));
 
-        verticalLayout->addWidget(label_2);
+        verticalLayout->addWidget(licenseLabel);
 
-        label_4 = new QLabel(About);
-        label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setOpenExternalLinks(true);
-        label_4->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+        sourceLabel = new QLabel(About);
+        sourceLabel->setObjectName(QStringLiteral("sourceLabel"));
+        sourceLabel->setOpenExternalLinks(true);
+        sourceLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
-        verticalLayout->addWidget(label_4);
+        verticalLayout->addWidget(sourceLabel);
 
-        label_7 = new QLabel(About);
-        label_7->setObjectName(QStringLiteral("label_7"));
+        authorLabel = new QLabel(About);
+        authorLabel->setObjectName(QStringLiteral("authorLabel"));
 
-        verticalLayout->addWidget(label_7);
+        verticalLayout->addWidget(authorLabel);
 
-        label_3 = new QLabel(About);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setOpenExternalLinks(true);
-        label_3->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
+        iconsLabel = new QLabel(About);
+        iconsLabel->setObjectName(QStringLiteral("iconsLabel"));
+        iconsLabel->setOpenExternalLinks(true);
+        iconsLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
-        verticalLayout->addWidget(label_3);
+        verticalLayout->addWidget(iconsLabel);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -131,17 +131,17 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        pushButton = new QPushButton(About);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        closeButton = new QPushButton(About);
+        closeButton->setObjectName(QStringLiteral("closeButton"));
 
-        horizontalLayout->addWidget(pushButton);
+        horizontalLayout->addWidget(closeButton);
 
 
         verticalLayout->addLayout(horizontalLayout);
 
 
         retranslateUi(About);
-        QObject::connect(pushButton, SIGNAL(clicked()), About, SLOT(close()));
+        QObject::connect(closeButton, SIGNAL(clicked()), About, SLOT(close()));
 
         QMetaObject::connectSlotsByName(About);
     } // setupUi
@@ -149,14 +149,14 @@ public:
     void retranslateUi(QDialog *About)
     {
         About->setWindowTitle(QApplication::translate("About", "About", 0));
-        label->setText(QApplication::translate("About", "<b> DengueME</b> is a software framework designed to support modeling and simulation of the spatiotemporal dynamics of dengue transmission and vector ecology.", 0));
-        label_6->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Version</span>: 0.65. <span style=\" font-weight:600;\">Date: </span>9/27/2016</p></body></html>", 0));
-        label_5->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">URL :</span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/dengueme </span></a></p></body></html>", 0));
-        label_2->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">License</span>: BSD - 2 Clause</p></body></html>", 0));
-        label_4->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Source Code:</span><a href=\"https://github.com/ufopleds/dengueme\"><span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/ufopleds/dengueme </span></a></p></body></html>", 0));
-        label_7->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Author: LEDS/UFOP  </span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/</span></a></p></body></html>", 0));
-        label_3->setText(QApplication::translate("About", "<b>Icons:</b> <a href=\" https://icons8.com/web-app/\">https://icons8.com</a>", 0));
-        pushButton->setText(QApplication::translate("About", "Close", 0));
+        textLabel->setText(QApplication::translate("About", "<b> DengueME</b> is a software framework designed to support modeling and simulation of the spatiotemporal dynamics of dengue transmission and vector ecology.", 0));
+        versionLabel->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Version</span>: 0.65. <span style=\" font-weight:600;\">Date: </span>9/27/2016</p></body></html>", 0));
+        siteLabel->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Site :</span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/dengueme </span></a></p></body></html>", 0));
+        licenseLabel->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">License</span>: BSD - 2 Clause</p></body></html>", 0));
+        sourceLabel->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Source Code:</span><a href=\"https://github.com/ufopleds/dengueme\"><span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/ufopleds/dengueme </span></a></p></body></html>", 0));
+        authorLabel->setText(QApplication::translate("About", "<html><head/><body><p><span style=\" font-weight:600;\">Author: LEDS/UFOP  </span><a href=\"http://www.leds.ufop.br/\"><span style=\" text-decoration: underline; color:#0000ff;\">http://www.leds.ufop.br/</span></a></p></body></html>", 0));
+        iconsLabel->setText(QApplication::translate("About", "<b>Icons:</b> <a href=\" https://icons8.com/web-app/\">https://icons8.com</a>", 0));
+        closeButton->setText(QApplication::translate("About", "Close", 0));
     } // retranslateUi
 
 };

@@ -40,12 +40,20 @@ ImportCsv::ImportCsv(QWidget *parent) :
 
     ui->options->setMenu(menu);
 
+    //C++ 11  +  Qt5 lambda connect
+    connect(actionText,  &QAction::triggered, this, [this]{ onMorph("Text"); });
+    connect(actionInteger,  &QAction::triggered, this, [this]{ onMorph("Integer"); });
+    connect(actionFloating,  &QAction::triggered, this, [this]{ onMorph("Float"); });
+    connect(actionCombobox,  &QAction::triggered, this, [this]{ onMorph("Combobox"); });
+    connect(actionBoolean,  &QAction::triggered, this, [this]{ onMorph("Boolean"); });
+
+
     //connect(actionCsv, SIGNAL(triggered()), SLOT(onActionCsv()));
-    connect(actionText,     SIGNAL(triggered()), SLOT(onMorphText()));
-    connect(actionInteger,  SIGNAL(triggered()), SLOT(onMorphInteger()));
+ //   connect(actionText,     SIGNAL(triggered()), SLOT(onMorphText()));
+    /*connect(actionInteger,  SIGNAL(triggered()), SLOT(onMorphInteger()));
     connect(actionFloating, SIGNAL(triggered()), SLOT(onMorphFloat()));
     connect(actionCombobox, SIGNAL(triggered()), SLOT(onMorphCombobox()));
-    connect(actionBoolean, SIGNAL(triggered()), SLOT(onMorphBoolean()));
+    connect(actionBoolean, SIGNAL(triggered()), SLOT(onMorphBoolean()));*/
     connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
      connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
 
@@ -144,7 +152,12 @@ void ImportCsv::openCsv()
     }
 }
 
-void ImportCsv::onMorphBoolean( )
+void ImportCsv::onMorph(QString type){
+    emit remove();
+    emit csv(type);
+}
+
+/*void ImportCsv::onMorphBoolean( )
 {
     emit remove();
     emit csv( "Boolean");
@@ -168,7 +181,7 @@ void ImportCsv::onMorphCombobox( )
 {
     emit remove();
     emit csv( "Combobox");
-}
+}*/
 
 void ImportCsv::onActionClone(){
     emit clone();

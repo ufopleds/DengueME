@@ -64,7 +64,16 @@ SOURCES += main.cpp \
     openmodel.cpp \
     syncmodels.cpp \
     downloadmanager.cpp \
-    downloadhttp.cpp
+    downloadhttp.cpp \
+    editor/observerslist.cpp \
+    editor/chartgroup.cpp \
+    editor/components/chartfield.cpp \
+    editor/textscreengroup.cpp \
+    editor/visualtablegroup.cpp \
+    editor/components/logfield.cpp \
+    editor/components/textscreenfield.cpp \
+    editor/components/visualtablefield.cpp \
+    editor/loggroup.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -102,14 +111,20 @@ HEADERS  += \
     openmodel.h \
     syncmodels.h \
     downloadmanager.h \
-    downloadhttp.h
+    downloadhttp.h \
+    editor/observerslist.h \
+    editor/chartgroup.h \
+    editor/components/chartfield.h \
+    editor/textscreengroup.h \
+    editor/visualtablegroup.h \
+    editor/components/logfield.h \
+    editor/components/textscreenfield.h \
+    editor/components/visualtablefield.h \
+    editor/loggroup.h
 
 FORMS    += \
     mainwindow.ui \
-    newproject.ui \
-    editor/components/observer.ui \
     editor/components/database.ui \
-    editor/components/colorbar.ui \
     options.ui \
     about.ui \
     editor/components/constraints/doublespinboxrules.ui \
@@ -124,7 +139,13 @@ FORMS    += \
     editor/views/modelview.ui \
     descriptionwindow.ui \
     openmodel.ui \
-    syncmodels.ui
+    syncmodels.ui \
+    editor/observerslist.ui \
+    editor/components/chartfield.ui \
+    editor/components/logfield.ui \
+    editor/components/textscreenfield.ui \
+    editor/components/visualtablefield.ui \
+    editor/components/vttsfield.ui
 
 RESOURCES += \
     Resource.qrc

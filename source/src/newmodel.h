@@ -37,7 +37,6 @@ public:
 
     TypePage();
 
-//    int nextId() const;
     bool isComplete() const;
 
 public slots:
@@ -77,7 +76,7 @@ public:
 
     NamePage(QString workspace);
 
-//    int nextId() const;
+
     bool isComplete() const;
 
 public slots:

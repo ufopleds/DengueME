@@ -1,18 +1,21 @@
 #include <QGridLayout>
 #include <QToolTip>
 
+#include "qdebug.h"
 #include "filenamepage.h"
 #include "dengueme.h"
 
-//Defines the FileName page
+
 FilenamePage::FilenamePage(QString path, QString def, QString extension)
     : path(path), def(def), ext(extension),
       subtitle(tr("Specify a unique name to identify your project in the workspace.")),
-      state(dengueme::EmptyName)
-{
+      state(dengueme::EmptyName){
+
     setTitle(tr("Specify a name"));
     setSubTitle(subtitle);
-     this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
+    this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     projectName = new QLabel(tr("&Name:"));
     projectLineEdit = new QLineEdit(def);
     projectName->setBuddy(projectLineEdit);
@@ -29,10 +32,11 @@ FilenamePage::FilenamePage(QString path, QString def, QString extension)
 
 }
 
-//Validate project - Observes if the name is not Empty, if all chararacters used in the name are allowed , if it already exists
 
 void FilenamePage::validateProject(QString name) {
+
     switch (dengueme::validateName(path, name, ext)) {
+
     case dengueme::EmptyName:
         if (state != dengueme::EmptyName) {
             setSubTitle(subtitle);
@@ -48,16 +52,16 @@ void FilenamePage::validateProject(QString name) {
         break;
 
     case dengueme::FileExists:
-//        if (state != dengueme::FileExists) {
+
         state = dengueme::FileExists;
         if (def.isEmpty() || def != name) {
             setSubTitle(tr("A file with that name already exists."));
             setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
         } else {
-            setSubTitle(tr("Specify a new name for your project."));
+            setSubTitle(tr("Specify a new unique name:"));
             setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
         }
-//        }
+
         break;
 
     case dengueme::ValidName:

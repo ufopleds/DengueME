@@ -1,21 +1,22 @@
-#include "syncmodels.h"
-#include "ui_syncmodels.h"
 #include <QProgressBar>
 #include <QPushButton>
 #include <QDesktopServices>
 #include <QStandardItemModel>
 #include <dengueme.h>
-#include <QDebug>
 #include <QMessageBox>
+
+#include "syncmodels.h"
+#include "ui_syncmodels.h"
+
 #ifdef Q_OS_LINUX
 #define SO_MACHINE "Linux"
 #else
 #define SO_MACHINE "Windows"
 #endif
+
 SyncModels::SyncModels(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SyncModels)
-{
+    ui(new Ui::SyncModels){
 
     ui->setupUi(this);
 
@@ -24,11 +25,13 @@ SyncModels::SyncModels(QWidget *parent) :
 
     ui->downloadButton->setEnabled(false);
     mManager = new DownloadManager(this);
+
     connect(mManager, SIGNAL(addLine(QString)), this, SLOT(addLine(QString)));
     connect(mManager, SIGNAL(downloadComplete()), this, SLOT(finished()));
     connect(mManager, SIGNAL(progress(int)), this, SLOT(progress(int)));
     connect(ui->updateButton,SIGNAL(clicked()),this,SLOT(updateAction()));
     connect(ui->downloadButton,SIGNAL(clicked()),this,SLOT(downloadAction()));
+
 }
 
 
@@ -43,15 +46,19 @@ void SyncModels::downloadAction(){
 
 }
 void SyncModels::checkNewModel(){
+
     ui->progressBar->setValue(0);
 
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
+
     QUrl url("https://github.com/ufopleds/DengueMELib/releases/latest");
+
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
+
     _pManager = new QNetworkAccessManager(this);
     _CurrentRequest = QNetworkRequest(url);
-
     _pCurrentReply = _pManager->head(_CurrentRequest);
+
     addLine(tr("Checking for updates"));
 
     _Timer.setInterval(10000);
@@ -63,6 +70,7 @@ void SyncModels::checkNewModel(){
     connect(_pCurrentReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(error(QNetworkReply::NetworkError)));
 }
 void SyncModels::finishedHead(){
+
     QString actualVersion = dengueme::config("modelsVersion") ;
 
     _Timer.stop();
@@ -71,7 +79,6 @@ void SyncModels::finishedHead(){
 
     foreach (QByteArray header, list)
     {
-        QString qsLine = QString(header) + " = " + _pCurrentReply->rawHeader(header);
         if(header == "Location"){
             this->version = _pCurrentReply->rawHeader(header);
             version.remove(0,version.lastIndexOf("/")+1);
@@ -109,7 +116,7 @@ void SyncModels::finishedHead(){
 
 void SyncModels::timeout(){
     ui->listView->model()->removeRows(0,ui->listView->model()->rowCount());
-    addLine(tr("Timeout, Sorry for the incovenience"));
+    addLine(tr("Timeout"));
     addLine(tr("You may download the models from the website"));
     addLine(tr("And extract the Models folder into the DengueME folder "));
     addLine("https://github.com/ufopleds/DengueMELib/releases/latest");
@@ -144,7 +151,7 @@ void SyncModels::finished(){
 
     QString file =ABS_APP_DIR;
     QUrl url = QUrl::fromLocalFile(file);
-    QDesktopServices::openUrl(url); //works
+    QDesktopServices::openUrl(url);
 
     ui->downloadButton->setEnabled(false);
     ui->updateButton->setEnabled(true);

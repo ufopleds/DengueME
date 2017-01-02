@@ -16,7 +16,7 @@ public:
     RenameWizard(QString path, QString name, bool isProject, QWidget *parent = 0);
 
 private slots:
-//    void showHelp();
+
 };
 
 #endif // RENAMEPROJECT_H

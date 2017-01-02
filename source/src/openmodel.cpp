@@ -15,23 +15,13 @@ OpenModel::OpenModel(QWidget *parent) :
     dir.mkpath("transmission");
 
     ui->setupUi(this);
-    BuilderDirModel *model = new BuilderDirModel;
-    /* ui->listView->setDirModel(model);
-    ui->listView->setWorkspace(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
-    connect(model, SIGNAL(updated()), ui->listView, SLOT(expandAll()));
-    connect(ui->listView, SIGNAL(collapsed(QModelIndex)), ui->listView, SLOT(expand(QModelIndex)));
-    ui->listView->expandAll();
-
-  connect(ui->listView, SIGNAL(activated(QModelIndex)), SLOT(setIndex()));*/
-
+    BuilderDirModel *model = new BuilderDirModel;    
 
     connect(ui->ok, SIGNAL(clicked()),SLOT(setIndex()));
     connect(ui->cancel, SIGNAL(clicked()),SLOT(close()));
     ui->treeView->setDirModel(model);
     ui->treeView->setWorkspace(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme");
     connect(model, SIGNAL(updated()), ui->treeView, SLOT(expandAll()));
-
-
 
     connect(ui->treeView, SIGNAL(doubleClicked(QModelIndex)), SLOT(setIndex()));
 

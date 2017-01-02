@@ -3,9 +3,10 @@
 #include "filenamepage.h"
 
 RenameWizard::RenameWizard(QString path, QString name, bool isProject, QWidget *parent) :
-    QWizard(parent)
-{
+    QWizard(parent){
+
     FilenamePage *page = new FilenamePage(path, name, isProject ? "" : ".xml");
+
     setOption(QWizard::NoBackButtonOnLastPage);
     setPage(Page_Filename, page);
     setStartId(Page_Filename);

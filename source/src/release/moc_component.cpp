@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Component_t {
-    QByteArrayData data[7];
-    char stringdata0[44];
+    QByteArrayData data[8];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,14 @@ QT_MOC_LITERAL(0, 0, 9), // "Component"
 QT_MOC_LITERAL(1, 10, 6), // "remove"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 5), // "clone"
-QT_MOC_LITERAL(4, 24, 3), // "csv"
-QT_MOC_LITERAL(5, 28, 4), // "type"
-QT_MOC_LITERAL(6, 33, 10) // "changeType"
+QT_MOC_LITERAL(4, 24, 14), // "chartBeingUsed"
+QT_MOC_LITERAL(5, 39, 3), // "csv"
+QT_MOC_LITERAL(6, 43, 4), // "type"
+QT_MOC_LITERAL(7, 48, 10) // "changeType"
 
     },
-    "Component\0remove\0\0clone\0csv\0type\0"
-    "changeType"
+    "Component\0remove\0\0clone\0chartBeingUsed\0"
+    "csv\0type\0changeType"
 };
 #undef QT_MOC_LITERAL
 
@@ -49,24 +50,26 @@ static const uint qt_meta_data_Component[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
-       3,    0,   35,    2, 0x06 /* Public */,
-       4,    1,   36,    2, 0x06 /* Public */,
-       6,    1,   39,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    0,   40,    2, 0x06 /* Public */,
+       4,    0,   41,    2, 0x06 /* Public */,
+       5,    1,   42,    2, 0x06 /* Public */,
+       7,    1,   45,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    5,
-    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void, QMetaType::QString,    6,
 
        0        // eod
 };
@@ -79,8 +82,9 @@ void Component::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->remove(); break;
         case 1: _t->clone(); break;
-        case 2: _t->csv((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->changeType((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->chartBeingUsed(); break;
+        case 3: _t->csv((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->changeType((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -101,16 +105,23 @@ void Component::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
         {
-            typedef void (Component::*_t)(QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Component::csv)) {
+            typedef void (Component::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Component::chartBeingUsed)) {
                 *result = 2;
                 return;
             }
         }
         {
             typedef void (Component::*_t)(QString );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Component::changeType)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Component::csv)) {
                 *result = 3;
+                return;
+            }
+        }
+        {
+            typedef void (Component::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Component::changeType)) {
+                *result = 4;
                 return;
             }
         }
@@ -142,13 +153,13 @@ int Component::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
@@ -166,16 +177,22 @@ void Component::clone()
 }
 
 // SIGNAL 2
-void Component::csv(QString _t1)
+void Component::chartBeingUsed()
 {
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+    QMetaObject::activate(this, &staticMetaObject, 2, Q_NULLPTR);
 }
 
 // SIGNAL 3
-void Component::changeType(QString _t1)
+void Component::csv(QString _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void Component::changeType(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_END_MOC_NAMESPACE

@@ -2,6 +2,9 @@
 #include "ui_modelbuilder.h"
 #include "newmodelwizard.h"
 #include "builderdirmodel.h"
+
+
+#include "../descriptionwindow.h"
 #include "../dengueme.h"
 #include "openmodel.h"
 #include <QDebug>
@@ -31,6 +34,7 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
     connect(ui->editor, SIGNAL(closed()), SLOT(onModelClosed()));
     connect(ui->editor, SIGNAL(renamed(QString)), ui->modelFile, SLOT(setText(QString)));
     connect(ui->actionSave, SIGNAL(triggered()), ui->editor, SLOT(save()));
+     connect(ui->actionHelp, SIGNAL(triggered()), SLOT(helpModelBuilder()));
     connect(ui->actionDelete, SIGNAL(triggered()), SLOT(deleteModel()));
     connect(ui->actionEdit, SIGNAL(triggered()), SLOT(openModelWizard()));
     connect(ui->actionNew, SIGNAL(triggered()), SLOT(newModel()));
@@ -38,8 +42,9 @@ ModelBuilder::ModelBuilder(QWidget *parent) :
     connect(ui->stackedWidget, SIGNAL(currentChanged(int)), SLOT(setToolbar(int)));
     ui->actionSave->setEnabled(false);
     ui->actionDelete->setEnabled(false);
-    ui->toolBar->addAction(ui->actionEdit);
     ui->toolBar->addAction(ui->actionNew);
+    ui->toolBar->addAction(ui->actionEdit);
+    ui->toolBar->addAction(ui->actionHelp);
 
 }
 
@@ -91,14 +96,17 @@ void ModelBuilder::selectionChanged(const QModelIndex &current, const QModelInde
 {
     ui->toolBar->clear();
 
-    ui->actionDelete->setEnabled(false);
-
+    ui->actionDelete->setEnabled(false); 
     ui->actionSave->setEnabled(false);
 
     ui->toolBar->addAction(ui->actionNew);
     ui->actionNew->setEnabled(true);
+
     ui->toolBar->addAction(ui->actionEdit);
     ui->actionEdit->setEnabled(true);
+
+    ui->toolBar->addAction(ui->actionHelp);
+    ui->actionHelp->setEnabled(true);
 
     if (!current.isValid()) return;
 
@@ -106,6 +114,9 @@ void ModelBuilder::selectionChanged(const QModelIndex &current, const QModelInde
     if (info.dir().canonicalPath() != QDir( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme").canonicalPath()) {
         ui->toolBar->addAction(ui->actionEdit);
         ui->actionEdit->setEnabled(true);
+
+        ui->toolBar->addAction(ui->actionHelp);
+        ui->actionHelp->setEnabled(true);
 
         ui->toolBar->addAction(ui->actionDelete);
         ui->actionDelete->setEnabled(true);
@@ -141,6 +152,13 @@ void ModelBuilder::editModel() {
     modelActivated(ui->listView->currentIndex());
 }
 
+
+void ModelBuilder::helpModelBuilder(){
+    DescriptionWindow *description = new DescriptionWindow(this,"ModelBuilder");
+    description->show();
+}
+
+
 void ModelBuilder::newModel() {
     if (!ui->editor->close(0))
         return;
@@ -154,11 +172,15 @@ void ModelBuilder::newModel() {
 
     dengueme::createEmptyModel(dest);
     dengueme::setProject(proj);
+
     ui->editor->loadModel(dest, true);
     ui->modelFile->setText(ui->editor->getModelFile());
+    ui->toolBar->addAction(ui->actionSave);
     ui->actionSave->setEnabled(true);
+    ui->actionSave->setVisible(true);
     ui->stackedWidget->setCurrentIndex(1);
 
+    setToolbar(1);
 
 }
 
@@ -178,6 +200,9 @@ void ModelBuilder::setToolbar(int i)
 
         ui->toolBar->addAction(ui->actionSave);
         ui->actionSave->setEnabled(true);
+
+        ui->toolBar->addAction(ui->actionHelp);
+        ui->actionHelp->setEnabled(true);
 
        // ui->actionEdit->setEnabled(false);
         ui->actionNew->setEnabled(false);

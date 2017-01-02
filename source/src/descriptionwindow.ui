@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>484</width>
-    <height>364</height>
+    <width>500</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>484</width>
-    <height>364</height>
+    <width>500</width>
+    <height>380</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>484</width>
-    <height>364</height>
+    <width>500</width>
+    <height>380</height>
    </size>
   </property>
   <property name="font">
@@ -34,11 +34,14 @@
    <iconset resource="Resource.qrc">
     <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
   </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>330</y>
+     <x>420</x>
+     <y>350</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -50,11 +53,20 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>10</x>
+     <y>10</y>
      <width>481</width>
      <height>321</height>
     </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
    </property>
   </widget>
  </widget>

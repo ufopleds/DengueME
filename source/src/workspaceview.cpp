@@ -4,14 +4,12 @@
 
 #include "renamewizard.h"
 #include "workspaceview.h"
-#include "QDebug"
+
 WorkspaceView::WorkspaceView(QWidget *parent)
     : QTreeView(parent),
-      model(NULL)
-{ }
+      model(NULL){ }
 
-WorkspaceView::~WorkspaceView()
-{ }
+WorkspaceView::~WorkspaceView(){ }
 
 void WorkspaceView::setWorkspace(QString workspace){
     model->setDir(workspace);
@@ -30,6 +28,7 @@ QModelIndex WorkspaceView::indexFromPath(QString path){
 }
 
 bool WorkspaceView::askDelete(QModelIndex index){
+
     if (!index.isValid()) return false;
 
     QFileInfo fileinfo = fileInfo(index);
@@ -65,6 +64,7 @@ bool WorkspaceView::askDelete(QModelIndex index){
 }
 
 QString WorkspaceView::askRename(QModelIndex index){
+
     QFileInfo info = fileInfo(index);
     RenameWizard *w = new RenameWizard(info.path(),info.baseName(),info.isDir(),this);
     if (w->exec()) {
@@ -95,6 +95,7 @@ QString WorkspaceView::askRename(QModelIndex index){
 }
 
 void WorkspaceView::setDirModel(DirModel *model){
+
     if (this->model) return;
 
     this->model = model;
@@ -104,6 +105,7 @@ void WorkspaceView::setDirModel(DirModel *model){
 }
 
 void WorkspaceView::onModelUpdated(){
+
     setCurrentIndex(indexFromPath(selected));
     foreach(QString path, expanded) {
         expand(indexFromPath(path));
@@ -113,6 +115,7 @@ void WorkspaceView::onModelUpdated(){
 }
 
 void WorkspaceView::onModelToUpdate(){
+
     expanded.clear();
     selected = filePath(currentIndex());
     for (int i = 0; i < model->rowCount(); ++i) {

@@ -4,6 +4,7 @@
 #include <QtWidgets>
 
 #include "editor/grouplist.h"
+#include "editor/observerslist.h"
 #include "editor/components/database.h"
 #include "editor/components/observer.h"
 #include "editor/views/modelview.h"
@@ -32,7 +33,7 @@ private:
     Ui::Editor *ui;
     QString modelFile;
     int renameFlag = 0;
-    QFrame *view_results;
+    QWidget *view_results;
     QWidget *view_parameters;
     QFrame *view_database;
     QFrame *view_simulation;
@@ -40,11 +41,9 @@ private:
 
     GroupList *parametersGroup;
     Group *simulationGroup;
-    Group *resultsGroup;
-    Database *database;
-    Observer *observer;
+    ObserversList *resultsGroup;
+    Database *database; 
     QCheckBox *enableDatabase;
-    QCheckBox *enableObserver;
     QCheckBox *enableResults;
     bool editMode;
 
