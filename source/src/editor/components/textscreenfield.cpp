@@ -11,8 +11,6 @@ TextScreenField::TextScreenField(QWidget *parent) :
     menu = new QMenu(this);
 
     actionVariable     = new QAction(tr("&Variable"),menu);
-    actionDelete   = new QAction(tr("&Delete"),menu);
-    actionClone =new QAction(tr("Cl&one"),menu);
 
     actionVariable->setCheckable(true);
 
@@ -23,6 +21,8 @@ TextScreenField::TextScreenField(QWidget *parent) :
     connect(ui->lButton,     SIGNAL(clicked()), this, SLOT(notUseLogVariable()));
     connect(ui->add, SIGNAL(clicked()), SLOT(add()));
     connect(ui->del, SIGNAL(clicked()), SLOT(del()));
+    connect(ui->selectDefault, SIGNAL(toggled(bool)), SLOT(selectAllDefaultVars(bool)));
+    connect(ui->selectUse, SIGNAL(toggled(bool)), SLOT(selectAllUseVars(bool)));
 
     updateMenu();
 }
@@ -31,71 +31,121 @@ TextScreenField::~TextScreenField(){
     delete ui;
 }
 
+void TextScreenField::selectAllDefaultVars(bool select){
+    if(select)
+        ui->defaultVarList->selectAll();
+    else
+        ui->defaultVarList->clearSelection();
+}
+
+void TextScreenField::selectAllUseVars(bool select){
+    if(select)
+        ui->useVarList->selectAll();
+    else
+        ui->useVarList->clearSelection();
+}
+
 void TextScreenField::useLogVariable(){
-    QList<QListWidgetItem *> selected = ui->defaultVarList->selectedItems();
-    if(!selected.empty()){
-        for(int i=0; i<selected.count();i++){
-            QListWidgetItem *item = new QListWidgetItem("");
-            item->setText(selected.at(i)->text());
-            item->setFlags(item->flags());
-            ui->useVarList->addItem(item);
-            ui->useVarList->scrollToItem(item);
-            ui->useVarList->setFocus();
-        }
-        qDeleteAll(  ui->defaultVarList->selectedItems());
+
+
+    QModelIndexList selection =  ui->defaultVarList->selectionModel()->selectedRows();
+
+    for(int i=0; i<selection.count();i++){
+        QTableWidgetItem *label=new QTableWidgetItem (ui->defaultVarList->item(selection.at(i).row(), 1)->text());
+        QTableWidgetItem *id=new QTableWidgetItem (ui->defaultVarList->item(selection.at(i).row(), 0)->text());
+        int currentRowCount =    ui->useVarList->rowCount();
+        ui->useVarList->insertRow(currentRowCount);
+        ui->useVarList->setItem(currentRowCount, 1,label);
+        ui->useVarList->setItem(currentRowCount, 0, id);
 
     }
+    QList<QTableWidgetItem *> items = ui->defaultVarList->selectedItems();
+    for(int i = 0;i<items.length(); i=i+2){
+        int row = items[i]->row();
+        if(row>=0){
+
+            ui->defaultVarList->removeRow(row);
+            ui->defaultVarList->setCurrentIndex(ui->defaultVarList->model()->index(row,0));
+        }
+    }
+    ui->selectDefault->setChecked(false);
 }
 void TextScreenField::notUseLogVariable(){
-    QList<QListWidgetItem *> selected = ui->useVarList->selectedItems();
-    if(!selected.empty()){
-        for(int i=0; i<selected.count();i++){
-            QListWidgetItem *item = new QListWidgetItem("");
-            item->setText(selected.at(i)->text());
-            item->setFlags(item->flags() | Qt::ItemIsEditable);
-            ui->defaultVarList->addItem(item);
-            ui->defaultVarList->scrollToItem(item);
-            ui->defaultVarList->setFocus();
-        }
-        qDeleteAll(  ui->useVarList->selectedItems());
+
+
+    QModelIndexList selection =  ui->useVarList->selectionModel()->selectedRows();
+
+    for(int i=0; i<selection.count();i++){
+
+        QTableWidgetItem *label=new QTableWidgetItem (ui->useVarList->item(selection.at(i).row(), 1)->text());
+        QTableWidgetItem *id=new QTableWidgetItem (ui->useVarList->item(selection.at(i).row(), 0)->text());
+        int currentRowCount =    ui->defaultVarList->rowCount();
+        ui->defaultVarList->insertRow(currentRowCount);
+        ui->defaultVarList->setItem(currentRowCount, 1,label);
+        ui->defaultVarList->setItem(currentRowCount, 0, id);
+
     }
+    QList<QTableWidgetItem *> items = ui->useVarList->selectedItems();
+
+    for(int i = 0;i<items.length(); i=i+2){
+        int row = items[i]->row();
+        if(row>=0){
+            ui->useVarList->removeRow(row);
+            ui->useVarList->setCurrentIndex(ui->useVarList->model()->index(row,0));
+        }
+    }
+    ui->selectUse->setChecked(false);
 }
 
 
 void TextScreenField::add(){
-    QListWidgetItem *item = new QListWidgetItem("New item");
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
-    ui->defaultVarList->addItem(item);
-    ui->defaultVarList->scrollToItem(item);
-    ui->defaultVarList->setFocus();
-    ui->defaultVarList->editItem(item);
+
+    QTableWidgetItem *label=new QTableWidgetItem ("New Label");
+    QTableWidgetItem *id=new QTableWidgetItem ("New id");
+
+    int currentRowCount =    ui->defaultVarList->rowCount();
+    ui->defaultVarList->insertRow(currentRowCount);
+    ui->defaultVarList->setItem(currentRowCount, 1,label);
+    ui->defaultVarList->setItem(currentRowCount, 0, id);
 }
 
 void TextScreenField::del(){
-    delete ui->defaultVarList->takeItem(ui->defaultVarList->currentRow());
+
+    QList<QTableWidgetItem *> items = ui->defaultVarList->selectedItems();
+    for(int i = 0;i<items.length(); i=i+2){
+        int row = items[i]->row();
+        if(row>=0){
+            ui->defaultVarList->removeRow(row);
+            ui->defaultVarList->setCurrentIndex(ui->defaultVarList->model()->index(row,0));
+        }
+    }
 }
 
 
 QDomDocument TextScreenField::getXml(){
 
     QDomDocument ret;
-
-    if(ui->useVarList->count() == 0 && ui->defaultVarList->count() == 0){
-        QDomElement opt = ret.createElement("txtScreenVariable");
+    if(ui->useVarList->rowCount() == 0 && ui->defaultVarList->rowCount() == 0){
+        QDomElement opt = ret.createElement("variable");
         opt.appendChild(ret.createTextNode("empty"));
-        opt.setAttribute("use", "0");
+        opt.setAttribute("output", "false");
         ret.appendChild(opt);
     }
-    for (int i = 0; i < ui->useVarList->count(); ++i) {
-        QDomElement opt = ret.createElement("txtScreenVariable");
-        opt.appendChild(ret.createTextNode(ui->useVarList->item(i)->text()));
-        opt.setAttribute("use", "1");
+
+    for (int i = 0; i < ui->useVarList->rowCount(); ++i) {
+        QDomElement opt = ret.createElement("variable");
+        opt.setAttribute("id", ui->useVarList->item(i,0)->text());
+        opt.setAttribute("select", ui->useVarList->item(i,0)->text());
+        opt.setAttribute("label", ui->useVarList->item(i,1)->text());
+        opt.setAttribute("output", "true");
         ret.appendChild(opt);
     }
-    for (int i = 0; i < ui->defaultVarList->count(); ++i) {
-        QDomElement opt = ret.createElement("txtScreenVariable");
-        opt.appendChild(ret.createTextNode(ui->defaultVarList->item(i)->text()));
-        opt.setAttribute("use", "0");
+    for (int i = 0; i < ui->defaultVarList->rowCount(); ++i) {
+        QDomElement opt = ret.createElement("variable");
+        opt.setAttribute("id", ui->defaultVarList->item(i,0)->text());
+        opt.setAttribute("select", ui->defaultVarList->item(i,0)->text());
+        opt.setAttribute("label", ui->defaultVarList->item(i,1)->text());
+        opt.setAttribute("output", "false");
         ret.appendChild(opt);
     }
 
@@ -106,11 +156,26 @@ QDomDocument TextScreenField::getXml(){
 
 void TextScreenField::setXml(QDomElement node){
     if(node.text() != "empty"){
-        for (QDomElement opt = node; !opt.isNull(); opt = opt.nextSiblingElement("txtScreenVariable")){
-            if(opt.attribute("use")=="1")
-                ui->useVarList->addItem(opt.text());
-            else
-                ui->defaultVarList->addItem(opt.text());
+        for (QDomElement opt = node; !opt.isNull(); opt = opt.nextSiblingElement("variable")){
+
+            if(opt.attribute("output")=="true"){
+                QTableWidgetItem *label=new QTableWidgetItem (opt.attribute("label"));
+                QTableWidgetItem *id=new QTableWidgetItem (opt.attribute("id"));
+                int currentRowCount =    ui->useVarList->rowCount();
+                ui->useVarList->insertRow(currentRowCount);
+                ui->useVarList->setItem(currentRowCount, 1,label);
+                ui->useVarList->setItem(currentRowCount, 0, id);
+            }
+
+            else{
+                QTableWidgetItem *label=new QTableWidgetItem (opt.attribute("label"));
+                QTableWidgetItem *id=new QTableWidgetItem (opt.attribute("id"));
+                int currentRowCount =    ui->defaultVarList->rowCount();
+                ui->defaultVarList->insertRow(currentRowCount);
+                ui->defaultVarList->setItem(currentRowCount, 1,label);
+                ui->defaultVarList->setItem(currentRowCount, 0, id);
+            }
+
         }
     }
 }
@@ -124,6 +189,10 @@ void TextScreenField::offField( bool enable){
 
 
 void TextScreenField::onField(bool editable){
+    ui->selectDefault->setChecked(false);
+    ui->selectUse->setChecked(false);
+    ui->selectDefault->setEnabled(editable);
+    ui->selectUse->setEnabled(editable);
     ui->lButton->setEnabled(editable);
     ui->rButton->setEnabled(editable);
     ui->useVarList->setEnabled(editable);
@@ -133,6 +202,13 @@ void TextScreenField::onField(bool editable){
 
 void TextScreenField::setEditMode(bool enable){
 
+    if(!enable){
+        ui->defaultVarList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->useVarList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->labelGeneral->setText(tr("Variables that will not be used:"));
+        ui->labelToBeUse->setText(tr("Variables that will be used:"));
+        ui->upperLabel->setText(tr("Pick variables that you want to use."));
+    }
 
     ui->add->setVisible(enable);
     ui->del->setVisible(enable);
@@ -149,18 +225,16 @@ void TextScreenField::setEditMode(bool enable){
 QString TextScreenField::genLua(){
 
     QString ret ="";
-    if(ui->useVarList->count()==0){
+
+    if(ui->useVarList->rowCount() == 0)
         return "false";
-    }
-    else{
 
-        for(int i=0; i<ui->useVarList->count();i++){
-            ret.append(ui->useVarList->item(i)->text()+",");
-        }
+    for (int i = 0; i < ui->useVarList->rowCount(); ++i) {
+        ret.append(ui->useVarList->item(i,0)->text()+",");
 
-        ret.remove(ret.size()-1,1);
-        return ret;
     }
+    ret.remove(ret.size()-1,1);
+    return ret;
 }
 
 QString TextScreenField::genR(){

@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
         translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
         app.installTranslator(&translator);
     }
+
     QTranslator translator;
     translator.load(dir.absolutePath() +"/"+ dengueme::config("locale")+".qm");
     app.installTranslator(&translator);

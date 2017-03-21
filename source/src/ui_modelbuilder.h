@@ -19,9 +19,10 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <workspaceview.h>
@@ -37,21 +38,25 @@ public:
     QAction *actionDelete;
     QAction *actionNew;
     QAction *actionEdit;
+    QAction *actionCloseModel;
     QAction *actionHelp;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QStackedWidget *stackedWidget;
     QWidget *page;
     QVBoxLayout *verticalLayout_3;
+    QLabel *label_2;
     WorkspaceView *listView;
     QWidget *page_2;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *modelFile;
-    QToolButton *buttonClose;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *buttonDescription;
     Editor *editor;
     QMenuBar *menubar;
     QMenu *menuFile;
+    QMenu *menuHelp;
     QToolBar *toolBar;
 
     void setupUi(QMainWindow *ModelBuilder)
@@ -85,11 +90,17 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/img/Resources/open.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionEdit->setIcon(icon4);
+        actionCloseModel = new QAction(ModelBuilder);
+        actionCloseModel->setObjectName(QStringLiteral("actionCloseModel"));
+        actionCloseModel->setCheckable(true);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/Resources/exit.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionCloseModel->setIcon(icon5);
         actionHelp = new QAction(ModelBuilder);
         actionHelp->setObjectName(QStringLiteral("actionHelp"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/img/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionHelp->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/Resources/help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionHelp->setIcon(icon6);
         centralwidget = new QWidget(ModelBuilder);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -101,6 +112,11 @@ public:
         verticalLayout_3 = new QVBoxLayout(page);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        label_2 = new QLabel(page);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        verticalLayout_3->addWidget(label_2);
+
         listView = new WorkspaceView(page);
         listView->setObjectName(QStringLiteral("listView"));
         listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -126,13 +142,14 @@ public:
 
         horizontalLayout_2->addWidget(modelFile);
 
-        buttonClose = new QToolButton(page_2);
-        buttonClose->setObjectName(QStringLiteral("buttonClose"));
-        buttonClose->setStyleSheet(QStringLiteral("border: none;"));
-        buttonClose->setIcon(icon);
-        buttonClose->setIconSize(QSize(20, 20));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addWidget(buttonClose);
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        buttonDescription = new QPushButton(page_2);
+        buttonDescription->setObjectName(QStringLiteral("buttonDescription"));
+
+        horizontalLayout_2->addWidget(buttonDescription);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -153,21 +170,24 @@ public:
         menubar->setGeometry(QRect(0, 0, 1000, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuHelp = new QMenu(menubar);
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
         ModelBuilder->setMenuBar(menubar);
         toolBar = new QToolBar(ModelBuilder);
         toolBar->setObjectName(QStringLiteral("toolBar"));
         ModelBuilder->addToolBar(Qt::LeftToolBarArea, toolBar);
 
         menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionNew);
         menuFile->addSeparator();
         menuFile->addAction(actionEdit);
         menuFile->addAction(actionSave);
-        menuFile->addAction(actionHelp);
-        menuFile->addSeparator();
         menuFile->addAction(actionDelete);
         menuFile->addSeparator();
+        menuFile->addSeparator();
         menuFile->addAction(actionExit);
+        menuHelp->addAction(actionHelp);
 
         retranslateUi(ModelBuilder);
         QObject::connect(actionExit, SIGNAL(triggered()), ModelBuilder, SLOT(close()));
@@ -190,9 +210,14 @@ public:
         actionNew->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+N", 0));
         actionEdit->setText(QApplication::translate("ModelBuilder", "&Open", 0));
         actionEdit->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+P", 0));
+        actionCloseModel->setText(QApplication::translate("ModelBuilder", "actionCloseModel", 0));
+        actionCloseModel->setShortcut(QApplication::translate("ModelBuilder", "Ctrl+W", 0));
         actionHelp->setText(QApplication::translate("ModelBuilder", "Help", 0));
+        label_2->setText(QApplication::translate("ModelBuilder", "Personal library of models", 0));
         modelFile->setText(QApplication::translate("ModelBuilder", "TextLabel", 0));
+        buttonDescription->setText(QApplication::translate("ModelBuilder", "Model Description", 0));
         menuFile->setTitle(QApplication::translate("ModelBuilder", "Fi&le", 0));
+        menuHelp->setTitle(QApplication::translate("ModelBuilder", "Help", 0));
         toolBar->setWindowTitle(QApplication::translate("ModelBuilder", "toolBar", 0));
     } // retranslateUi
 

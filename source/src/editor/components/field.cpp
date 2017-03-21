@@ -220,6 +220,12 @@ QDomDocument Field::getXml()
     }
     return ret;
 }
+void Field::configureField(){
+    ui->toolClone->setVisible(false);
+    ui->toolDelete->setVisible(false);
+    ui->options->setVisible(false);
+    ui->toolOptions->setVisible(false);
+}
 
 void Field::setXml(QDomElement node)
 {

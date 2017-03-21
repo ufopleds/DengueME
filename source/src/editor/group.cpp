@@ -14,7 +14,8 @@ Group::Group(QWidget *parent) :
 
     QFont font;
     font.setBold(true);
-    ui->label->setFont(font);
+    ui->userLabel->setFont(font);
+    ui->observerID->setFont(font);
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
 
@@ -43,7 +44,10 @@ Group::Group(QWidget *parent) :
 
     ui->useGroup->setVisible(false);
     ui->useGroup->setEnabled(false);
+    ui->observerID->setVisible(false);
+    ui->observerID->setEnabled(false);
     ui->addField->setMenu(menu);
+
 }
 
 Group::~Group(){
@@ -63,7 +67,7 @@ void Group::askRemoveGroup(){
 
 void Group::setLabel(QString label){
 
-    ui->label->setText(label);
+    ui->userLabel->setText(label);
 }
 
 QDomDocument Group::getXml()
@@ -72,7 +76,7 @@ QDomDocument Group::getXml()
     if (ui->widgets->count() == 0) return ret;
 
     QDomElement root = ret.createElement("groupbox");
-    root.setAttribute("label", ui->label->text());
+    root.setAttribute("label", ui->userLabel->text());
 
     for (int i = 0; i < ui->widgets->count(); ++i) {
         Component *comp = map.value(ui->widgets->item(i));
@@ -87,7 +91,7 @@ QDomDocument Group::getXml()
 void Group::setXml(QDomElement root)
 {
     ui->widgets->clear();
-    ui->label->setText(root.attribute("label"));
+    ui->userLabel->setText(root.attribute("label"));
     for (QDomElement node = root.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
         if (node.nodeName() == "field") {
             addComponent(new Field)->setXml(node);
@@ -106,9 +110,10 @@ void Group::setEditMode(bool enable)
         if (comp)
             comp->setEditMode(enable);
     }
+
     ui->removeGroup->setVisible(enable);
     ui->addField->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 
     if (enable) {
         ui->widgets->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -116,15 +121,23 @@ void Group::setEditMode(bool enable)
         ui->widgets->setSelectionMode(QAbstractItemView::NoSelection);
     }
 }
+void Group::configureSimulation(){
 
-void Group::setRemovable(bool enable)
-{
-    ui->removeGroup->setVisible(enable);
-    ui->label->setReadOnly(!enable);
 }
 
-QString Group::genLua()
-{
+void Group::setRemovable(bool enable){
+    ui->removeGroup->setVisible(enable);
+    ui->addField->setVisible(enable);
+    ui->userLabel->setReadOnly(!enable);
+
+    if(ui->widgets->count() != 0 ){
+          dynamic_cast<Field *> (ui->widgets->itemWidget(ui->widgets->item(0 )))->configureField();
+    }
+
+}
+
+QString Group::genLua(){
+
     QString ret;
     for (int i = 0; i < ui->widgets->count(); ++i) {
         Component *comp = map.value(ui->widgets->item(i));
@@ -149,7 +162,7 @@ QString Group::genR()
 void Group::updateHeight(){
 
     int height = 8;
-//    int count = (ui->widgets->count() < 4) ? ui->widgets->count() : 4;
+    //    int count = (ui->widgets->count() < 4) ? ui->widgets->count() : 4;
     for (int i = 0; i < ui->widgets->count(); ++i)
         height += ui->widgets->sizeHintForRow(i);
 
@@ -172,27 +185,27 @@ void Group::removeField(){
 }
 
 void Group::cloneField(){
-        QObject *field = QObject::sender();
-        /// TODO - MELHORAR CLONE
+    QObject *field = QObject::sender();
+    /// TODO - MELHORAR CLONE
 
-         if("Text" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
-            addText();
-        }
-        else if("Boolean" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
-            addBoolean();
-        }
-        else if("Integer" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
-            addInteger();
-        }
-        else if("Float" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
-            addFloating();
-        }
-        else if("Combobox" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
-            addCombobox();
-        }
-        else if("ImportCsv" ==   QObject::sender()->objectName()){
-            addCsv();
-        }
+    if("Text" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addText();
+    }
+    else if("Boolean" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addBoolean();
+    }
+    else if("Integer" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addInteger();
+    }
+    else if("Float" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addFloating();
+    }
+    else if("Combobox" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addCombobox();
+    }
+    else if("ImportCsv" ==   QObject::sender()->objectName()){
+        addCsv();
+    }
 
 }
 
@@ -249,7 +262,7 @@ Field *Group::addCombobox(){
     Field *field = new Field;
 
     field->onActionCombobox();
-     field->setToolTip("Combobox");
+    field->setToolTip("Combobox");
 
     if (field->onActionOptions())
         addComponent(field);
@@ -291,7 +304,7 @@ void Group::changeType(QString type){
 
     QObject *field = QObject::sender();
 
-   ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->setToolTip(type);
+    ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->setToolTip(type);
 
     updateHeight();
 }

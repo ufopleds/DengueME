@@ -63,6 +63,24 @@ public slots:
     void loadWorkspace();
 };
 
+class CategoryPage: public QWizardPage {
+    Q_OBJECT
+
+public:
+    QListWidget *projects;
+    QPushButton *newproject;
+    QString workspace;
+    QString project;
+
+    CategoryPage(QString workspace, QString project);
+    bool isComplete() const;
+
+public slots:
+    void itemChanged();
+    void newProject();
+    void loadWorkspace();
+};
+
 class NamePage: public QWizardPage {
     Q_OBJECT
 

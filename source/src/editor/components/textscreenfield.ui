@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_5">
+  <layout class="QHBoxLayout" name="horizontalLayout_6">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <item>
@@ -50,14 +50,14 @@
          <item>
           <widget class="QLabel" name="upperLabel">
            <property name="text">
-            <string>Choose variables that the user can use</string>
+            <string>Add variables that the user may use for this observer</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="labelGeneral">
            <property name="text">
-            <string>All Variables</string>
+            <string>Default variables</string>
            </property>
            <property name="margin">
             <number>3</number>
@@ -85,7 +85,57 @@
        <item>
         <widget class="QLabel" name="labelToBeUse">
          <property name="text">
-          <string>Use Variables</string>
+          <string>Variables to be used:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>30</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="selectDefault">
+         <property name="text">
+          <string>Select All</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>35</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="selectUse">
+         <property name="text">
+          <string>Select All</string>
          </property>
         </widget>
        </item>
@@ -133,7 +183,27 @@
         </layout>
        </item>
        <item>
-        <widget class="QListWidget" name="defaultVarList"/>
+        <widget class="QTableWidget" name="defaultVarList">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::MultiSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Label</string>
+          </property>
+         </column>
+        </widget>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -180,7 +250,27 @@
         </layout>
        </item>
        <item>
-        <widget class="QListWidget" name="useVarList"/>
+        <widget class="QTableWidget" name="useVarList">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::MultiSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <attribute name="horizontalHeaderStretchLastSection">
+          <bool>true</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Label</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </item>

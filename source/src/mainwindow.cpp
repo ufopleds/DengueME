@@ -240,20 +240,20 @@ void MainWindow::actionDefault() {
 
         QDomElement root = modelXml.firstChildElement("xmlmodel");
 
-        QDomElement a = root.firstChildElement("script");
-        QString modelcategory = a.firstChildElement("modelcategory").text();
-        QString modeltype = a.firstChildElement("modeltype").text();
+        QDomElement a = root.firstChildElement("model");
+
+        QString modelcategory = a.firstChildElement("category").text();
+        QString modeltype = a.firstChildElement("name").text();
         file.close();
-
-
 
         ui->editor->close(2);
 
-        QString original_dir = DEFAULT_MODELS_DIR + modelcategory + '/' + modeltype;
+        QString original_dir = DEFAULT_MODELS_DIR + modelcategory + '/' + modeltype;     
+           qDebug() << "PATH" <<original_dir;
         QFileInfo original_file(original_dir + '/' + modeltype+ ".xml");
         if(original_file.exists()){
             dengueme::copy(original_file.absoluteFilePath(),path,true);
-            QModelIndex index = ui->treeView->indexFromPath(path);
+            QModelIndex index = ui->treeView->indexFromPath(path);        
             modelActivated(index);
         }
         QString appData = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/dengueme/"+ modelcategory + '/' + modeltype;

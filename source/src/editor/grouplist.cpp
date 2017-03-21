@@ -19,7 +19,7 @@ GroupList::GroupList(QWidget *parent) :
 
     menu->addAction(population);
 
-    ui->addWidget->setMenu(menu);
+
 }
 
 

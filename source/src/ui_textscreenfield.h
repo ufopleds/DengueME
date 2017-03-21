@@ -13,12 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -28,7 +29,7 @@ QT_BEGIN_NAMESPACE
 class Ui_TextScreenField
 {
 public:
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout_6;
     QHBoxLayout *horizontalLayout_3;
     QFrame *line;
@@ -39,16 +40,21 @@ public:
     QLabel *labelGeneral;
     QSpacerItem *horizontalSpacer;
     QLabel *labelToBeUse;
+    QHBoxLayout *horizontalLayout_5;
+    QSpacerItem *horizontalSpacer_3;
+    QCheckBox *selectDefault;
+    QSpacerItem *horizontalSpacer_4;
+    QCheckBox *selectUse;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_4;
     QToolButton *add;
     QToolButton *del;
     QSpacerItem *verticalSpacer;
-    QListWidget *defaultVarList;
+    QTableWidget *defaultVarList;
     QVBoxLayout *verticalLayout_3;
     QToolButton *rButton;
     QToolButton *lButton;
-    QListWidget *useVarList;
+    QTableWidget *useVarList;
     QWidget *container;
     QHBoxLayout *horizontalLayout_2;
 
@@ -57,8 +63,8 @@ public:
         if (TextScreenField->objectName().isEmpty())
             TextScreenField->setObjectName(QStringLiteral("TextScreenField"));
         TextScreenField->resize(748, 347);
-        horizontalLayout_5 = new QHBoxLayout(TextScreenField);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_6 = new QHBoxLayout(TextScreenField);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
         horizontalLayout_3 = new QHBoxLayout();
@@ -107,6 +113,29 @@ public:
 
         verticalLayout_6->addLayout(horizontalLayout_4);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalSpacer_3 = new QSpacerItem(30, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_3);
+
+        selectDefault = new QCheckBox(TextScreenField);
+        selectDefault->setObjectName(QStringLiteral("selectDefault"));
+
+        horizontalLayout_5->addWidget(selectDefault);
+
+        horizontalSpacer_4 = new QSpacerItem(35, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_4);
+
+        selectUse = new QCheckBox(TextScreenField);
+        selectUse->setObjectName(QStringLiteral("selectUse"));
+
+        horizontalLayout_5->addWidget(selectUse);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_5);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         verticalLayout_4 = new QVBoxLayout();
@@ -134,8 +163,17 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_4);
 
-        defaultVarList = new QListWidget(TextScreenField);
+        defaultVarList = new QTableWidget(TextScreenField);
+        if (defaultVarList->columnCount() < 2)
+            defaultVarList->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        defaultVarList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        defaultVarList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         defaultVarList->setObjectName(QStringLiteral("defaultVarList"));
+        defaultVarList->setSelectionMode(QAbstractItemView::MultiSelection);
+        defaultVarList->setSelectionBehavior(QAbstractItemView::SelectRows);
+        defaultVarList->horizontalHeader()->setStretchLastSection(true);
 
         horizontalLayout->addWidget(defaultVarList);
 
@@ -164,8 +202,17 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_3);
 
-        useVarList = new QListWidget(TextScreenField);
+        useVarList = new QTableWidget(TextScreenField);
+        if (useVarList->columnCount() < 2)
+            useVarList->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        useVarList->setHorizontalHeaderItem(0, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        useVarList->setHorizontalHeaderItem(1, __qtablewidgetitem3);
         useVarList->setObjectName(QStringLiteral("useVarList"));
+        useVarList->setSelectionMode(QAbstractItemView::MultiSelection);
+        useVarList->setSelectionBehavior(QAbstractItemView::SelectRows);
+        useVarList->horizontalHeader()->setStretchLastSection(true);
 
         horizontalLayout->addWidget(useVarList);
 
@@ -173,7 +220,7 @@ public:
         verticalLayout_6->addLayout(horizontalLayout);
 
 
-        horizontalLayout_5->addLayout(verticalLayout_6);
+        horizontalLayout_6->addLayout(verticalLayout_6);
 
         container = new QWidget(TextScreenField);
         container->setObjectName(QStringLiteral("container"));
@@ -182,7 +229,7 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
 
-        horizontalLayout_5->addWidget(container);
+        horizontalLayout_6->addWidget(container);
 
 
         retranslateUi(TextScreenField);
@@ -193,13 +240,23 @@ public:
     void retranslateUi(QWidget *TextScreenField)
     {
         TextScreenField->setWindowTitle(QApplication::translate("TextScreenField", "Form", 0));
-        upperLabel->setText(QApplication::translate("TextScreenField", "Choose variables that the user can use", 0));
-        labelGeneral->setText(QApplication::translate("TextScreenField", "All Variables", 0));
-        labelToBeUse->setText(QApplication::translate("TextScreenField", "Use Variables", 0));
+        upperLabel->setText(QApplication::translate("TextScreenField", "Add variables that the user may use for this observer", 0));
+        labelGeneral->setText(QApplication::translate("TextScreenField", "Default variables", 0));
+        labelToBeUse->setText(QApplication::translate("TextScreenField", "Variables to be used:", 0));
+        selectDefault->setText(QApplication::translate("TextScreenField", "Select All", 0));
+        selectUse->setText(QApplication::translate("TextScreenField", "Select All", 0));
         add->setText(QApplication::translate("TextScreenField", "+", 0));
         del->setText(QApplication::translate("TextScreenField", "-", 0));
+        QTableWidgetItem *___qtablewidgetitem = defaultVarList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("TextScreenField", "ID", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = defaultVarList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("TextScreenField", "Label", 0));
         rButton->setText(QApplication::translate("TextScreenField", "...", 0));
         lButton->setText(QApplication::translate("TextScreenField", "...", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = useVarList->horizontalHeaderItem(0);
+        ___qtablewidgetitem2->setText(QApplication::translate("TextScreenField", "ID", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = useVarList->horizontalHeaderItem(1);
+        ___qtablewidgetitem3->setText(QApplication::translate("TextScreenField", "Label", 0));
 #ifndef QT_NO_TOOLTIP
         container->setToolTip(QApplication::translate("TextScreenField", "Default value", 0));
 #endif // QT_NO_TOOLTIP

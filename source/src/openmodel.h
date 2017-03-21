@@ -20,11 +20,12 @@ public:
      QModelIndex getIndex();
      QString getFilePath();
      QString getFileName();
-
 private:
     Ui::OpenModel *ui;
 private slots:
-    void setIndex( );
+    void setIndex( );    
+    void selectionChanged(const QModelIndex &current);
+
 
 };
 

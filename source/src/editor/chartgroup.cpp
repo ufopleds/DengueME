@@ -15,7 +15,7 @@ ChartGroup::ChartGroup(QWidget *parent):
 
     QFont font;
     font.setBold(true);
-    ui->label->setFont(font);
+    ui->userLabel->setFont(font);
     ui->addField->setText(tr("Add plot variable"));
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
@@ -28,13 +28,16 @@ ChartGroup::ChartGroup(QWidget *parent):
 
     connect(    ui->addField,      SIGNAL(clicked()), SLOT(addVariable()));
     connect(ui->useGroup, SIGNAL(toggled(bool)), SLOT(togglePlotCheckbox(bool)));
-    connect(ui->label, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
+    connect(ui->observerID, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
 
 
     ui->removeGroup->setText("Remove chart");
-    ui->label->setFrame(true);
-    ui->label->setText(tr("New Chart"));
-  //  ui->addField->setMenu(menu);
+    ui->userLabel->setFrame(true);
+    ui->observerID->setFrame(true);
+    ui->userLabel->setText(tr("New Chart"));
+    ui->useGroup->setChecked(true);
+    addVariable();
+    //  ui->addField->setMenu(menu);
 }
 
 ChartGroup::~ChartGroup(){
@@ -46,8 +49,8 @@ ChartGroup::~ChartGroup(){
 void ChartGroup::validateId(QString name){
 
     if (!QRegExp("[A-Za-z0-9_]+").exactMatch(name)){
-        ui->label->setText(purgeName(name));
-        QToolTip::showText(  ui->label->mapToGlobal(QPoint(0,  ui->label->height())),
+        ui->observerID->setText(purgeName(name));
+        QToolTip::showText(  ui->observerID->mapToGlobal(QPoint(0,  ui->observerID->height())),
                              tr("The id name can contain only\nalphanumeric chars and,"
                                 " \nunderscore (_)."));
     }
@@ -68,7 +71,7 @@ void ChartGroup::askRemoveGroup(){
 }
 
 void ChartGroup::setLabel(QString label) {
-    ui->label->setText(label);
+    ui->userLabel->setText(label);
 }
 
 
@@ -80,7 +83,8 @@ QDomDocument ChartGroup::getXml() {
 
     QDomElement root = ret.createElement("outChart");
 
-    root.setAttribute("label", ui->label->text());
+    root.setAttribute("label", ui->userLabel->text());
+      root.setAttribute("id", ui->observerID->text());
     root.setAttribute("output", ui->useGroup->isChecked() ? "true": "false");
 
     for (int i = 0; i < ui->widgets->count(); ++i) {
@@ -97,8 +101,8 @@ QDomDocument ChartGroup::getXml() {
 void ChartGroup::setXml(QDomElement root){
 
     ui->widgets->clear();
-    ui->label->setText(root.attribute("label"));
-
+    ui->userLabel->setText(root.attribute("label"));
+  ui->observerID->setText(root.attribute("id"));
     if(root.attribute("output") == "true"){
         ui->useGroup->setChecked(true);
     }else{
@@ -121,10 +125,12 @@ void ChartGroup::setEditMode(bool enable){
             comp->setEditMode(enable);
     }
 
-    ui->label->setFrame(enable);
+    ui->observerID->setVisible(enable);
+    ui->userLabel->setFrame(enable);
+    ui->observerID->setFrame(enable);
     ui->removeGroup->setVisible(enable);
     ui->addField->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 
 
     if(ui->useGroup->isChecked()){
@@ -154,7 +160,7 @@ void ChartGroup::setEditMode(bool enable){
 
 void ChartGroup::setRemovable(bool enable){
     ui->removeGroup->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 }
 
 
@@ -162,16 +168,16 @@ QString ChartGroup::genLua(){
 
     QString ret,chart, select, label, style, color;
 
-    chart = ui->label->text()+"= false\n";
+    chart = ui->observerID->text()+"= false\n";
     int countFalse = 0;
 
     if(ui->useGroup->isChecked()){
 
-        select =ui->label->text()+ "Select = {";
-        label = ui->label->text()+"Label = {";
-        style =ui->label->text()+ "Style = {";
-        color = ui->label->text()+"Color = {";
-        chart =  ui->label->text()+" = true\n";
+        select =ui->observerID->text()+ "Select = {";
+        label = ui->observerID->text()+"Label = {";
+        style =ui->observerID->text()+ "Style = {";
+        color = ui->observerID->text()+"Color = {";
+        chart =  ui->observerID->text()+" = true";
 
         for (int i = 0; i < ui->widgets->count(); ++i) {
 
@@ -208,7 +214,7 @@ QString ChartGroup::genLua(){
     }
 
     if(ui->widgets->count() == countFalse || !ui->useGroup->isChecked() ){
-        ret =     ui->label->text()+"= false \n";
+        ret =     ui->observerID->text()+"= false \n";
     }
 
     return ret;
@@ -241,9 +247,27 @@ void ChartGroup::updateHeight(){
 void ChartGroup::removeField(){
 
     QObject *field = QObject::sender();
+    if(ui->widgets->count() == 1){
+        int opt = QMessageBox::question(this,tr("Remove last Field"),
+                                        tr("The chart must have at least one field. If you delete this field the chart will be deleted. Are you sure?"),
+                                        QMessageBox::Yes | QMessageBox::No);
 
-    delete ui->widgets->takeItem(ui->widgets->row(map.key((ChartField *) field)));
 
+        if(opt == QMessageBox::Yes){
+            delete ui->widgets->takeItem(ui->widgets->row(map.key((ChartField *) field)));
+              onRemove();
+        }
+
+
+    }else{
+        int opt = QMessageBox::question(this,tr("Remove Field"),
+                                        tr("This action will remove this field. Do you want to continue?"),
+                                        QMessageBox::Yes | QMessageBox::No);
+
+
+        if(opt == QMessageBox::Yes)
+            delete ui->widgets->takeItem(ui->widgets->row(map.key((ChartField *) field)));
+    }
     updateHeight();
 
 }
@@ -300,6 +324,7 @@ Component *ChartGroup::addComponent(Component *comp){
     connect(comp, SIGNAL(clone()), SLOT(cloneField ()));
     connect(comp, SIGNAL(changeType(QString)), SLOT(changeType (QString)));
     map.insert(item, comp);
+
 
 
     updateHeight();

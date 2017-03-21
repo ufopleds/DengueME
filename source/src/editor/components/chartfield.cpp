@@ -55,7 +55,7 @@ QDomDocument ChartField::getXml(){
     QDomDocument ret;
     QDomElement node = ret.createElement("variable");
 
-    node.setAttribute("type","plotVariable");
+
 
 
     node.setAttribute("label",ui->chartLabel->text());
@@ -215,15 +215,7 @@ void ChartField::onActionClone(){
     emit clone();
 }
 
-void ChartField::onActionDelete()
-{
-    int opt = QMessageBox::question(this,tr("Remove Field"),
-                                    tr("This action will remove this field. Do you want to continue?"),
-                                    QMessageBox::Yes | QMessageBox::No);
-
-
-    if(opt == QMessageBox::Yes){
-        emit remove();
-    }
+void ChartField::onActionDelete(){   
+        emit remove();    
 
 }

@@ -79,7 +79,7 @@ void DownloadHTTP::finishedHead(){
     _Timer.stop();
     _bAcceptRanges = false;
 
-    addLine("Downloading Models...");
+
 
     QList<QByteArray> list = _pCurrentReply->rawHeaderList();
     foreach (QByteArray header, list) {
@@ -112,24 +112,36 @@ void DownloadHTTP::finished(){
 
     int size =_pFile->size();
 
+    qDebug() <<  _pCurrentReply->errorString();
+    if(_pCurrentReply->errorString().contains("Unknown error")){
+        if(size !=_nDownloadSize){
+            _Timer.stop();
+            _pFile->close();
+            QFile::remove(_pFile->fileName());
+            _pFile = NULL;
+            _pCurrentReply = 0;
+            addLine(tr("Corrupted file. Please try again."));
+            emit downloadError();
+        }else{
 
-    if(size !=_nDownloadSize){
+            _Timer.stop();
+            _pFile->close();
+            QFile::remove(_qsFileName);
+            _pFile->rename(_qsFileName + ".part", _qsFileName);
+
+            _pFile = NULL;
+            _pCurrentReply = 0;        ;
+            emit downloadComplete();
+        }
+    }else{
+         qDebug() << "SENDO CHAMADO";
         _Timer.stop();
         _pFile->close();
         QFile::remove(_pFile->fileName());
         _pFile = NULL;
         _pCurrentReply = 0;
-        addLine(tr("Corrupted file. Please try again."));
-        emit timeout();
-    }else{
-        _Timer.stop();
-        _pFile->close();
-        QFile::remove(_qsFileName);
-        _pFile->rename(_qsFileName + ".part", _qsFileName);
 
-        _pFile = NULL;
-        _pCurrentReply = 0;        ;
-        emit downloadComplete();
+        emit downloadError();
     }
 }
 
@@ -147,10 +159,11 @@ void DownloadHTTP::downloadProgress(qint64 bytesReceived, qint64 bytesTotal){
 
 
 void DownloadHTTP::error(QNetworkReply::NetworkError code){
-    addLine(":"+code);
+
+   // addLine(":"+code);
 }
 
 
 void DownloadHTTP::timeout(){
-    addLine(tr("Timeout"));
+   // addLine(tr("Timeout"));
 }

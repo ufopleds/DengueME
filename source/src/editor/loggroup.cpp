@@ -14,7 +14,8 @@ LogGroup::LogGroup(QWidget *parent):
 
     QFont font;
     font.setBold(true);
-    ui->label->setFont(font);
+    ui->userLabel->setFont(font);
+    ui->observerID->setFont(font);
     ui->addField->setText(tr("Add log file"));
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
@@ -22,16 +23,16 @@ LogGroup::LogGroup(QWidget *parent):
     QMenu   *menu     = new QMenu(this);
 
     connect(ui->useGroup, SIGNAL(toggled(bool)), SLOT(togglePlotCheckbox(bool)));
-    connect(ui->label, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
+    connect(ui->observerID, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
 
     ui->addField->setVisible(false);
     ui->useGroup->setText("Use Log:");
     ui->removeGroup->setText("Remove log");
-    ui->label->setFrame(true);
-    ui->label->setText(tr("New Log"));
+    ui->userLabel->setFrame(true);
+    ui->userLabel->setText(tr("New Log"));
     ui->addField->setMenu(menu);
 
-
+    ui->useGroup->setChecked(true);
     addVariable();
 }
 
@@ -42,8 +43,8 @@ LogGroup::~LogGroup(){
 void LogGroup::validateId(QString name){
 
     if (!QRegExp("[A-Za-z0-9_]+").exactMatch(name)){
-        ui->label->setText(purgeName(name));
-        QToolTip::showText(  ui->label->mapToGlobal(QPoint(0,  ui->label->height())),
+        ui->observerID->setText(purgeName(name));
+        QToolTip::showText(  ui->observerID->mapToGlobal(QPoint(0,  ui->observerID->height())),
                              tr("The id name can contain only\nalphanumeric chars and,"
                                 " \nunderscore (_)."));
     }
@@ -64,7 +65,7 @@ void LogGroup::askRemoveGroup(){
 }
 
 void LogGroup::setLabel(QString label) {
-    ui->label->setText(label);
+    ui->userLabel->setText(label);
 }
 
 QDomDocument LogGroup::getXml() {
@@ -72,7 +73,7 @@ QDomDocument LogGroup::getXml() {
     QDomDocument ret;
     if (ui->widgets->count() == 0) return ret;
     QDomElement root = ret.createElement("outLog");
-    root.setAttribute("label", ui->label->text());
+    root.setAttribute("label", ui->userLabel->text());
     root.setAttribute("id", ui->observerID->text());
     root.setAttribute("output", ui->useGroup->isChecked() ? "true": "false");
     for (int i = 0; i < ui->widgets->count(); ++i) {
@@ -88,18 +89,15 @@ void LogGroup::setXml(QDomElement root){
 
     ui->widgets->clear();
     ui->observerID->setText(root.attribute("id"));
-    ui->label->setText(root.attribute("label"));
+    ui->userLabel->setText(root.attribute("label"));
     if(root.attribute("output") == "true"){
         ui->useGroup->setChecked(true);
     }else{
         ui->useGroup->setChecked(false);
     }
-
-
-
     for (QDomElement node = root.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
 
-        if (node.nodeName() == "logConfig") {
+        if (node.nodeName() == "config") {
             ui->addField->setEnabled(false);
             addComponent(new LogField)->setXml(node);
         }
@@ -116,9 +114,9 @@ void LogGroup::setEditMode(bool enable)
     }
 
     ui->observerID->setVisible(enable);
-    ui->label->setFrame(enable);
+    ui->userLabel->setFrame(enable);
     ui->removeGroup->setVisible(enable);    
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 
 
     if(ui->useGroup->isChecked()){
@@ -149,7 +147,7 @@ void LogGroup::setEditMode(bool enable)
 
 void LogGroup::setRemovable(bool enable){
     ui->removeGroup->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 }
 
 QString LogGroup::genLua(){
@@ -164,7 +162,7 @@ QString LogGroup::genLua(){
         select =ui->observerID->text()+ "Select = {";
         overwrite = ui->observerID->text()+"Overwrite = ";
         separator =ui->observerID->text()+ "Separator = ";
-        filename = ui->observerID->text()+"File = ";
+        filename = ui->observerID->text()+"File = RESULTS_PATH ..";
 
         for (int i = 0; i < ui->widgets->count(); ++i) {
             LogField *comp =  dynamic_cast<LogField *>(map.value(ui->widgets->item(i)));

@@ -30,9 +30,9 @@ void openModelWizard();
     void editModel();
     void newModel();
     void helpModelBuilder();
-
+    void addDescription();
     void setToolbar(int i);
-    void actionClose();
+    void actionExit();
 
 };
 

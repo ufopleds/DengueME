@@ -21,6 +21,7 @@ public:
 signals:
     void addLine(QString qsLine);
     void downloadComplete();
+    void downloadError();
     void progress(int nPercentage);
 
 public slots:

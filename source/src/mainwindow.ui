@@ -423,7 +423,7 @@
      <normaloff>:/img/Resources/folder-new.png</normaloff>:/img/Resources/folder-new.png</iconset>
    </property>
    <property name="text">
-    <string>New &amp;project</string>
+    <string>New &amp;Project</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -488,7 +488,7 @@
      <normaloff>:/Resources/close.png</normaloff>:/Resources/close.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Close model </string>
+    <string>&amp;Close Model </string>
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
@@ -500,7 +500,7 @@
      <normaloff>:/img/Resources/run-step.png</normaloff>:/img/Resources/run-step.png</iconset>
    </property>
    <property name="text">
-    <string>Run &amp;step by step</string>
+    <string>Run &amp;Step by Step</string>
    </property>
    <property name="shortcut">
     <string>F10</string>
@@ -512,7 +512,7 @@
      <normaloff>:/img/Resources/folder.png</normaloff>:/img/Resources/folder.png</iconset>
    </property>
    <property name="text">
-    <string>Change &amp;workspace</string>
+    <string>Change &amp;Workspace</string>
    </property>
   </action>
   <action name="actionRename">
@@ -533,7 +533,7 @@
      <normaloff>:/img/Resources/delete.png</normaloff>:/img/Resources/delete.png</iconset>
    </property>
    <property name="text">
-    <string>R&amp;emove</string>
+    <string>Delete</string>
    </property>
    <property name="shortcut">
     <string>Del</string>
@@ -545,7 +545,7 @@
      <normaloff>:/img/Resources/model-new.png</normaloff>:/img/Resources/model-new.png</iconset>
    </property>
    <property name="text">
-    <string>New &amp;model</string>
+    <string>New &amp;Model</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
@@ -557,7 +557,7 @@
      <normaloff>:/img/Resources/builderTool.png</normaloff>:/img/Resources/builderTool.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Model builder</string>
+    <string>&amp;Model Builder</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
@@ -569,7 +569,7 @@
      <normaloff>:/img/Resources/Synchronize-64.png</normaloff>:/img/Resources/Synchronize-64.png</iconset>
    </property>
    <property name="text">
-    <string>Reset views</string>
+    <string>Reset Views</string>
    </property>
   </action>
   <action name="actionBuilder">
@@ -593,7 +593,7 @@
      <normaloff>:/Resources/download.png</normaloff>:/Resources/download.png</iconset>
    </property>
    <property name="text">
-    <string>Synchronize</string>
+    <string>Update Models Library</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>

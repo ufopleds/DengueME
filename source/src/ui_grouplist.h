@@ -30,7 +30,6 @@ public:
     QVBoxLayout *verticalLayout;
     QWidget *panel;
     QHBoxLayout *horizontalLayout;
-    QToolButton *addWidget;
     QToolButton *addGroup;
     QSpacerItem *horizontalSpacer;
     QListWidget *widgets;
@@ -52,12 +51,6 @@ public:
         horizontalLayout = new QHBoxLayout(panel);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        addWidget = new QToolButton(panel);
-        addWidget->setObjectName(QStringLiteral("addWidget"));
-        addWidget->setPopupMode(QToolButton::InstantPopup);
-
-        horizontalLayout->addWidget(addWidget);
-
         addGroup = new QToolButton(panel);
         addGroup->setObjectName(QStringLiteral("addGroup"));
 
@@ -90,7 +83,6 @@ public:
     void retranslateUi(QFrame *GroupEditor)
     {
         GroupEditor->setWindowTitle(QApplication::translate("GroupEditor", "GroupEditor", 0));
-        addWidget->setText(QApplication::translate("GroupEditor", "Add widget", 0));
         addGroup->setText(QApplication::translate("GroupEditor", "Add group", 0));
     } // retranslateUi
 

@@ -111,6 +111,8 @@ public:
 
         authorLabel = new QLabel(About);
         authorLabel->setObjectName(QStringLiteral("authorLabel"));
+        authorLabel->setOpenExternalLinks(true);
+        authorLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse);
 
         verticalLayout->addWidget(authorLabel);
 

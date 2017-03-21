@@ -53,7 +53,7 @@ public slots:
     Field *addCombobox();
     ImportCsv *addCsv();
     Component *addComponent(Component *comp);
-
+    void configureSimulation();
 signals:
     void heightChanged(int);
 };

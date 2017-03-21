@@ -66,6 +66,9 @@ TypePage::TypePage() {
     layout->addWidget(modelType);
     layout->addWidget(modelName);
     setLayout(layout);
+    this->setButtonText(QWizard::NextButton,  tr("Next"));
+    this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
+    this->setButtonText(QWizard::FinishButton,  tr("Create"));
 
     connect(modelType, SIGNAL(itemSelectionChanged()), SLOT(itemChanged()));
     connect(modelType, SIGNAL(clicked(QModelIndex)), SLOT(itemClicked()));
@@ -146,7 +149,9 @@ ProjectPage::ProjectPage(QString workspace, QString project)
     layout->addWidget(projects);
     layout->addWidget(newproject,0,Qt::AlignRight);
     setLayout(layout);
-
+    this->setButtonText(QWizard::NextButton,  tr("Next"));
+    this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
+    this->setButtonText(QWizard::FinishButton,  tr("Create"));
     connect(projects, SIGNAL(itemSelectionChanged()), SLOT(itemChanged()));
 }
 
@@ -196,16 +201,91 @@ void ProjectPage::loadWorkspace(){
     if (project.isEmpty() && projects->count() > 0) projects->itemAt(0,0)->setSelected(true);
 }
 
+// CATEGORY PAGE
+
+
+CategoryPage::CategoryPage(QString workspace, QString project)
+    : workspace(workspace),
+      project(project)
+{
+    setTitle(tr("Category"));
+    setSubTitle(tr("Select the category in which the model will be created."));
+    setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
+
+    projects = new QListWidget;
+
+    loadWorkspace();
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setMargin(8);
+
+    layout->addWidget(projects);
+    setLayout(layout);
+
+    connect(projects, SIGNAL(itemSelectionChanged()), SLOT(itemChanged()));
+    this->setButtonText(QWizard::NextButton,  tr("Next"));
+    this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
+    this->setButtonText(QWizard::FinishButton,  tr("Create"));
+}
+
+bool CategoryPage::isComplete() const {
+    if (!projects->selectedItems().isEmpty()) {
+        wizard()->setProperty("project", projects->selectedItems().first()->text());
+        return true;
+    } else
+        return false;
+}
+
+void CategoryPage::itemChanged() {
+    emit completeChanged();
+}
+
+void CategoryPage::newProject(){
+    newproject->hide();
+    projects->hide();
+
+    NewProject *n = new NewProject(workspace,this);
+    if (n->exec()) {
+        QString name = n->field("name").toString();
+        QDir dir(workspace + QDir::separator() + name);
+        if (dir.mkpath(dir.absolutePath())) {
+            loadWorkspace();
+            QList<QListWidgetItem*> items = projects->findItems(name, Qt::MatchCaseSensitive);
+            if (!items.isEmpty()) items.at(0)->setSelected(true);
+        } else {
+            QMessageBox::critical(this, tr("Error"), tr("Failed to create project folder."));
+        }
+    }
+    newproject->show();
+    projects->show();
+}
+
+void CategoryPage::loadWorkspace(){
+    projects->clear();
+    QDir dir(workspace);
+    foreach(QFileInfo x, dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        QListWidgetItem *item = new QListWidgetItem(x.fileName());
+        item->setSizeHint(QSize(-1,20));
+        projects->addItem(item);
+        if (x.fileName() == project)
+            item->setSelected(true);
+    }
+
+    if (project.isEmpty() && projects->count() > 0) projects->itemAt(0,0)->setSelected(true);
+}
+
+
+
 NamePage::NamePage(QString workspace)
-    : subtitle(tr("Specify a unique name to identify your model in the workspace.")),
+    : subtitle(tr("Please specify an unique identifier for the new model.")),
       workspace(workspace),
       state(dengueme::EmptyName){
 
-    setTitle(tr("Specify a name"));
+    setTitle(tr("Specify an ID:"));
     setSubTitle(subtitle);
     setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
 
-    modelName = new QLabel(tr("&Name:"));
+    modelName = new QLabel(tr("&Id:"));
     projectLineEdit = new QLineEdit;
     modelName->setBuddy(projectLineEdit);
 
@@ -218,6 +298,10 @@ NamePage::NamePage(QString workspace)
     layout->addWidget(projectLineEdit, 0, 1);
     setLayout(layout);
     projectLineEdit->setFocus();
+
+    this->setButtonText(QWizard::NextButton,  tr("Next"));
+    this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
+    this->setButtonText(QWizard::FinishButton,  tr("Create"));
 
 }
 

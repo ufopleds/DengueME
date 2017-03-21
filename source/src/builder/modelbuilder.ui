@@ -38,6 +38,13 @@
          <number>0</number>
         </property>
         <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Personal library of models</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="WorkspaceView" name="listView">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -88,19 +95,22 @@
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="buttonClose">
-            <property name="styleSheet">
-             <string notr="true">border: none;</string>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="icon">
-             <iconset resource="../Resource.qrc">
-              <normaloff>:/img/Resources/exit.png</normaloff>:/img/Resources/exit.png</iconset>
-            </property>
-            <property name="iconSize">
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
+              <width>40</width>
               <height>20</height>
              </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buttonDescription">
+            <property name="text">
+             <string>Model Description</string>
             </property>
            </widget>
           </item>
@@ -132,13 +142,19 @@
     <addaction name="separator"/>
     <addaction name="actionEdit"/>
     <addaction name="actionSave"/>
-    <addaction name="actionHelp"/>
-    <addaction name="separator"/>
     <addaction name="actionDelete"/>
+    <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -208,10 +224,25 @@
     <string>Ctrl+P</string>
    </property>
   </action>
+  <action name="actionCloseModel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource.qrc">
+     <normaloff>:/Resources/exit.png</normaloff>:/Resources/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>actionCloseModel</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
   <action name="actionHelp">
    <property name="icon">
     <iconset resource="../Resource.qrc">
-     <normaloff>:/img/Resources/help.png</normaloff>:/img/Resources/help.png</iconset>
+     <normaloff>:/Resources/help.png</normaloff>:/Resources/help.png</iconset>
    </property>
    <property name="text">
     <string>Help</string>

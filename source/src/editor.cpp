@@ -4,7 +4,7 @@
 
 #include "editor.h"
 #include "ui_editor.h"
-#include "dengueme.h" //Namespace containing basic control and setting files
+#include "dengueme.h"
 
 Editor::Editor(QWidget *parent) :
     QWidget(parent),
@@ -68,8 +68,8 @@ Editor::Editor(QWidget *parent) :
         QVBoxLayout *layout = new QVBoxLayout(cont);
         layout->setMargin(0);
         simulationGroup = new Group;
-        simulationGroup->setRemovable(false);
-        simulationGroup->setLabel(tr("Simulation"));
+
+        simulationGroup->setLabel(tr("TSTE"));
         layout->addWidget(simulationGroup);
         layout->addStretch(1);
 
@@ -134,7 +134,9 @@ void Editor::setEditModeEnabled(bool enable){
 
 
     parametersGroup->setEditMode(enable);
+
     simulationGroup->setEditMode(enable);
+    simulationGroup->setRemovable(false);
     resultsGroup->setEditMode(enable);
     enableDatabase->setVisible(enable);
 
@@ -202,15 +204,16 @@ bool Editor::loadModel(QString filename, bool editMode){
     QDomElement root = modelXml.firstChildElement("xmlmodel");
 
     view_model->setScriptDir(info.absolutePath() + '/' + info.baseName() + "_scripts");
-    view_model->setXml(root.firstChildElement("script"));
+    view_model->setXml(root.firstChildElement("model"));
     
     QDomElement datEl = root.firstChildElement("Database");
     QDomElement par = root.firstChildElement("parameters");
     QDomElement sim = root.firstChildElement("simulation");
-
     QDomElement res = root.firstChildElement("results");
+
     loadDescription(par);
     loadDescription(sim);
+
     viewmap[ViewDatabase].visible = !datEl.isNull();
     database->setXml(datEl);
     enableDatabase->setChecked(!datEl.isNull());
@@ -221,7 +224,7 @@ bool Editor::loadModel(QString filename, bool editMode){
     viewmap[ViewSimulation].visible = !sim.isNull() ;
     sim.setAttribute("label", "Simulation");
     simulationGroup->setXml(sim);
-
+    simulationGroup->setRemovable(false);
 
 
     viewmap[ViewResults].visible = !res.isNull();
@@ -250,21 +253,25 @@ void Editor::execModel(bool stepByStep){
         QFile input(dir + '/' + model + "_input.lua");
         input.open(QFile::WriteOnly | QFile::Truncate);
         QTextStream out(&input);
-
+        out << "-- INPUT FILE\n";
         out <<  "print(\'LOADING INPUT FILE AND RUNNING MODEL\')\n";
         out << "io.flush();\n";
+
+        out << "\n-- PATH CONFIG \n";
+        out << "BASE_PATH = \"" + dir + "\"\n";
+        out << "SCRIPT_PATH = \"" + view_model->scriptDir() + "\"\n";
+        out << "RESULTS_PATH = BASE_PATH\n";
+
         if (enableDatabase->isChecked())
             out << database->outData();
 
-        out<< "\n -- Parameters Variables \n\n";
+        out<< "\n-- PARAMETERS \n";
         out << parametersGroup->genLua();
-        out<< "\n -- Simulation Variables \n\n";
+        out<< "\n-- SIMULATION  \n";
         out << simulationGroup->genLua();
-        out <<"\n -- Observers \n\n";
+        out <<"\n-- RESULTS \n";
         out << resultsGroup->genLua();
-        out<< "\n -- Execution Variables \n\n";
-        out << "BASE_PATH = \"" + dir + "\"\n";
-        out << "SCRIPT_PATH = \"" + view_model->scriptDir() + "\"\n";
+        out<< "\n-- LOADING MODEL  \n";
         out << "dofile(SCRIPT_PATH .. \"/" << view_model->mainScript() << "\")\n";
 
         input.close();

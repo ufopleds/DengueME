@@ -36,20 +36,22 @@ private:
     Ui::LogField *ui;
     FieldType type;
 
- void updateMenu();
+    void updateMenu();
     void setWidget(QWidget *widget);
 
 public slots:
     void onActionVariable();
-     void onActionDelete();
+    void onActionDelete();
     void offField(bool enable);
     void onField(bool);
     void useLogVariable();
     void notUseLogVariable();
     void validateId(QString);
     QString purgeName(QString);
-   void add();
-   void del();
+    void selectAllDefaultVars(bool select);
+    void selectAllUseVars(bool select);
+    void add();
+    void del();
 };
 
 #endif // LOGFIELD_H

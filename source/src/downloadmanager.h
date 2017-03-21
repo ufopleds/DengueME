@@ -24,6 +24,7 @@ signals:
     void addLine(QString qsLine);
     void progress(int nPercentage);
     void downloadComplete();
+    void downloadError();
 
 public slots:
     void download(QUrl url);
@@ -33,6 +34,7 @@ private slots:
     void localAddLine(QString qsLine);
     void localProgress(int nPercentage);
     void localDownloadComplete();
+    void localDownloadError();
 
 private:
     QUrl _URL;

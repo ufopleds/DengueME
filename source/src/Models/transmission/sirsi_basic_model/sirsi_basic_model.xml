@@ -1,28 +1,98 @@
 <xmlmodel>
-  <script interpreter="TerraME">
-    <file>sirsi_basic_model.lua</file>
-    <main>sirsi_basic_model.lua</main>
-    <modelcategory>transmission</modelcategory>
-    <modeltype>sirsi_basic_model</modeltype>
-  </script>
+  <model>
+    <id>sirsi_basic_model</id>
+    <userid>sirsi_basic_model</userid>
+    <name>SIR-SI Basic Model</name>
+    <category>transmission</category>
+    <type>compartmental</type>
+    <title>A Susceptible-Infected-Recovered-Susceptible-Infected (SIR-SI) basic model.</title>
+    <authors>
+      <author>Tiago Lima</author>
+      <author>Lucas Ferreira</author>
+    </authors>
+    <description>SIR-SI model is a simplified version of the model proposed by Nishiura (2006). For a complete description of such model see the paper Nishiura (2006), "Mathematical and Statistical Analyses of the Spread of Dengue", Dengue Bulletin, Volume 30, 2006.</description>
+    <sourcecode lang="TerraML" interpreter="TerraME" version="2.0.0-beta-4">
+      <version>1.0</version>
+      <files>
+        <file>sirsi_basic_model.lua</file>
+      </files>
+      <main>sirsi_basic_model.lua</main>
+      <dependencies></dependencies>
+    </sourcecode>
+  </model>
   <parameters>
     <groupbox label="Human Population">
-      <field minimum="0" maximum="1e+06" type="spinbox" description="number of susceptible humans [1-999999999]" id="human_susceptible" label="Susceptible">9999</field>
-      <field minimum="0" maximum="1e+06" type="spinbox" description="number of infected humans [1-999999999]" id="human_infected" label="Infected">1</field>
-      <field minimum="0" maximum="1e+06" type="spinbox" description=" number of removed humans [1-999999999]" id="human_removed" label="Removed">0</field>
+      <field id="Sh" label="Susceptible" type="spinbox" minimum="0" maximum="1e+06" description="number of susceptible humans [1-999999999]">9999</field>
+      <field id="Ih" label="Infected" type="spinbox" minimum="0" maximum="1e+06" description="number of infectious humans [1-999999999]">1</field>
+      <field id="Rh" label="Recovered" type="spinbox" minimum="0" maximum="1e+06" description="number of recovered humans [1-999999999]">0</field>
+      <field id="Nh" label="Population" type="spinbox" minimum="0" maximum="1e+06" description="total population [1-999999999]">10000</field>
     </groupbox>
     <groupbox label="Vector Population">
-      <field minimum="0" maximum="1e+06" type="spinbox" description="number of susceptible vectors [1-999999999]" id="vector_susceptible" label="Susceptible">20000</field>
-      <field minimum="0" maximum="1e+06" type="spinbox" description="number of infected vectors [1-999999999]" id="vector_infected" label="Infected">0</field>
+      <field id="Sv" label="Susceptible" type="spinbox" minimum="0" maximum="1e+06" description="number of susceptible vectors [1-999999999]">20000</field>
+      <field id="Iv" label="Infected" type="spinbox" minimum="0" maximum="1e+06" description="number of infectious vectors [1-999999999]">0</field>    
+      <field id="Nv" label="Population" type="spinbox" minimum="0" maximum="1e+06" description="total vector population [1-999999999]">20000</field>
     </groupbox>
     <groupbox label="Rates">
-      <field minimum="0" maximum="1e+06" precision="2" description="average number of bites per mosquito per day [0-1000]" type="doublespinbox" id="vector_bites_rate" step="1" label="Vector bites rate">1</field>
-      <field minimum="0" maximum="1e+06" precision="3" description="human recovery rate [0-1]" type="doublespinbox" id="human_recovery_rate" step="0.1" label="Recovery rate of humans">0.167</field>
-      <field minimum="0" maximum="1e+06" precision="3" description="probability of transmission from vector to human [0-1]" type="doublespinbox" id="vector_human_transmission_rate" step="0.1" label="Probability of transmission from vector to human">0.4</field>
-      <field minimum="0" maximum="1e+06" precision="3" description="probability of transmission from human to vector [0-1]" type="doublespinbox" id="human_vector_transmission_rate" step="0.1" label="Probability of transmission from human to vector">0.4</field>
+      <field id="biting" label="Biting rate (per mosquito per day)" type="doublespinbox" minimum="0" maximum="1e+03" precision="2" step="1" description="average number of bites per mosquito per day [0-999]">1</field>
+      <field id="gamma" label="Recovery rate of humans" type="doublespinbox" minimum="0" maximum="1" precision="3" step="0.1" description="human recovery rate [0-1]">0.167</field>
+      <field id="betah" label="Transmission probability (vector to human)" type="doublespinbox" minimum="0" maximum="1" precision="3" step="0.1" description="transmission probability from vector to human [0-1]">0.4</field>
+      <field id="betav" label="Transmission probability (human to vector)" type="doublespinbox" minimum="0" maximum="1" precision="3" step="0.1" description="transmission probability from human to vector [0-1]">0.4</field>
     </groupbox>
   </parameters>
   <simulation label="Simulation">
-    <field minimum="0" maximum="1e+06" type="spinbox" description="simulation steps [0-999999999]" id="steps" label="Steps">120</field>
+    <field id="steps" label="Steps" type="spinbox" minimum="0" maximum="1e+06" description="simulation steps [0-999999999]">120</field>
   </simulation>
+  <results>
+    <outChart id="outChart" label="Chart (human and vector populations)" output="true">
+      <config title="" xLabel="Time" yLabel="" />
+      <variable id="Sh" select="Sh" label="Susceptible (human)" chartlabel="Susceptible (human)" type="plotVariable" style="lines" color="blue" output="true" />
+      <variable id="Ih" select="Ih" label="Infectious (human)" chartlabel="Infectious (human)" type="plotVariable" style="lines" color="red" output="true" />
+      <variable id="Rh" select="Rh" label="Recovered (human)" chartlabel="Recovered (human)" type="plotVariable" style="lines" color="yellow" output="true" />
+      <variable id="Nh" select="Nh" label="Population (human)" chartlabel="Population (human)" type="plotVariable" style="lines" color="black" output="false" />
+      <variable id="Sv" select="Sv" label="Susceptible (vector)" chartlabel="Susceptible (vector)" type="plotVariable" style="dots" color="blue" output="true" />
+      <variable id="Iv" select="Iv" label="Infectious (vector)" chartlabel="Infectious (vector)" type="plotVariable" style="dots" color="red" output="true" />
+      <variable id="Nv" select="Nv" label="Population (vector)" chartlabel="Population (vector)" type="plotVariable" style="dots" color="black" output="false" />
+    </outChart>
+    <outChart id="outChartHuman" label="Chart (human population)" output="true">
+      <config title="" xLabel="Time" yLabel="" />
+      <variable id="Sh" select="Sh" label="Susceptible" chartlabel="Susceptible" type="plotVariable" style="lines" color="blue" output="true" />
+      <variable id="Ih" select="Ih" label="Infectious" chartlabel="Infectious" type="plotVariable" style="lines" color="red" output="true" />
+      <variable id="Rh" select="Rh" label="Recovered" chartlabel="Recovered" type="plotVariable" style="lines" color="yellow" output="true" />
+      <variable id="Nh" select="Nh" label="Human Population" chartlabel="Humam Population" type="plotVariable" style="dots" color="black" output="true" />
+    </outChart>
+    <outChart id="outChartVector" label="Chart (vector population)" output="true">
+      <config title="" xLabel="Time" yLabel="" />
+      <variable id="Sv" select="Sv" label="Susceptible" chartlabel="Susceptible" type="plotVariable" style="lines" color="blue" output="true" />
+      <variable id="Iv" select="Iv" label="Infectious" chartlabel="Infectious" type="plotVariable" style="lines" color="red" output="true" />
+      <variable id="Nv" select="Nv" label="Vector Population" chartlabel="Vector Population" type="plotVariable" style="dots" color="black" output="true" />
+    </outChart>
+    <outTextScreen id="outTextScreen" label="TextScreen" output="true">
+      <variable id="Sh" select="Sh" label="Susceptible (human)" type="plotVariable" output="true" />
+      <variable id="Ih" select="Ih" label="Infectious (human)" type="plotVariable" output="true" />
+      <variable id="Rh" select="Rh" label="Recovered (human)" type="plotVariable" output="true" />
+      <variable id="Nh" select="Nh" label="Population (human)" type="plotVariable" output="true" />
+      <variable id="Sv" select="Sv" label="Susceptible (vector)" type="plotVariable" output="true" />
+      <variable id="Iv" select="Iv" label="Infectious (vector)" type="plotVariable" output="true" />
+      <variable id="Nv" select="Nv" label="Population (vector)" type="plotVariable" output="true" />
+    </outTextScreen>
+    <outVisualTable id="outVisualTable" label="Table" output="true">
+      <variable id="Sh" select="Sh" label="Susceptible (human)" type="plotVariable" output="true" />
+      <variable id="Ih" select="Ih" label="Infectious (human)" type="plotVariable" output="true" />
+      <variable id="Rh" select="Rh" label="Recovered (human)" type="plotVariable" output="true" />
+      <variable id="Nh" select="Nh" label="Population (human)" type="plotVariable" output="true" />
+      <variable id="Sv" select="Sv" label="Susceptible (vector)" type="plotVariable" output="true" />
+      <variable id="Iv" select="Iv" label="Infectious (vector)" type="plotVariable" output="true" />
+      <variable id="Nv" select="Nv" label="Population (vector)" type="plotVariable" output="true" />
+    </outVisualTable>
+    <outLog id="outLog" label="File" output="true">
+      <config separator=";" filepath="" filename="results" overwrite="true" />
+      <variable id="Sh" select="Sh" label="Susceptible (human)" type="plotVariable" output="true" />
+      <variable id="Ih" select="Ih" label="Infectious (human)" type="plotVariable" output="true" />
+      <variable id="Rh" select="Rh" label="Recovered (human)" type="plotVariable" output="true" />
+      <variable id="Nh" select="Nh" label="Population (human)" type="plotVariable" output="true" />
+      <variable id="Sv" select="Sv" label="Susceptible (vector)" type="plotVariable" output="true" />
+      <variable id="Iv" select="Iv" label="Infectious (vector)" type="plotVariable" output="true" />
+      <variable id="Nv" select="Nv" label="Population (vector)" type="plotVariable" output="true" />
+    </outLog>
+  </results>
 </xmlmodel>

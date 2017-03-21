@@ -44,6 +44,7 @@ INPUT(
 ./release\textscreenfield.o
 ./release\visualtablefield.o
 ./release\loggroup.o
+./release\modeldocument.o
 ./release\qrc_Resource.o
 ./release\moc_mainwindow.o
 ./release\moc_newproject.o
@@ -86,4 +87,5 @@ INPUT(
 ./release\moc_textscreenfield.o
 ./release\moc_visualtablefield.o
 ./release\moc_loggroup.o
+./release\moc_modeldocument.o
 );

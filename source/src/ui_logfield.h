@@ -20,8 +20,8 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -31,12 +31,9 @@ QT_BEGIN_NAMESPACE
 class Ui_LogField
 {
 public:
-    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
-    QVBoxLayout *verticalLayout_3;
-    QLabel *labelId;
-    QLineEdit *id;
     QVBoxLayout *vertical3;
     QLabel *labelFilename;
     QLineEdit *fileName;
@@ -53,16 +50,21 @@ public:
     QLabel *labelGeneral;
     QSpacerItem *horizontalSpacer;
     QLabel *labelToBeUse;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer_4;
+    QCheckBox *selectDefault;
+    QSpacerItem *horizontalSpacer_3;
+    QCheckBox *selectUse;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_2;
     QToolButton *add;
     QToolButton *del;
     QSpacerItem *verticalSpacer;
-    QListWidget *defaultVarList;
+    QTableWidget *defaultVarList;
     QVBoxLayout *verticalLayout_4;
     QToolButton *rButton;
     QToolButton *lButton;
-    QListWidget *useVarList;
+    QTableWidget *useVarList;
     QFrame *line1;
     QWidget *container;
     QHBoxLayout *horizontalLayout_2;
@@ -72,30 +74,12 @@ public:
         if (LogField->objectName().isEmpty())
             LogField->setObjectName(QStringLiteral("LogField"));
         LogField->resize(712, 399);
-        horizontalLayout_4 = new QHBoxLayout(LogField);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_7 = new QHBoxLayout(LogField);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(6, 6, 6, 6);
-        labelId = new QLabel(LogField);
-        labelId->setObjectName(QStringLiteral("labelId"));
-
-        verticalLayout_3->addWidget(labelId);
-
-        id = new QLineEdit(LogField);
-        id->setObjectName(QStringLiteral("id"));
-        id->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
-        id->setFrame(false);
-
-        verticalLayout_3->addWidget(id);
-
-
-        horizontalLayout_3->addLayout(verticalLayout_3);
-
         vertical3 = new QVBoxLayout();
         vertical3->setObjectName(QStringLiteral("vertical3"));
         vertical3->setContentsMargins(6, 6, 6, 6);
@@ -186,6 +170,29 @@ public:
 
         vertical1->addLayout(horizontalLayout_5);
 
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalSpacer_4 = new QSpacerItem(27, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_4);
+
+        selectDefault = new QCheckBox(LogField);
+        selectDefault->setObjectName(QStringLiteral("selectDefault"));
+
+        horizontalLayout_4->addWidget(selectDefault);
+
+        horizontalSpacer_3 = new QSpacerItem(34, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_3);
+
+        selectUse = new QCheckBox(LogField);
+        selectUse->setObjectName(QStringLiteral("selectUse"));
+
+        horizontalLayout_4->addWidget(selectUse);
+
+
+        vertical1->addLayout(horizontalLayout_4);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         verticalLayout_2 = new QVBoxLayout();
@@ -213,14 +220,17 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_2);
 
-        defaultVarList = new QListWidget(LogField);
+        defaultVarList = new QTableWidget(LogField);
+        if (defaultVarList->columnCount() < 2)
+            defaultVarList->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        defaultVarList->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        defaultVarList->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         defaultVarList->setObjectName(QStringLiteral("defaultVarList"));
-        defaultVarList->setStyleSheet(QStringLiteral(""));
-        defaultVarList->setEditTriggers(QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed);
-        defaultVarList->setDragEnabled(true);
-        defaultVarList->setDragDropMode(QAbstractItemView::NoDragDrop);
         defaultVarList->setSelectionMode(QAbstractItemView::MultiSelection);
-        defaultVarList->setSelectionRectVisible(true);
+        defaultVarList->setSelectionBehavior(QAbstractItemView::SelectRows);
+        defaultVarList->horizontalHeader()->setStretchLastSection(true);
 
         horizontalLayout->addWidget(defaultVarList);
 
@@ -249,8 +259,17 @@ public:
 
         horizontalLayout->addLayout(verticalLayout_4);
 
-        useVarList = new QListWidget(LogField);
+        useVarList = new QTableWidget(LogField);
+        if (useVarList->columnCount() < 2)
+            useVarList->setColumnCount(2);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        useVarList->setHorizontalHeaderItem(0, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        useVarList->setHorizontalHeaderItem(1, __qtablewidgetitem3);
         useVarList->setObjectName(QStringLiteral("useVarList"));
+        useVarList->setSelectionMode(QAbstractItemView::MultiSelection);
+        useVarList->setSelectionBehavior(QAbstractItemView::SelectRows);
+        useVarList->horizontalHeader()->setStretchLastSection(true);
 
         horizontalLayout->addWidget(useVarList);
 
@@ -268,7 +287,7 @@ public:
         verticalLayout->addWidget(line1);
 
 
-        horizontalLayout_4->addLayout(verticalLayout);
+        horizontalLayout_7->addLayout(verticalLayout);
 
         container = new QWidget(LogField);
         container->setObjectName(QStringLiteral("container"));
@@ -277,7 +296,7 @@ public:
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
 
-        horizontalLayout_4->addWidget(container);
+        horizontalLayout_7->addWidget(container);
 
 
         retranslateUi(LogField);
@@ -291,8 +310,6 @@ public:
     void retranslateUi(QWidget *LogField)
     {
         LogField->setWindowTitle(QApplication::translate("LogField", "Form", 0));
-        labelId->setText(QApplication::translate("LogField", "Log Model ID:", 0));
-        id->setPlaceholderText(QApplication::translate("LogField", "Id...", 0));
         labelFilename->setText(QApplication::translate("LogField", "File name:", 0));
 #ifndef QT_NO_TOOLTIP
         fileName->setToolTip(QApplication::translate("LogField", "label", 0));
@@ -308,13 +325,23 @@ public:
          << QApplication::translate("LogField", ";", 0)
         );
         overwrite->setText(QApplication::translate("LogField", "Overwrite?", 0));
-        upperLabel->setText(QApplication::translate("LogField", "Choose Variables that can be used by the user", 0));
-        labelGeneral->setText(QApplication::translate("LogField", "Unsaved variables by default:", 0));
-        labelToBeUse->setText(QApplication::translate("LogField", "Saved Variables by default:", 0));
+        upperLabel->setText(QApplication::translate("LogField", "Add variables that the user may use for this observer", 0));
+        labelGeneral->setText(QApplication::translate("LogField", "Default variables:", 0));
+        labelToBeUse->setText(QApplication::translate("LogField", "Variables to be used:", 0));
+        selectDefault->setText(QApplication::translate("LogField", "Select all", 0));
+        selectUse->setText(QApplication::translate("LogField", "Select all", 0));
         add->setText(QApplication::translate("LogField", "+", 0));
         del->setText(QApplication::translate("LogField", "-", 0));
+        QTableWidgetItem *___qtablewidgetitem = defaultVarList->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("LogField", "ID", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = defaultVarList->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("LogField", "Label", 0));
         rButton->setText(QApplication::translate("LogField", "...", 0));
         lButton->setText(QApplication::translate("LogField", "...", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = useVarList->horizontalHeaderItem(0);
+        ___qtablewidgetitem2->setText(QApplication::translate("LogField", "ID", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = useVarList->horizontalHeaderItem(1);
+        ___qtablewidgetitem3->setText(QApplication::translate("LogField", "Label", 0));
 #ifndef QT_NO_TOOLTIP
         container->setToolTip(QApplication::translate("LogField", "Default value", 0));
 #endif // QT_NO_TOOLTIP

@@ -44,6 +44,7 @@ INPUT(
 ./debug\textscreenfield.o
 ./debug\visualtablefield.o
 ./debug\loggroup.o
+./debug\modeldocument.o
 ./debug\qrc_Resource.o
 ./debug\moc_mainwindow.o
 ./debug\moc_newproject.o
@@ -86,4 +87,5 @@ INPUT(
 ./debug\moc_textscreenfield.o
 ./debug\moc_visualtablefield.o
 ./debug\moc_loggroup.o
+./debug\moc_modeldocument.o
 );

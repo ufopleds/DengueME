@@ -14,7 +14,8 @@ VisualTableGroup::VisualTableGroup(QWidget *parent):
 
     QFont font;
     font.setBold(true);
-    ui->label->setFont(font);
+    ui->userLabel->setFont(font);
+    ui->observerID->setFont(font);
     ui->addField->setText(tr("Add variable"));
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
@@ -22,15 +23,16 @@ VisualTableGroup::VisualTableGroup(QWidget *parent):
     QMenu   *menu     = new QMenu(this);
 
     connect(ui->useGroup, SIGNAL(toggled(bool)), SLOT(togglePlotCheckbox(bool)));
-    connect(ui->label, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
+    connect(ui->observerID, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
 
     ui->addField->setVisible(false);
     ui->useGroup->setText("Use Visual Table:");
     ui->removeGroup->setText("Remove visual table");
-    ui->label->setFrame(true);
-    ui->label->setText(tr("New Visual Table"));
+    ui->userLabel->setFrame(true);
+        ui->observerID->setFrame(true);
+    ui->userLabel->setText(tr("New Visual Table"));
     ui->addField->setMenu(menu);
-
+ui->useGroup->setChecked(true);
     addVariable();
 }
 
@@ -41,8 +43,8 @@ VisualTableGroup::~VisualTableGroup(){
 void VisualTableGroup::validateId(QString name){
 
     if (!QRegExp("[A-Za-z0-9_]+").exactMatch(name)){
-        ui->label->setText(purgeName(name));
-        QToolTip::showText(  ui->label->mapToGlobal(QPoint(0,  ui->label->height())),
+        ui->observerID->setText(purgeName(name));
+        QToolTip::showText(  ui->observerID->mapToGlobal(QPoint(0,  ui->observerID->height())),
                              tr("The id name can contain only\nalphanumeric chars and,"
                                 " \nunderscore (_)."));
     }
@@ -70,7 +72,7 @@ QDomDocument VisualTableGroup::getXml() {
 
 
     QDomElement root = ret.createElement("outVisualTable");
-    root.setAttribute("label", ui->label->text());
+    root.setAttribute("label", ui->userLabel->text());
     root.setAttribute("id", ui->observerID->text());
     root.setAttribute("output", ui->useGroup->isChecked() ? "true": "false");
     for (int i = 0; i < ui->widgets->count(); ++i) {
@@ -88,7 +90,7 @@ void VisualTableGroup::setXml(QDomElement root){
 
     ui->widgets->clear();
     ui->observerID->setText(root.attribute("id"));
-    ui->label->setText(root.attribute("label"));
+    ui->userLabel->setText(root.attribute("label"));
     if(root.attribute("output") == "true"){
         ui->useGroup->setChecked(true);
     }else{
@@ -96,7 +98,7 @@ void VisualTableGroup::setXml(QDomElement root){
     }
 
     QDomElement node = root.firstChildElement();
-    if (node.nodeName() == "tableVariable") {
+    if (node.nodeName() == "variable") {
         addComponent(new VisualTableField)->setXml(node);
     }
 
@@ -111,10 +113,10 @@ void VisualTableGroup::setEditMode(bool enable){
     }
 
     ui->observerID->setVisible(enable);
-    ui->label->setFrame(enable);
+    ui->userLabel->setFrame(enable);
     ui->removeGroup->setVisible(enable);
 
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 
 
     if(ui->useGroup->isChecked()){
@@ -132,7 +134,7 @@ void VisualTableGroup::setEditMode(bool enable){
             }
         }
     }
-    ui->useGroup->setText("Use this Visual Table view?");
+    ui->useGroup->setText("Use Visual Table:");
     if (enable) {
         ui->widgets->setSelectionMode(QAbstractItemView::SingleSelection);
     } else {
@@ -142,7 +144,7 @@ void VisualTableGroup::setEditMode(bool enable){
 
 void VisualTableGroup::setRemovable(bool enable){
     ui->removeGroup->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 }
 
 

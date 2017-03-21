@@ -36,24 +36,15 @@ ImportCsv::ImportCsv(QWidget *parent) :
     menu->addAction(actionCombobox);
 
 
-
-
     ui->options->setMenu(menu);
 
-    //C++ 11  +  Qt5 lambda connect
+    //C++ 11  +  Qt5 lambda connect, necessary to pass parameters
     connect(actionText,  &QAction::triggered, this, [this]{ onMorph("Text"); });
     connect(actionInteger,  &QAction::triggered, this, [this]{ onMorph("Integer"); });
     connect(actionFloating,  &QAction::triggered, this, [this]{ onMorph("Float"); });
     connect(actionCombobox,  &QAction::triggered, this, [this]{ onMorph("Combobox"); });
     connect(actionBoolean,  &QAction::triggered, this, [this]{ onMorph("Boolean"); });
 
-
-    //connect(actionCsv, SIGNAL(triggered()), SLOT(onActionCsv()));
- //   connect(actionText,     SIGNAL(triggered()), SLOT(onMorphText()));
-    /*connect(actionInteger,  SIGNAL(triggered()), SLOT(onMorphInteger()));
-    connect(actionFloating, SIGNAL(triggered()), SLOT(onMorphFloat()));
-    connect(actionCombobox, SIGNAL(triggered()), SLOT(onMorphCombobox()));
-    connect(actionBoolean, SIGNAL(triggered()), SLOT(onMorphBoolean()));*/
     connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
      connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
 

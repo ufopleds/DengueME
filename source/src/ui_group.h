@@ -31,8 +31,9 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QCheckBox *useGroup;
-    QLineEdit *label;
     QLineEdit *observerID;
+    QSpacerItem *horizontalSpacer_3;
+    QLineEdit *userLabel;
     QSpacerItem *horizontalSpacer_2;
     QToolButton *addField;
     QSpacerItem *horizontalSpacer;
@@ -55,19 +56,23 @@ public:
 
         horizontalLayout->addWidget(useGroup);
 
-        label = new QLineEdit(Group);
-        label->setObjectName(QStringLiteral("label"));
-        label->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
-        label->setFrame(false);
-
-        horizontalLayout->addWidget(label);
-
         observerID = new QLineEdit(Group);
         observerID->setObjectName(QStringLiteral("observerID"));
         observerID->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
         observerID->setFrame(false);
 
         horizontalLayout->addWidget(observerID);
+
+        horizontalSpacer_3 = new QSpacerItem(10, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
+
+        userLabel = new QLineEdit(Group);
+        userLabel->setObjectName(QStringLiteral("userLabel"));
+        userLabel->setStyleSheet(QStringLiteral("QLineEdit { background-color:transparent; }"));
+        userLabel->setFrame(false);
+
+        horizontalLayout->addWidget(userLabel);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -122,11 +127,11 @@ public:
     {
         Group->setWindowTitle(QApplication::translate("Group", "Form", 0));
         useGroup->setText(QApplication::translate("Group", "Use chart:", 0));
+        observerID->setText(QApplication::translate("Group", "ID", 0));
 #ifndef QT_NO_TOOLTIP
-        label->setToolTip(QApplication::translate("Group", "Group name", 0));
+        userLabel->setToolTip(QApplication::translate("Group", "Group name", 0));
 #endif // QT_NO_TOOLTIP
-        label->setText(QApplication::translate("Group", "New group", 0));
-        observerID->setText(QApplication::translate("Group", "New groupID", 0));
+        userLabel->setText(QApplication::translate("Group", "Label", 0));
         addField->setText(QApplication::translate("Group", "Add field", 0));
         removeGroup->setText(QApplication::translate("Group", "Remove group", 0));
     } // retranslateUi

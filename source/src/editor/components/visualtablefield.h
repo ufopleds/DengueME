@@ -47,7 +47,8 @@ public slots:
     void onField(bool);
     void useLogVariable();
     void notUseLogVariable();
-
+    void selectAllDefaultVars(bool select);
+    void selectAllUseVars(bool select);
     void add();
     void del();
 };

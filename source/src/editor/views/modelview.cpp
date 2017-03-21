@@ -1,6 +1,7 @@
 #include "dengueme.h"
 #include "modelview.h"
 #include "ui_modelview.h"
+#include "builder/modeldocument.h"
 
 struct FileInfo : QWidget {
     QLineEdit *path;
@@ -31,13 +32,35 @@ ModelView::ModelView(QWidget *parent) :
 
     connect(ui->buttonAdd, SIGNAL(clicked()), SLOT(addFile()));
     connect(ui->interpreter, SIGNAL(currentIndexChanged(int)), SLOT(onInterpreterChanged(int)));
+    connect(ui->add, SIGNAL(clicked()), SLOT(add()));
+    connect(ui->del, SIGNAL(clicked()), SLOT(del()));
+
+    ui->userIdText->setEnabled(false);
+    ui->categoryCombo->setEnabled(false);
+
+    ui->modelInfo->setText(dengueme::getProjectType());
+    ui->modelInfo->setVisible(false);
+    ui->modelType->setVisible(false);
 }
+
 
 ModelView::~ModelView()
 {
     delete ui;
 }
+void ModelView::add(){
 
+    QListWidgetItem *label=new QListWidgetItem ("New Author");
+
+    label->setFlags(label->flags () | Qt::ItemIsEditable);
+    ui->authorsList->addItem(label);
+}
+void ModelView::del(){
+    for(int i = 0;i<ui->authorsList->count(); i++){
+        if(ui->authorsList->item(i)->isSelected())
+            ui->authorsList->takeItem(i);
+    }
+}
 void ModelView::setScriptDir(QString dir)
 {
     QDir().mkpath(dir);
@@ -48,51 +71,125 @@ QString ModelView::scriptDir()
 {
     return _scriptDir;
 }
-//XML TIAGO
-QDomDocument ModelView::getXml()
-{
-    QDomDocument doc;
-    QDomElement root = doc.createElement("script");
-    root.setAttribute("interpreter", ui->interpreter->currentText());
 
+QDomDocument ModelView::getXml(){
+
+
+    QDomDocument doc;
+    QDomElement root = doc.createElement("model");
+
+    QDomElement id = doc.createElement("id");
+    id.appendChild(doc.createTextNode(ui->userIdText->text()));
+    QDomElement userid = doc.createElement("userid");
+    userid.appendChild(doc.createTextNode(ui->userIdText->text()));
+    QDomElement name = doc.createElement("name");
+    name.appendChild(doc.createTextNode(ui->nameText->text()));
+    QDomElement category = doc.createElement("category");
+    category.appendChild(doc.createTextNode(scriptDir().contains("transmission") ? "transmission" : "vector" ));
+    QDomElement title = doc.createElement("title");
+    title.appendChild(doc.createTextNode(ui->titleText->text()));
+    QDomElement type = doc.createElement("type");
+    type.appendChild(doc.createTextNode(ui->typeCombo->currentText()));
+
+    QDomElement authorsRoot = doc.createElement("authors");
+    for (int i = 0; i < ui->authorsList->count(); ++i) {
+
+        QDomElement author = doc.createElement("author");
+        author.appendChild(doc.createTextNode(ui->authorsList->item(i)->text()));
+        authorsRoot.appendChild(author);
+    }
+
+    QDomElement description = doc.createElement("description");
+    description.appendChild(doc.createTextNode(ui->descriptionText->toPlainText()));
+
+    root.appendChild(id);
+    root.appendChild(userid);
+    root.appendChild(name);
+    root.appendChild(category);
+    root.appendChild(type);
+    root.appendChild(title);
+    root.appendChild(authorsRoot);
+    root.appendChild(description);
+
+    QDomElement root2 = doc.createElement("sourcecode");
+    root2.setAttribute("lang", ui->interpreter->currentText() == "TerraME" ? "TerraML" : "R");
+    root2.setAttribute("interpreter", ui->interpreter->currentText());
+    root2.setAttribute("version", ui->versionCombo->currentText());
+
+    QDomElement modelVersion = doc.createElement("version");
+    modelVersion.appendChild(doc.createTextNode("1.0"));
+    root2.appendChild(modelVersion);
+    QDomElement fileRoot = doc.createElement("files");
     for (int i = 0; i < ui->list->count(); ++i) {
+
         FileInfo *fi = dynamic_cast<FileInfo *>(ui->list->itemWidget(ui->list->item(i)));
         if (fi == NULL) continue;
 
         QDomElement file = doc.createElement("file");
         file.appendChild(doc.createTextNode(fi->path->text()));
-        root.appendChild(file);
+        fileRoot.appendChild(file);
     }
 
-
+    root2.appendChild(fileRoot);
     QDomElement main = doc.createElement("main");
     main.appendChild(doc.createTextNode(ui->mainFile->currentText()));
-    root.appendChild(main);
+    root2.appendChild(main);
+    QDomElement dependencies = doc.createElement("dependencies");
+    dependencies.appendChild(doc.createTextNode("dependencias"));
+    root2.appendChild(dependencies);
 
 
-    QDomElement cat = doc.createElement("modelcategory");
-    cat.appendChild(doc.createTextNode(ui->modelInfo->text()));
-    root.appendChild(cat);
-    QDomElement type = doc.createElement("modeltype");
-    type.appendChild(doc.createTextNode( ui->modelType->text()));
-    root.appendChild(type);
 
+    ui->userIdText->setEnabled(false);
+    ui->categoryCombo->setEnabled(false);
+
+    root.appendChild(root2);
     doc.appendChild(root);
     return doc;
 }
-//XML TIAGO
+
 void ModelView::setXml(QDomElement node)
 {
+
+    ui->categoryCombo->setCurrentIndex(ui->categoryCombo->findText(scriptDir().contains("transmission") ? "transmission" : "vector" ));
+    ui->userIdText->setEnabled(false);
+    ui->userIdText->setText(scriptDir().remove(0,scriptDir().lastIndexOf('/')+1).replace("_scripts",""));
+
     ui->list->clear();
     ui->mainFile->clear();
-    for (QDomElement file = node.firstChildElement("file");
+
+    ui->titleText->setText(node.firstChildElement("title").text());
+    ui->nameText->setText(node.firstChildElement("name").text());
+
+    ui->typeCombo->setCurrentIndex(ui->typeCombo->findText(node.firstChildElement("type").text()));
+    ui->descriptionText->setText(node.firstChildElement("description").text());
+    QDomElement authors = node.firstChildElement("authors");
+    ui->authorsList->clear();
+    for (QDomElement author = authors.firstChildElement("author");!author.isNull(); author = author.nextSiblingElement("author")) {
+        QListWidgetItem *item = new QListWidgetItem(author.text());
+        item->setFlags(item->flags () | Qt::ItemIsEditable);
+        ui->authorsList->addItem(item);
+    }
+    QDomElement source = node.firstChildElement("sourcecode");
+    QDomElement files = source.firstChildElement("files");
+
+    ui->mainFile->setCurrentIndex(ui->mainFile->findText(source.firstChildElement("main").text()));
+    ui->interpreter->setCurrentIndex(ui->interpreter->findText(source.attribute("interpreter")));
+    ui->versionCombo->setCurrentIndex(ui->versionCombo->findText(source.attribute("version")));
+
+    for (QDomElement file = files.firstChildElement("file");
          !file.isNull(); file = file.nextSiblingElement("file")) {
         addItem(file.text());
     }
-    ui->interpreter->setCurrentIndex(ui->interpreter->findText(node.attribute("interpreter")));
-    ui->mainFile->setCurrentIndex(ui->mainFile->findText(node.firstChildElement("main").text()));
-    ui->modelInfo->setText(node.firstChildElement("modelcategory").text());
-    ui->modelType->setText(node.firstChildElement("modeltype").text());
+
+    ui->userIdText->setEnabled(false);
+    ui->categoryCombo->setEnabled(false);
+
+    ui->modelInfo->setVisible(false);
+    ui->modelType->setVisible(false);
+    ui->modelInfo->setText(node.firstChildElement("category").text());
+
+
 }
 
 ModelView::Interpreter ModelView::interpreter()
@@ -138,7 +235,9 @@ void ModelView::addItem(QString fileName)
     } else {
         ui->mainFile->addItem(fileName);
     }
-    ui->modelInfo->setText(dengueme::getProjectType());
+
+
+
     ui->modelType->setText (ui->mainFile->currentText().remove(ui->mainFile->currentText().indexOf('.'),4));
 
 }
@@ -201,8 +300,8 @@ void ModelView::renameFile()
         fi->path->setText(fi->oldPath);
 
     if (ui->mainFile->findText(fi->path->text() + "/", Qt::MatchStartsWith | Qt::MatchFixedString) == -1
-         && ui->mainFile->findText(fi->path->text(), Qt::MatchFixedString) == -1
-         && !dengueme::remove(to)) {
+            && ui->mainFile->findText(fi->path->text(), Qt::MatchFixedString) == -1
+            && !dengueme::remove(to)) {
         fi->path->setText(fi->oldPath);
         return;
     }

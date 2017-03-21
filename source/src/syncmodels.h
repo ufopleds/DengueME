@@ -11,7 +11,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QProcess>
-
+#include <QListWidgetItem>
 #include "downloadmanager.h"
 
 namespace Ui {
@@ -30,12 +30,14 @@ private slots:
     void addLine(QString qsLine);
     void progress(int nPercentage);
     void finished();
+    void finishedWithErrors();
     void updateAction();
     void checkNewModel();
     void finishedHead();
     void timeout();
     void downloadAction();
     void error(QNetworkReply::NetworkError code);
+    void onItemClicked();
 
 private:
     Ui::SyncModels *ui;

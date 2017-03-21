@@ -9,9 +9,7 @@ DescriptionWindow::DescriptionWindow(QWidget *parent,QString description) :
 
     ui->setupUi(this);
 
-    if(description == ("ModelBuilder")){
-     //   QString path = QCoreApplication::applicationDirPath() + "/docs/";
-
+    if(description == ("ModelBuilder")){ 
         ui->textBrowser->setSource(*new QUrl("docs/help.html"));
     }
     else

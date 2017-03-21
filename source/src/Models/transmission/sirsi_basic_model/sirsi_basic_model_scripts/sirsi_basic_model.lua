@@ -1,60 +1,89 @@
--- @example A Susceptible-Infected-Recovered basic (SIR) model. 
--- @version TerraME 1.6
+-- DengueME Models Library
+-- @id sirsi_basic_model
+-- @name SIR-SI Basic Model
+-- @version 1.0
+-- @interpreter TerraME 2.0-beta4
+-- @example A Susceptible-Infected-Recovered-Susceptible-Infected (SIR-SI) basic model.
 -- @authors Tiago Lima, Lucas Saraiva
--- @description For a description of such model visit <<http://en.wikipedia.org/wiki/Epidemic_model>>
+-- @description SIR-SI model is a simplified version of the model proposed by Nishiura (2006). For a complete description of such model see the paper Nishiura (2006), "Mathematical and Statistical Analyses of the Spread of Dengue", Dengue Bulletin, Volume 30, 2006.
 
-world = Cell {
-    Sh = human_susceptible,
-    Ih = human_infected, 
-    Rh = human_removed,
-    Nh = human_susceptible + human_infected + human_removed,
-    Sv = vector_susceptible,
-    Iv = vector_infected,
-    Nv = vector_susceptible + vector_infected,
-    b = vector_bites_rate,      
-    gamma = human_recovery_rate,            -- gamma
-    Bh = vector_human_transmission_rate,    -- betaH
-    Bv = human_vector_transmission_rate     -- betaV
-}
-
-chartHuman = Chart { 
-    target = world, 
-    select = {"Sh", "Ih", "Rh", "Nh"}, 
-    color = {"blue", "red", "yellow", "black"}
-    }
-
-chartVector = Chart { 
-    target = world, 
-    select = {"Sv", "Iv", "Nv"}, 
-    color = {"blue", "red", "black"}
-    }
-    
-world:notify()
-
-t = Timer {
-    Event {
-        action = function()
-            local new_human_infections = ( world.Bh * world.b / world.Nh ) * world.Sh * world.Iv
-            if new_human_infections > world.Sh then
-               new_human_infections = world.Sh
+world = Model {
+   Sh = Sh,
+   Ih = Ih, 
+   Rh = Rh,
+   Nh = Sh + Ih + Rh,
+   Sv = Sv,
+   Iv = Iv,
+   Nv = Sv + Iv,
+   biting = biting,
+   gamma = gamma,
+   betah = betah,
+   betav = betav,
+   
+   finalTime = steps,
+        
+   init = function(model)
+      
+      -- Output: Chart
+      if (outChart) then
+         model.chart = Chart { target = model, select = outChartSelect, label= outChartLabel, style = outChartStyle, color = outChartColor, title = outChartTitle, xLabel = outChartXLabel, yLabel = outChartYLabel }
+      end
+      
+      if (outChartHuman) then
+         model.chartHuman = Chart { target = model, select = outChartHumanSelect, label= outChartHumanLabel, style = outChartHumanStyle, color = outChartHumanColor, title = outChartHumanTitle, xLabel = outChartHumanXLabel, yLabel = outChartHumanYLabel }
+      end
+      
+      if (outChartVector) then
+         model.chartVector = Chart { target = model, select = outChartVectorSelect, label= outChartVectorLabel, style = outChartVectorStyle, color = outChartVectorColor, title = outChartVectorTitle, xLabel = outChartVectorXLabel, yLabel = outChartVectorYLabel }
+      end
+      
+      -- Output: TextScreen
+      if (outTextScreen) then         
+         model.text = TextScreen { target = model, select = outTextScreenSelect }
+      end
+      
+      -- Output: VisualTable
+      if (outVisualTable) then         
+         model.text = VisualTable { target = model, select = outVisualTableSelect }
+      end
+      
+      -- Output: Log
+      if (outLog) then         
+         model.text = Log { target = model, select = outLogSelect, file = outLogFile, separator = outLogSeparator, overwrite = outLogOverwrite }
+      end
+      
+      if (output) then
+         model:notify()
+      end
+      
+      model.timer = Timer{
+         Event{action = function(ev)
+            local new_human_infections = (model.betah * model.biting/model.Nh) * model.Sh * model.Iv
+            if new_human_infections > model.Sh then
+               new_human_infections = model.Sh
             end
-            local new_vector_infections = ( world.Bv * world.b / world.Nh ) * world.Sv * world.Ih
-            if new_vector_infections > world.Sv then
-               new_vector_infections = world.Sv
-            end
-            world.Rh = world.Rh + (world.gamma * world.Ih)
-            world.Ih = world.Ih + new_human_infections - (world.gamma * world.Ih)
-            world.Sh = world.Sh - new_human_infections
-            world.Nh = world.Sh + world.Ih + world.Rh
             
-            world.Iv = world.Iv + new_vector_infections
-            world.Sv = world.Sv - new_vector_infections
-            world.Nv = world.Sv + world.Iv
-            world:notify()
-        end
-    }
+            local new_vector_infections = (model.betav * model.biting/model.Nh) * model.Sv * model.Ih
+            if new_vector_infections > model.Sv then
+               new_vector_infections = model.Sv
+            end
+                        
+            model.Rh = model.Rh + (model.gamma * model.Ih)
+            model.Ih = model.Ih + new_human_infections - (model.gamma * model.Ih)
+            model.Sh = model.Sh - new_human_infections
+            model.Nh = model.Sh + model.Ih + model.Rh
+            
+            model.Iv = model.Iv + new_vector_infections
+            model.Sv = model.Sv - new_vector_infections
+            model.Nv = model.Sv + model.Iv
+            
+            if (output) then
+               model:notify(ev)
+            end
+                
+         end}
+      }
+   end
 }
 
-t:execute(steps)
-print("READY");
-io.flush();
+world:run()

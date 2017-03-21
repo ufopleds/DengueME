@@ -22,51 +22,49 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_SyncModels
 {
 public:
-    QWidget *verticalLayoutWidget;
+    QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout;
     QSpacerItem *verticalSpacer;
     QLabel *label;
-    QProgressBar *progressBar;
     QListView *listView;
+    QProgressBar *progressBar;
     QHBoxLayout *horizontalLayout;
-    QPushButton *downloadButton;
     QPushButton *updateButton;
+    QPushButton *downloadButton;
     QPushButton *cancelButton;
 
     void setupUi(QDialog *SyncModels)
     {
         if (SyncModels->objectName().isEmpty())
             SyncModels->setObjectName(QStringLiteral("SyncModels"));
-        SyncModels->resize(375, 271);
-        verticalLayoutWidget = new QWidget(SyncModels);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 10, 361, 251));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
+        SyncModels->resize(582, 454);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(SyncModels->sizePolicy().hasHeightForWidth());
+        SyncModels->setSizePolicy(sizePolicy);
+        SyncModels->setMinimumSize(QSize(582, 454));
+        SyncModels->setMaximumSize(QSize(582, 454));
+        horizontalLayout_2 = new QHBoxLayout(SyncModels);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(10, 10, QSizePolicy::Minimum, QSizePolicy::Fixed);
 
         verticalLayout->addItem(verticalSpacer);
 
-        label = new QLabel(verticalLayoutWidget);
+        label = new QLabel(SyncModels);
         label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
-        progressBar = new QProgressBar(verticalLayoutWidget);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setValue(0);
-
-        verticalLayout->addWidget(progressBar);
-
-        listView = new QListView(verticalLayoutWidget);
+        listView = new QListView(SyncModels);
         listView->setObjectName(QStringLiteral("listView"));
         listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         listView->setTabKeyNavigation(true);
@@ -76,26 +74,35 @@ public:
 
         verticalLayout->addWidget(listView);
 
+        progressBar = new QProgressBar(SyncModels);
+        progressBar->setObjectName(QStringLiteral("progressBar"));
+        progressBar->setValue(0);
+
+        verticalLayout->addWidget(progressBar);
+
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        downloadButton = new QPushButton(verticalLayoutWidget);
+        updateButton = new QPushButton(SyncModels);
+        updateButton->setObjectName(QStringLiteral("updateButton"));
+
+        horizontalLayout->addWidget(updateButton);
+
+        downloadButton = new QPushButton(SyncModels);
         downloadButton->setObjectName(QStringLiteral("downloadButton"));
         downloadButton->setEnabled(false);
 
         horizontalLayout->addWidget(downloadButton);
 
-        updateButton = new QPushButton(verticalLayoutWidget);
-        updateButton->setObjectName(QStringLiteral("updateButton"));
-
-        horizontalLayout->addWidget(updateButton);
-
-        cancelButton = new QPushButton(verticalLayoutWidget);
+        cancelButton = new QPushButton(SyncModels);
         cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         horizontalLayout->addWidget(cancelButton);
 
 
         verticalLayout->addLayout(horizontalLayout);
+
+
+        horizontalLayout_2->addLayout(verticalLayout);
 
 
         retranslateUi(SyncModels);
@@ -106,10 +113,10 @@ public:
 
     void retranslateUi(QDialog *SyncModels)
     {
-        SyncModels->setWindowTitle(QApplication::translate("SyncModels", "SyncModels", 0));
-        label->setText(QApplication::translate("SyncModels", "Check and Download Model Updates.", 0));
+        SyncModels->setWindowTitle(QApplication::translate("SyncModels", "Update Models Library", 0));
+        label->setText(QApplication::translate("SyncModels", "Check and download updates in Model Library", 0));
+        updateButton->setText(QApplication::translate("SyncModels", "Check updates", 0));
         downloadButton->setText(QApplication::translate("SyncModels", "Download", 0));
-        updateButton->setText(QApplication::translate("SyncModels", "Check Updates", 0));
         cancelButton->setText(QApplication::translate("SyncModels", "Close", 0));
     } // retranslateUi
 

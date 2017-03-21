@@ -14,7 +14,7 @@ TextScreenGroup::TextScreenGroup(QWidget *parent):
 
     QFont font;
     font.setBold(true);
-    ui->label->setFont(font);
+    ui->userLabel->setFont(font);
     ui->addField->setText(tr("Add variable"));
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
@@ -22,14 +22,16 @@ TextScreenGroup::TextScreenGroup(QWidget *parent):
     QMenu   *menu     = new QMenu(this);
 
     connect(ui->useGroup, SIGNAL(toggled(bool)), SLOT(togglePlotCheckbox(bool)));
-    connect(ui->label, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
+    connect(ui->observerID, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
 
     ui->addField->setVisible(false);
     ui->useGroup->setText("Use Text Screen:");
     ui->removeGroup->setText("Remove text screen");
-    ui->label->setFrame(true);
-    ui->label->setText(tr("New Text Screen"));
+    ui->observerID->setFrame(true);
+    ui->userLabel->setFrame(true);
+    ui->userLabel->setText(tr("New Text Screen"));
     ui->addField->setMenu(menu);
+    ui->useGroup->setChecked(true);
 
     addVariable();
 }
@@ -43,8 +45,8 @@ TextScreenGroup::~TextScreenGroup(){
 void TextScreenGroup::validateId(QString name){
 
     if (!QRegExp("[A-Za-z0-9_]+").exactMatch(name)){
-        ui->label->setText(purgeName(name));
-        QToolTip::showText(  ui->label->mapToGlobal(QPoint(0,  ui->label->height())),
+        ui->observerID->setText(purgeName(name));
+        QToolTip::showText(  ui->observerID->mapToGlobal(QPoint(0,  ui->observerID->height())),
                              tr("The id name can contain only\nalphanumeric chars and,"
                                 " \nunderscore (_)."));
     }
@@ -73,7 +75,7 @@ QDomDocument TextScreenGroup::getXml() {
 
 
     QDomElement root = ret.createElement("outTextScreen");
-    root.setAttribute("label", ui->label->text());
+    root.setAttribute("label", ui->userLabel->text());
     root.setAttribute("id", ui->observerID->text());
     root.setAttribute("output", ui->useGroup->isChecked() ? "true": "false");
     for (int i = 0; i < ui->widgets->count(); ++i) {
@@ -90,7 +92,7 @@ QDomDocument TextScreenGroup::getXml() {
 void TextScreenGroup::setXml(QDomElement root){
 
     ui->widgets->clear();
-    ui->label->setText(root.attribute("label"));
+    ui->userLabel->setText(root.attribute("label"));
     ui->observerID->setText(root.attribute("id"));
     if(root.attribute("output") == "true"){
         ui->useGroup->setChecked(true);
@@ -98,7 +100,7 @@ void TextScreenGroup::setXml(QDomElement root){
         ui->useGroup->setChecked(false);
     }
     QDomElement node = root.firstChildElement();
-    if (node.nodeName() == "txtScreenVariable") {
+    if (node.nodeName() == "variable") {
         addComponent(new TextScreenField)->setXml(node);
     }
 
@@ -113,10 +115,11 @@ void TextScreenGroup::setEditMode(bool enable){
     }
 
     ui->observerID->setVisible(enable);
-    ui->label->setFrame(enable);
+    ui->userLabel->setFrame(enable);
+    ui->observerID->setFrame(enable);
     ui->removeGroup->setVisible(enable);
 
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 
 
     if(ui->useGroup->isChecked()){
@@ -134,7 +137,7 @@ void TextScreenGroup::setEditMode(bool enable){
             }
         }
     }
-    ui->useGroup->setText("Use this Text Screen view?");
+    ui->useGroup->setText("Use Text Screen: ");
     if (enable) {
         ui->widgets->setSelectionMode(QAbstractItemView::SingleSelection);
     } else {
@@ -144,7 +147,7 @@ void TextScreenGroup::setEditMode(bool enable){
 
 void TextScreenGroup::setRemovable(bool enable){
     ui->removeGroup->setVisible(enable);
-    ui->label->setReadOnly(!enable);
+    ui->userLabel->setReadOnly(!enable);
 }
 
 

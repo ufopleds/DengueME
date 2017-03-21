@@ -44,9 +44,9 @@ public:
         sizePolicy.setHeightForWidth(list->sizePolicy().hasHeightForWidth());
         list->setSizePolicy(sizePolicy);
         list->setMaximumSize(QSize(100, 16777215));
-        list->setFrameShape(QFrame::NoFrame);
-        list->setFrameShadow(QFrame::Plain);
-        list->setLineWidth(0);
+        list->setFrameShape(QFrame::StyledPanel);
+        list->setFrameShadow(QFrame::Sunken);
+        list->setLineWidth(1);
         list->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         list->setIconSize(QSize(48, 48));

@@ -57,7 +57,8 @@ public slots:
     bool onActionOptions();
     void onActionDelete();
     void onActionClone();
-    void onActionCsv( );
+    void onActionCsv();
+    void configureField();
 };
 
 #endif // FIELD_H

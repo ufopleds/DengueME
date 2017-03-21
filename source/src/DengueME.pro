@@ -73,7 +73,8 @@ SOURCES += main.cpp \
     editor/components/logfield.cpp \
     editor/components/textscreenfield.cpp \
     editor/components/visualtablefield.cpp \
-    editor/loggroup.cpp
+    editor/loggroup.cpp \
+    builder/modeldocument.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -120,7 +121,8 @@ HEADERS  += \
     editor/components/logfield.h \
     editor/components/textscreenfield.h \
     editor/components/visualtablefield.h \
-    editor/loggroup.h
+    editor/loggroup.h \
+    builder/modeldocument.h
 
 FORMS    += \
     mainwindow.ui \
@@ -145,7 +147,8 @@ FORMS    += \
     editor/components/logfield.ui \
     editor/components/textscreenfield.ui \
     editor/components/visualtablefield.ui \
-    editor/components/vttsfield.ui
+    editor/components/vttsfield.ui \
+    builder/modeldocument.ui
 
 RESOURCES += \
     Resource.qrc

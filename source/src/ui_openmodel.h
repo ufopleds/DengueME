@@ -14,9 +14,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 #include <workspaceview.h>
 
 QT_BEGIN_NAMESPACE
@@ -24,38 +27,62 @@ QT_BEGIN_NAMESPACE
 class Ui_OpenModel
 {
 public:
-    QPushButton *ok;
-    WorkspaceView *treeView;
-    QPushButton *cancel;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
+    WorkspaceView *treeView;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *ok;
+    QPushButton *cancel;
 
     void setupUi(QDialog *OpenModel)
     {
         if (OpenModel->objectName().isEmpty())
             OpenModel->setObjectName(QStringLiteral("OpenModel"));
         OpenModel->setWindowModality(Qt::NonModal);
-        OpenModel->resize(535, 402);
+        OpenModel->resize(532, 402);
+        OpenModel->setMinimumSize(QSize(532, 402));
+        OpenModel->setMaximumSize(QSize(532, 402));
         QIcon icon;
         icon.addFile(QStringLiteral("Resources/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         OpenModel->setWindowIcon(icon);
         OpenModel->setModal(true);
-        ok = new QPushButton(OpenModel);
-        ok->setObjectName(QStringLiteral("ok"));
-        ok->setGeometry(QRect(350, 370, 75, 23));
+        verticalLayout = new QVBoxLayout(OpenModel);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        label = new QLabel(OpenModel);
+        label->setObjectName(QStringLiteral("label"));
+
+        verticalLayout->addWidget(label);
+
         treeView = new WorkspaceView(OpenModel);
         treeView->setObjectName(QStringLiteral("treeView"));
-        treeView->setGeometry(QRect(10, 20, 511, 341));
         treeView->setContextMenuPolicy(Qt::CustomContextMenu);
         treeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
         treeView->setSortingEnabled(true);
         treeView->setAnimated(true);
         treeView->setHeaderHidden(true);
+
+        verticalLayout->addWidget(treeView);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        ok = new QPushButton(OpenModel);
+        ok->setObjectName(QStringLiteral("ok"));
+
+        horizontalLayout->addWidget(ok);
+
         cancel = new QPushButton(OpenModel);
         cancel->setObjectName(QStringLiteral("cancel"));
-        cancel->setGeometry(QRect(440, 370, 75, 23));
-        label = new QLabel(OpenModel);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 0, 511, 20));
+
+        horizontalLayout->addWidget(cancel);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
 
         retranslateUi(OpenModel);
 
@@ -65,9 +92,9 @@ public:
     void retranslateUi(QDialog *OpenModel)
     {
         OpenModel->setWindowTitle(QApplication::translate("OpenModel", "Open Model", 0));
-        ok->setText(QApplication::translate("OpenModel", "Ok", 0));
+        label->setText(QApplication::translate("OpenModel", "<html><head/><body><p><span style=\" font-size:xx-large; font-weight:600;\">Personal library of models</span><br/>Select the model to be opened</p></body></html>", 0));
+        ok->setText(QApplication::translate("OpenModel", "Open", 0));
         cancel->setText(QApplication::translate("OpenModel", "Cancel", 0));
-        label->setText(QApplication::translate("OpenModel", "Select one model.", 0));
     } // retranslateUi
 
 };

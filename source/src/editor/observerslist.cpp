@@ -51,11 +51,11 @@ QDomDocument ObserversList::getXml(){
 
         if(objectType == "ChartGroup"){
             group = dynamic_cast<ChartGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
-        }  else if(objectType == "TextScreenGroup"){
+        } else if(objectType == "TextScreenGroup"){
             group = dynamic_cast<TextScreenGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
         } else if(objectType == "VisualTableGroup"){
             group = dynamic_cast<VisualTableGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
-        }else if(objectType == "LogGroup"){
+        }else{
             group = dynamic_cast<LogGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
         }
         if (group){
@@ -103,7 +103,7 @@ void ObserversList::setEditMode(bool enable){
             if (group)
                 group->setEditMode(enable);
         }
-        else if(objectType == "LogGroup"){
+        else{
             LogGroup *group = dynamic_cast<LogGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
             if (group)
                 group->setEditMode(enable);
@@ -139,7 +139,7 @@ QString ObserversList::genLua(){
         }else if(objectType == "VisualTableGroup"){
             group = dynamic_cast<VisualTableGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
 
-        }else if(objectType == "LogGroup"){
+        }else{
             group = dynamic_cast<LogGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
 
         }

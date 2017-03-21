@@ -38,6 +38,8 @@ private slots:
     void removeFile();
     void renameFile();
     void onInterpreterChanged(int r);
+    void add();
+    void del();
 
 signals:
     void interpreterChanged(Interpreter);

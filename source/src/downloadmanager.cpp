@@ -17,6 +17,7 @@ void DownloadManager::download(QUrl url){
         connect(_pHTTP, SIGNAL(addLine(QString)), this, SLOT(localAddLine(QString)));
         connect(_pHTTP, SIGNAL(progress(int)), this, SLOT(localProgress(int)));
         connect(_pHTTP, SIGNAL(downloadComplete()), this, SLOT(localDownloadComplete()));
+        connect(_pHTTP, SIGNAL(downloadError()), this, SLOT(localDownloadError()));
         _pHTTP->download(url);
 
 }
@@ -30,6 +31,10 @@ void DownloadManager::localProgress(int nPercentage){
     emit progress(nPercentage);
 }
 
+void DownloadManager::localDownloadError(){
+
+    emit downloadError();
+}
 
 void DownloadManager::localDownloadComplete(){
 

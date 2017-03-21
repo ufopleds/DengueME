@@ -30,15 +30,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="label">
-       <property name="toolTip">
-        <string>Group name</string>
-       </property>
+      <widget class="QLineEdit" name="observerID">
        <property name="styleSheet">
         <string notr="true">QLineEdit { background-color:transparent; }</string>
        </property>
        <property name="text">
-        <string>New group</string>
+        <string>ID</string>
        </property>
        <property name="frame">
         <bool>false</bool>
@@ -46,12 +43,31 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="observerID">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>10</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="userLabel">
+       <property name="toolTip">
+        <string>Group name</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit { background-color:transparent; }</string>
        </property>
        <property name="text">
-        <string>New groupID</string>
+        <string>Label</string>
        </property>
        <property name="frame">
         <bool>false</bool>
