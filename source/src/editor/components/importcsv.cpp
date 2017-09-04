@@ -19,8 +19,6 @@ ImportCsv::ImportCsv(QWidget *parent) :
     QAction *actionCombobox = new QAction(tr("C&ombobox"),menu);
     QAction *actionCsv = new QAction(tr("Csv"),menu);
 
-
-
     actionCsv->setCheckable(true);
     actionBoolean->setCheckable(true);
     actionText->setCheckable(true);
@@ -46,12 +44,12 @@ ImportCsv::ImportCsv(QWidget *parent) :
     connect(actionBoolean,  &QAction::triggered, this, [this]{ onMorph("Boolean"); });
 
     connect(ui->toolDelete,   SIGNAL(clicked()), SLOT(onActionDelete()));
-     connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
+    connect(ui->toolClone,   SIGNAL(clicked()), SLOT(onActionClone()));
 
-     ui->toolOptions->setEnabled(false);
-     ui->toolOptions->setToolTip("Options");
-     ui->toolDelete->setToolTip("Delete");
-     ui->toolClone->setToolTip("Clone");
+    ui->toolOptions->setEnabled(false);
+    ui->toolOptions->setToolTip("Options");
+    ui->toolDelete->setToolTip("Delete");
+    ui->toolClone->setToolTip("Clone");
     ui->options->setMenu(menu);
 }
 
@@ -108,7 +106,7 @@ QString ImportCsv::genLua()
 
 QString ImportCsv::genR()
 {
-    QString ret = ui->var->text() + " = c(";
+    QString ret = ui->var->text() + " <- c(";
     ret += ui->textEdit->toPlainText().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
     ret += ")\n";
     return ret;

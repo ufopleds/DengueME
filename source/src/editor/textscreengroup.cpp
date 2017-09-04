@@ -186,7 +186,34 @@ QString TextScreenGroup::genLua(){
 }
 
 QString TextScreenGroup::genR(){
-    return "";
+    QString ret,textScreen, select;
+
+    if(ui->useGroup->isChecked()){
+
+        select =ui->observerID->text()+ "Select <- c(";
+        textScreen =  ui->observerID->text()+" <- TRUE";
+
+        TextScreenField *comp =  dynamic_cast<TextScreenField *>(map.value(ui->widgets->item(0)));
+
+        if (comp){
+
+            ret = comp->genLua();
+            if(ret !="FALSE"){
+                QStringList values = ret.split(',');
+                for(int i = 0;i<values.count();i++){
+                    select += "\"" + values.value(i)+"\",";
+                }
+                select.remove(select.size()-1,1);
+                select+= ")";
+            }
+            else{
+                select =ui->observerID->text()+ "Select <- ()";
+            }
+        }
+        return  ret =  textScreen+"\n"+ select+"\n";
+    }else{
+        return ret = ui->observerID->text()+"<- FALSE\n";
+    }
 }
 
 

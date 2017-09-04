@@ -284,7 +284,21 @@ QString LogField::genLua(){
 }
 
 QString LogField::genR(){
-    return "";
+    QString ret ="";
+    ret.append(ui->fileName->text()+",");
+    ret.append(ui->overwrite->isChecked()? "TRUE," : "FALSE,");
+    if(ui->separator->currentText() ==","){
+        ret.append("comma,");
+    }else{
+        ret.append(ui->separator->currentText()+",");
+    }
+
+    for (int i = 0; i < ui->useVarList->rowCount(); ++i) {
+        ret.append(ui->useVarList->item(i,0)->text()+",");
+
+    }
+    ret.remove(ret.size()-1,1);
+    return ret;
 }
 
 void LogField::setWidget(QWidget *widget){

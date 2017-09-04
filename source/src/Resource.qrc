@@ -36,6 +36,7 @@
         <file>Resources/leftDArrow.png</file>
         <file>Resources/rightDArrow.png</file>
         <file>Resources/download.png</file>
+        <file>Resources/calc_icon_gray.png</file>
     </qresource>
     <qresource prefix="/">
         <file>Resources/simulation.png</file>

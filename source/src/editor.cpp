@@ -246,8 +246,8 @@ void Editor::execModel(bool stepByStep){
     QString model = modelInfo.baseName();
     QString dir = modelInfo.path();
 
-    if (interpreter.isOpen())
-        interpreter.kill();
+   // if (interpreter.isOpen())
+    //    interpreter.kill();
 
     if (view_model->interpreter() == view_model->TerraME) {
         QFile input(dir + '/' + model + "_input.lua");
@@ -284,17 +284,45 @@ void Editor::execModel(bool stepByStep){
 
         interpreter.start(dengueme::config("terrame"), args);
     } else if (view_model->interpreter() == view_model->RScript) {
+
         QFile input(dir + '/' + model + "_input.r");
         input.open(QFile::WriteOnly | QFile::Truncate);
         QTextStream out(&input);
 
+        out << "# INPUT FILE\n";
+        out <<  "print(\'LOADING INPUT FILE AND RUNNING MODEL\')\n";
+
+        out << "\n# DEPENDENCIES\n";
+        out << "MODEL_RVERSION <- " << "\"3.4.1\"" << "\n";
+        out << "DEPENDENCIES <- " << "data.frame(lib = c(\"deSolve\"), version = c(\"1.20\"), stringsAsFactors = F)\n";
+
+        out << "\n# PATH CONFIG\n";
+        out << "MODEL_PATH <- \"" + DEFAULT_MODELS_DIR + "\"\n";
+        out << "BASE_PATH <- \"" + dir + "\"\n";
+        out << "SCRIPT_PATH <- \"" + view_model->scriptDir() + "\"\n";
+        out << "RESULTS_PATH <- BASE_PATH\n";
+
+        out << "\n# checking dependencies\n";
+        out << "USER_RVERSION <- package_version(R.version)\n";
+        out << "USER_PACKINFO <- installed.packages(fields = c(\"Package\", \"Version\"))\n";
+        out << "source(paste0(MODEL_PATH, \"dmelib.r\"))\n";
+        out << "dmelib_check_dependencies(modelRVersion = MODEL_RVERSION, modelDependences = DEPENDENCIES, userRVersion = USER_RVERSION, userLibs = USER_PACKINFO)\n";
+
+        if (enableDatabase->isChecked())
+            out << database->outData();
+
+        out << "\n# PARAMETERS\n";
         out << parametersGroup->genR();
+
+        out << "\n# SIMULATION\n";
         out << simulationGroup->genR();
 
-        out << "BASE_PATH = \"" + dir + "\"\n";
-        out << "SCRIPT_PATH =\"" + view_model->scriptDir() + "\"\n";
-        out <<"setwd(SCRIPT_PATH) # Path that all plots will be saved. R Workspace. \n";
+        out << "\n# RESULTS";
+        out << resultsGroup->genR();
+
+        out<< "\n# LOADING MODEL  \n";
         out << "source(paste0(SCRIPT_PATH, \"/" << view_model->mainScript() << "\"))\n";
+
         input.close();
 
         QStringList args;
@@ -420,8 +448,6 @@ void Editor::readyReadStandardError(){
 void Editor::readyReadStandardOutput(){
     emit output (1, interpreter.readAllStandardOutput());
 }
-
-
 
 void Editor::onInterpreterFinished(int exitCode){
 

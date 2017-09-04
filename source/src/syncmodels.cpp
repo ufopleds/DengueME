@@ -220,7 +220,7 @@ void SyncModels::finished(){
     dengueme::saveconfig("modelsVersion",version);
     dengueme::setconfig("modelsVersion",version);
 
-    QString file =ABS_APP_DIR;
+    QString file = ABS_APP_DIR;
     QUrl url = QUrl::fromLocalFile(file);
     QDesktopServices::openUrl(url);
 

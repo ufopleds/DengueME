@@ -222,7 +222,68 @@ QString ChartGroup::genLua(){
 
 
 QString ChartGroup::genR(){
-    return "";
+    QString ret,chart, select, label, style, color;
+
+    chart = ui->observerID->text()+"<- FALSE\n";
+    int countFalse = 0;
+
+    if(ui->useGroup->isChecked()){
+
+        select = ui->observerID->text()+ "Select <- c(";
+        label = ui->observerID->text()+"Label <- c(";
+        style = ui->observerID->text()+ "Style <- c(";
+        color = ui->observerID->text()+"Color <- c(";
+        chart = ui->observerID->text()+" <- TRUE";
+
+        for (int i = 0; i < ui->widgets->count(); ++i) {
+
+            ChartField *comp =  dynamic_cast<ChartField *>(map.value(ui->widgets->item(i)));
+
+            if (comp){
+
+                ret = comp->genR();
+
+                if(ret !="FALSE"){
+                    QStringList values = ret.split(',');
+                    select+="\""+values.value(1)+"\",";
+                    label+="\""+values.value(0)+"\",";
+                    color+="\""+values.value(2)+"\",";
+                    QString rstyle;
+                    if (!values.value(3).compare("lines")){
+                        rstyle = "l";
+                    } else if (!values.value(3).compare("dots")){
+                        rstyle = "o";
+                    } else if (!values.value(3).compare("steps")){
+                        rstyle = "s";
+                    } else {
+                        rstyle = "h";
+                    }
+                    style+="\""+rstyle+"\",";
+                }
+                else{
+                    countFalse++;
+                    ret = "";
+                }
+            }
+        }
+        select.remove(select.size()-1,1);
+        label.remove(label.size()-1,1);
+        style.remove(style.size()-1,1);
+        color.remove(color.size()-1,1);
+
+        select+= ")";
+        label+= ")";
+        style+= ")";
+        color+= ")";
+
+        ret =chart+"\n"+ select+"\n"+label+"\n"+style+"\n"+color+"\n";
+    }
+
+    if(ui->widgets->count() == countFalse || !ui->useGroup->isChecked() ){
+        ret =     ui->observerID->text()+"<- FALSE \n";
+    }
+
+    return ret;
 }
 
 

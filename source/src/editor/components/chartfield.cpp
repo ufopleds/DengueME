@@ -176,10 +176,17 @@ QString ChartField::genLua(){
 }
 
 QString ChartField::genR(){
-    if (!type || !widget) return QString();
+    QString ret ="";
+    ret = "FALSE";
+    if(ui->checkUse->isChecked()){
+        ret = "";
+        ret.append(ui->chartLabel->text()+",");
+        ret.append(ui->selectId->text()+",");
+        ret.append(ui->color->currentText()+",");
+        ret.append(ui->style->currentText());
 
-
-    return "";
+    }
+    return ret;
 }
 
 void ChartField::updateMenu(){

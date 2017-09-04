@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <QtXml>
 #include "../component.h"
+#include "calculator/lepton/Lepton.h"
 
 namespace Ui {
 class Field;
@@ -14,7 +15,7 @@ class Field : public Component
     Q_OBJECT
 
 public:
-    enum FieldType { Null, Text = 1, Integer, Floating, Checkbox, Combobox,Boolean};
+    enum FieldType { Null, Text = 1, Integer, Floating, Checkbox, Combobox,Boolean, Equation};
 
     QMap<QString, QString> attr;
     QWidget *widget;
@@ -30,7 +31,7 @@ public:
     QString genR();
 
 private:
-    QMenu *menu;
+    QMenu   *menu;
     QAction *actionText;
     QAction *actionBoolean;
     QAction *actionCsv;
@@ -38,11 +39,13 @@ private:
     QAction *actionFloating;
     QAction *actionCheckbox;
     QAction *actionCombobox;
+    QAction *actionEquation;
     QAction *actionOptions;
     QAction *actionDelete;
     QAction *actionClone;
     Ui::Field *ui;
     FieldType type;
+    Lepton::Parser parser;
 
     void updateMenu();
     void setWidget(QWidget *widget);
@@ -57,8 +60,14 @@ public slots:
     bool onActionOptions();
     void onActionDelete();
     void onActionClone();
+    void onActionEquation();
     void onActionCsv();
     void configureField();
+    void onActionCalculator();
+
+private slots:
+    void onSentEquation(QString);
+
 };
 
 #endif // FIELD_H

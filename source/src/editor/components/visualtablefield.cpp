@@ -244,7 +244,17 @@ QString VisualTableField::genLua(){
 }
 
 QString VisualTableField::genR(){
-    return "";
+    QString ret ="";
+
+    if(ui->useVarList->rowCount() == 0)
+        return "FALSE";
+
+    for (int i = 0; i < ui->useVarList->rowCount(); ++i) {
+        ret.append(ui->useVarList->item(i,0)->text()+",");
+
+    }
+    ret.remove(ret.size()-1,1);
+    return ret;
 }
 
 void VisualTableField::updateMenu(){

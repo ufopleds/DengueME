@@ -49,7 +49,8 @@ public slots:
     Field *addText();
     Field *addInteger();
     Field *addFloating();
-  //  Field *addCheckbox();
+    Field *addEquation();
+  //Field *addCheckbox();
     Field *addCombobox();
     ImportCsv *addCsv();
     Component *addComponent(Component *comp);

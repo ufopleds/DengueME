@@ -2,13 +2,18 @@
 #define DENGUEME_H
 
 #include <QFile>
-#include <QDir>
+#include <QtCore/QDir>
+#include <iostream>
 #include <QString>
 #include <QSettings>
+#include <QDir>
 
 #define ABS_APP_DIR QFileInfo(QCoreApplication::applicationFilePath()).absolutePath()
+
 #ifdef Q_OS_LINUX
     #define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/../share/dengueme/Models/")
+#elif defined(Q_OS_MACOS)
+    #define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/Models/")
 #else
     #define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/Models/")
 #endif
@@ -38,6 +43,7 @@ namespace dengueme {
     NameValidation validateName(QString path, QString name, QString ext);
     QString purgeName(QString name);
     QList<QPair<QString, QStringList> > model_types();
+    bool copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit);
 
 
 }

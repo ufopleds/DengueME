@@ -148,8 +148,6 @@ QString ObserversList::genLua(){
             QStringList splitRet = luaRet.split('=');
             qDebug() << splitRet.value(0);
             if(luaRet.contains("false")){
-
-
                 output+= splitRet.value(0)+ " or ";
             }else{
                 output+= splitRet.value(0)+ " or ";
@@ -166,7 +164,45 @@ QString ObserversList::genLua(){
 }
 
 QString ObserversList::genR(){
-    return "";
+
+    if(ui->widgets->count() == 0)
+        return  "";
+
+    QString ret,RRet,output;
+    output+= "output <- ";
+    Component *group;
+    for (int i = 0; i < ui->widgets->count(); ++i) {
+        QString objectType = ui->widgets->itemWidget(ui->widgets->item(i))->metaObject()->className() ;
+        if(objectType == "ChartGroup"){
+            group = dynamic_cast<ChartGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
+
+        }else if(objectType == "TextScreenGroup"){
+            group = dynamic_cast<TextScreenGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
+
+        }else if(objectType == "VisualTableGroup"){
+            group = dynamic_cast<VisualTableGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
+
+        }else{
+            group = dynamic_cast<LogGroup *>(ui->widgets->itemWidget(ui->widgets->item(i)));
+
+        }
+        if (group){
+            RRet = group->genR();
+            QStringList splitRet = RRet.split(QRegExp("<-"));
+            qDebug() << splitRet.value(0);
+            if(RRet.contains("FALSE")){
+                output+= splitRet.value(0)+ " | ";
+            }else{
+                output+= splitRet.value(0)+ " | ";
+            }
+            ret += "\n" +RRet;
+        }
+    }
+    output.remove(output.size()-3,4);
+    output+= "\n";
+    ret = ret +"\n"+ output ;
+
+    return ret;
 }
 
 

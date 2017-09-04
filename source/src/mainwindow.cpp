@@ -1,4 +1,6 @@
 #include <QDialog>
+#include <QDir>
+#include <iostream>
 
 #include "mainwindow.h"
 #include "dengueme.h"
@@ -15,8 +17,6 @@
 #include "descriptionwindow.h"
 #include "dirmodel.h"
 #include "syncmodels.h"
-
-
 
 
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
@@ -322,11 +322,13 @@ void MainWindow::actionRename() {
 }
 
 void MainWindow::actionRun() {
-    if(ui->editorView->isVisible()) {
-        setState(Running);
-        if(! ui->editor->isRunning()) ui->editor->execModel(false);
-        else ui->editor->stopModel();
-    }
+    //if(ui->editorView->isVisible()) {
+       // setState(Running);
+      //  if(! ui->editor->isRunning()) ui->editor->execModel(false);
+     //   else ui->editor->stopModel();
+    //}
+
+    ui->editor->execModel(false);
 }
 
 

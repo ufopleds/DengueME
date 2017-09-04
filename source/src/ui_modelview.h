@@ -75,7 +75,7 @@ public:
     {
         if (ModelView->objectName().isEmpty())
             ModelView->setObjectName(QStringLiteral("ModelView"));
-        ModelView->resize(372, 630);
+        ModelView->resize(386, 699);
         ModelView->setAutoFillBackground(true);
         ModelView->setFrameShape(QFrame::StyledPanel);
         ModelView->setFrameShadow(QFrame::Sunken);
@@ -326,7 +326,7 @@ public:
         interpreter->clear();
         interpreter->insertItems(0, QStringList()
          << QApplication::translate("ModelView", "TerraME", 0)
-         << QApplication::translate("ModelView", "Rscript", 0)
+         << QApplication::translate("ModelView", "R", 0)
         );
         label_11->setText(QApplication::translate("ModelView", "Version:", 0));
         label_3->setText(QApplication::translate("ModelView", "Interpreter:", 0));

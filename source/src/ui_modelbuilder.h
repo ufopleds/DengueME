@@ -167,7 +167,7 @@ public:
         ModelBuilder->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ModelBuilder);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1000, 21));
+        menubar->setGeometry(QRect(0, 0, 1000, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuHelp = new QMenu(menubar);

@@ -33,6 +33,7 @@ public:
     QLineEdit *descript;
     QWidget *container;
     QHBoxLayout *horizontalLayout_2;
+    QToolButton *toolCalculator;
     QToolButton *options;
     QToolButton *toolClone;
     QToolButton *toolOptions;
@@ -89,6 +90,16 @@ public:
 
         horizontalLayout->addWidget(container);
 
+        toolCalculator = new QToolButton(Field);
+        toolCalculator->setObjectName(QStringLiteral("toolCalculator"));
+        toolCalculator->setStyleSheet(QStringLiteral("border: none;"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/img/Resources/calc_icon_gray.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolCalculator->setIcon(icon);
+        toolCalculator->setIconSize(QSize(24, 24));
+
+        horizontalLayout->addWidget(toolCalculator);
+
         options = new QToolButton(Field);
         options->setObjectName(QStringLiteral("options"));
         options->setPopupMode(QToolButton::InstantPopup);
@@ -101,9 +112,9 @@ public:
         toolClone = new QToolButton(Field);
         toolClone->setObjectName(QStringLiteral("toolClone"));
         toolClone->setStyleSheet(QStringLiteral("border: none;"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/Resources/clone.png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolClone->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/Resources/clone.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolClone->setIcon(icon1);
         toolClone->setIconSize(QSize(24, 24));
         toolClone->setPopupMode(QToolButton::InstantPopup);
         toolClone->setAutoRaise(true);
@@ -113,9 +124,9 @@ public:
         toolOptions = new QToolButton(Field);
         toolOptions->setObjectName(QStringLiteral("toolOptions"));
         toolOptions->setStyleSheet(QStringLiteral("border: none;"));
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolOptions->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/Resources/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolOptions->setIcon(icon2);
         toolOptions->setIconSize(QSize(24, 24));
         toolOptions->setPopupMode(QToolButton::InstantPopup);
         toolOptions->setAutoRaise(true);
@@ -125,9 +136,9 @@ public:
         toolDelete = new QToolButton(Field);
         toolDelete->setObjectName(QStringLiteral("toolDelete"));
         toolDelete->setStyleSheet(QStringLiteral("border: none;"));
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/img/Resources/Trash-52 (2).png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolDelete->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/img/Resources/Trash-52 (2).png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolDelete->setIcon(icon3);
         toolDelete->setIconSize(QSize(24, 24));
         toolDelete->setToolButtonStyle(Qt::ToolButtonIconOnly);
         toolDelete->setAutoRaise(true);
@@ -159,6 +170,7 @@ public:
 #ifndef QT_NO_TOOLTIP
         container->setToolTip(QApplication::translate("Field", "Default value", 0));
 #endif // QT_NO_TOOLTIP
+        toolCalculator->setText(QApplication::translate("Field", "...", 0));
         options->setText(QApplication::translate("Field", "Type", 0));
         toolClone->setText(QApplication::translate("Field", "...", 0));
         toolClone->setShortcut(QApplication::translate("Field", "Ctrl++", 0));

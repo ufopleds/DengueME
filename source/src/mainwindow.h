@@ -3,7 +3,6 @@
 
 #include <QtCore>
 #include <QtWidgets>
-
 #include "helpbrowser.h"
 
 namespace Ui {

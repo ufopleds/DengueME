@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>372</width>
-    <height>630</height>
+    <width>386</width>
+    <height>699</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -282,7 +282,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Rscript</string>
+             <string>R</string>
             </property>
            </item>
           </widget>

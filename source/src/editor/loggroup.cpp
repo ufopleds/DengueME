@@ -195,15 +195,48 @@ QString LogGroup::genLua(){
           return ret = ui->observerID->text()+"= false";
     }
 
-
-
-
-
 }
 
 
 QString LogGroup::genR(){
-    return "";
+    QString ret,log, select, label, separator, filename, overwrite;
+    int count=0;
+    if(ui->useGroup->isChecked()){
+        select =ui->observerID->text()+ "Select <- c(";
+        overwrite = ui->observerID->text()+"Overwrite <- ";
+        separator =ui->observerID->text()+ "Separator <- ";
+        filename = ui->observerID->text()+"File <- paste0(RESULTS_PATH, ";
+
+        for (int i = 0; i < ui->widgets->count(); ++i) {
+            LogField *comp =  dynamic_cast<LogField *>(map.value(ui->widgets->item(i)));
+            if (comp){
+                log =  ui->observerID->text()+" <- TRUE";
+                ret = comp->genR();
+                    QStringList values = ret.split(',');
+                    qDebug() << values;
+                    filename+="\"/"+values.value(0);
+                    overwrite +=values.value(1);
+                    separator+="\""+values.value(2)+"\"";
+                    for(int i = 3;i<values.count();i++){
+                        select += "\"" + values.value(i)+"\",";
+                        count++;
+                    }
+
+            }
+        }
+        if(count >0)
+             select.remove(select.size()-1,1);
+        filename.append(".csv");
+        select+= ")";
+        filename+= "\"";
+        if(separator.contains("comma"))
+            separator = ui->observerID->text()+"Separator <- \",\" ";
+        ret =  log+"\n"+ select+"\n"+separator+"\n"+filename+")\n"+overwrite +"\n";
+
+        return ret;
+    }else{
+          return ret = ui->observerID->text()+"<- FALSE";
+    }
 }
 
 

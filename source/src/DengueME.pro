@@ -7,6 +7,7 @@
 QT += core xml network
 QT += help
 QT += widgets
+QT += core
 
 TARGET = dengueme
 TEMPLATE = app
@@ -74,7 +75,14 @@ SOURCES += main.cpp \
     editor/components/textscreenfield.cpp \
     editor/components/visualtablefield.cpp \
     editor/loggroup.cpp \
-    builder/modeldocument.cpp
+    builder/modeldocument.cpp \
+    calculator/lepton/CompiledExpression.cpp \
+    calculator/lepton/ExpressionProgram.cpp \
+    calculator/lepton/ExpressionTreeNode.cpp \
+    calculator/lepton/Operation.cpp \
+    calculator/lepton/ParsedExpression.cpp \
+    calculator/lepton/Parser.cpp \
+    calculator/calculator.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -122,7 +130,18 @@ HEADERS  += \
     editor/components/textscreenfield.h \
     editor/components/visualtablefield.h \
     editor/loggroup.h \
-    builder/modeldocument.h
+    builder/modeldocument.h \
+    calculator/lepton/CompiledExpression.h \
+    calculator/lepton/CustomFunction.h \
+    calculator/lepton/Exception.h \
+    calculator/lepton/ExpressionProgram.h \
+    calculator/lepton/ExpressionTreeNode.h \
+    calculator/lepton/Lepton.h \
+    calculator/lepton/Operation.h \
+    calculator/lepton/ParsedExpression.h \
+    calculator/lepton/Parser.h \
+    calculator/lepton/windowsIncludes.h \
+    calculator/calculator.h
 
 FORMS    += \
     mainwindow.ui \
@@ -148,7 +167,8 @@ FORMS    += \
     editor/components/textscreenfield.ui \
     editor/components/visualtablefield.ui \
     editor/components/vttsfield.ui \
-    builder/modeldocument.ui
+    builder/modeldocument.ui \
+    calculator/calculator.ui
 
 RESOURCES += \
     Resource.qrc

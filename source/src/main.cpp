@@ -1,14 +1,13 @@
 #include <QApplication>
+#include <QStandardPaths>
 
 #include "dengueme.h"
 #include "changeworkspace.h"
 #include "mainwindow.h"
 #include "newmodel.h"
 
-
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-
 
     /* To generate the translate file, please use these commands in terminal
      * lupdate -pro DengueME.pro -ts languageName.ts
@@ -17,6 +16,18 @@ int main(int argc, char *argv[]) {
      * use lrelease languageName.ts
      * a .qm file will be created, put this file on the translations folder
     */
+
+    #if defined(Q_OS_MACOS)
+        QDir modelsDir(ABS_APP_DIR);
+        modelsDir.cdUp();
+        modelsDir.cdUp();
+        modelsDir.cdUp();
+        if (!QDir(ABS_APP_DIR + "/Models/").exists()){
+            QDir().mkdir(ABS_APP_DIR + "/Models/");
+        }
+        QString modelsPath = modelsDir.absolutePath() + "/Models/";
+        dengueme::copy_dir_recursive(modelsPath, ABS_APP_DIR + "/Models/", 1);
+    #endif
 
     QDir dir(QCoreApplication::applicationDirPath() + "/translations/");
     if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "English") {

@@ -19,13 +19,14 @@ Group::Group(QWidget *parent) :
 
     connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
 
-    QMenu   *menu     = new QMenu(this);
-    QAction *boolean = new QAction("&Boolean field",menu);
-    QAction *text     = new QAction("&Text field", menu);
-    QAction *integer  = new QAction("&Integer field", menu);
-    QAction *floating = new QAction("&Floating field", menu);
-    QAction *combobox = new QAction("C&ombobox", menu);
-    QAction *csv      = new QAction("C&SV", menu);
+    QMenu   *menu      = new QMenu(this);
+    QAction *boolean   = new QAction("&Boolean field",menu);
+    QAction *combobox  = new QAction("C&ombobox", menu);
+    QAction *csv       = new QAction("C&SV", menu);
+    QAction *equation  = new QAction("&Equation", menu);
+    QAction *floating  = new QAction("&Floating field", menu);
+    QAction *integer   = new QAction("&Integer field", menu);
+    QAction *text      = new QAction("&Text field", menu);
 
     menu->addAction(boolean);
     menu->addAction(text);
@@ -33,14 +34,15 @@ Group::Group(QWidget *parent) :
     menu->addAction(floating);
     menu->addAction(combobox);
     menu->addAction(csv);
+    menu->addAction(equation);
 
-    connect(boolean, SIGNAL(triggered()),SLOT(addBoolean()));
+    connect(boolean,  SIGNAL(triggered()), SLOT(addBoolean()));
     connect(text,     SIGNAL(triggered()), SLOT(addText()));
     connect(integer,  SIGNAL(triggered()), SLOT(addInteger()));
     connect(floating, SIGNAL(triggered()), SLOT(addFloating()));
     connect(combobox, SIGNAL(triggered()), SLOT(addCombobox()));
     connect(csv,      SIGNAL(triggered()), SLOT(addCsv()));
-
+    connect(equation, SIGNAL(triggered()), SLOT(addEquation()));
 
     ui->useGroup->setVisible(false);
     ui->useGroup->setEnabled(false);
@@ -203,6 +205,9 @@ void Group::cloneField(){
     else if("Combobox" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
         addCombobox();
     }
+    else if("Equation" ==  ui->widgets->item( ui->widgets->row(map.key((Field *) field)))->toolTip()){
+        addEquation();
+    }
     else if("ImportCsv" ==   QObject::sender()->objectName()){
         addCsv();
     }
@@ -218,6 +223,18 @@ Field *Group::addText(){
 
     return field;
 }
+
+
+Field *Group::addEquation(){
+
+    Field *field = new Field;
+    field->onActionEquation();
+    field->setToolTip("Equation");
+    addComponent(field);
+
+    return field;
+}
+
 Field *Group::addBoolean(){
 
     Field *field = new Field;
@@ -297,6 +314,8 @@ void Group::morphField(QString type){
         addFloating();
     else if(type == "Combobox")
         addCombobox();
+    else if(type == "Equation")
+        addEquation();
 
 }
 
