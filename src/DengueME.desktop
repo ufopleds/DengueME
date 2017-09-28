@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=DengueME
+GenericName=DengueME
+Comment=Dengue Modeling Environment
+Exec=dengueme %U
+Terminal=false
+Type=Application
+StartupNotify=true
+#Icon=
+

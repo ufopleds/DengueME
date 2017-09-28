@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Coupled Model</title>
+  </head>
+  <body>
+   <h2>Path</h2>
+    <p>
+     <b>Results Path:</b> Informe o nome da pasta na qual os resultados da simulação serão armazenados. Se você desejar manter os resultados de uma simulação, altere o nome desta pasta antes de executar novamente o modelo.
+    </p>
+    <p>
+     <b>Save Images:</b> Define se serão ou não salvas imagens com o estado do modelo.
+    </p>
+    <p>
+     <b>Frequency to save images:</b> Informe a frequência com que as imagens serão salvas, ou seja, a cada quantos passos de tempo.
+    </p>
+    <p>
+     <b>Show observer map:</b> Define se será exibido o observer mostrando a execução do modelo.
+    </p>
+    <p>
+     <b>Save Logfile:</b> Define se a saída do modelo será salva em arquivo.
+    </p>
+   <h2>Database</h2>
+    <p>
+     <b>dbType:</b> Informe o tipo de base de dados a ser utilizado pelo modelo. É possível utilizar como base de dados um banco de dados Mysql ou Access. Também é possível criar um espaço celular virtual (grade de células). A base de dados pode ser construída utilizando um Sistema de Informações Geográficas (SIG), como, por exemplo, o TerraView.
+    </p>
+    <h3>Mysql</h3>
+     <p>
+      <b>Database:</b> Informe o nome do banco de dados utilizado no modelo.
+     </p>
+     <p>
+      <b>Layer:</b> Informe o layer do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Theme:</b> Informe o tema do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Select:</b> Informe as colunas da tabela de atributos a serem utilizadas pelo modelo.
+     </p>
+     <p>
+      <b>Host:</b> Informe o host do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>User:</b> Informe o nome do usuário do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>Password:</b> Informe a senha do usuário do banco de dados a ser utilizado.
+     </p>
+    <h3>Access</h3>
+     <p>
+      <b>Access Database file:</b> Selecione o arquivo do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>Layer:</b> Informe o layer do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Theme:</b> Informe o tema do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Select:</b> Informe as colunas da tabela de atributos a serem utilizadas pelo modelo.
+     </p>
+    <h3>Virtual</h3>
+     <p>
+      <b>xdim, ydim:</b> Informe a dimensão do espaço celular a ser criado.
+     </p>
+   <h2>Parameters about humans</h2>
+    <p>
+     <b>Use Population Data:</b> Define se o modelo utilizará dados de população reais, carregados do BD ou não.
+    </p>
+    <p>
+     <b>Population Attribute:</b> Informe o nome do atributo da célula que contém os dados de população, isto é, a coluna do BD onde estão estes dados.
+    </p>
+    <p>
+     <b>Population Percentage:</b> Informe a porcentagem da população carregada do BD que será utilizada pelo modelo. Deve ser um valor maior que 0 e menor ou igual a 1
+    </p>
+    <p>
+     <b>Percentage of cells with humans:</b> Informe a porcentagem de células que são ocupadas por humanos (deve ser um número real maior 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Annual human renewal rate:</b> Informe o percentual anual de pessoas que serão renovadas (deve ser um número real maior ou igual a 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Daily mobility rate:</b> Informe que percentual da população humana irá visitar outras células (deve ser um número real maior ou igual a 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Daily mobility rate to public locations:</b> Informe que percentual de humanos, dentro do conjunto diário de humanos que visitam outras células, vai visitar as locações públicas (padarias, farmácias, comércio em geral, áreas de lazer, etc) (deve ser um número real maior ou igual a 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Percentage of assymptomatic infected humans:</b> Informe a porcentagem de humanos infectados que não apresentam sintomas da dengue (deve ser um número real maoir ou igual a 0 e menor ou igual a 1).
+    </p>
+   <h2>Parameters about vectors</h2>
+    <p>
+     <b>Percentage of cells with vectors:</b> Informe a porcentagem de células que contém mosquitos (deve ser um numero real maior que 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Probability of migration:</b> Informe a probabilidade de um mosquito voar para uma célula vizinha (deve ser um número real maoir ou igual a 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Daily survival probability:</b> Informe a probabilidade diária de sobrevivência do mosquito (deve ser um número real maior que 0 e menor que 1).
+    </p>
+    <p>
+     <b>Maximum proportion of vectors by human:</b> Informe a proporção máxima de mosquitos (fêmeas) por humanos (deve ser um número real maior que 0).
+    </p>
+    <p>
+     <b>Bite frequency:</b> Informe a taxa média diária de pessoas que o mosquito pica (deve ser um número real maior que 0).
+    </p>
+   <h2>Contamination probabilities</h2>
+    <p>
+     <b>Transmission probability from human to vector:</b> Informe a probabilidade de um humano infectar um mosquito (deve ser um número real maior que 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Transmission probability from vector to human:</b> Informe a probabilidade de um mosquito infectar um humano (deve ser um número real maior que 0 e menor ou igual a 1).
+    </p>
+   <h2>Parameters about location and time</h2>
+    <p>
+     <b>Percentage of cells with public locations:</b> Informe a porcentagem de células que contém locações públicas em seu interior (deve ser um número real maior ou igual a 0 e menor ou igual a 1).
+    </p>
+    <p>
+     <b>Total number of days:</b> Informe o número total de dias (deve ser um número inteiro maior que 0).
+    </p>
+   <h2>Parameters for initial conditions</h2>
+    <p>
+     <b>Initial number of infected humans:</b> Informe a quantidade inicial de humanos infectados (deve ser um número inteiro maior que 0).
+    </p>
+    <p>
+     <b>Initial numbers of recovered humans:</b>Informe a quantidade inicial de humanos recuperados (deve ser um número inteiro maior ou igual a 0).
+    </p>
+  </body>
+</html>
+

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DoubleSpinBoxRules</class>
+ <widget class="QDialog" name="DoubleSpinBoxRules">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>193</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Double Spin Box Settings</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Precision:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="precision">
+       <property name="maximum">
+        <number>323</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Mininum:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="minimum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Maximum:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="maximum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="step">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Single step:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>295</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>precision</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>precisionChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>37</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>minimum</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>minimumChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>59</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>maximum</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>maximumChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>175</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>80</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>step</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DoubleSpinBoxRules</receiver>
+   <slot>stepChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>110</x>
+     <y>187</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>precisionChanged(int)</slot>
+  <slot>minimumChanged(double)</slot>
+  <slot>maximumChanged(double)</slot>
+  <slot>stepChanged(double)</slot>
+ </slots>
+</ui>

@@ -1,0 +1,13 @@
+QMAKE_DEFAULT_INCDIRS = \
+    c:/mingw/lib/gcc/mingw32/6.3.0/include/c++ \
+    c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32 \
+    c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/backward \
+    c:/mingw/lib/gcc/mingw32/6.3.0/include \
+    c:/mingw/include \
+    c:/mingw/lib/gcc/mingw32/6.3.0/include-fixed \
+    c:/mingw/mingw32/include
+QMAKE_DEFAULT_LIBDIRS = \
+    c:/mingw/lib/gcc/mingw32/6.3.0 \
+    c:/mingw/lib/gcc \
+    c:/mingw/mingw32/lib \
+    c:/mingw/lib

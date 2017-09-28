@@ -1,0 +1,5 @@
+<xmlmodel type="Lua">
+  <simulation label="Simulation">    
+    <field type="spinbox" minimum="0" description= "Steps"  maximum="1000000000" id="steps" label="Simulation steps:">0</field>    
+  </simulation>
+</xmlmodel>

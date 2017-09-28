@@ -1,0 +1,77 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>Resources/delete.png</file>
+        <file>Resources/error.png</file>
+        <file>Resources/exit.png</file>
+        <file>Resources/folder-new.png</file>
+        <file>Resources/folder-open.png</file>
+        <file>Resources/folder.png</file>
+        <file>Resources/help.png</file>
+        <file>Resources/logo.png</file>
+        <file>Resources/model-new.png</file>
+        <file>Resources/model.png</file>
+        <file>Resources/open.png</file>
+        <file>Resources/preferences-system.png</file>
+        <file>Resources/rename.png</file>
+        <file>Resources/run-step.png</file>
+        <file>Resources/run.png</file>
+        <file>Resources/save-as.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/configure.png</file>
+        <file>Resources/ok.png</file>
+        <file>Resources/database.png</file>
+        <file>Resources/parameters.png</file>
+        <file>Resources/simulation.png</file>
+        <file>Resources/results.png</file>
+        <file>Resources/clone.png</file>
+        <file>Resources/components.png</file>
+        <file>Resources/about.png</file>
+        <file>Resources/close.png</file>
+        <file>Resources/Synchronize-64.png</file>
+        <file>Resources/builderTool.png</file>
+        <file>Resources/Trash-52 (1).png</file>
+        <file>Resources/Trash-52 (2).png</file>
+        <file>Resources/stop.png</file>
+        <file>Resources/leftDArrow.png</file>
+        <file>Resources/rightDArrow.png</file>
+        <file>Resources/download.png</file>
+        <file>Resources/calc_icon_gray.png</file>
+        <file>Resources/dengueme.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>Resources/simulation.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/save-as.png</file>
+        <file>Resources/run.png</file>
+        <file>Resources/run-step.png</file>
+        <file>Resources/results.png</file>
+        <file>Resources/rename.png</file>
+        <file>Resources/preferences-system.png</file>
+        <file>Resources/plus</file>
+        <file>Resources/parameters.png</file>
+        <file>Resources/open.png</file>
+        <file>Resources/ok.png</file>
+        <file>Resources/model.png</file>
+        <file>Resources/model-new.png</file>
+        <file>Resources/minus.png</file>
+        <file>Resources/logo.png</file>
+        <file>Resources/help.png</file>
+        <file>Resources/folder.png</file>
+        <file>Resources/folder-open.png</file>
+        <file>Resources/folder-new.png</file>
+        <file>Resources/exit.png</file>
+        <file>Resources/error.png</file>
+        <file>Resources/delete.png</file>
+        <file>Resources/database.png</file>
+        <file>Resources/configure.png</file>
+        <file>Resources/components.png</file>
+        <file>Resources/clone.png</file>
+        <file>Resources/builderTool.png</file>
+        <file>Resources/close.png</file>
+        <file>Resources/stop.png</file>
+        <file>Resources/leftDArrow.png</file>
+        <file>Resources/rightDArrow.png</file>
+        <file>Resources/download.png</file>
+        <file>Resources/FontAwesome.otf</file>
+    </qresource>
+</RCC>

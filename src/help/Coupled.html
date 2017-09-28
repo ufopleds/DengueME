@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>Coupled Model</title>
+  </head>
+  <body>
+   <h2>Path</h2>
+    <p>
+     <b>Results Path:</b> Informe o nome da pasta na qual os resultados da simulação serão armazenados. Se você desejar manter os resultados de uma simulação, altere o nome desta pasta antes de executar novamente o modelo.
+    </p>
+   <h2>Logfile</h2>
+    <p>
+     <b>Name of results file:</b> Informe o nome do arquivo .csv que armazenará os resultados da simulação.
+    </p>
+    <p>
+     <b>Atributes to save in results file:</b> Selecione os atributos a serem armazenados como resultados da simulação.
+    </p>
+   <h2>Simulation</h2>
+    <p>
+     <b>Debug mode:</b> Simulação em modo de depuração. Exibe informações detalhadas durante a execução do modelo. Em geral, essa opção é utilizada para testes.
+    </p>
+    <p>
+     <b>Simulation start/end time:</b> Informe o intervalo de tempo (tempo inicial e tempo final) da simulação.
+    </p>
+    <p>
+     <b>Save results start/end time:</b> Informe o intervalo de tempo (tempo inicial e tempo final) no qual os resultados serão armazenados.
+    </p>
+   <h2>ODE</h2>
+    <p>
+     <b>Step:</b> Informe o passo de integração das Equações Diferenciais Ordinárias (EDOs) do modelo.
+    </p>
+   <h2>Constants</h2>
+    <h3>Carrying capacity (K):</h3>
+     <p>
+      Informe a capacidade de suporte para o modelo. Essa constante está presente no termo logístico que controla o crescimento da população. Em geral é baseado em características ambientais do local de estudo.
+     </p>
+    <h3>Mortality Rates:</h3>
+     <p>
+      <b>Eggs:</b> Informe a taxa de mortalidade natural da população de ovos.
+     </p>
+     <p>
+      <b>Larvae:</b> Informe a taxa de mortalidade natural da população de larvas.
+     </p>
+     <p>
+      <b>Pupae:</b> Informe a taxa de mortalidade natural da população de pupas.
+     </p>
+     <p>
+      <b>Mosquitoes:</b> Informe a taxa de mortalidade natural da população de adultos.
+     </p>
+    <h3>Development Rates:</h3>
+     <p>
+      <b>Eggs:</b> Informe a taxa de desenvolvimento de ovos.
+     </p>
+     <p>
+      <b>Larvae:</b> Taxa de desenvolvimento de larvas.
+     </p>
+     <p>
+      <b>Pupae:</b> Taxa de desenvolvimento de pupas.
+     </p>
+    <h3>Temperature time series:</h3>
+     <p>
+      Informe a temperatura (constante) ou a série temporal de temperatura da região estudada. Se a temperatura for constante ao longo do tempo basta informar o valor desejado. Caso a temperatura seja dada por uma série temporal, é necessário informar os valores das temperaturas separados por vírgula. Neste caso, também é possível importar os valores de temperatura armazenados em um arquivo .csv (sem cabeçalho) através do botão "import from csv". É possível obter estes dados de fontes públicas, por exemplo, INMET e CPTEC.
+     </p>
+   <h2>Population</h2>
+    <p>
+     <b>Population Scale:</b> Informe a escala da população (0 a 1). Este atributo permite escalar a quantidade da população escolhida. Por exemplo, pode-se realizar a simulação utilizando somente 10% da população, definindo o valor como 0.1. Assim, é possível executar o modelo mais rapidamente para a obtenção de resultados e realização de testes.
+    </p>
+    <p>
+     <b>Population type:</b> Informe o tipo de população que deseja espacializar no modelo. Para isto, basta escolher o tipo de população: oviposition (considera apenas os ovos depositados sem a diminuição desses ovos causada pela morte natural, nesse caso, utilizamos a população de ovos), eggs, larvae, pupae, mosquitoes.
+    </p>
+   <h2>Database</h2>
+    <p>
+     <b>dbType:</b> Informe o tipo de base de dados a ser utilizado pelo modelo. É possível utilizar como base de dados um banco de dados Mysql ou Access. Também é possível criar um espaço celular virtual (grade de células). A base de dados pode ser construída utilizando um Sistema de Informações Geográficas (SIG), como, por exemplo, o TerraView.
+    </p>
+    <h3>Mysql</h3>
+     <p>
+      <b>Database:</b> Informe o nome do banco de dados utilizado no modelo.
+     </p>
+     <p>
+      <b>Layer:</b> Informe o layer do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Theme:</b> Informe o tema do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Select:</b> Informe as colunas da tabela de atributos a serem utilizadas pelo modelo.
+     </p>
+     <p>
+      <b>Host:</b> Informe o host do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>User:</b> Informe o nome do usuário do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>Password:</b> Informe a senha do usuário do banco de dados a ser utilizado.
+     </p>
+    <h3>Access</h3>
+     <p>
+      <b>Access Database file:</b> Selecione o arquivo do banco de dados a ser utilizado.
+     </p>
+     <p>
+      <b>Layer:</b> Informe o layer do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Theme:</b> Informe o tema do banco a ser utilizado.
+     </p>
+     <p>
+      <b>Select:</b> Informe as colunas da tabela de atributos a serem utilizadas pelo modelo.
+     </p>
+    <h3>Virtual</h3>
+     <p>
+      <b>xdim, ydim:</b> Informe a dimensão do espaço celular a ser criado.
+     </p>
+   <h2>Observer</h2>
+    <p>
+     <b>Legend scale:</b> Informe a escala da legenda. Este atributo permite escalar os valores dos atributos de uma legenda. Por exemplo, suponha que o valor da população desejada varia entre 10 e 20 durante a simulação para uma determinada configuração dos parâmetros do modelo. E ao definir uma nova configuração de parâmetros para o modelo, este valor passou a variar entre 100 e 200. Neste caso, não é necessário definir novamente a legenda, basta ajustá-la para a escala adequada - multiplicando-a por 10 neste exemplo.
+    </p>
+    <p>
+     <b>Type:</b> Defina o tipo do atributo a ser observado. Pode ser: "bool", "number", "string", "datetime" (an ordered string)
+    </p>
+    <p>
+     <b>Grouping:</b> Informe a estratégia para agrupamento e coloração dos dados. Pode ser um dos seguintes tipos: equalsteps, quantil, stdeviation, uniquevalue.
+    </p>
+    <p>
+     <b>Slices:</b> Informe o número de cores a ser utilizada na visualização dos resultados.
+    </p>
+    <p>
+     <b>Precision:</b> Informe a precisão (número de casas decimais) do atributo a ser utilizada para visualização e geração dos resultados.
+    </p>
+    <p>
+     <b>StdDeviation:</b> Este atributo deve ser informado quando a estratégia de agrupamento escolhida for stdeviation, pondendo assumir um dos seguintes valores: "full", "half" "quarter", "none".
+    </p>
+    <p>
+     <b>Maximum:</b> Informe o valor máximo do atributo observado.
+    </p>
+    <p>
+     <b>Mininum:</b> Informe o valor mínimo do atributo observado.
+    </p>
+    <p>
+     <b>ColorBar:</b> Informe a tabela de cores a ser utilizada na visualização dos resultados. Cada elemento desta tabela é constituído por uma cor e o respectivo valor do atributo. Cada cor pode ser informada como uma string ("red", "green", "blue", "white", "black", "yellow", "brown", "cyan", "gray", "magenta"), ou como uma tabela com três valores representando a sua composição RGB. Por exemplo: "{00, 00, 00}").
+    </p>
+    <p>
+     <b>Generate map:</b> Selecione este parâmetro para gravar os resultados da simulação como mapas.
+    </p>
+    <p>
+     <b>View Execution:</b> Selecione este parâmetro se desejar visualizar a execução do modelo.
+    </p>
+  </body>
+</html>
+

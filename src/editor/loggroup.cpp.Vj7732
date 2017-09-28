@@ -1,0 +1,286 @@
+#include "loggroup.h"
+#include "ui_group.h"
+
+LogGroup::LogGroup(QWidget *parent):
+    Component(parent),
+    ui(new Ui::Group){
+
+    ui->setupUi(this);
+    defaultHeight = height();
+    setMinimumHeight(height());
+
+    listDefaultHeight = 64;
+    ui->widgets->setMaximumHeight(listDefaultHeight);
+
+    QFont font;
+    font.setBold(true);
+    ui->label->setFont(font);
+    ui->addField->setText(tr("Add log file"));
+
+    connect(ui->removeGroup, SIGNAL(clicked(bool)), SLOT(askRemoveGroup()));
+
+    QMenu   *menu     = new QMenu(this);
+    QAction *logVariable = new QAction(tr("&Log variable"), menu);
+
+    menu->addAction(logVariable);
+
+    connect(logVariable,      SIGNAL(triggered()), SLOT(addVariable()));
+    connect(ui->useGroup, SIGNAL(toggled(bool)), SLOT(togglePlotCheckbox(bool)));
+    connect(ui->label, SIGNAL(textChanged(QString)), this, SLOT(validateId(QString)));
+
+    ui->useGroup->setVisible(false);
+    ui->removeGroup->setText("Remove log");
+    ui->label->setFrame(true);
+    ui->label->setText(tr("New Log"));
+    ui->addField->setMenu(menu);
+
+}
+
+LogGroup::~LogGroup(){
+    delete ui;
+}
+
+void LogGroup::validateId(QString name){
+
+    if (!QRegExp("[A-Za-z0-9_]+").exactMatch(name)){
+        ui->label->setText(purgeName(name));
+        QToolTip::showText(  ui->label->mapToGlobal(QPoint(0,  ui->label->height())),
+                             tr("The id name can contain only\nalphanumeric chars and,"
+                                " \nunderscore (_)."));
+    }
+}
+
+QString LogGroup::purgeName(QString name) {
+    return name.remove(QRegExp("[^A-Za-z0-9_]"));
+}
+
+void LogGroup::askRemoveGroup(){
+    int opt = QMessageBox::question(this,tr("Remove Log"),
+                                    tr("This action will remove the log and all properties that you set. Do you want to continue?"),
+                                    QMessageBox::Yes | QMessageBox::No);
+
+    if(opt == QMessageBox::Yes) {
+        onRemove();
+    }
+}
+
+void LogGroup::setLabel(QString label) {
+    ui->label->setText(label);
+}
+
+QDomDocument LogGroup::getXml() {
+
+    QDomDocument ret;
+    if (ui->widgets->count() == 0) return ret;
+    QDomElement root = ret.createElement("outLog");
+    root.setAttribute("label", ui->label->text());
+    root.setAttribute("output", ui->useGroup->isChecked() ? "true": "false");
+    for (int i = 0; i < ui->widgets->count(); ++i) {
+        Component *comp = map.value(ui->widgets->item(i));
+        if (comp)
+            root.appendChild(comp->getXml());
+    }
+    ret.appendChild(root);
+    return ret;
+}
+
+void LogGroup::setXml(QDomElement root){
+
+    ui->widgets->clear();
+    ui->label->setText(root.attribute("label"));
+    if(root.attribute("output") == "true"){
+        ui->useGroup->setChecked(true);
+    }else{
+        ui->useGroup->setChecked(false);
+    }
+
+
+
+    for (QDomElement node = root.firstChildElement(); !node.isNull(); node = node.nextSiblingElement()) {
+
+        if (node.nodeName() == "variable") {
+            ui->addField->setEnabled(false);
+            addComponent(new LogField)->setXml(node);
+        }
+    }
+}
+
+
+void LogGroup::setEditMode(bool enable)
+{
+    for (int i = 0; i < ui->widgets->count(); ++i) {
+        Component *comp = map.value(ui->widgets->item(i));
+        if (comp)
+            comp->setEditMode(enable);
+    }
+
+    ui->label->setFrame(enable);
+    ui->removeGroup->setVisible(enable);
+    ui->addField->setVisible(enable);
+    ui->label->setReadOnly(!enable);
+
+
+
+    for (int i = 0; i < ui->widgets->count(); ++i) {
+        LogField *comp =  dynamic_cast<LogField *>(map.value(ui->widgets->item(i)));
+        if (comp){
+            comp->offField();
+        }
+    }
+
+
+
+    if (enable) {
+        ui->widgets->setSelectionMode(QAbstractItemView::SingleSelection);
+    } else {
+        ui->widgets->setSelectionMode(QAbstractItemView::NoSelection);
+    }
+}
+
+void LogGroup::setRemovable(bool enable){
+    ui->removeGroup->setVisible(enable);
+    ui->label->setReadOnly(!enable);
+}
+
+QString LogGroup::genLua(){
+
+    QString ret,log, select, label, separator, filename, overwrite;
+    log = ui->label->text()+"= false\n";
+    int countFalse = 0;
+
+    select =ui->label->text()+ "Select = {";
+    overwrite = ui->label->text()+"Overwrite = ";
+    separator =ui->label->text()+ "Separator = ";
+    filename = ui->label->text()+"Filename = {";
+
+    for (int i = 0; i < ui->widgets->count(); ++i) {
+        LogField *comp =  dynamic_cast<LogField *>(map.value(ui->widgets->item(i)));
+        if (comp){
+            log =  ui->label->text()+" = true\n";
+            ret = comp->genLua();
+            if(ret !="false"){
+                QStringList values = ret.split(',');
+
+                filename+="\""+values.value(0);
+                overwrite+=values.value(1);;
+                separator+="\""+values.value(2)+"\"";
+                for(int i = 3;i<values.count();i++){
+                    select += "\"" + values.value(i)+"\",";
+                }
+
+            }
+            else{
+                ret = "false";
+            }
+        }
+    }
+    if(ret == "false"){
+        return ret;
+    }else{
+        select.remove(select.size()-1,1);
+        filename.append(".csv");
+
+
+        select+= "}";
+        filename+= "\"}";
+
+        ret =log+"\n"+ select+"\n"+separator+"\n"+filename+"\n"+overwrite +"\n";
+        qDebug() << ret;
+        return ret;
+    }
+
+
+}
+
+
+QString LogGroup::genR(){
+    return "";
+}
+
+
+//WORK
+void LogGroup::updateHeight(){
+
+    int height = 8;
+    //    int count = (ui->widgets->count() < 4) ? ui->widgets->count() : 4;
+    for (int i = 0; i < ui->widgets->count(); ++i)
+        height += ui->widgets->sizeHintForRow(i);
+
+    if (height < listDefaultHeight) height = listDefaultHeight;
+
+    ui->widgets->setMaximumHeight(height);
+
+    height = height + defaultHeight - listDefaultHeight;
+    setMinimumHeight(height);
+    emit heightChanged(height);
+}
+
+
+//WORK
+void LogGroup::removeField(){
+
+    QObject *field = QObject::sender();
+
+    delete ui->widgets->takeItem(ui->widgets->row(map.key((LogField *) field)));
+
+    updateHeight();
+    ui->addField->setEnabled(true);
+}
+
+
+void LogGroup::cloneField(){
+    addVariable();
+}
+
+void LogGroup::togglePlotCheckbox(bool enable){
+   /* for (int i = 0; i < ui->widgets->count(); ++i) {
+        LogField *comp =  dynamic_cast<LogField *>(map.value(ui->widgets->item(i)));
+        if (comp){
+            comp->offField(enable);
+        }
+    }*/
+}
+
+LogField *LogGroup::addVariable(){
+
+    LogField *field = new LogField;
+    field->onActionVariable();
+    field->setToolTip("Variable");
+    addComponent(field);
+    ui->addField->setEnabled(false);
+    return field;
+}
+
+
+void LogGroup::changeType(QString type){
+
+    QObject *field = QObject::sender();
+
+    ui->widgets->item( ui->widgets->row(map.key((LogField *) field)))->setToolTip(type);
+
+    updateHeight();
+}
+
+
+Component *LogGroup::addComponent(Component *comp){
+
+    QListWidgetItem *item = new QListWidgetItem;
+
+    item->setSizeHint(QSize(-1,comp->height()));
+    item->setToolTip(comp->toolTip());
+
+
+    ui->widgets->addItem(item);
+    ui->widgets->setItemWidget(item,comp);
+    ui->widgets->scrollToBottom();
+
+    connect(comp, SIGNAL(remove()), SLOT(removeField ()));
+    connect(comp, SIGNAL(clone()), SLOT(cloneField ()));
+    connect(comp, SIGNAL(changeType(QString)), SLOT(changeType (QString)));
+    map.insert(item, comp);
+
+
+    updateHeight();
+
+    return comp;
+}

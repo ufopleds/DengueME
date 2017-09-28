@@ -1,0 +1,28 @@
+<xmlmodel>
+  <script interpreter="TerraME">
+    <file>sirsi_basic_model.lua</file>
+    <main>sirsi_basic_model.lua</main>
+    <modelcategory>transmission</modelcategory>
+    <modeltype>sirsi_basic_model</modeltype>
+  </script>
+  <parameters>
+    <groupbox label="Human Population">
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of susceptible humans [1-999999999]" id="human_susceptible" label="Susceptible">9999</field>
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of infected humans [1-999999999]" id="human_infected" label="Infected">1</field>
+      <field minimum="0" maximum="1e+06" type="spinbox" description=" number of removed humans [1-999999999]" id="human_removed" label="Removed">0</field>
+    </groupbox>
+    <groupbox label="Vector Population">
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of susceptible vectors [1-999999999]" id="vector_susceptible" label="Susceptible">20000</field>
+      <field minimum="0" maximum="1e+06" type="spinbox" description="number of infected vectors [1-999999999]" id="vector_infected" label="Infected">0</field>
+    </groupbox>
+    <groupbox label="Rates">
+      <field minimum="0" maximum="1e+06" precision="2" description="average number of bites per mosquito per day [0-1000]" type="doublespinbox" id="vector_bites_rate" step="1" label="Vector bites rate">1</field>
+      <field minimum="0" maximum="1e+06" precision="3" description="human recovery rate [0-1]" type="doublespinbox" id="human_recovery_rate" step="0.1" label="Recovery rate of humans">0.167</field>
+      <field minimum="0" maximum="1e+06" precision="3" description="probability of transmission from vector to human [0-1]" type="doublespinbox" id="vector_human_transmission_rate" step="0.1" label="Probability of transmission from vector to human">0.4</field>
+      <field minimum="0" maximum="1e+06" precision="3" description="probability of transmission from human to vector [0-1]" type="doublespinbox" id="human_vector_transmission_rate" step="0.1" label="Probability of transmission from human to vector">0.4</field>
+    </groupbox>
+  </parameters>
+  <simulation label="Simulation">
+    <field minimum="0" maximum="1e+06" type="spinbox" description="simulation steps [0-999999999]" id="steps" label="Steps">120</field>
+  </simulation>
+</xmlmodel>
