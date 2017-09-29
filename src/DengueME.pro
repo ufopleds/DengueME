@@ -35,7 +35,6 @@ INSTALLS = target models shortcut
 SOURCES += main.cpp \
     mainwindow.cpp \
     dengueme.cpp \
-    editor/components/observer.cpp \
     options.cpp \
     about.cpp \
     changeworkspace.cpp \
@@ -83,7 +82,6 @@ SOURCES += main.cpp \
 HEADERS  += \
     mainwindow.h \
     dengueme.h \
-    editor/components/observer.h \
     options.h \
     about.h \
     changeworkspace.h \
