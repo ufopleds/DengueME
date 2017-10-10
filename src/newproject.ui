@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>480</height>
+    <height>290</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,6 +18,18 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>630</width>
+    <height>290</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>630</width>
+    <height>290</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>New Project</string>
@@ -295,6 +307,12 @@ padding: 5px 5px 5px 5px;</string>
         <property name="text">
          <string>OK</string>
         </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
      </layout>
@@ -302,6 +320,12 @@ padding: 5px 5px 5px 5px;</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>project_name</tabstop>
+  <tabstop>newModelCheckBox</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>okButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
