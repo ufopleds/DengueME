@@ -1,4 +1,3 @@
-#include <QDebug>
 #include "iconsFontAwesome.h"
 #include "dengueme.h"
 #include "newmodel.h"
