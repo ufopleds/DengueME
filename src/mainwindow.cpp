@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   ui->treeView->setWorkspace(dengueme::config("workspace"));
   ui->treeView->expandAll();
 
+  ui->treeView->setSelectionMode(QAbstractItemView::SingleSelection);
+
   this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setMinimumSize(760, 560);
   setState(Browsing);
@@ -66,7 +68,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->actionModelBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
   connect(ui->actionResetViews,   SIGNAL(triggered()), SLOT(actionResetViews()));
 
-  connect(ui->treeView, SIGNAL(clicked(QModelIndex)), SLOT(changeToolbar(QModelIndex)));
+  connect(ui->treeView->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), SLOT(changeToolbar(QModelIndex)));
   connect(ui->treeView, SIGNAL(activated(QModelIndex)), SLOT(modelActivated(QModelIndex)));
   connect(ui->treeView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(workspaceContextMenu(QPoint)));
 
