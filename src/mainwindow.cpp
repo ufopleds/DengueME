@@ -26,8 +26,6 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   ui->treeView->setWorkspace(dengueme::config("workspace"));
   ui->treeView->expandAll();
 
-  ui->treeView->setSelectionMode(QAbstractItemView::SingleSelection);
-
   this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
   setMinimumSize(760, 560);
   setState(Browsing);
