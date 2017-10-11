@@ -22,7 +22,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
 
   connect(ui->createButton, SIGNAL(clicked(bool)), this, SLOT(onCreateButton()));
 
-  connect(ui->projectslistWidget, SIGNAL(clicked(QModelIndex)), SLOT(enableNext()));
+  connect(ui->projectslistWidget, SIGNAL(itemSelectionChanged()), SLOT(enableNext()));
   connect(ui->projectslistWidget, SIGNAL(doubleClicked(QModelIndex)), SLOT(changePage()));
 
   connect(ui->typeComboBox, SIGNAL(activated(int)), this, SLOT(addNamesTypePage()));

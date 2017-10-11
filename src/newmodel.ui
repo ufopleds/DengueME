@@ -48,7 +48,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="modelProjectPge">
       <property name="sizePolicy">
@@ -246,6 +246,9 @@ padding: 5px 5px 5px 5px;</string>
            <widget class="QPushButton" name="cancelButtonPage1">
             <property name="text">
              <string>Cancel</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -625,6 +628,9 @@ padding: 5px 5px 5px 5px;</string>
             <property name="text">
              <string>Cancel</string>
             </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -644,6 +650,9 @@ padding: 5px 5px 5px 5px;</string>
            <widget class="QPushButton" name="previousButton">
             <property name="text">
              <string>Previous</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
