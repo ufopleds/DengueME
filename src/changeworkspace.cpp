@@ -22,6 +22,7 @@ ChangeWorkspace::ChangeWorkspace(QWidget* parent) :
     ui->workspaceLineEdit->setText(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/dengueme_workspace");
   else
     ui->workspaceLineEdit->setText(dengueme::config("workspace"));
+
 }
 
 ChangeWorkspace::~ChangeWorkspace() {

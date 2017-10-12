@@ -29,6 +29,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
   connect(ui->modelNameslistWidget, SIGNAL(currentTextChanged(QString)), SLOT(addDescription(QString)));
 
   connect(ui->idLineEdit, SIGNAL(textChanged(QString)), this, SLOT(checkIdLineEdit(QString)), Qt::UniqueConnection);
+  connect(ui->idLineEdit, SIGNAL(returnPressed()), ui->createButton, SIGNAL(clicked()));
 
   QList<QPair<QString, QStringList> > modelTypes = dengueme::model_types();
 
@@ -283,7 +284,7 @@ void NewModel::addProjects() {
     QListWidgetItem* item = new QListWidgetItem(x.fileName());
     ui->projectslistWidget->addItem(item);
     if (x.fileName() == project)
-      item->setSelected(true);
+      ui->projectslistWidget->setCurrentItem(item);
   }
 }
 void NewModel::checkIdLineEdit(const QString& str) {
