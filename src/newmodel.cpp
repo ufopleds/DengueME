@@ -29,7 +29,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
   connect(ui->modelNameslistWidget, SIGNAL(currentTextChanged(QString)), SLOT(addDescription(QString)));
 
   connect(ui->idLineEdit, SIGNAL(textChanged(QString)), this, SLOT(checkIdLineEdit(QString)), Qt::UniqueConnection);
-  connect(ui->idLineEdit, SIGNAL(returnPressed()), ui->createButton, SIGNAL(clicked()));
+  connect(ui->idLineEdit, SIGNAL(returnPressed()), this, SLOT(onCreateButton()));
 
   QList<QPair<QString, QStringList> > modelTypes = dengueme::model_types();
 
@@ -112,6 +112,9 @@ void NewModel::loadModelsInfo() {
 }
 
 void NewModel::onCreateButton() {
+  if (!ui->createButton->isEnabled())
+    return;
+
   this->close();
   QString data = modelsInfoHash[selectedModelID];
   QStringList info = data.split("$&*");
