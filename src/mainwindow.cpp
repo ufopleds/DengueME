@@ -321,6 +321,9 @@ void MainWindow::actionRename() {
     ui->editor->updateModelInfo(newPath);
   }
 
+  ui->actionRename->setEnabled(false);
+  ui->actionRemove->setEnabled(false);
+
 }
 
 void MainWindow::actionRun() {
@@ -350,6 +353,7 @@ void MainWindow::actionSetWorkspace() {
     ui->actionRemove->setEnabled(false);
     ui->actionRename->setEnabled(false);
   }
+  ui->treeView->clearSelection();
 }
 
 void MainWindow::actionModelBuilder() {
