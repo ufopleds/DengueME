@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->actionModelBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
   connect(ui->actionResetViews,   SIGNAL(triggered()), SLOT(actionResetViews()));
 
-  connect(ui->treeView, SIGNAL(clicked(QModelIndex)), SLOT(changeToolbar(QModelIndex)));
+  connect(ui->treeView->selectionModel(), SIGNAL(currentChanged(QModelIndex, QModelIndex)), SLOT(changeToolbar(QModelIndex)));
   connect(ui->treeView, SIGNAL(activated(QModelIndex)), SLOT(modelActivated(QModelIndex)));
   connect(ui->treeView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(workspaceContextMenu(QPoint)));
 
@@ -129,6 +129,8 @@ void MainWindow::setState(State state) {
       ui->actionRunByStep->setEnabled(false);
       ui->actionClose->setEnabled(false);
       ui->actionSave->setEnabled(false);
+      ui->actionRename->setEnabled(false);
+      ui->actionRemove->setEnabled(false);
       break;
 
     case Running:
@@ -186,8 +188,12 @@ void MainWindow::changeToolbar(QModelIndex index) {
   QFileInfo modelinfo(ui->treeView->fileInfo(index));
   if (modelinfo.isFile()) {
     ui->actionRename->setEnabled(true);
-  } else
+    ui->actionRemove->setEnabled(true);
+  } else {
+    ui->actionRemove->setEnabled(true);
     ui->actionRename->setEnabled(false);
+  }
+
 }
 
 void MainWindow::modelActivated(QModelIndex index) {
@@ -315,6 +321,9 @@ void MainWindow::actionRename() {
     ui->editor->updateModelInfo(newPath);
   }
 
+  ui->actionRename->setEnabled(false);
+  ui->actionRemove->setEnabled(false);
+
 }
 
 void MainWindow::actionRun() {
@@ -339,6 +348,12 @@ void MainWindow::actionAbout() {
 void MainWindow::actionSetWorkspace() {
   if (ChangeWorkspace(this).exec() == QDialog::Accepted)
     ui->treeView->setWorkspace(dengueme::config("workspace"));
+
+  if (ui->treeView->currentIndex().row() < 0 ) {
+    ui->actionRemove->setEnabled(false);
+    ui->actionRename->setEnabled(false);
+  }
+  ui->treeView->clearSelection();
 }
 
 void MainWindow::actionModelBuilder() {

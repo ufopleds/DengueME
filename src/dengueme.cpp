@@ -108,7 +108,6 @@ bool createModel(QString dest, QString type, QString category) {
   } else {
     QString user_models_dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme" + '/' + category + '/' + type;
 
-
     QFileInfo user_model(user_models_dir + '/' + type + ".xml");
 
     if (user_model.exists()) {
