@@ -348,6 +348,7 @@ void MainWindow::actionSetWorkspace() {
 
   if (ui->treeView->currentIndex().row() < 0 ) {
     ui->actionRemove->setEnabled(false);
+    ui->actionRename->setEnabled(false);
   }
 }
 
