@@ -9,10 +9,15 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
   project(project),
   QDialog(parent),
   ui(new Ui::NewModel) {
-
   ui->setupUi(this);
   this->setWindowModality(Qt::ApplicationModal);
-  this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+  this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
+  QFont fontAwesome;
+  fontAwesome.setFamily("FontAwesome");
+  fontAwesome.setPixelSize(12);
+  ui->icon_project->setFont(fontAwesome);
+  ui->icon_project->setText(ICON_FA_FOLDER_OPEN);
 
   connect(ui->cancelButtonPage1, SIGNAL(clicked()), this, SLOT(close()));
   connect(ui->cancelButtonType, SIGNAL(clicked()), this, SLOT(close()));
@@ -105,7 +110,6 @@ void NewModel::loadModelsInfo() {
       modelInfo.append(description);
 
       modelsInfoHash.insert(id, modelInfo);
-
     }
   }
 
@@ -274,6 +278,7 @@ QString NewModel::readXmlModel(QString path, QString tag) {
 
 void NewModel::enableNext() {
   ui->nextButtonPage1->setDisabled(false);
+  ui->project_name->setText(ui->projectslistWidget->currentItem()->text());
 }
 
 void NewModel::changePage() {
@@ -318,9 +323,17 @@ void NewModel::checkIdLineEdit(const QString& str) {
 
     case dengueme::FileExists:
       state = dengueme::FileExists;
-      ui->idLineEdit->setStyleSheet("border: 1px solid red");
-      ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  A model with this name already exists in current project."));
-      ui->createButton->setDisabled(true);
+      if (!QFile(path + QDir::separator() + str + ".xml").exists()) {
+        state = dengueme::ValidName;
+        if(ui->modelNameslistWidget->currentIndex().row() != -1)
+          ui->createButton->setDisabled(false);
+        ui->idLineEdit->setStyleSheet("");
+        ui->error_idLabel->setText("");
+      } else {
+        ui->idLineEdit->setStyleSheet("border: 1px solid red");
+        ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  A model with this name already exists in current project."));
+        ui->createButton->setDisabled(true);
+      }
       break;
 
     case dengueme::ValidName:

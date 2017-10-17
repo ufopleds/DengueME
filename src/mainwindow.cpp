@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->actionModelBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
   connect(ui->actionResetViews,   SIGNAL(triggered()), SLOT(actionResetViews()));
 
-  connect(ui->treeView, SIGNAL(itemSelectionChanged()), SLOT(changeToolbar(QModelIndex)));
+  connect(ui->treeView, SIGNAL(clicked(QModelIndex)), SLOT(changeToolbar(QModelIndex)));
   connect(ui->treeView, SIGNAL(activated(QModelIndex)), SLOT(modelActivated(QModelIndex)));
   connect(ui->treeView, SIGNAL(customContextMenuRequested(QPoint)), SLOT(workspaceContextMenu(QPoint)));
 
@@ -203,6 +203,8 @@ void MainWindow::modelActivated(QModelIndex index) {
   }
 }
 void MainWindow::actionNewModel(QString project) {
+
+  ui->treeView->clearSelection();
 
   NewModel n(dengueme::config("workspace"), project);
   connect(&n, SIGNAL(accepted(QString, QString, QString, QString)),
