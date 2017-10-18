@@ -9,8 +9,7 @@ NewProject::NewProject(QWidget* parent) :
   QDialog(parent),
   ui(new Ui::NewProject) {
   ui->setupUi(this);
-  this->setWindowModality(Qt::ApplicationModal);
-  this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+  this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   connect(ui->project_name, SIGNAL(textChanged(QString)), this, SLOT(checkLineEdited(QString)), Qt::UniqueConnection);
   connect(ui->cancelButton, SIGNAL(released()), this, SLOT(close()));

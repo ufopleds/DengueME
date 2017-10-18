@@ -3,7 +3,7 @@
  <class>NewProject</class>
  <widget class="QDialog" name="NewProject">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
