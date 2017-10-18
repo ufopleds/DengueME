@@ -9,8 +9,7 @@ ChangeWorkspace::ChangeWorkspace(QWidget* parent) :
   QDialog(parent),
   ui(new Ui::ChangeWorkspace) {
   ui->setupUi(this);
-  this->setWindowModality(Qt::ApplicationModal);
-  this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+  this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(ui->cancelButton, SIGNAL(released()), this, SLOT(close()));
