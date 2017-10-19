@@ -138,6 +138,10 @@ void NewModel::navigateBack() {
 void NewModel::navigateUp() {
   int indexPage = ui->stackedWidget->currentIndex();
   ui->stackedWidget->setCurrentIndex(indexPage + 1);
+  QString modelName = ui->idLineEdit->text();
+  if (!modelName.isEmpty())
+    checkIdLineEdit(modelName);
+
 }
 
 void NewModel::addTypeTypePage() {
@@ -246,6 +250,7 @@ void NewModel::addDescription(QString modelName) {
 
   if (!ui->idLineEdit->text().isEmpty())
     ui->createButton->setDisabled(false);
+  checkIdLineEdit(ui->idLineEdit->text());
 
   selectedModelID = key;
 }
@@ -325,7 +330,7 @@ void NewModel::checkIdLineEdit(const QString& str) {
       state = dengueme::FileExists;
       if (!QFile(path + QDir::separator() + str + ".xml").exists()) {
         state = dengueme::ValidName;
-        if(ui->modelNameslistWidget->currentIndex().row() != -1)
+        if(ui->modelNameslistWidget->currentIndex().row() != -1 && ui->modelNameslistWidget->currentItem()->text() != "TerraME" && ui->modelNameslistWidget->currentItem()->text() != "R")
           ui->createButton->setDisabled(false);
         ui->idLineEdit->setStyleSheet("");
         ui->error_idLabel->setText("");
@@ -339,7 +344,7 @@ void NewModel::checkIdLineEdit(const QString& str) {
     case dengueme::ValidName:
       if (state != dengueme::ValidName) {
         state = dengueme::ValidName;
-        if(ui->modelNameslistWidget->currentIndex().row() != -1)
+        if(ui->modelNameslistWidget->currentIndex().row() != -1 && ui->modelNameslistWidget->currentItem()->text() != "TerraME" && ui->modelNameslistWidget->currentItem()->text() != "R")
           ui->createButton->setDisabled(false);
         ui->idLineEdit->setStyleSheet("");
         ui->error_idLabel->setText("");
