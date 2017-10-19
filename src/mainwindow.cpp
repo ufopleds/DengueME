@@ -339,6 +339,7 @@ void MainWindow::actionAbout() {
 }
 
 void MainWindow::actionSetWorkspace() {
+  ui->treeView->clearSelection();
   if (ChangeWorkspace(this).exec() == QDialog::Accepted)
     ui->treeView->setWorkspace(dengueme::config("workspace"));
 }
