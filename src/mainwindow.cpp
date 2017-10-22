@@ -210,6 +210,8 @@ void MainWindow::modelActivated(QModelIndex index) {
 }
 void MainWindow::actionNewModel(QString project) {
 
+  ui->treeView->clearSelection();
+
   NewModel n(dengueme::config("workspace"), project);
   connect(&n, SIGNAL(accepted(QString, QString, QString, QString)),
           SLOT(newModel(QString, QString, QString, QString)));
@@ -346,6 +348,7 @@ void MainWindow::actionAbout() {
 }
 
 void MainWindow::actionSetWorkspace() {
+  ui->treeView->clearSelection();
   if (ChangeWorkspace(this).exec() == QDialog::Accepted)
     ui->treeView->setWorkspace(dengueme::config("workspace"));
 

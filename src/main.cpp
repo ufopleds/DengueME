@@ -23,11 +23,10 @@ int main(int argc, char* argv[]) {
   modelsDir.cdUp();
   if (!QDir(ABS_APP_DIR + "/Models/").exists()) {
     QDir().mkdir(ABS_APP_DIR + "/Models/");
+    QString modelsPath = modelsDir.absolutePath() + "/Models/";
+    dengueme::copy(modelsPath, ABS_APP_DIR + "/Models/", 1);
   }
-  QString modelsPath = modelsDir.absolutePath() + "/Models/";
-  dengueme::copy(modelsPath, ABS_APP_DIR + "/Models/", 1);
 #endif
-
   if (QFontDatabase::addApplicationFont(":/Resources/FontAwesome.otf") < 0)
     qWarning() << "FontAwesome cannot be loaded !";
 

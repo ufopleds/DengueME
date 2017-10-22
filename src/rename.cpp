@@ -11,9 +11,7 @@ RenameModel::RenameModel(QString path, QString name, QString extension, QWidget*
   state(dengueme::EmptyName),
   ui(new Ui::RenameModel) {
   ui->setupUi(this);
-
-  this->setWindowModality(Qt::ApplicationModal);
-  this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+  this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   ui->error_message->setText("");
   ui->okButton->setDisabled(true);

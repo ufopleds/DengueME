@@ -9,8 +9,7 @@ ChangeWorkspace::ChangeWorkspace(QWidget* parent) :
   QDialog(parent),
   ui(new Ui::ChangeWorkspace) {
   ui->setupUi(this);
-  this->setWindowModality(Qt::ApplicationModal);
-  this->setWindowFlags(Qt::Tool | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::CustomizeWindowHint);
+  this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(ui->cancelButton, SIGNAL(released()), this, SLOT(close()));
@@ -22,6 +21,7 @@ ChangeWorkspace::ChangeWorkspace(QWidget* parent) :
     ui->workspaceLineEdit->setText(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/dengueme_workspace");
   else
     ui->workspaceLineEdit->setText(dengueme::config("workspace"));
+
 }
 
 ChangeWorkspace::~ChangeWorkspace() {
@@ -49,7 +49,7 @@ void ChangeWorkspace::checkLineEdited(const QString& path) {
       ui->okButton->setEnabled(false);
   } else {
     ui->workspaceLineEdit->setStyleSheet("border: 1px solid red");
-    ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  Folder does not exist."));
+    ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  This Folder does not exist."));
     ui->okButton->setEnabled(false);
   }
 }

@@ -98,8 +98,7 @@ void ModelBuilder::modelActivated(QModelIndex index) {
 }
 
 void ModelBuilder::selectionChanged(const QModelIndex& current, const QModelIndex&) {
-  if(ui->modelFile->text() == ""){
-    qDebug()<<"Teste";
+  if(ui->modelFile->text() == "") {
     ui->actionNew->setEnabled(true);
     ui->actionEdit->setEnabled(true);
     ui->actionHelp->setEnabled(true);
@@ -144,7 +143,7 @@ void ModelBuilder::deleteModel() {
       }
       break;
     }
-    default:      
+    default:
       return;
   }
 
@@ -205,7 +204,7 @@ void ModelBuilder::setToolbar(int i) {
       ui->actionExit->setEnabled(true);
 
       ui->actionEdit->setEnabled(false);
-      ui->actionNew->setEnabled(false);     
+      ui->actionNew->setEnabled(false);
       break;
   }
 }
