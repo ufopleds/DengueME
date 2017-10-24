@@ -323,7 +323,7 @@ void NewModel::checkIdLineEdit(const QString& str) {
       state = dengueme::UnallowedChar;
       ui->createButton->setDisabled(true);
       ui->idLineEdit->setStyleSheet("border: 1px solid red");
-      ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_)"));
+      ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_)."));
       break;
 
     case dengueme::FileExists:
