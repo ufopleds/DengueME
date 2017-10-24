@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>546</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -656,7 +656,7 @@ padding: 5px 5px 5px 5px;</string>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>75</width>
+             <width>63</width>
              <height>20</height>
             </size>
            </property>

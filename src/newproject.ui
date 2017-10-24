@@ -206,7 +206,7 @@ padding: 5px 5px 5px 5px;</string>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>50</width>
+           <width>41</width>
            <height>20</height>
           </size>
          </property>
