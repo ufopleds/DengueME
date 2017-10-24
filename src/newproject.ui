@@ -34,6 +34,10 @@
   <property name="windowTitle">
    <string>New Project</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Resource.qrc">
+    <normaloff>:/Resources/folder-new.png</normaloff>:/Resources/folder-new.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -305,7 +309,7 @@ padding: 5px 5px 5px 5px;</string>
       <item>
        <widget class="QPushButton" name="okButton">
         <property name="text">
-         <string>OK</string>
+         <string>Create</string>
         </property>
         <property name="autoDefault">
          <bool>false</bool>
@@ -326,6 +330,8 @@ padding: 5px 5px 5px 5px;</string>
   <tabstop>cancelButton</tabstop>
   <tabstop>okButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="Resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
