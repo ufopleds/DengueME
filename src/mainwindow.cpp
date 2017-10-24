@@ -322,10 +322,6 @@ void MainWindow::actionRename() {
     ui->modelFile->setText(newPath);
     ui->editor->updateModelInfo(newPath);
   }
-
-  ui->actionRename->setEnabled(false);
-  ui->actionRemove->setEnabled(false);
-
 }
 
 void MainWindow::actionRun() {
