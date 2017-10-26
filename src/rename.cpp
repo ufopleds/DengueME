@@ -60,12 +60,12 @@ void RenameModel::checkLineEdited(const QString& str) {
     case dengueme::UnallowedChar:
       ui->okButton->setDisabled(true);
       ui->namelineEdit->setStyleSheet("border: 1px solid red");
-      ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  The project name can only contain alphanumeric chars, hyphen (-) and underscore (_)."));
+      ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore ()."));
       break;
 
     case dengueme::FileExists:
       if (modelName == str) {
-        ui->okButton->setDisabled(false);
+        ui->okButton->setDisabled(true);
         ui->namelineEdit->setStyleSheet("");
         ui->error_message->setText("");
       } else {
