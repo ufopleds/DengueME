@@ -321,6 +321,9 @@ void MainWindow::actionRename() {
     newPath = info.path() + '/' + newPath + ".xml";
     ui->modelFile->setText(newPath);
     ui->editor->updateModelInfo(newPath);
+
+    ui->actionRename->setDisabled(true);
+    ui->actionRemove->setDisabled(true);
   }
 }
 
