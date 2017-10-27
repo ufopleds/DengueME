@@ -1,38 +1,40 @@
-#include <QtCore>
-#include <QtWidgets>
-
+#include "iconsFontAwesome.h"
 #include "dengueme.h"
 #include "newmodel.h"
+#include "ui_newmodel.h"
 #include "newproject.h"
 
 NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
-  QWizard(parent) {
+  workspace(workspace),
+  project(project),
+  QDialog(parent),
+  ui(new Ui::NewModel) {
+  ui->setupUi(this);
+  this->setWindowModality(Qt::ApplicationModal);
   this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-  addPage(new TypePage());
-  addPage(new ProjectPage(workspace, project));
-  addPage(new NamePage(workspace));
-  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/img/logo.png"));
-  setWindowTitle(tr("New model"));
 
-  this->setButtonText(QWizard::NextButton, tr("Next"));
-  this->setButtonText(QWizard::CancelButton, tr("Cancel"));
-  this->setFixedSize(this->sizeHint());
-}
+  QFont fontAwesome;
+  fontAwesome.setFamily("FontAwesome");
+  fontAwesome.setPixelSize(12);
+  ui->icon_project->setFont(fontAwesome);
+  ui->icon_project->setText(ICON_FA_FOLDER_OPEN);
 
-void NewModel::accept() {
-  QString category = property("category").toString();
-  QString type = property("type").toString();
-  QString project = property("project").toString();
-  QString name = field("name").toString();
+  connect(ui->cancelButtonPage1, SIGNAL(clicked()), this, SLOT(close()));
+  connect(ui->cancelButtonType, SIGNAL(clicked()), this, SLOT(close()));
 
-  emit accepted(category, type, project, name);
-  QWizard::accept();
-}
+  connect(ui->nextButtonPage1, SIGNAL(clicked()), this, SLOT(navigateUp()));
+  connect(ui->previousButton, SIGNAL(clicked()), this, SLOT(navigateBack()));
 
-TypePage::TypePage() {
-  setTitle(tr("Type"));
-  setSubTitle(tr("Specify the type of the new model"));
-  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/ok.png"));
+  connect(ui->createButton, SIGNAL(clicked(bool)), this, SLOT(onCreateButton()));
+
+  connect(ui->projectslistWidget, SIGNAL(itemSelectionChanged()), SLOT(enableNext()));
+  connect(ui->projectslistWidget, SIGNAL(doubleClicked(QModelIndex)), SLOT(changePage()));
+
+  connect(ui->typeComboBox, SIGNAL(activated(int)), this, SLOT(addNamesTypePage()));
+  connect(ui->modelNameslistWidget, SIGNAL(currentTextChanged(QString)), SLOT(addDescription(QString)));
+
+  connect(ui->idLineEdit, SIGNAL(textChanged(QString)), this, SLOT(checkIdLineEdit(QString)), Qt::UniqueConnection);
+  connect(ui->idLineEdit, SIGNAL(returnPressed()), this, SLOT(onCreateButton()));
 
   QList<QPair<QString, QStringList> > modelTypes = dengueme::model_types();
 
@@ -42,155 +44,319 @@ TypePage::TypePage() {
   for (int i = 0; i < modelTypes.size(); ++i)
     models.names.append(modelTypes[i].second);
 
+  ui->stackedWidget->setCurrentIndex(0);
+  ui->nextButtonPage1->setDisabled(true);
+  ui->createButton->setDisabled(true);
+  ui->error_idLabel->setText("");
+  ui->error_idLabel->setWordWrap(true);
 
-  modelType = new QTreeWidget;
-  modelName = new QListWidget;
+  loadModelsInfo() ;
+  addTypeTypePage();
+  addNamesTypePage();
+  addProjects();
+}
 
-  QTreeWidgetItem* type = new QTreeWidgetItem(QStringList(tr("Model")));
-  type->setFlags(Qt::ItemIsEnabled);
-  type->setBackground(0, QBrush(palette().color(QPalette::Background)));
-  type->setSizeHint(0, QSize(-1, 20));
-  modelType->addTopLevelItem(type);
+NewModel::~NewModel() {
+  delete ui;
+}
 
-  foreach(QString c, models.types) {
-    QTreeWidgetItem* item = new QTreeWidgetItem(QStringList(c));
-    item->setSizeHint(0, QSize(-1, 20));
-    type->addChild(item);
+void NewModel::loadModelsInfo() {
+  QString modelInfo;
+
+  for (int i = 0; i < models.types.size(); i++) {
+    foreach(QString modelName, models.names.at(i)) {
+      modelInfo = "";
+
+      QString xmlModelPath = ABS_APP_DIR + "/Models/" + models.types[i] + "/" + modelName + "/" + modelName + ".xml";
+      QString userModelPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme/" + models.types[i] + "/" + modelName + "/" + modelName + ".xml";
+
+      QString id = readXmlModel(xmlModelPath, "id");
+      if (id.isEmpty())
+        id = readXmlModel(userModelPath, "id");
+
+      QString name = readXmlModel(xmlModelPath, "name");
+      if (name.isEmpty())
+        name = readXmlModel(userModelPath, "name");
+
+      QString category = readXmlModel(xmlModelPath, "category");
+      if (category.isEmpty())
+        category = readXmlModel(userModelPath, "category");
+
+      QString title = readXmlModel(xmlModelPath, "title");
+      if (title.isEmpty())
+        title = readXmlModel(userModelPath, "title");
+
+      QString interpreter = readXmlModel(xmlModelPath, "interpreter");
+      if (interpreter.isEmpty())
+        interpreter = readXmlModel(userModelPath, "interpreter");
+
+      QString version = readXmlModel(xmlModelPath, "version");
+      if (version.isEmpty())
+        version = readXmlModel(userModelPath, "version");
+
+      QString description = readXmlModel(xmlModelPath, "description");
+      if (description.isEmpty())
+        description = readXmlModel(userModelPath, "description");
+
+      modelInfo.append(name);
+      modelInfo.append("$&*");
+      modelInfo.append(category);
+      modelInfo.append("$&*");
+      modelInfo.append(title);
+      modelInfo.append("$&*");
+      modelInfo.append(interpreter);
+      modelInfo.append("$&*");
+      modelInfo.append(version);
+      modelInfo.append("$&*");
+      modelInfo.append(description);
+
+      modelsInfoHash.insert(id, modelInfo);
+    }
   }
 
-  QHBoxLayout* layout = new QHBoxLayout;
-  layout->addWidget(modelType);
-  layout->addWidget(modelName);
-  setLayout(layout);
-  this->setButtonText(QWizard::NextButton,  tr("Next"));
-  this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
-  this->setButtonText(QWizard::FinishButton,  tr("Create"));
-
-  connect(modelType, SIGNAL(itemSelectionChanged()), SLOT(itemChanged()));
-  connect(modelType, SIGNAL(clicked(QModelIndex)), SLOT(itemClicked()));
-  connect(modelName, SIGNAL(currentTextChanged(QString)), SLOT(nameSelected(QString)));
-
-  connect(modelType, SIGNAL(collapsed(QModelIndex)), modelType, SLOT(expand(QModelIndex)));
-
-  modelType->setIndentation(4);
-  modelType->setRootIsDecorated(false);
-  modelType->setHeaderHidden(true);
-  modelType->expandAll();
 }
 
-bool TypePage::isComplete() const {
-  return !modelName->selectedItems().isEmpty();
+void NewModel::onCreateButton() {
+  if (!ui->createButton->isEnabled())
+    return;
+
+  this->close();
+  QString data = modelsInfoHash[selectedModelID];
+  QStringList info = data.split("$&*");
+  QString category = info[1];
+
+  QString projetSelected = ui->projectslistWidget->currentItem()->text();
+  QString nameIDTyped = ui->idLineEdit->text();
+
+  emit accepted(category, selectedModelID, projetSelected, nameIDTyped);
 }
 
-void TypePage::itemChanged() {
-  modelName->clear();
-  QList<QTreeWidgetItem*> selected = modelType->selectedItems();
-  if (!selected.isEmpty()) {
-    wizard()->setProperty("category", selected.first()->text(0));
+void NewModel::navigateBack() {
+  int indexPage = ui->stackedWidget->currentIndex();
+  ui->stackedWidget->setCurrentIndex(indexPage - 1);
+}
 
-    QString cl = selected.first()->parent()->text(0);
-    int i;
-    QList<QStringList> names;
+void NewModel::navigateUp() {
+  int indexPage = ui->stackedWidget->currentIndex();
+  ui->stackedWidget->setCurrentIndex(indexPage + 1);
+  QString modelName = ui->idLineEdit->text();
+  if (!modelName.isEmpty())
+    checkIdLineEdit(modelName);
 
-    names = models.names;
-    i = models.types.indexOf(selected.first()->text(0));
+}
 
-    wizard()->setProperty("class", cl);
+void NewModel::addTypeTypePage() {
+  ui->typeComboBox->clear();
+  QString itemAll = tr("All");
+  ui->typeComboBox->addItem(itemAll);
+  ui->typeComboBox->addItems(models.types);
+  ui->typeComboBox->setCurrentIndex(0);
+}
 
-    if (i >= 0 && i < names.size()) {
-      foreach(QString t, names.at(i)) {
-        QListWidgetItem* item = new QListWidgetItem(t);
-        item->setSizeHint(QSize(-1, 20));
-        modelName->addItem(item);
+void NewModel::addNamesTypePage() {
+  ui->modelDescription->clear();
+  ui->modelNameslistWidget->clear();
+
+  QListWidgetItem* tme = new QListWidgetItem("TerraME");
+  tme->setBackground(QBrush(QApplication::palette().color(QPalette::Background)));
+  ui->modelNameslistWidget->addItem(tme);
+
+  QListWidgetItem* r = new QListWidgetItem("R");
+  r->setBackground(QBrush(QApplication::palette().color(QPalette::Background)));
+  ui->modelNameslistWidget->addItem(r);
+
+  QHashIterator<QString, QString> i(modelsInfoHash);
+
+  while (i.hasNext()) {
+    i.next();
+    QString data = i.value();
+    QStringList info = data.split("$&*");
+    QString name = info[0];
+    QString category = info[1];
+    QString interpreter = info[3];
+    if (ui->typeComboBox->currentText() == category) {
+      if (interpreter == "TerraME") {
+        ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(tme) + 1, name);
+        name = name + "_TME";
+        namesMap.insert(i.key(), name);
+      } else if(interpreter == "R")  {
+        ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(r) + 1, name);
+        name = name + "_RST";
+        namesMap.insert(i.key(), name);
       }
-      QListWidgetItem* item = modelName->item(0);
-      if (item)
-        item->setSelected(true);
+    } else if (ui->typeComboBox->currentText() == "All") {
+      if (interpreter == "TerraME") {
+        ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(tme) + 1, name);
+        name = name + "_TME";
+        namesMap.insert(i.key(), name);
+      } else if(interpreter == "R")  {
+        ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(r) + 1, name);
+        name = name + "_RST";
+        namesMap.insert(i.key(), name);
+      }
     }
   }
 }
 
-void TypePage::itemClicked() {
-  if (!modelType->selectedItems().isEmpty())
-    modelName->setFocus();
+void NewModel::addDescription(QString modelName) {
+  ui->modelDescription->clear();
+
+  if (modelName.isEmpty()) {
+    ui->createButton->setDisabled(true);
+    return;
+  }
+  if ((modelName == "TerraME") || (modelName == "R")) {
+    ui->createButton->setDisabled(true);
+    return;
+  }
+
+  int rowSelected = ui->modelNameslistWidget->currentRow();
+  QList<QListWidgetItem*> rowR = ui->modelNameslistWidget->findItems("R", Qt::MatchExactly);
+  int indexR = ui->modelNameslistWidget->row(rowR[0]);
+
+  if (rowSelected < indexR) {
+    modelName = modelName + "_TME";
+  } else {
+    modelName = modelName + "_RST";
+  }
+
+  QString key;
+  QMapIterator<QString, QString> i(namesMap);
+  while (i.hasNext()) {
+    i.next();
+    if (namesMap[i.key()] == modelName) {
+      key = i.key();
+      break;
+    }
+  }
+
+  QString data = modelsInfoHash[key];
+  QStringList info = data.split("$&*");
+  QString title = info[2];
+  QString interpreter = info[3];
+  QString version = info[4];
+  QString description = info[5];
+
+  if (!title.isEmpty())
+    ui->modelDescription->append(title);
+  if(version.isEmpty())
+    ui->modelDescription->append(interpreter);
+  else
+    ui->modelDescription->append(interpreter + " (" + version + ")\n");
+  if (!description.isEmpty())
+    ui->modelDescription->append(description);
+
+  QTextCursor cursor = ui->modelDescription->textCursor();
+  cursor.setPosition(0);
+  ui->modelDescription->setTextCursor(cursor);
+
+  if (!ui->idLineEdit->text().isEmpty())
+    ui->createButton->setDisabled(false);
+  checkIdLineEdit(ui->idLineEdit->text());
+
+  selectedModelID = key;
 }
 
-void TypePage::nameSelected(QString item) {
-  wizard()->setProperty("type", item);
-  emit completeChanged();
-}
+QString NewModel::readXmlModel(QString path, QString tag) {
+  QFile xmlFile(path);
 
-ProjectPage::ProjectPage(QString workspace, QString project)
-  : workspace(workspace),
-    project(project) {
-  setTitle(tr("Project"));
-  setSubTitle(tr("Specify the project where the model will be created."));
-  setPixmap(QWizard::LogoPixmap, QPixmap(":/img/Resources/error.png"));
+  if(!xmlFile.open(QIODevice::ReadOnly))
+    return {};
 
-  projects = new QListWidget;
-
-  newproject = new QPushButton(tr("New project"));
-  connect(newproject, SIGNAL(clicked()), SLOT(newProject()));
-
-  loadWorkspace();
-
-  QVBoxLayout* layout = new QVBoxLayout;
-  layout->setMargin(8);
-
-  layout->addWidget(projects);
-  layout->addWidget(newproject, 0, Qt::AlignRight);
-  setLayout(layout);
-  this->setButtonText(QWizard::NextButton,  tr("Next"));
-  this->setButtonText(QWizard::CancelButton,  tr("Cancel"));
-  this->setButtonText(QWizard::FinishButton,  tr("Create"));
-  connect(projects, SIGNAL(itemSelectionChanged()), SLOT(itemChanged()));
-}
-
-bool ProjectPage::isComplete() const {
-  if (!projects->selectedItems().isEmpty()) {
-    wizard()->setProperty("project", projects->selectedItems().first()->text());
-    return true;
-  } else
-    return false;
-}
-
-void ProjectPage::itemChanged() {
-  emit completeChanged();
-}
-
-void ProjectPage::newProject() {
-  newproject->hide();
-  projects->hide();
-
-  NewProject* n = new NewProject(this);
-  if (n->exec()) {
-    QString name = n->getProjectName();
-    QDir dir(workspace + QDir::separator() + name);
-    if (dir.mkpath(dir.absolutePath())) {
-      loadWorkspace();
-      QList<QListWidgetItem*> items = projects->findItems(name, Qt::MatchCaseSensitive);
-      if (!items.isEmpty()) items.at(0)->setSelected(true);
+  QXmlStreamReader reader;
+  reader.setDevice(&xmlFile);
+  while(!reader.atEnd() && !reader.hasError()) {
+    if (tag == "interpreter") {
+      if(reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "sourcecode" && reader.attributes().hasAttribute("interpreter")) {
+        return  reader.attributes().value("interpreter").toString();
+      }
+    } else if (tag == "version") {
+      if(reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "sourcecode" && reader.attributes().hasAttribute("version")) {
+        return  reader.attributes().value("version").toString();
+      }
     } else {
-      QMessageBox::critical(this, tr("Error"), tr("Failed to create project folder."));
+      if(reader.readNext() == QXmlStreamReader::StartElement && reader.name() == tag) {
+        return reader.readElementText();
+      }
     }
   }
-  newproject->show();
-  projects->show();
+  return {};
 }
 
-void ProjectPage::loadWorkspace() {
-  projects->clear();
+void NewModel::enableNext() {
+  ui->nextButtonPage1->setDisabled(false);
+  ui->project_name->setText(ui->projectslistWidget->currentItem()->text());
+}
+
+void NewModel::changePage() {
+  ui->stackedWidget->setCurrentIndex(1);
+}
+
+void NewModel::addProjects() {
+  ui->projectslistWidget->clear();
   QDir dir(workspace);
   foreach(QFileInfo x, dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
     QListWidgetItem* item = new QListWidgetItem(x.fileName());
-    item->setSizeHint(QSize(-1, 20));
-    projects->addItem(item);
+    ui->projectslistWidget->addItem(item);
     if (x.fileName() == project)
-      item->setSelected(true);
+      ui->projectslistWidget->setCurrentItem(item);
   }
-
-  if (project.isEmpty() && projects->count() > 0) projects->itemAt(0, 0)->setSelected(true);
 }
+void NewModel::checkIdLineEdit(const QString& str) {
+  QFont fontAwesome;
+  fontAwesome.setFamily("FontAwesome");
+  fontAwesome.setPixelSize(12);
+  ui->error_idLabel->setFont(fontAwesome);
+
+  QString projct = ui->projectslistWidget->currentItem()->text();
+  QString path = workspace + QDir::separator() + projct;
+
+  switch (dengueme::validateName(path, str, ".xml")) {
+    case dengueme::EmptyName:
+      if (state != dengueme::EmptyName) {
+        state = dengueme::EmptyName;
+        ui->idLineEdit->setStyleSheet("");
+        ui->error_idLabel->setText("");
+        ui->createButton->setDisabled(true);
+      }
+      break;
+
+    case dengueme::UnallowedChar:
+      state = dengueme::UnallowedChar;
+      ui->createButton->setDisabled(true);
+      ui->idLineEdit->setStyleSheet("border: 1px solid red");
+      ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_)."));
+      break;
+
+    case dengueme::FileExists:
+      state = dengueme::FileExists;
+      if (!QFile(path + QDir::separator() + str + ".xml").exists()) {
+        state = dengueme::ValidName;
+        if(ui->modelNameslistWidget->currentIndex().row() != -1 && ui->modelNameslistWidget->currentItem()->text() != "TerraME" && ui->modelNameslistWidget->currentItem()->text() != "R")
+          ui->createButton->setDisabled(false);
+        ui->idLineEdit->setStyleSheet("");
+        ui->error_idLabel->setText("");
+      } else {
+        ui->idLineEdit->setStyleSheet("border: 1px solid red");
+        ui->error_idLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  A model with this name already exists in current project."));
+        ui->createButton->setDisabled(true);
+      }
+      break;
+
+    case dengueme::ValidName:
+      if (state != dengueme::ValidName) {
+        state = dengueme::ValidName;
+        if(ui->modelNameslistWidget->currentIndex().row() != -1 && ui->modelNameslistWidget->currentItem()->text() != "TerraME" && ui->modelNameslistWidget->currentItem()->text() != "R")
+          ui->createButton->setDisabled(false);
+        ui->idLineEdit->setStyleSheet("");
+        ui->error_idLabel->setText("");
+      }
+      break;
+  }
+}
+
+/* Category Page and Name Page */
+/* New Model - Model Builder */
 
 CategoryPage::CategoryPage(QString workspace, QString project)
   : workspace(workspace),
@@ -333,3 +499,4 @@ void NamePage::setWorkspace(QString path) {
 bool NamePage::isComplete() const {
   return state == dengueme::ValidName;
 }
+

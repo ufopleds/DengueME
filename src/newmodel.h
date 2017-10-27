@@ -1,27 +1,15 @@
 #ifndef NEWMODEL_H
 #define NEWMODEL_H
 
-#include <QWizard>
-#include <QLabel>
-#include <QLineEdit>
-#include <QListWidget>
-#include <QTreeWidget>
+#include <QDialog>
 #include "dengueme.h"
+#include "editor/views/modelview.h"
 
-class NewModel : public QWizard {
-  Q_OBJECT
- public:
-  NewModel(QString workspace, QString project = QString(), QWidget* parent = 0);
-  enum { idNamePage, idProjectPage, idNewProjectPage, idTypePage };
+namespace Ui {
+class NewModel;
+}
 
- private:
-  void accept();
-
- signals:
-  void accepted(QString category, QString type, QString project, QString name);
-};
-
-class TypePage: public QWizardPage {
+class NewModel : public QDialog {
   Q_OBJECT
 
  public:
@@ -30,36 +18,38 @@ class TypePage: public QWizardPage {
     QList<QStringList> names;
   } models;
 
+  QHash<QString, QString> modelsInfoHash;
+  QMap<QString, QString> namesMap;
+  QString selectedModelID;
 
-  QTreeWidget* modelType;
-  QListWidget* modelName;
+  explicit NewModel(QString workspace, QString project, QWidget* parent = 0);
+  ~NewModel();
+  void readModelsInfo();
+  void addTypeTypePage();
 
-  TypePage();
+  void loadModelsInfo();
+  QString readXmlModel(QString path, QString tag);
 
-  bool isComplete() const;
-
- public slots:
-  void itemChanged();
-  void itemClicked();
-  void nameSelected(QString item);
-};
-
-class ProjectPage: public QWizardPage {
-  Q_OBJECT
-
- public:
-  QListWidget* projects;
-  QPushButton* newproject;
+ private:
+  Ui::NewModel* ui;
   QString workspace;
   QString project;
-
-  ProjectPage(QString workspace, QString project);
-  bool isComplete() const;
+  dengueme::NameValidation state;
 
  public slots:
-  void itemChanged();
-  void newProject();
-  void loadWorkspace();
+  void navigateBack();
+  void navigateUp();
+  void onCreateButton();
+  void addProjects();
+  void enableNext();
+  void changePage();
+  void addNamesTypePage();
+  void addDescription(QString modelName);
+  void checkIdLineEdit(const QString& str);
+
+ signals:
+  void accepted(QString category, QString type, QString project, QString name);
+
 };
 
 class CategoryPage: public QWizardPage {

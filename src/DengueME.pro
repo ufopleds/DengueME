@@ -160,7 +160,8 @@ FORMS    += \
     calculator/calculator.ui \
     newproject.ui \
     rename.ui \
-    changeworkspace.ui
+    changeworkspace.ui \
+    newmodel.ui
 
 RESOURCES += \
     Resource.qrc
