@@ -61,7 +61,7 @@ void RenameModel::checkLineEdited(const QString& str) {
     case dengueme::UnallowedChar:
       ui->okButton->setDisabled(true);
       ui->namelineEdit->setStyleSheet("border: 1px solid red");
-      ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore ()."));
+      ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_)."));
       break;
 
     case dengueme::FileExists:

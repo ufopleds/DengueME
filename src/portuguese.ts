@@ -228,8 +228,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="changeworkspace.ui" line="35"/>
-        <source>Choose the workspace</source>
-        <translation>Escolha o espaço de trabalho</translation>
+        <source>Change Workspace</source>
+        <oldsource>Choose the workspace</oldsource>
+        <translation>Alterar o Espaço de Trabalho</translation>
     </message>
     <message>
         <location filename="changeworkspace.ui" line="103"/>
@@ -2280,8 +2281,9 @@ underscore (_) and dot (.).</source>
     </message>
     <message>
         <location filename="newmodel.ui" line="176"/>
-        <source>Choose the project in which the new model will be created</source>
-        <translation>Escolha o projeto no qual será criado o novo modelo</translation>
+        <source>Choose the project in which the new model will be created.</source>
+        <oldsource>Choose the project in which the new model will be created</oldsource>
+        <translation>Escolha o projeto no qual será criado o novo modelo.</translation>
     </message>
     <message>
         <location filename="newmodel.ui" line="271"/>
@@ -2326,8 +2328,9 @@ underscore (_) and dot (.).</source>
     </message>
     <message>
         <location filename="newmodel.ui" line="605"/>
-        <source>Define a name (unique identifier) for your new model</source>
-        <translation>Defina um nome (identificador único) para o novo modelo</translation>
+        <source>Define a name (unique identifier) for your new model.</source>
+        <oldsource>Define a name (unique identifier) for your new model</oldsource>
+        <translation>Defina um nome (identificador único) para o novo modelo.</translation>
     </message>
     <message>
         <location filename="newmodel.ui" line="635"/>
@@ -2368,7 +2371,7 @@ underscore (_) and dot (.).</source>
     <message>
         <location filename="newmodel.cpp" line="328"/>
         <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_).</source>
-        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
+        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado (_).</translation>
     </message>
     <message>
         <location filename="newmodel.cpp" line="341"/>
@@ -2469,7 +2472,7 @@ underscore (_) and dot (.).</source>
     <message>
         <location filename="newproject.cpp" line="58"/>
         <source>  The project name can only contain alphanumeric chars, hyphen (-) and underscore (_).</source>
-        <translation>  O nome do projeto pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
+        <translation>  O nome do projeto pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado (_).</translation>
     </message>
     <message>
         <location filename="newproject.cpp" line="61"/>
@@ -2725,8 +2728,9 @@ underscore (_) and dot (.).</source>
     </message>
     <message>
         <location filename="rename.cpp" line="64"/>
-        <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore ().</source>
-        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
+        <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_).</source>
+        <oldsource>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore ().</oldsource>
+        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado (_).</translation>
     </message>
     <message>
         <location filename="rename.cpp" line="74"/>

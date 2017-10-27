@@ -32,7 +32,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Choose the workspace</string>
+   <string>Change Workspace</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Resource.qrc">

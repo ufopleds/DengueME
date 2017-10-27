@@ -48,7 +48,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="modelProjectPge">
       <property name="sizePolicy">
@@ -173,7 +173,7 @@ padding: 5px 5px 5px 5px;</string>
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Choose the project in which the new model will be created</string>
+            <string>Choose the project in which the new model will be created.</string>
            </property>
           </widget>
          </item>
@@ -602,7 +602,7 @@ padding: 5px 5px 5px 5px;</string>
          <item>
           <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>Define a name (unique identifier) for your new model</string>
+            <string>Define a name (unique identifier) for your new model.</string>
            </property>
           </widget>
          </item>
