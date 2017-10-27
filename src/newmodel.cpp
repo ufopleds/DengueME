@@ -147,7 +147,8 @@ void NewModel::navigateUp() {
 
 void NewModel::addTypeTypePage() {
   ui->typeComboBox->clear();
-  ui->typeComboBox->addItem("All");
+  QString itemAll = tr("All");
+  ui->typeComboBox->addItem(itemAll);
   ui->typeComboBox->addItems(models.types);
   ui->typeComboBox->setCurrentIndex(0);
 }
