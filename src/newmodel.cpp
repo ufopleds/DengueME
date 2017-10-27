@@ -48,6 +48,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
   ui->nextButtonPage1->setDisabled(true);
   ui->createButton->setDisabled(true);
   ui->error_idLabel->setText("");
+  ui->error_idLabel->setWordWrap(true);
 
   loadModelsInfo() ;
   addTypeTypePage();
@@ -146,7 +147,8 @@ void NewModel::navigateUp() {
 
 void NewModel::addTypeTypePage() {
   ui->typeComboBox->clear();
-  ui->typeComboBox->addItem("All");
+  QString itemAll = tr("All");
+  ui->typeComboBox->addItem(itemAll);
   ui->typeComboBox->addItems(models.types);
   ui->typeComboBox->setCurrentIndex(0);
 }

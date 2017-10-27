@@ -48,7 +48,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="modelProjectPge">
       <property name="sizePolicy">
@@ -132,7 +132,7 @@ padding: 5px 5px 5px 5px;</string>
              <string notr="true">padding: 0px 0px 0px 15px;</string>
             </property>
             <property name="text">
-             <string>Select the project of your new model</string>
+             <string>Select the project of your new model.</string>
             </property>
            </widget>
           </item>
@@ -173,7 +173,7 @@ padding: 5px 5px 5px 5px;</string>
          <item>
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Choose the project in which the new model will be created</string>
+            <string>Choose the project in which the new model will be created.</string>
            </property>
           </widget>
          </item>
@@ -368,7 +368,7 @@ padding: 5px 5px 5px 5px;</string>
              <string notr="true">padding: 0px 0px 0px 15px;</string>
             </property>
             <property name="text">
-             <string>Select a model and define its name</string>
+             <string>Select a model and define its name.</string>
             </property>
            </widget>
           </item>
@@ -602,41 +602,14 @@ padding: 5px 5px 5px 5px;</string>
          <item>
           <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>Define a name (unique identifier) for your new model</string>
+            <string>Define a name (unique identifier) for your new model.</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="ID">
-         <property name="leftMargin">
-          <number>12</number>
-         </property>
-         <property name="rightMargin">
-          <number>12</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="idLabel">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Name (ID):</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="idLineEdit">
-           <property name="placeholderText">
-            <string>e.g. mySirModel</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="error_layout">
+        <layout class="QGridLayout" name="gridLayout">
          <property name="leftMargin">
           <number>12</number>
          </property>
@@ -646,23 +619,24 @@ padding: 5px 5px 5px 5px;</string>
          <property name="rightMargin">
           <number>12</number>
          </property>
-         <item>
-          <spacer name="horizontalSpacer_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="idLineEdit">
+           <property name="placeholderText">
+            <string>e.g. mySirModel</string>
            </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>63</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
-         <item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="idLabel">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Name (ID):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
           <widget class="QLabel" name="error_idLabel">
            <property name="styleSheet">
             <string notr="true">color: red;</string>
