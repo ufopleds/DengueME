@@ -48,6 +48,7 @@ NewModel::NewModel(QString workspace, QString project, QWidget* parent) :
   ui->nextButtonPage1->setDisabled(true);
   ui->createButton->setDisabled(true);
   ui->error_idLabel->setText("");
+  ui->error_idLabel->setWordWrap(true);
 
   loadModelsInfo() ;
   addTypeTypePage();

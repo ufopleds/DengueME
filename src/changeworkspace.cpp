@@ -17,6 +17,7 @@ ChangeWorkspace::ChangeWorkspace(QWidget* parent) :
   connect(ui->browseButton, SIGNAL(released()), SLOT(browseWorkspace()));
 
   ui->error_message->setText("");
+  ui->error_message->setWordWrap(true);
   if(dengueme::config("workspace").isEmpty())
     ui->workspaceLineEdit->setText(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/dengueme_workspace");
   else

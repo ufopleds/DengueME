@@ -267,7 +267,7 @@ padding: 5px 5px 5px 5px;</string>
        <item>
         <widget class="QCheckBox" name="defaultCheckBox">
          <property name="text">
-          <string>Use as a default workspace</string>
+          <string>Use as a default workspace.</string>
          </property>
         </widget>
        </item>

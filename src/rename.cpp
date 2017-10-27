@@ -14,6 +14,7 @@ RenameModel::RenameModel(QString path, QString name, QString extension, QWidget*
   this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
   ui->error_message->setText("");
+  ui->error_message->setWordWrap(true);
   ui->okButton->setDisabled(true);
   ui->namelineEdit->setText(modelName);
 

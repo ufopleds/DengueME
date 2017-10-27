@@ -16,6 +16,7 @@ NewProject::NewProject(QWidget* parent) :
   connect(ui->okButton, SIGNAL(released()), this, SLOT(onOkPressed()));
 
   ui->error_message->setText("");
+  ui->error_message->setWordWrap(true);
   ui->okButton->setDisabled(true);
   ui->project_name->setMaxLength(40);
 }

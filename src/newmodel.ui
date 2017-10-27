@@ -132,7 +132,7 @@ padding: 5px 5px 5px 5px;</string>
              <string notr="true">padding: 0px 0px 0px 15px;</string>
             </property>
             <property name="text">
-             <string>Select the project of your new model</string>
+             <string>Select the project of your new model.</string>
             </property>
            </widget>
           </item>
@@ -368,7 +368,7 @@ padding: 5px 5px 5px 5px;</string>
              <string notr="true">padding: 0px 0px 0px 15px;</string>
             </property>
             <property name="text">
-             <string>Select a model and define its name</string>
+             <string>Select a model and define its name.</string>
             </property>
            </widget>
           </item>

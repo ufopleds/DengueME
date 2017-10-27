@@ -93,7 +93,7 @@ padding: 5px 5px 5px 5px;</string>
          <string notr="true">padding: 0px 0px 0px 15px;</string>
         </property>
         <property name="text">
-         <string>Define a new name for your model</string>
+         <string>Define a new name for your model.</string>
         </property>
        </widget>
       </item>
@@ -159,7 +159,7 @@ padding: 5px 5px 5px 5px;</string>
           <number>40</number>
          </property>
          <property name="placeholderText">
-          <string>mymodel</string>
+          <string>e.g. mymodel</string>
          </property>
         </widget>
        </item>

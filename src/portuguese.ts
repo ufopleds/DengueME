@@ -59,22 +59,11 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;.SF NS Text&apos;; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Version&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;DengueME v0.7 (September 4), 2017 &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Description&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;DengueME is a software framework designed to support modeling and simulation of the spatiotemporal dynamics of dengue transmission and vector ecology. &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Licence&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;BSD - 2 Clause &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Website&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://www.leds.ufop.br/dengueme&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;DengueME&lt;/span&gt;&lt;/a&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Thirdpartires&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;www.icons8.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Icons8&lt;/span&gt;&lt;/a&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:medium; font-weight:600;&quot;&gt;Developers&lt;/span&gt; &lt;/p&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lucas Ferreira, Miguel Pessoa, Tiago Lima&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="about.ui" line="162"/>
+        <location filename="about.ui" line="151"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
@@ -155,7 +144,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="calculator/calculator.ui" line="424"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <location filename="calculator/calculator.ui" line="478"/>
@@ -192,37 +181,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CategoryPage</name>
     <message>
-        <location filename="newmodel.cpp" line="198"/>
+        <location filename="newmodel.cpp" line="362"/>
         <source>Category</source>
         <translation>Categoria</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="199"/>
+        <location filename="newmodel.cpp" line="363"/>
         <source>Select the category in which the model will be created.</source>
         <translation>Selecione a categoria na qual o modelo será criado.</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="213"/>
+        <location filename="newmodel.cpp" line="377"/>
         <source>Next</source>
         <translation>Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="214"/>
+        <location filename="newmodel.cpp" line="378"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="215"/>
+        <location filename="newmodel.cpp" line="379"/>
         <source>Create</source>
         <translation>Criar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="243"/>
+        <location filename="newmodel.cpp" line="407"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="243"/>
+        <location filename="newmodel.cpp" line="407"/>
         <source>Failed to create project folder.</source>
         <translation>Falha ao criar modelo.</translation>
     </message>
@@ -238,72 +227,72 @@ p, li { white-space: pre-wrap; }
         <translation type="vanished">Confirmar</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="23"/>
-        <source>Change Workspace</source>
-        <translatorcomment>Alterar Espaço de Trabalho</translatorcomment>
-        <translation></translation>
+        <location filename="changeworkspace.ui" line="35"/>
+        <source>Choose the workspace</source>
+        <translation>Escolha o espaço de trabalho</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="91"/>
-        <source>Change a Workspace</source>
-        <translatorcomment>Espaço de Trabalho</translatorcomment>
-        <translation></translation>
+        <location filename="changeworkspace.ui" line="103"/>
+        <source>Workspace</source>
+        <translation>Espaço de trabalho</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="113"/>
+        <location filename="changeworkspace.ui" line="125"/>
         <source>DengueME will save your projects inside a folder called workspace. </source>
         <translatorcomment> O DengueME armazenará seus projetos dentro de uma pasta (&quot;espaço de trabalho&quot;)</translatorcomment>
-        <translation></translation>
+        <translation>O DengueME armazenará seus projetos dentro de uma pasta chamada &quot;espaço de trabalho&quot;.</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="132"/>
+        <location filename="changeworkspace.ui" line="144"/>
         <source>Choose the folder to be used as workspace.</source>
         <translatorcomment>Escolha a pasta que será usada para essa finalidade.</translatorcomment>
-        <translation></translation>
+        <translation>Escolha a pasta que será usada para essa finalidade.</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="173"/>
+        <location filename="changeworkspace.ui" line="185"/>
         <source>Workspace (path):</source>
-        <translation type="unfinished"></translation>
+        <translation>Espaço de trabalho (Caminho):</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="192"/>
+        <location filename="changeworkspace.ui" line="204"/>
         <source>d:\DengueME\workspace</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="199"/>
+        <location filename="changeworkspace.ui" line="211"/>
         <location filename="changeworkspace.cpp" line="32"/>
         <source>Browse</source>
         <translatorcomment>Selecionar</translatorcomment>
         <translation>Procurar</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="235"/>
+        <location filename="changeworkspace.ui" line="256"/>
         <source>error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="249"/>
-        <source>Use as a default workspace</source>
+        <location filename="changeworkspace.ui" line="270"/>
+        <source>Use as a default workspace.</source>
+        <oldsource>Use as a default workspace</oldsource>
         <translatorcomment>Usar como espaço de trabalho padrão</translatorcomment>
-        <translation></translation>
+        <translation>Usar como espaço de trabalho padrão.</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="319"/>
+        <location filename="changeworkspace.ui" line="343"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="changeworkspace.ui" line="326"/>
+        <location filename="changeworkspace.ui" line="350"/>
         <source>OK</source>
         <translation></translation>
     </message>
     <message>
         <location filename="changeworkspace.cpp" line="52"/>
-        <source>  Folder does not exist.</source>
+        <source>  This folder does not exist.</source>
+        <oldsource>  Folder does not exist.</oldsource>
         <translatorcomment>A pasta selecionada não existe</translatorcomment>
-        <translation></translation>
+        <translation>  Essa pasta não existe.</translation>
     </message>
 </context>
 <context>
@@ -1067,36 +1056,30 @@ underscore (_).</source>
 <context>
     <name>FilenamePage</name>
     <message>
-        <location filename="filenamepage.cpp" line="9"/>
         <source>Specify a unique name to identify your project in the workspace.</source>
-        <translation>Escolha um nome único para o projeto no workspace.</translation>
+        <translation type="vanished">Escolha um nome único para o projeto no workspace.</translation>
     </message>
     <message>
-        <location filename="filenamepage.cpp" line="12"/>
         <source>Specify a name</source>
-        <translation>Escolha um nome</translation>
+        <translation type="vanished">Escolha um nome</translation>
     </message>
     <message>
-        <location filename="filenamepage.cpp" line="17"/>
         <source>&amp;Name:</source>
-        <translation>&amp;Nome:</translation>
+        <translation type="vanished">&amp;Nome:</translation>
     </message>
     <message>
-        <location filename="filenamepage.cpp" line="48"/>
         <source>The project name can contain only
 alphanumeric chars, hyphen (-), 
 underscore (_) and dot (.).</source>
-        <translation>O nome do projeto pode conter somente caracteres alfanuméricos, letras, hífen (-), traço inferior (_) ou ponto (.).</translation>
+        <translation type="vanished">O nome do projeto pode conter somente caracteres alfanuméricos, letras, hífen (-), traço inferior (_) ou ponto (.).</translation>
     </message>
     <message>
-        <location filename="filenamepage.cpp" line="55"/>
         <source>A file with that name already exists.</source>
-        <translation>Um arquivo com este nome já existe.</translation>
+        <translation type="vanished">Um arquivo com este nome já existe.</translation>
     </message>
     <message>
-        <location filename="filenamepage.cpp" line="58"/>
         <source>Specify a new unique name:</source>
-        <translation>Especifique um nome unico:</translation>
+        <translation type="vanished">Especifique um nome unico:</translation>
     </message>
     <message>
         <source>Specify a new name for your project.</source>
@@ -1619,7 +1602,7 @@ underscore (_).</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="350"/>
-        <location filename="mainwindow.cpp" line="370"/>
+        <location filename="mainwindow.cpp" line="385"/>
         <source>Run</source>
         <translation>Executar</translation>
     </message>
@@ -1673,7 +1656,7 @@ underscore (_).</source>
         <location filename="mainwindow.ui" line="426"/>
         <source>New &amp;Project</source>
         <oldsource>New &amp;project</oldsource>
-        <translation type="unfinished">Novo &amp;projeto</translation>
+        <translation>Novo &amp;Projeto</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="429"/>
@@ -1761,7 +1744,7 @@ underscore (_).</source>
         <location filename="mainwindow.ui" line="515"/>
         <source>Change &amp;Workspace</source>
         <oldsource>Change &amp;workspace</oldsource>
-        <translation type="unfinished">Alterar &amp;workspace</translation>
+        <translation>Alterar o Espaço de Trabalho</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="524"/>
@@ -1796,7 +1779,7 @@ underscore (_).</source>
         <location filename="mainwindow.ui" line="548"/>
         <source>New &amp;Model</source>
         <oldsource>New &amp;model</oldsource>
-        <translation type="unfinished">Novo &amp;modelo</translation>
+        <translation>Novo &amp;Modelo</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="551"/>
@@ -1841,57 +1824,57 @@ underscore (_).</source>
         <translation>Abrir diretório </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="85"/>
+        <location filename="mainwindow.cpp" line="84"/>
         <source>Output</source>
         <translation>Saída</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="160"/>
+        <location filename="mainwindow.cpp" line="161"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="163"/>
+        <location filename="mainwindow.cpp" line="164"/>
         <source>Add model</source>
         <translation>Adicionar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="226"/>
+        <location filename="mainwindow.cpp" line="233"/>
         <source>Reset Model</source>
         <translation>Resetar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="227"/>
+        <location filename="mainwindow.cpp" line="234"/>
         <source>This action will reset all changes that you made so far. Do you want to continue?</source>
         <translation>Essa ação ira apagar todas as mudanças realizadas. Deseja continuar?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="358"/>
+        <location filename="mainwindow.cpp" line="373"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="361"/>
+        <location filename="mainwindow.cpp" line="376"/>
         <source>LOADING MODEL...</source>
         <translation>CARREGANDO MODELO...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="373"/>
+        <location filename="mainwindow.cpp" line="388"/>
         <source>TerraME process exited with code </source>
         <translation>TerraME teminado com saida</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="375"/>
+        <location filename="mainwindow.cpp" line="390"/>
         <source>R process exited with code </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="411"/>
+        <location filename="mainwindow.cpp" line="426"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="411"/>
+        <location filename="mainwindow.cpp" line="426"/>
         <source>Error creating project folder.</source>
         <translation>Erro ao criar projeto.</translation>
     </message>
@@ -2133,7 +2116,7 @@ If you want to make titles, just use the double # keyword and break a line at th
     <message>
         <location filename="editor/views/modelview.ui" line="161"/>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Descrição:</translation>
     </message>
     <message>
         <location filename="editor/views/modelview.ui" line="188"/>
@@ -2221,12 +2204,12 @@ If you want to make titles, just use the double # keyword and break a line at th
         <translation type="obsolete">Escolha um nome</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="265"/>
+        <location filename="newmodel.cpp" line="429"/>
         <source>Please specify an unique identifier for the new model.</source>
         <translation>Por favor defina um ID (identificador único) para o novo modelo.</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="269"/>
+        <location filename="newmodel.cpp" line="433"/>
         <source>Specify an ID:</source>
         <translation>Defina um ID:</translation>
     </message>
@@ -2239,34 +2222,34 @@ If you want to make titles, just use the double # keyword and break a line at th
         <translation type="vanished">&amp;ID:</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="273"/>
+        <location filename="newmodel.cpp" line="437"/>
         <source>&amp;Id:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="287"/>
+        <location filename="newmodel.cpp" line="451"/>
         <source>Next</source>
         <translation>Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="288"/>
+        <location filename="newmodel.cpp" line="452"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="289"/>
+        <location filename="newmodel.cpp" line="453"/>
         <source>Create</source>
         <translation>Criar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="307"/>
+        <location filename="newmodel.cpp" line="471"/>
         <source>The file name can contain only
 alphanumeric chars, hyphen (-), 
 underscore (_) and dot (.).</source>
         <translation>O nome do modelo pode conter somente caracteres alfanuméricos, letras, hífen (-), traço inferior (_) ou ponto (.).</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="314"/>
+        <location filename="newmodel.cpp" line="478"/>
         <source>A file with that name already exists.</source>
         <translation>Escolha um nome para seu projeto.</translation>
     </message>
@@ -2274,19 +2257,118 @@ underscore (_) and dot (.).</source>
 <context>
     <name>NewModel</name>
     <message>
-        <location filename="newmodel.cpp" line="15"/>
         <source>New model</source>
-        <translation>Novo modelo</translation>
+        <translation type="vanished">Novo modelo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="17"/>
+        <location filename="newmodel.ui" line="23"/>
+        <location filename="newmodel.ui" line="119"/>
+        <location filename="newmodel.ui" line="355"/>
+        <source>New Model</source>
+        <translation>Novo Modelo</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="135"/>
+        <source>Select the project of your new model.</source>
+        <oldsource>Select the project of your new model</oldsource>
+        <translation>Selecione o projeto do novo modelo.</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="156"/>
+        <source>Projects</source>
+        <translation>Projetos</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="176"/>
+        <source>Choose the project in which the new model will be created</source>
+        <translation>Escolha o projeto no qual será criado o novo modelo</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="271"/>
         <source>Next</source>
-        <translation>Proximo</translation>
+        <translation>Próximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="18"/>
+        <location filename="newmodel.ui" line="371"/>
+        <source>Select a model and define its name.</source>
+        <oldsource>Select a model and define its name</oldsource>
+        <translation>Selecione o modelo e defina seu nome.</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="416"/>
+        <source>Icon</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="426"/>
+        <source>Project:</source>
+        <translation>Projeto:</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="433"/>
+        <source>Project Name</source>
+        <translation>Nome do projeto</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="478"/>
+        <source>Category:</source>
+        <translation>Categoria:</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="527"/>
+        <source>Models:</source>
+        <translation>Modelos:</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="534"/>
+        <source>Description:</source>
+        <translation>Descrição:</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="605"/>
+        <source>Define a name (unique identifier) for your new model</source>
+        <translation>Defina um nome (identificador único) para o novo modelo</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="625"/>
+        <source>Name (ID):</source>
+        <translation>Nome (ID):</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="632"/>
+        <source>e.g. mySirModel</source>
+        <translation>ex. meuModeloSir</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="671"/>
+        <source>error</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="723"/>
+        <source>Previous</source>
+        <translation>Retornar</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="733"/>
+        <source>Create</source>
+        <translation>Criar</translation>
+    </message>
+    <message>
+        <location filename="newmodel.ui" line="248"/>
+        <location filename="newmodel.ui" line="700"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="newmodel.cpp" line="326"/>
+        <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_).</source>
+        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
+    </message>
+    <message>
+        <location filename="newmodel.cpp" line="339"/>
+        <source>  A model with this name already exists in current project.</source>
+        <translation type="unfinished">  Um modelo com esse nome já existe no projeto atual.</translation>
     </message>
 </context>
 <context>
@@ -2335,59 +2417,59 @@ underscore (_) and dot (.).</source>
         <translation type="obsolete">Aceitar</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="23"/>
+        <location filename="newproject.ui" line="35"/>
         <source>New Project</source>
         <translation>Novo Projeto</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="87"/>
+        <location filename="newproject.ui" line="103"/>
         <source>Project Name</source>
         <translation>Nome do projeto</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="109"/>
+        <location filename="newproject.ui" line="125"/>
         <source>Define a name for your new project.</source>
-        <translation>Defina um nome para o novo projeto</translation>
+        <translation>Defina um nome para o novo projeto.</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="150"/>
+        <location filename="newproject.ui" line="166"/>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="169"/>
+        <location filename="newproject.ui" line="185"/>
         <source>e.g. myproject</source>
-        <translation>exe. meuprojeto</translation>
+        <translation>ex. meuprojeto</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="205"/>
+        <location filename="newproject.ui" line="221"/>
         <source>error</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="219"/>
+        <location filename="newproject.ui" line="235"/>
         <source>I would like to create a new model inside this project.</source>
         <translation>Gostaria de criar um novo modelo para este projeto.</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="289"/>
+        <location filename="newproject.ui" line="305"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newproject.ui" line="296"/>
-        <source>OK</source>
-        <translation></translation>
+        <location filename="newproject.ui" line="312"/>
+        <source>Create</source>
+        <translation>Criar</translation>
     </message>
     <message>
-        <location filename="newproject.cpp" line="62"/>
+        <location filename="newproject.cpp" line="57"/>
         <source>  The project name can only contain alphanumeric chars, hyphen (-) and underscore (_).</source>
         <translation>  O nome do projeto pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
     </message>
     <message>
-        <location filename="newproject.cpp" line="65"/>
+        <location filename="newproject.cpp" line="60"/>
         <source>  A project with this name already exists in current workspace.</source>
-        <translation>  Um projeto com esse nome já existe no espaço de trabalho atual</translation>
+        <translation>  Um projeto com esse nome já existe no espaço de trabalho atual.</translation>
     </message>
 </context>
 <context>
@@ -2560,52 +2642,98 @@ underscore (_) and dot (.).</source>
 <context>
     <name>ProjectPage</name>
     <message>
-        <location filename="newmodel.cpp" line="126"/>
         <source>Project</source>
-        <translation>Projeto</translation>
+        <translation type="vanished">Projeto</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="127"/>
         <source>Specify the project where the model will be created.</source>
-        <translation>Escolha o projeto onde o modelo sera inserido.</translation>
+        <translation type="vanished">Escolha o projeto onde o modelo sera inserido.</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="132"/>
         <source>New project</source>
-        <translation>Novo projeto</translation>
+        <translation type="vanished">Novo projeto</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="143"/>
         <source>Next</source>
-        <translation>Proximo</translation>
+        <translation type="vanished">Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="144"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="vanished">Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="145"/>
         <source>Create</source>
-        <translation>Criar</translation>
+        <translation type="vanished">Criar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="174"/>
+        <source>Error</source>
+        <translation type="vanished">Erro</translation>
+    </message>
+    <message>
+        <source>Failed to create project folder.</source>
+        <translation type="vanished">Falha ao criar projeto.</translation>
+    </message>
+</context>
+<context>
+    <name>RenameModel</name>
+    <message>
+        <location filename="rename.ui" line="29"/>
+        <source>Rename Model</source>
+        <translation>Renomear modelo</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="80"/>
+        <source>Model Name</source>
+        <translation>Nome do modelo</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="96"/>
+        <source>Define a new name for your model.</source>
+        <oldsource>Define a new name for your model</oldsource>
+        <translation>Defina um novo nome para o modelo.</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="146"/>
+        <source>Name:</source>
+        <translation>Nome:</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="162"/>
+        <source>e.g. mymodel</source>
+        <oldsource>mymodel</oldsource>
+        <translation>ex. meumodelo</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="204"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="174"/>
-        <source>Failed to create project folder.</source>
-        <translation>Falha ao criar projeto.</translation>
+        <location filename="rename.ui" line="252"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <location filename="rename.ui" line="259"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="rename.cpp" line="63"/>
+        <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore ().</source>
+        <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado ().</translation>
+    </message>
+    <message>
+        <location filename="rename.cpp" line="73"/>
+        <source>  A model with this name already exists in current project.</source>
+        <translation>  Um modelo com esse nome já existe no projeto atual.</translation>
     </message>
 </context>
 <context>
     <name>RenameWizard</name>
     <message>
-        <location filename="renamewizard.cpp" line="13"/>
         <source>Project name</source>
-        <translation>Renomear projeto</translation>
+        <translation type="vanished">Renomear projeto</translation>
     </message>
 </context>
 <context>
@@ -2995,34 +3123,28 @@ underscore (_).</source>
 <context>
     <name>TypePage</name>
     <message>
-        <location filename="newmodel.cpp" line="33"/>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation type="vanished">Tipo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="34"/>
         <source>Specify the type of the new model</source>
-        <translation>Escolha o tipo de seu modelo</translation>
+        <translation type="vanished">Escolha o tipo de seu modelo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="49"/>
         <source>Model</source>
-        <translation>Modelo</translation>
+        <translation type="vanished">Modelo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="65"/>
         <source>Next</source>
-        <translation>Proximo</translation>
+        <translation type="vanished">Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="66"/>
         <source>Cancel</source>
-        <translation>Cancelar</translation>
+        <translation type="vanished">Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="67"/>
         <source>Create</source>
-        <translation>Criar</translation>
+        <translation type="vanished">Criar</translation>
     </message>
 </context>
 <context>
@@ -3189,12 +3311,12 @@ underscore (_).</source>
         <translation>? Essa ação ira remover todos arquivos relacionados ao modelo &lt;b&gt; permanentemente&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="workspaceview.cpp" line="90"/>
+        <location filename="workspaceview.cpp" line="95"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="workspaceview.cpp" line="90"/>
+        <location filename="workspaceview.cpp" line="95"/>
         <source>Error trying to rename file/folder.</source>
         <translation>Erro ao renomear arquivo.</translation>
     </message>
