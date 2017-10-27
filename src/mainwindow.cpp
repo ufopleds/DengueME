@@ -295,7 +295,6 @@ void MainWindow::actionOpenExplorer() {
 }
 
 void MainWindow::actionRemove() {
-
   QModelIndex index = ui->treeView->currentIndex();
 
   if (!index.isValid()) return;
@@ -303,6 +302,8 @@ void MainWindow::actionRemove() {
   if(ui->treeView->askDelete(index)) {
     ui->editor->close(2);
   }
+
+  ui->actionRemove->setDisabled(true);
 }
 
 void MainWindow::actionSync() {
