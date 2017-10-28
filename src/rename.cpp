@@ -65,14 +65,22 @@ void RenameModel::checkLineEdited(const QString& str) {
       break;
 
     case dengueme::FileExists:
+      state = dengueme::FileExists;
       if (modelName == str) {
         ui->okButton->setDisabled(true);
         ui->namelineEdit->setStyleSheet("");
         ui->error_message->setText("");
       } else {
-        ui->namelineEdit->setStyleSheet("border: 1px solid red");
-        ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  A model with this name already exists in current project."));
-        ui->okButton->setDisabled(true);
+        if ((!QFile(path + QDir::separator() + str + ".xml").exists())) {
+          state = dengueme::ValidName;
+          ui->okButton->setDisabled(false);
+          ui->namelineEdit->setStyleSheet("");
+          ui->error_message->setText("");
+        } else {
+          ui->namelineEdit->setStyleSheet("border: 1px solid red");
+          ui->error_message->setText(ICON_FA_TIMES_CIRCLE + tr("  A model with this name already exists in current project."));
+          ui->okButton->setDisabled(true);
+        }
       }
       break;
 
