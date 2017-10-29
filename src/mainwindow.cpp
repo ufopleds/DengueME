@@ -296,14 +296,18 @@ void MainWindow::actionOpenExplorer() {
 
 void MainWindow::actionRemove() {
   QModelIndex index = ui->treeView->currentIndex();
+  QFileInfo modelinfo(ui->treeView->fileInfo(index));
 
   if (!index.isValid()) return;
 
   if(ui->treeView->askDelete(index)) {
     ui->editor->close(2);
+    ui->actionRemove->setDisabled(true);
+    ui->actionRename->setDisabled(true);
+  } else {
+    ui->actionRemove->setDisabled(false);
   }
 
-  ui->actionRemove->setDisabled(true);
 }
 
 void MainWindow::actionSync() {
