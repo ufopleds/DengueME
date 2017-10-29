@@ -296,8 +296,6 @@ void MainWindow::actionOpenExplorer() {
 
 void MainWindow::actionRemove() {
   QModelIndex index = ui->treeView->currentIndex();
-  QFileInfo modelinfo(ui->treeView->fileInfo(index));
-
   if (!index.isValid()) return;
 
   if(ui->treeView->askDelete(index)) {
