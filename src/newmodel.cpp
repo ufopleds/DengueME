@@ -81,6 +81,8 @@ void NewModel::loadModelsInfo() {
       QString category = readXmlModel(xmlModelPath, "category");
       if (category.isEmpty())
         category = readXmlModel(userModelPath, "category");
+      if (dengueme::config("locale") != "English")
+        category = getCategoryName(category);
 
       QString title = readXmlModel(xmlModelPath, "title");
       if (title.isEmpty())
@@ -123,7 +125,12 @@ void NewModel::onCreateButton() {
   this->close();
   QString data = modelsInfoHash[selectedModelID];
   QStringList info = data.split("$&*");
-  QString category = info[1];
+
+  QString category;
+  if (dengueme::config("locale") != "English")
+    category = getCategoryName(info[1]);
+  else
+    category = info[1];
 
   QString projetSelected = ui->projectslistWidget->currentItem()->text();
   QString nameIDTyped = ui->idLineEdit->text();
@@ -148,6 +155,13 @@ void NewModel::navigateUp() {
 void NewModel::addTypeTypePage() {
   ui->typeComboBox->clear();
   QString itemAll = tr("All");
+
+  if (dengueme::config("locale") != "English") {
+    for (int i = 0; i < models.types.size(); i++) {
+      models.types[i] = getCategoryName(models.types[i]);
+    }
+  }
+
   ui->typeComboBox->addItem(itemAll);
   ui->typeComboBox->addItems(models.types);
   ui->typeComboBox->setCurrentIndex(0);
@@ -174,6 +188,7 @@ void NewModel::addNamesTypePage() {
     QString name = info[0];
     QString category = info[1];
     QString interpreter = info[3];
+
     if (ui->typeComboBox->currentText() == category) {
       if (interpreter == "TerraME") {
         ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(tme) + 1, name);
@@ -184,7 +199,7 @@ void NewModel::addNamesTypePage() {
         name = name + "_RST";
         namesMap.insert(i.key(), name);
       }
-    } else if (ui->typeComboBox->currentText() == "All") {
+    } else if ((ui->typeComboBox->currentText() == "All") || (ui->typeComboBox->currentText() == "Todas")) {
       if (interpreter == "TerraME") {
         ui->modelNameslistWidget->insertItem(ui->modelNameslistWidget->row(tme) + 1, name);
         name = name + "_TME";
@@ -302,6 +317,36 @@ void NewModel::addProjects() {
       ui->projectslistWidget->setCurrentItem(item);
   }
 }
+
+QString NewModel::getCategoryName(QString category) {
+  if (category == "vector")
+    return "vetor";
+  else if (category == "vetor")
+    return "vector";
+  else if (category == "transmission")
+    return "transmissão";
+  else if (category == "transmissão")
+    return "transmission";
+  else if (category == "hospedeiro")
+    return "host";
+  else if (category == "host")
+    return "hospedeiro";
+  else if (category == "mobilidade")
+    return "mobility";
+  else if (category == "mobility")
+    return "mobilidade";
+  else if (category == "landscape")
+    return "classificação de paisagem";
+  else if (category == "classificação de paisagem")
+    return "landspace";
+  else if (category == "virus")
+    return "vírus";
+  else if (category == "vírus")
+    return "virus";
+  else
+    return {};
+}
+
 void NewModel::checkIdLineEdit(const QString& str) {
   QFont fontAwesome;
   fontAwesome.setFamily("FontAwesome");

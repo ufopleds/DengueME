@@ -29,6 +29,7 @@ class NewModel : public QDialog {
 
   void loadModelsInfo();
   QString readXmlModel(QString path, QString tag);
+  QString getCategoryName(QString category);
 
  private:
   Ui::NewModel* ui;
