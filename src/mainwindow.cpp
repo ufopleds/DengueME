@@ -213,7 +213,8 @@ void MainWindow::modelActivated(QModelIndex index) {
       setState(Editing);
     }
   }
-
+  ui->actionRename->setEnabled(true);
+  ui->actionRemove->setEnabled(true);
 }
 void MainWindow::actionNewModel(QString project) {
   NewModel n(dengueme::config("workspace"), project);
@@ -325,7 +326,9 @@ void MainWindow::actionRename() {
   QString newPath = ui->treeView->askRename(index);
   if(newPath != "false") {
     QFileInfo info = ui->treeView->fileInfo(index);
-    if ( (ui->editor->getModelFile().isEmpty()) || (!ui->editor->getModelFile().contains(info.baseName())) ) {
+    QStringList namePath = ui->editor->getModelFile().split( "/" );
+    QString modelName = namePath.value(namePath.size() - 1);
+    if ( (ui->editor->getModelFile().isEmpty()) || (modelName != (info.baseName() + ".xml")) ) {
       newPath = info.path() + '/' + newPath + ".xml";
     } else {
       newPath = info.path() + '/' + newPath + ".xml";
