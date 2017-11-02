@@ -213,8 +213,6 @@ void MainWindow::modelActivated(QModelIndex index) {
       setState(Editing);
     }
   }
-  ui->actionRename->setEnabled(true);
-  ui->actionRemove->setEnabled(true);
 }
 void MainWindow::actionNewModel(QString project) {
   NewModel n(dengueme::config("workspace"), project);
