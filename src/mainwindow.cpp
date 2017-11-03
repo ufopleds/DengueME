@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
   connect(ui->actionRemove,       SIGNAL(triggered()), SLOT(actionRemove()));
   connect(ui->actionRename,       SIGNAL(triggered()), SLOT(actionRename()));
-  connect(ui->actionSynchronize,       SIGNAL(triggered()), SLOT(actionSync()));
+  connect(ui->actionSynchronize,  SIGNAL(triggered()), SLOT(actionSync()));
   connect(ui->actionOpenExplorer, SIGNAL(triggered()), SLOT(actionOpenExplorer()));
 
   connect(ui->actionAbout,        SIGNAL(triggered()), SLOT(actionAbout()));
@@ -131,6 +131,9 @@ void MainWindow::setState(State state) {
       ui->actionSave->setEnabled(false);
       ui->actionRename->setEnabled(false);
       ui->actionRemove->setEnabled(false);
+      ui->treeView->clearFocus();
+      ui->treeView->selectionModel()->clearSelection();
+      ui->treeView->selectionModel()->clearCurrentIndex();
       break;
 
     case Running:
@@ -189,9 +192,12 @@ void MainWindow::changeToolbar(QModelIndex index) {
   if (modelinfo.isFile()) {
     ui->actionRename->setEnabled(true);
     ui->actionRemove->setEnabled(true);
-  } else {
+  } else if (modelinfo.isDir()) {
     ui->actionRemove->setEnabled(true);
     ui->actionRename->setEnabled(false);
+  } else {
+    ui->actionRename->setEnabled(false);
+    ui->actionRemove->setEnabled(false);
   }
 
 }
@@ -209,9 +215,6 @@ void MainWindow::modelActivated(QModelIndex index) {
   }
 }
 void MainWindow::actionNewModel(QString project) {
-
-  ui->treeView->clearSelection();
-
   NewModel n(dengueme::config("workspace"), project);
   connect(&n, SIGNAL(accepted(QString, QString, QString, QString)),
           SLOT(newModel(QString, QString, QString, QString)));
@@ -321,13 +324,19 @@ void MainWindow::actionRename() {
   QString newPath = ui->treeView->askRename(index);
   if(newPath != "false") {
     QFileInfo info = ui->treeView->fileInfo(index);
-    newPath = info.path() + '/' + newPath + ".xml";
-    ui->modelFile->setText(newPath);
-    ui->editor->updateModelInfo(newPath);
-
+    QStringList namePath = ui->editor->getModelFile().split( "/" );
+    QString modelName = namePath.value(namePath.size() - 1);
+    if ( (ui->editor->getModelFile().isEmpty()) || (modelName != (info.baseName() + ".xml")) ) {
+      newPath = info.path() + '/' + newPath + ".xml";
+    } else {
+      newPath = info.path() + '/' + newPath + ".xml";
+      ui->modelFile->setText(newPath);
+      ui->editor->updateModelInfo(newPath);
+    }
     ui->actionRename->setDisabled(true);
     ui->actionRemove->setDisabled(true);
   }
+  ui->treeView->selectionModel()->select(index,  QItemSelectionModel::ClearAndSelect);
 }
 
 void MainWindow::actionRun() {
