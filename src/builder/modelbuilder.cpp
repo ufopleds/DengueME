@@ -1,11 +1,11 @@
 #include "modelbuilder.h"
 #include "ui_modelbuilder.h"
-#include "newmodelwizard.h"
 #include "builderdirmodel.h"
 #include "modeldocument.h"
 #include "../descriptionwindow.h"
 #include "../dengueme.h"
 #include "openmodel.h"
+#include "newmodelbuilder.h"
 
 ModelBuilder::ModelBuilder(QWidget* parent) :
   QMainWindow(parent),
@@ -34,7 +34,7 @@ ModelBuilder::ModelBuilder(QWidget* parent) :
   connect(ui->actionHelp, SIGNAL(triggered()), SLOT(helpModelBuilder()));
   connect(ui->actionDelete, SIGNAL(triggered()), SLOT(deleteModel()));
   connect(ui->actionEdit, SIGNAL(triggered()), SLOT(openModelWizard()));
-  connect(ui->actionNew, SIGNAL(triggered()), SLOT(newModel()));
+  connect(ui->actionNew, SIGNAL(triggered()), SLOT(actionNewModel()));
   connect(ui->actionCloseModel, SIGNAL(triggered()), SLOT(actionExit()));
   connect(ui->buttonDescription, SIGNAL(clicked()), SLOT(addDescription()));
 
@@ -164,32 +164,25 @@ void ModelBuilder::addDescription() {
   document->show();
 }
 
-void ModelBuilder::newModel() {
-  if (!ui->editor->close(0))
-    return;
+void ModelBuilder::actionNewModel() {
+  NewModelBuilder n(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme", QString(), this);
+  connect(&n, SIGNAL(accepted(QString, QString)),
+          SLOT(newModel(QString, QString)));
+  n.exec();
+}
 
-  NewModelWizard* n = new NewModelWizard( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme", QString(), this);
-  if (!n->exec()) return;
-
-  QString proj = n->property("project").toString();
-  QString name = n->field("name").toString();
-  QString dest = QDir::toNativeSeparators( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme" + "/" + proj + "/" + name + "/" + name + ".xml");
-
-  dengueme::createEmptyModel(dest);
-  dengueme::setProject(proj);
+void ModelBuilder::newModel(QString name, QString project) {
+  QString destination = QDir::toNativeSeparators( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/dengueme" + "/" + project + "/" + name + "/" + name + ".xml");
+  dengueme::createEmptyModel(destination);
+  dengueme::setProject(project);
   setToolbar(1);
-  ui->editor->loadModel(dest, true);
+  ui->editor->loadModel(destination, true);
   ui->modelFile->setText(ui->editor->getModelFile());
-
   ui->stackedWidget->setCurrentIndex(1);
-
-
-
 }
 
 
 void ModelBuilder::setToolbar(int i) {
-
   switch (i) {
     case 0:
       ui->actionEdit->setEnabled(true);

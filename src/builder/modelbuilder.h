@@ -27,7 +27,8 @@ class ModelBuilder : public QMainWindow {
   void onModelClosed();
   void deleteModel();
   void editModel();
-  void newModel();
+  void actionNewModel();
+  void newModel(QString name, QString project);
   void helpModelBuilder();
   void addDescription();
   void setToolbar(int i);

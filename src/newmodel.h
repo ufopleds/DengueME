@@ -53,43 +53,4 @@ class NewModel : public QDialog {
 
 };
 
-class CategoryPage: public QWizardPage {
-  Q_OBJECT
-
- public:
-  QListWidget* projects;
-  QPushButton* newproject;
-  QString workspace;
-  QString project;
-
-  CategoryPage(QString workspace, QString project);
-  bool isComplete() const;
-
- public slots:
-  void itemChanged();
-  void newProject();
-  void loadWorkspace();
-};
-
-class NamePage: public QWizardPage {
-  Q_OBJECT
-
- public:
-  QLabel* modelName;
-  QLineEdit* projectLineEdit;
-  QListWidget* projects;
-  QString subtitle;
-  QString workspace;
-  dengueme::NameValidation state;
-
-  NamePage(QString workspace);
-
-
-  bool isComplete() const;
-
- public slots:
-  void validateProject(QString name);
-  void setWorkspace(QString path);
-};
-
 #endif // NEWMODEL_H

@@ -43,7 +43,6 @@ SOURCES += main.cpp \
     editor/components/constraints/spinboxrules.cpp \
     builder/modelbuilder.cpp \
     workspaceview.cpp \
-    builder/newmodelwizard.cpp \
     dirmodel.cpp \
     workspacemodel.cpp \
     editor/group.cpp \
@@ -77,7 +76,8 @@ SOURCES += main.cpp \
     calculator/lepton/Parser.cpp \
     calculator/calculator.cpp \
     newproject.cpp \
-    rename.cpp
+    rename.cpp \
+    builder/newmodelbuilder.cpp
 
 HEADERS  += \
     mainwindow.h \
@@ -90,7 +90,6 @@ HEADERS  += \
     editor/components/constraints/spinboxrules.h \
     builder/modelbuilder.h \
     workspaceview.h \
-    builder/newmodelwizard.h \
     dirmodel.h \
     workspacemodel.h \
     editor/components/field.h \
@@ -130,7 +129,8 @@ HEADERS  += \
     calculator/calculator.h \
     iconsFontAwesome.h \
     newproject.h \
-    rename.h
+    rename.h \
+    builder/newmodelbuilder.h
 
 FORMS    += \
     mainwindow.ui \
@@ -161,7 +161,8 @@ FORMS    += \
     newproject.ui \
     rename.ui \
     changeworkspace.ui \
-    newmodel.ui
+    newmodel.ui \
+    builder/newmodelbuilder.ui
 
 RESOURCES += \
     Resource.qrc
