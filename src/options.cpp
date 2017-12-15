@@ -1,14 +1,5 @@
 #include <QTranslator>
 #include <QFileDialog>
-
-
-
-
-#include <QDebug>
-
-
-
-
 #include "dengueme.h"
 #include "options.h"
 #include "ui_options.h"
