@@ -2,7 +2,6 @@
 #include "ui_openmodel.h"
 #include "builder/modelbuilder.h"
 #include "ui_modelbuilder.h"
-#include "builder/newmodelwizard.h"
 #include "builder/builderdirmodel.h"
 #include "dengueme.h"
 
