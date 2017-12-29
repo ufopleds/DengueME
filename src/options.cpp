@@ -16,11 +16,13 @@ Options::Options(QWidget* parent) :
   fontAwesome.setPixelSize(12);
 
   ui->warningMessageLabel->setFont(fontAwesome);
+  ui->warningRunLabel->setFont(fontAwesome);
   ui->errorWorksapcePath->setFont(fontAwesome);
   ui->errorTmePath->setFont(fontAwesome);
   ui->errorRPath->setFont(fontAwesome);
 
   ui->warningMessageLabel->setText("");
+  ui->warningRunLabel->setText("");
   ui->errorWorksapcePath->setText("");
   ui->errorTmePath->setText("");
   ui->errorRPath->setText("");
@@ -65,10 +67,13 @@ void Options::languageMessage() {
   QString actualLanguage = dengueme::config("locale");
 
   if (actualLanguage != ui->languageComboBox->currentText()) {
-    ui->warningMessageLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + tr("  You must roboot DengueME to apply the language change."));
+    ui->warningMessageLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + tr("  You must reboot DengueME to apply the change."));
   } else {
-    ui->warningMessageLabel->setText("");
+    QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
+    if (errorWorkspace == false && (oldWorkspacePath == ui->workspaceLineEdit->text()))
+      ui->warningMessageLabel->setText("");
   }
+
 }
 
 void Options::checkCheckBox() {
@@ -100,39 +105,70 @@ void Options::browseRscript() {
 void Options::checkPath(QString path) {
   QObject* obj = sender();
 
+  QString warningMessage = "  You must reboot DengueME to apply the path change.";
   QString errorMessage = tr("  This folder does not exist.");
   QString errorMessageInterpreter = tr("  This path is not valid.");
   QString styleSheet = "border: 1px solid red";
 
   if(obj == ui->workspaceLineEdit) {
     if (QDir(path).exists()) {
+      QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
+      if (path != oldWorkspacePath) {
+        ui->warningMessageLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  You must reboot DengueME to apply the change."));
+      }
+
+      errorWorkspace = false;
       ui->workspaceLineEdit->setStyleSheet("");
       ui->errorWorksapcePath->setText("");
-      if (!path.isEmpty())
-        ui->okButton->setEnabled(true);
-      else
-        ui->okButton->setEnabled(false);
+      if (!path.isEmpty()) {
+        if (errorR == false && errorTme == false) {
+          ui->okButton->setEnabled(true);
+        } else {
+          ui->okButton->setEnabled(false);
+        }
+      }
     } else {
+      errorWorkspace = true;
       ui->workspaceLineEdit->setStyleSheet(styleSheet);
       ui->errorWorksapcePath->setText(ICON_FA_TIMES_CIRCLE + errorMessage);
       ui->okButton->setEnabled(false);
     }
   } else {
     if (QFile(path).exists() || path.isEmpty()) {
-      ui->tmeLineEdit->setStyleSheet("");
-      ui->rLineEdit->setStyleSheet("");
-      ui->errorTmePath->setText("");
-      ui->errorRPath->setText("");
-      ui->okButton->setEnabled(true);
+      if (obj == ui->tmeLineEdit) {
+        ui->tmeLineEdit->setStyleSheet("");
+        ui->errorTmePath->setText("");
+        errorTme = false;
+        if (errorR == false && errorWorkspace == false)
+          ui->okButton->setEnabled(true);
+      } else {
+        ui->rLineEdit->setStyleSheet("");
+        ui->errorRPath->setText("");
+        errorR = false;
+        if (errorTme == false && errorWorkspace == false)
+          ui->okButton->setEnabled(true);
+      }
+
+      QString oldPathTME = dengueme::settingsFile.value("terrame").toString();
+      QString oldPathR = dengueme::settingsFile.value("rscript").toString();
+      if ((oldPathTME != path) && (oldPathR != path)) {
+        ui->warningRunLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + warningMessage);
+      } else {
+        ui->warningRunLabel->setText("");
+      }
+
     } else {
       if (obj == ui->tmeLineEdit) {
         ui->tmeLineEdit->setStyleSheet(styleSheet);
         ui->errorTmePath->setText(ICON_FA_TIMES_CIRCLE + errorMessageInterpreter);
+        errorTme = true;
       } else {
         ui->rLineEdit->setStyleSheet(styleSheet);
         ui->errorRPath->setText(ICON_FA_TIMES_CIRCLE + errorMessageInterpreter);
+        errorR = true;
       }
       ui->okButton->setEnabled(false);
+
     }
   }
 

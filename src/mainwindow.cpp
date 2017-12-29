@@ -44,14 +44,14 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   ui->actionRunByStep->setEnabled(false);
   ui->actionRunByStep->setVisible(false);
 
-  connect(ui->buttonHelp, SIGNAL(clicked()), SLOT(onHelpRequested()));
+  connect(ui->buttonHelp,         SIGNAL(clicked()), SLOT(onHelpRequested()));
   connect(ui->actionExit,         SIGNAL(triggered()), SLOT(close()));
-  connect(ui->buttonDefault,         SIGNAL(clicked()), SLOT(actionDefault()));
+  connect(ui->buttonDefault,      SIGNAL(clicked()), SLOT(actionDefault()));
 
   connect(ui->actionNewModel,     SIGNAL(triggered()), SLOT(actionNewModel()));
   connect(ui->actionNewProject,   SIGNAL(triggered()), SLOT(actionNewProject()));
 
-  connect(ui->actionBuilder, SIGNAL(triggered()), SLOT(actionModelBuilder()));
+  connect(ui->actionBuilder,      SIGNAL(triggered()), SLOT(actionModelBuilder()));
   connect(ui->actionSave,         SIGNAL(triggered()), SLOT(actionSave()));
   connect(ui->actionClose,        SIGNAL(triggered()), SLOT(actionClose()));
   connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
@@ -351,7 +351,18 @@ void MainWindow::actionRun() {
 
 
 void MainWindow::actionOptions() {
+
+  QString actualWorkspacePath = dengueme::settingsFile.value("workspace").toString();
   Options(this).exec();
+  if (QDialog::Accepted) {
+#if defined(Q_OS_MACOS)
+    QString newWorkspacePath = dengueme::settingsFile.value("workspace").toString();
+    if (actualWorkspacePath != newWorkspacePath) {
+      ui->treeView->setWorkspace(dengueme::config("workspace"));
+      ui->treeView->expandAll();
+    }
+  }
+#endif
 }
 
 void MainWindow::actionAbout() {

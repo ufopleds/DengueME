@@ -26,6 +26,9 @@ class Options : public QDialog {
  private:
   Ui::Options* ui;
   QString locale;
+  bool errorR = false;
+  bool errorTme = false;
+  bool errorWorkspace = false;
 };
 
 #endif // OPTIONS_H
