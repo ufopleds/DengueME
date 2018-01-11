@@ -361,8 +361,9 @@ void MainWindow::actionOptions() {
       ui->treeView->setWorkspace(dengueme::config("workspace"));
       ui->treeView->expandAll();
     }
-  }
 #endif
+  }
+
 }
 
 void MainWindow::actionAbout() {
