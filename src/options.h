@@ -20,10 +20,15 @@ class Options : public QDialog {
   void browseRscript();
   void accept();
   void languageMessage();
+  void checkPath(QString path);
+  void checkCheckBox();
 
  private:
   Ui::Options* ui;
   QString locale;
+  bool errorR = false;
+  bool errorTme = false;
+  bool errorWorkspace = false;
 };
 
 #endif // OPTIONS_H

@@ -47,10 +47,6 @@ int main(int argc, char* argv[]) {
     dir.mkpath(dir.absolutePath());
   }
 
-  if (dengueme::config("terrame").isEmpty()) {
-    dengueme::saveconfig("terrame", "TerraME");
-    dengueme::setconfig("terrame", "TerraME");
-  }
   if (dengueme::config("terrame/gui").isEmpty()) {
     dengueme::saveconfig("terrame/gui", "true");
     dengueme::setconfig("terrame/gui", "true");
