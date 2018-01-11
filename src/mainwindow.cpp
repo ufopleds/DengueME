@@ -1,4 +1,5 @@
 #include <QDialog>
+#include <QToolButton>
 #include <QDir>
 #include <iostream>
 #include "mainwindow.h"
@@ -27,7 +28,6 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   ui->treeView->expandAll();
 
   this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint);
-  setMinimumSize(760, 560);
   setState(Browsing);
 
   if (dengueme::config("mainwindow/defaultstate").isNull()) {
@@ -37,9 +37,12 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
     dengueme::setconfig("mainwindow/defaultstate", state);
   }
 
-  restoreGeometry(QByteArray::fromBase64(dengueme::config("mainwindow/geometry").toLocal8Bit()));
-  restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toLocal8Bit()));
-  setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+  //restoreGeometry(QByteArray::fromBase64(dengueme::config("mainwindow/geometry").toLocal8Bit()));
+  //restoreState(QByteArray::fromBase64(dengueme::config("mainwindow/state").toLocal8Bit()));
+  //setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+
+  ui->editorTools->setWindowFlags(Qt::WindowStaysOnTopHint);
+  ui->editorTools->hide();
 
   ui->actionRunByStep->setEnabled(false);
   ui->actionRunByStep->setVisible(false);
@@ -47,6 +50,15 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->buttonHelp, SIGNAL(clicked()), SLOT(onHelpRequested()));
   connect(ui->actionExit,         SIGNAL(triggered()), SLOT(close()));
   connect(ui->buttonDefault,         SIGNAL(clicked()), SLOT(actionDefault()));
+
+  connect(ui->actionNewProjectButton, SIGNAL(clicked(bool)), this, SLOT(actionNewProject()));
+  connect(ui->actionNewModelButton, SIGNAL(clicked(bool)), this, SLOT(actionNewModel()));
+  connect(ui->actionSaveButton, SIGNAL(clicked(bool)), this, SLOT(actionSave()));
+  connect(ui->actionRenameButton, SIGNAL(clicked(bool)), this, SLOT(actionRename()));
+  connect(ui->actionDeleteButton, SIGNAL(clicked(bool)), this, SLOT(actionRemove()));
+
+  connect(ui->run_stopButton, SIGNAL(clicked(bool)), this, SLOT(actionRun()));
+  connect(ui->actionBuilder, SIGNAL(clicked(bool)), this, SLOT(actionModelBuilder()));
 
   connect(ui->actionNewModel,     SIGNAL(triggered()), SLOT(actionNewModel()));
   connect(ui->actionNewProject,   SIGNAL(triggered()), SLOT(actionNewProject()));
@@ -56,6 +68,7 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->actionClose,        SIGNAL(triggered()), SLOT(actionClose()));
   connect(ui->actionRun,          SIGNAL(triggered()), SLOT(actionRun()));
   connect(ui->actionRemove,       SIGNAL(triggered()), SLOT(actionRemove()));
+  connect(ui->actionDeleteButton, SIGNAL(triggered()), SLOT(actionRemove()));
   connect(ui->actionRename,       SIGNAL(triggered()), SLOT(actionRename()));
   connect(ui->actionSynchronize,  SIGNAL(triggered()), SLOT(actionSync()));
   connect(ui->actionOpenExplorer, SIGNAL(triggered()), SLOT(actionOpenExplorer()));
@@ -81,7 +94,12 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
   connect(ui->clearButton,    SIGNAL(clicked()), ui->outputBrowser, SLOT(clear()));
 
   {
-    QPushButton* output = new QPushButton(tr("Output"));
+    QPushButton* output = new QPushButton();
+    output->setMinimumSize(QSize(25, 25));
+    output->setMaximumSize(QSize(25, 25));
+    output->setIcon(QIcon(":/new/test/Resources/new/icons8-console-40.png"));
+    output->setToolTip("View Console Output");
+    output->setStyleSheet("QPushButton:hover:!pressed {background-color: rgb(124, 150, 162);} QPushButton:pressed { background-color: rgb(128, 128, 128);} QToolTip { color: black; background-color: rgb(253,255,228);border-color: 1px rgb(255,218,91); }");
     output->setCheckable(true);
 
     ui->statusBar->setLayoutDirection(Qt::RightToLeft);
@@ -112,25 +130,31 @@ void MainWindow::setState(State state) {
   switch (state) {
     case Editing:
       ui->editorView->show();
+      ui->editorTools->show();
       ui->run_stopButton->setEnabled(true);
       ui->actionRun->setEnabled(true);
       ui->actionModelBuilder->setEnabled(true);
       ui->actionBuilder->setEnabled(true);
       ui->actionClose->setEnabled(true);
       ui->actionSave->setEnabled(true);
+      ui->actionSaveButton->setEnabled(true);
       break;
 
     case Browsing:
       setWindowTitle("DengueME");
       ui->editorView->hide();
+      ui->editorTools->hide();
       ui->outputDock->close();
       ui->run_stopButton->setEnabled(false);
       ui->actionRun->setEnabled(false);
       ui->actionRunByStep->setEnabled(false);
       ui->actionClose->setEnabled(false);
       ui->actionSave->setEnabled(false);
+      ui->actionSaveButton->setEnabled(false);
       ui->actionRename->setEnabled(false);
+      ui->actionRenameButton->setEnabled(false);
       ui->actionRemove->setEnabled(false);
+      ui->actionDeleteButton->setEnabled(false);
       ui->treeView->clearFocus();
       ui->treeView->selectionModel()->clearSelection();
       ui->treeView->selectionModel()->clearCurrentIndex();
@@ -191,13 +215,19 @@ void MainWindow::changeToolbar(QModelIndex index) {
   QFileInfo modelinfo(ui->treeView->fileInfo(index));
   if (modelinfo.isFile()) {
     ui->actionRename->setEnabled(true);
+    ui->actionRenameButton->setEnabled(true);
     ui->actionRemove->setEnabled(true);
+    ui->actionDeleteButton->setEnabled(true);
   } else if (modelinfo.isDir()) {
     ui->actionRemove->setEnabled(true);
+    ui->actionDeleteButton->setEnabled(true);
     ui->actionRename->setEnabled(false);
+    ui->actionRenameButton->setEnabled(false);
   } else {
     ui->actionRename->setEnabled(false);
+    ui->actionRenameButton->setEnabled(false);
     ui->actionRemove->setEnabled(false);
+    ui->actionDeleteButton->setEnabled(false);
   }
 
 }
@@ -304,9 +334,12 @@ void MainWindow::actionRemove() {
   if(ui->treeView->askDelete(index)) {
     ui->editor->close(2);
     ui->actionRemove->setDisabled(true);
+    ui->actionDeleteButton->setDisabled(true);
     ui->actionRename->setDisabled(true);
+    ui->actionRenameButton->setDisabled(true);
   } else {
     ui->actionRemove->setDisabled(false);
+    ui->actionDeleteButton->setDisabled(false);
   }
 
 }
@@ -334,7 +367,9 @@ void MainWindow::actionRename() {
       ui->editor->updateModelInfo(newPath);
     }
     ui->actionRename->setDisabled(true);
+    ui->actionRenameButton->setDisabled(true);
     ui->actionRemove->setDisabled(true);
+    ui->actionDeleteButton->setDisabled(true);
   }
   ui->treeView->selectionModel()->select(index,  QItemSelectionModel::ClearAndSelect);
 }
@@ -365,7 +400,9 @@ void MainWindow::actionSetWorkspace() {
 
   if (ui->treeView->currentIndex().row() < 0 ) {
     ui->actionRemove->setEnabled(false);
+    ui->actionDeleteButton->setEnabled(false);
     ui->actionRename->setEnabled(false);
+    ui->actionRenameButton->setEnabled(false);
   }
   ui->treeView->clearSelection();
 }
@@ -383,6 +420,7 @@ void MainWindow::actionResetViews() {
 void MainWindow::onModelStarted() {
 
   ui->run_stopButton->setText(tr("Stop"));
+  ui->run_stopButton->setIcon(QIcon(":/Resources/stop.png"));
   ui->actionRun->setIcon( QIcon(":/Resources/stop.png"));
 
   output(1, tr("LOADING MODEL..."));
@@ -395,6 +433,7 @@ void MainWindow::onModelClosed() {
 void MainWindow::onModelStopped(int exitCode) {
 
   ui->run_stopButton->setText(tr("Run"));
+  ui->run_stopButton->setIcon(QIcon(":/Resources/run.png"));
   ui->actionRun->setIcon( QIcon(":/Resources/run.png"));
   if(ui->editor->view_model->interpreter() == ui->editor->view_model->TerraME)
     output (1, tr("TerraME process exited with code ") + QString::number(exitCode));

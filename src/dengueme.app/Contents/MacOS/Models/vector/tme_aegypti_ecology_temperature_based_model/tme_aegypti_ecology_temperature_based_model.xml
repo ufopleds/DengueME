@@ -1,0 +1,84 @@
+<xmlmodel>
+  <model>
+    <id>tme_aegypti_ecology_temperature_based_model</id>
+    <userid>tme_aegypti_ecology_temperature_based_model</userid>
+    <name>Temperature-based vector ecology model</name>
+    <category>vector</category>
+    <type>compartmental</type>
+    <title>Temperature-based model of Aedes aegypti ecology</title>
+    <authors>
+      <author>Raquel Lana</author>
+      <author>Tiago Carneiro</author>
+      <author>Cláudia Codeço</author>
+      <author>Tiago Lima</author>
+    </authors>
+    <description>An Aedes aegypti population model with four compartments representing (egg, larva, pupa and adult) with temperature-dependent transition rates. For a complete description of such model please see the paper Lana et al. (2014), "Seasonal and nonseasonal dynamics of Aedes aegypti in Rio de Janeiro, Brazil: Fitting mathematical models to trap data", Acta Tropica, Volume 129, 2014.</description>
+    <sourcecode lang="TerraML" interpreter="TerraME" version="2.0-RC-4">
+      <version>1.0</version>
+      <files>
+        <file>tme_aegypti_ecology_temperature_based_model.lua</file>
+      </files>
+      <main>tme_aegypti_ecology_temperature_based_model.lua</main>
+      <dependencies></dependencies>
+    </sourcecode>
+  </model>
+  <parameters>
+    <groupbox label="Population">
+      <field id="eggs" label="Eggs" type="spinbox" minimum="0" maximum="999999999" description="initial value of eggs [1-999999999]">1000</field>
+      <field id="larvae" label="Larvae" type="spinbox" minimum="0" maximum="999999999" description="initial value of larvae [1-999999999]">0</field>
+      <field id="pupae" label="Pupae" type="spinbox" minimum="0" maximum="999999999" description="initial value of pupae [1-999999999]">0</field>
+      <field id="adults" label="Adults" type="spinbox" minimum="0" maximum="999999999" description="initial value of adults [1-999999999]">0</field>
+    </groupbox>
+    <groupbox label="Environmental parameters">
+      <field id="carrying_cap" label="Carrying capacity (limits the oviposition)" type="doublespinbox" minimum="0" maximum="9999999" precision="2" step="1" description="carrying capacity (limits the oviposition) [0-9999999]">191.5</field>
+      <field id="oviposition_rate" label="Oviposition rate (per day per mosquito)" type="doublespinbox" minimum="0" maximum="9999999" precision="2" step="1" description="oviposition rate (per day per mosquito) [0-9999999]">1</field>
+      <csv id="weeklyTemperature" label="Weekly temperature values" description="weekly temperature values">23.47142857,22.71428571,24.87142857,26.35714286,22.61428571,25.01428571,26.12857143,21.92857143,26.94285714,26.9,26.28571429,25.52857143,28.6,30.31428571,26.7,26.37142857,25.88571429,26.82857143,28.85714286,27.58571429,29.12857143,27.81428571,29.55714286,29.7,30.21428571,29.58571429,28.18571429,29.35714286,28.18571429,27.54285714,27.11428571,27.38571429,26.07142857,23.71428571,24.78571429,22.02857143,20.95714286,22.91428571,25.18571429,23.75714286,22.67142857,25.15714286,21.65714286,21.08571429,17.98571429,21.45714286,23.01428571,21.68571429,23.95714286,22.7,25.85714286,24.97142857,24.78571429,22.48571429,24.14285714,25.62857143,24.95714286,25.28571429,27.7,26.15714286,24.01428571,25.37142857,24.25714286,28.21428571,26.8,25.57142857,31.18571429,28.91428571,28.98571429,28.15714286,23.71428571,25.17142857,26.98571429,28.88571429,27.8,28.12727273</csv>
+    </groupbox>
+    <groupbox label="Mortality rates">
+      <field id="u_eggs" label="Daily mortality rate in egg stage" type="doublespinbox" minimum="0" maximum="1.0000" precision="3" step="0.1" description="daily mortality rate in egg stage [0-1]">1/100</field>
+      <field id="u_larvae" label="Daily mortality rate in larval stage" type="doublespinbox" minimum="0" maximum="1.0000" precision="3" step="0.1" description="daily mortality rate in larval stage [0-1]">1/3</field>
+      <field id="u_pupae" label="Daily mortality rate in pupal stage" type="doublespinbox" minimum="0" maximum="1.0000" precision="10" step="0.1" description="daily mortality rate in pupal stage [0-1]">1/70</field>
+      <field id="u_adults" label="Daily mortality rate in adult stage" type="doublespinbox" minimum="0" maximum="1.0000" precision="10" step="0.1" description="daily mortality rate in adult stage [0-1]">1/17.5</field>
+    </groupbox>
+    <groupbox label="Differential Equation">
+      <field id="edo_dt" label="dt (day)" type="spinbox" minimum="0" maximum="9999" step="1" description="a number with the beginning of the interval (EDO function)">1</field>
+      <field id="edo_upper" label="Upper limit (week):" type="spinbox" minimum="0" maximum="9999" step="1" description="a number with the end of the interval (EDO function)">7</field>
+      <field id="edo_delta" label="Step:" type="doublespinbox" minimum="0" maximum="9999" step="1" precision="4" description="a positive number with the step within the interval (EDO function)">0.1</field>
+    </groupbox>
+  </parameters>
+  <simulation label="Simulation">
+    <field id="steps" label="Steps" type="spinbox" minimum="0" maximum="1e+06" description="simulation steps [0-999999999]">720</field>
+  </simulation>
+  <results>
+    <outChart id="outChart" label="Chart (vector population)" output="true">
+      <config title="" xLabel="Time" yLabel="" />
+      <variable id="eggs" select="eggs" label="Eggs" chartlabel="Eggs" type="plotVariable" style="lines" color="blue" output="true" />
+      <variable id="larvae" select="larvae" label="Larvae" chartlabel="Larvae" type="plotVariable" style="lines" color="red" output="true" />
+      <variable id="pupae" select="pupae" label="Pupae" chartlabel="Pupae" type="plotVariable" style="lines" color="yellow" output="true" />
+      <variable id="adults" select="adults" label="Adults" chartlabel="Adults" type="plotVariable" style="lines" color="black" output="true" />
+      <variable id="population" select="population" label="Vector Population" chartlabel="Vector Population" type="plotVariable" style="lines" color="gray" output="true" />
+    </outChart>
+    <outTextScreen id="outTextScreen" label="TextScreen" output="true">
+      <variable id="eggs" select="eggs" label="Eggs" type="plotVariable" output="true" />
+      <variable id="larvae" select="larvae" label="Larvae" type="plotVariable" output="true" />
+      <variable id="pupae" select="pupae" label="Pupae" type="plotVariable" output="true" />
+      <variable id="adults" select="adults" label="Adults" type="plotVariable" output="true" />
+      <variable id="population" select="population" label="Vector Population" type="plotVariable" output="true" />
+    </outTextScreen>
+    <outVisualTable id="outVisualTable" label="Table" output="true">
+      <variable id="eggs" select="eggs" label="Eggs" type="plotVariable" output="true" />
+      <variable id="larvae" select="larvae" label="Larvae" type="plotVariable" output="true" />
+      <variable id="pupae" select="pupae" label="Pupae" type="plotVariable" output="true" />
+      <variable id="adults" select="adults" label="Adults" type="plotVariable" output="true" />
+      <variable id="population" select="population" label="Vector Population" type="plotVariable" output="true" />
+    </outVisualTable>
+    <outLog id="outLog" label="File" output="true">
+      <config separator=";" filepath="" filename="results" overwrite="true" />
+      <variable id="eggs" select="eggs" label="Eggs" type="plotVariable" output="true" />
+      <variable id="larvae" select="larvae" label="Larvae" type="plotVariable" output="true" />
+      <variable id="pupae" select="pupae" label="Pupae" type="plotVariable" output="true" />
+      <variable id="adults" select="adults" label="Adults" type="plotVariable" output="true" />
+      <variable id="population" select="population" label="Vector Population" type="plotVariable" output="true" />
+    </outLog>
+  </results>
+</xmlmodel>

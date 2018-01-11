@@ -133,7 +133,6 @@ HEADERS  += \
     rename.h
 
 FORMS    += \
-    mainwindow.ui \
     editor/components/database.ui \
     options.ui \
     about.ui \
@@ -161,7 +160,9 @@ FORMS    += \
     newproject.ui \
     rename.ui \
     changeworkspace.ui \
-    newmodel.ui
+    newmodel.ui \
+    builder/newmodelbuilder.ui \
+    mainwindow.ui
 
 RESOURCES += \
     Resource.qrc

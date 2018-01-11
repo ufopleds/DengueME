@@ -12,11 +12,9 @@
         <file>Resources/model.png</file>
         <file>Resources/open.png</file>
         <file>Resources/preferences-system.png</file>
-        <file>Resources/rename.png</file>
         <file>Resources/run-step.png</file>
         <file>Resources/run.png</file>
         <file>Resources/save-as.png</file>
-        <file>Resources/save.png</file>
         <file>Resources/configure.png</file>
         <file>Resources/ok.png</file>
         <file>Resources/database.png</file>
@@ -26,7 +24,6 @@
         <file>Resources/clone.png</file>
         <file>Resources/components.png</file>
         <file>Resources/about.png</file>
-        <file>Resources/close.png</file>
         <file>Resources/Synchronize-64.png</file>
         <file>Resources/builderTool.png</file>
         <file>Resources/Trash-52 (1).png</file>
@@ -40,12 +37,10 @@
     </qresource>
     <qresource prefix="/">
         <file>Resources/simulation.png</file>
-        <file>Resources/save.png</file>
         <file>Resources/save-as.png</file>
         <file>Resources/run.png</file>
         <file>Resources/run-step.png</file>
         <file>Resources/results.png</file>
-        <file>Resources/rename.png</file>
         <file>Resources/preferences-system.png</file>
         <file>Resources/plus</file>
         <file>Resources/parameters.png</file>
@@ -67,11 +62,34 @@
         <file>Resources/components.png</file>
         <file>Resources/clone.png</file>
         <file>Resources/builderTool.png</file>
-        <file>Resources/close.png</file>
         <file>Resources/stop.png</file>
         <file>Resources/leftDArrow.png</file>
         <file>Resources/rightDArrow.png</file>
         <file>Resources/download.png</file>
         <file>Resources/FontAwesome.otf</file>
+    </qresource>
+    <qresource prefix="/new/test">
+        <file>Resources/new/icons8-add-file-40.png</file>
+        <file>Resources/new/icons8-add-folder-40.png</file>
+        <file>Resources/new/icons8-animated-skeleton-40.png</file>
+        <file>Resources/new/icons8-bulleted-list-40.png</file>
+        <file>Resources/new/icons8-cancel-40.png</file>
+        <file>Resources/new/icons8-delete-folder-40.png</file>
+        <file>Resources/new/icons8-erase-40.png</file>
+        <file>Resources/new/icons8-help-40.png</file>
+        <file>Resources/new/icons8-next-40.png</file>
+        <file>Resources/new/icons8-rename-40.png</file>
+        <file>Resources/new/icons8-save-40.png</file>
+        <file>Resources/new/icons8-stop-40.png</file>
+        <file>Resources/new/icons8-trash-can-40.png</file>
+        <file>Resources/icons8-sair-40.png</file>
+        <file>Resources/new/icons8-actualizar-40.png</file>
+        <file>Resources/new/icons8-live-folder-40.png</file>
+        <file>Resources/new/icons8-baixar-atualizacoes-40.png</file>
+        <file>Resources/new/icons8-configuracoes-40.png</file>
+        <file>Resources/new/icons8-informacoes-40.png</file>
+        <file>Resources/new/icons8-avancar-40.png</file>
+        <file>Resources/new/icons8-vassoura-40.png</file>
+        <file>Resources/new/icons8-console-40.png</file>
     </qresource>
 </RCC>

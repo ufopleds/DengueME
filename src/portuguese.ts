@@ -181,37 +181,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CategoryPage</name>
     <message>
-        <location filename="newmodel.cpp" line="364"/>
+        <location filename="newmodel.cpp" line="409"/>
         <source>Category</source>
         <translation>Categoria</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="365"/>
+        <location filename="newmodel.cpp" line="410"/>
         <source>Select the category in which the model will be created.</source>
         <translation>Selecione a categoria na qual o modelo será criado.</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="379"/>
+        <location filename="newmodel.cpp" line="424"/>
         <source>Next</source>
         <translation>Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="380"/>
+        <location filename="newmodel.cpp" line="425"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="381"/>
+        <location filename="newmodel.cpp" line="426"/>
         <source>Create</source>
         <translation>Criar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="409"/>
+        <location filename="newmodel.cpp" line="454"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="409"/>
+        <location filename="newmodel.cpp" line="454"/>
         <source>Failed to create project folder.</source>
         <translation>Falha ao criar modelo.</translation>
     </message>
@@ -1603,7 +1603,7 @@ underscore (_).</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="350"/>
-        <location filename="mainwindow.cpp" line="385"/>
+        <location filename="mainwindow.cpp" line="397"/>
         <source>Run</source>
         <translation>Executar</translation>
     </message>
@@ -1830,52 +1830,52 @@ underscore (_).</source>
         <translation>Saída</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="161"/>
+        <location filename="mainwindow.cpp" line="164"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="164"/>
+        <location filename="mainwindow.cpp" line="167"/>
         <source>Add model</source>
         <translation>Adicionar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="236"/>
         <source>Reset Model</source>
         <translation>Resetar modelo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="234"/>
+        <location filename="mainwindow.cpp" line="237"/>
         <source>This action will reset all changes that you made so far. Do you want to continue?</source>
         <translation>Essa ação ira apagar todas as mudanças realizadas. Deseja continuar?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="373"/>
+        <location filename="mainwindow.cpp" line="385"/>
         <source>Stop</source>
         <translation>Parar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="376"/>
+        <location filename="mainwindow.cpp" line="388"/>
         <source>LOADING MODEL...</source>
         <translation>CARREGANDO MODELO...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="388"/>
+        <location filename="mainwindow.cpp" line="400"/>
         <source>TerraME process exited with code </source>
         <translation>TerraME teminado com saida</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="390"/>
+        <location filename="mainwindow.cpp" line="402"/>
         <source>R process exited with code </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="426"/>
+        <location filename="mainwindow.cpp" line="438"/>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="426"/>
+        <location filename="mainwindow.cpp" line="438"/>
         <source>Error creating project folder.</source>
         <translation>Erro ao criar projeto.</translation>
     </message>
@@ -2205,12 +2205,12 @@ If you want to make titles, just use the double # keyword and break a line at th
         <translation type="obsolete">Escolha um nome</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="431"/>
+        <location filename="newmodel.cpp" line="476"/>
         <source>Please specify an unique identifier for the new model.</source>
         <translation>Por favor defina um ID (identificador único) para o novo modelo.</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="435"/>
+        <location filename="newmodel.cpp" line="480"/>
         <source>Specify an ID:</source>
         <translation>Defina um ID:</translation>
     </message>
@@ -2223,34 +2223,34 @@ If you want to make titles, just use the double # keyword and break a line at th
         <translation type="vanished">&amp;ID:</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="439"/>
+        <location filename="newmodel.cpp" line="484"/>
         <source>&amp;Id:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="453"/>
+        <location filename="newmodel.cpp" line="498"/>
         <source>Next</source>
         <translation>Proximo</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="454"/>
+        <location filename="newmodel.cpp" line="499"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="455"/>
+        <location filename="newmodel.cpp" line="500"/>
         <source>Create</source>
         <translation>Criar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="473"/>
+        <location filename="newmodel.cpp" line="518"/>
         <source>The file name can contain only
 alphanumeric chars, hyphen (-), 
 underscore (_) and dot (.).</source>
         <translation>O nome do modelo pode conter somente caracteres alfanuméricos, letras, hífen (-), traço inferior (_) ou ponto (.).</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="480"/>
+        <location filename="newmodel.cpp" line="525"/>
         <source>A file with that name already exists.</source>
         <translation>Escolha um nome para seu projeto.</translation>
     </message>
@@ -2364,17 +2364,17 @@ underscore (_) and dot (.).</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="150"/>
+        <location filename="newmodel.cpp" line="157"/>
         <source>All</source>
         <translation>Todas</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="328"/>
+        <location filename="newmodel.cpp" line="373"/>
         <source>  The model name can contain only alphanumeric chars, hyphen (-) and / or underscore (_).</source>
         <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado (_).</translation>
     </message>
     <message>
-        <location filename="newmodel.cpp" line="341"/>
+        <location filename="newmodel.cpp" line="386"/>
         <source>  A model with this name already exists in current project.</source>
         <translation>  Um modelo com esse nome já existe no projeto atual.</translation>
     </message>
@@ -2733,7 +2733,7 @@ underscore (_) and dot (.).</source>
         <translation>  O nome do modelo pode conter somente caracteres alfanuméricos, hífen (-) e / ou sublinhado (_).</translation>
     </message>
     <message>
-        <location filename="rename.cpp" line="74"/>
+        <location filename="rename.cpp" line="81"/>
         <source>  A model with this name already exists in current project.</source>
         <translation>  Um modelo com esse nome já existe no projeto atual.</translation>
     </message>
