@@ -30,6 +30,11 @@ int main(int argc, char* argv[]) {
   if (QFontDatabase::addApplicationFont(":/Resources/FontAwesome.otf") < 0)
     qWarning() << "FontAwesome cannot be loaded !";
 
+  if (dengueme::settingsFile.value("locale") != dengueme::settingsFile.value("gui_user_language")) {
+    dengueme::saveconfig("locale", dengueme::config("gui_user_language"));
+    dengueme::setconfig("locale", dengueme::config("gui_user_language"));
+  }
+
   QDir dir(QCoreApplication::applicationDirPath() + "/translations/");
   if (! dengueme::config("locale").isEmpty() && dengueme::config("locale") != "English") {
     QTranslator translator;

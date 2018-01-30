@@ -20,6 +20,7 @@ class Options : public QDialog {
   void browseRscript();
   void accept();
   void languageMessage();
+  QString getLanguageName(QString name);
   void checkPath(QString path);
   void checkCheckBox();
 
