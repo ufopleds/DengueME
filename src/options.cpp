@@ -16,13 +16,21 @@ Options::Options(QWidget* parent) :
   fontAwesome.setPixelSize(12);
 
   ui->warningMessageLabel->setFont(fontAwesome);
+  ui->iconWarning->setFont(fontAwesome);
+
+  ui->iconWarningRunLabel->setFont(fontAwesome);
   ui->warningRunLabel->setFont(fontAwesome);
+
   ui->errorWorksapcePath->setFont(fontAwesome);
   ui->errorTmePath->setFont(fontAwesome);
   ui->errorRPath->setFont(fontAwesome);
 
-  ui->warningMessageLabel->setText("");
   ui->warningRunLabel->setText("");
+  ui->iconWarningRunLabel->setText("");
+
+  ui->warningMessageLabel->setText("");
+  ui->iconWarning->setText("");
+
   ui->errorWorksapcePath->setText("");
   ui->errorTmePath->setText("");
   ui->errorRPath->setText("");
@@ -32,16 +40,36 @@ Options::Options(QWidget* parent) :
   ui->rLineEdit->setText(dengueme::settingsFile.value("rscript").toString());
 
   ui->startupPathCheckBox->setChecked(dengueme::settingsFile.value("prompt_workspace") == "true");
-  ui->languageComboBox->addItem("English");
+
+  if (dengueme::config("locale") == "English")
+    ui->languageComboBox->addItem("English");
+  else
+    ui->languageComboBox->addItem("Inglês");
 
   QDir dir(QCoreApplication::applicationDirPath() + "/translations");
   foreach (QFileInfo x, dir.entryInfoList(QDir::Files))
-    if (x.suffix() == "qm")
-      ui->languageComboBox->addItem(x.baseName());
+    if (x.suffix() == "qm") {
+      if (dengueme::config("locale") == "English")
+        ui->languageComboBox->addItem(x.baseName());
+      else
+        ui->languageComboBox->addItem(getLanguageName(x.baseName()));
+    }
 
-  for (int i = 0; i < ui->languageComboBox->count(); ++i)
-    if (ui->languageComboBox->itemText(i) == dengueme::settingsFile.value("locale"))
-      ui->languageComboBox->setCurrentIndex(i);
+  for (int i = 0; i < ui->languageComboBox->count(); ++i) {
+    if (dengueme::settingsFile.value("locale") != dengueme::settingsFile.value("gui_user_language")) {
+      if (getLanguageName(ui->languageComboBox->itemText(i)) == dengueme::settingsFile.value("locale"))
+        ui->languageComboBox->setCurrentIndex(i);
+
+      QString userLanguage = dengueme::config("locale") == "English" ? dengueme::config("gui_user_language") : getLanguageName(dengueme::config("gui_user_language"));
+      QString warningLanguage = tr("  There is a pending update: the interface will change to ") + userLanguage +  tr(" in the next initialization.");
+
+      ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+      ui->warningMessageLabel->setText(warningLanguage);
+    } else {
+      if (getLanguageName(ui->languageComboBox->itemText(i)) == dengueme::settingsFile.value("gui_user_language"))
+        ui->languageComboBox->setCurrentIndex(i);
+    }
+  }
 
   connect(ui->browseWorkspaceButton, SIGNAL(pressed()), this, SLOT(browseWorkspace()));
   connect(ui->browseTmeButton, SIGNAL(pressed()), this, SLOT(browseTerraME()));
@@ -56,7 +84,6 @@ Options::Options(QWidget* parent) :
 
   connect(ui->okButton, SIGNAL(clicked()), this, SLOT(accept()));
   connect(ui->cancelButton, SIGNAL(released()), this, SLOT(close()));
-
 }
 
 Options::~Options() {
@@ -64,16 +91,20 @@ Options::~Options() {
 }
 
 void Options::languageMessage() {
-  QString actualLanguage = dengueme::config("locale");
+  QString systemLanguage = dengueme::config("locale") == "English" ? dengueme::config("locale") : getLanguageName(dengueme::config("locale"));
 
-  if (actualLanguage != ui->languageComboBox->currentText()) {
-    ui->warningMessageLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + tr("  You must reboot DengueME to apply the change."));
+  if (systemLanguage != ui->languageComboBox->currentText()) {
+    ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+    ui->warningMessageLabel->setText(tr("Please restart DengueME for the changes to take effect."));
   } else {
     QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
-    if (errorWorkspace == false && (oldWorkspacePath == ui->workspaceLineEdit->text()))
+    if (errorWorkspace == false && (oldWorkspacePath == ui->workspaceLineEdit->text())) {
+      ui->iconWarning->setText("");
       ui->warningMessageLabel->setText("");
-  }
+    }
 
+
+  }
 }
 
 void Options::checkCheckBox() {
@@ -105,7 +136,7 @@ void Options::browseRscript() {
 void Options::checkPath(QString path) {
   QObject* obj = sender();
 
-  QString warningMessage = "  You must reboot DengueME to apply the path change.";
+  QString warningMessage = tr("You must reboot DengueME to apply the path change.");
   QString errorMessage = tr("  This folder does not exist.");
   QString errorMessageInterpreter = tr("  This path is not valid.");
   QString styleSheet = "border: 1px solid red";
@@ -114,7 +145,8 @@ void Options::checkPath(QString path) {
     if (QDir(path).exists()) {
       QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
       if (path != oldWorkspacePath) {
-        ui->warningMessageLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  You must reboot DengueME to apply the change."));
+        ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+        ui->warningMessageLabel->setText(tr("You must reboot DengueME to apply the change."));
       }
 
       errorWorkspace = false;
@@ -152,8 +184,10 @@ void Options::checkPath(QString path) {
       QString oldPathTME = dengueme::settingsFile.value("terrame").toString();
       QString oldPathR = dengueme::settingsFile.value("rscript").toString();
       if ((oldPathTME != path) && (oldPathR != path)) {
-        ui->warningRunLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + warningMessage);
+        ui->iconWarningRunLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+        ui->warningRunLabel->setText(warningMessage);
       } else {
+        ui->iconWarningRunLabel->setText("");
         ui->warningRunLabel->setText("");
       }
 
@@ -174,6 +208,19 @@ void Options::checkPath(QString path) {
 
 }
 
+QString Options::getLanguageName(QString name) {
+  if (name == "English")
+    return "Inglês";
+  else if (name == "Inglês")
+    return "English";
+  else if (name == "Portuguese")
+    return "Português";
+  else if (name == "Português")
+    return "Portuguese";
+  else
+    return {};
+}
+
 void Options::accept() {
   dengueme::saveconfig("workspace", ui->workspaceLineEdit->text());
   dengueme::setconfig("workspace", ui->workspaceLineEdit->text());
@@ -187,8 +234,14 @@ void Options::accept() {
   dengueme::saveconfig("prompt_workspace", ui->startupPathCheckBox->isChecked() ? "true" : "false");
   dengueme::setconfig("prompt_workspace", ui->startupPathCheckBox->isChecked() ? "true" : "false");
 
-  dengueme::saveconfig("locale", ui->languageComboBox->currentText());
-  dengueme::setconfig("locale", ui->languageComboBox->currentText());
+  if (dengueme::config("locale") == "English") {
+    dengueme::saveconfig("gui_user_language", ui->languageComboBox->currentText());
+    dengueme::setconfig("gui_user_language", ui->languageComboBox->currentText());
+  } else {
+    dengueme::saveconfig("gui_user_language", getLanguageName(ui->languageComboBox->currentText()));
+    dengueme::setconfig("gui_user_language", getLanguageName(ui->languageComboBox->currentText()));
+  }
+
   close();
 }
 

@@ -10,13 +10,7 @@
 
 #define ABS_APP_DIR QFileInfo(QCoreApplication::applicationFilePath()).absolutePath()
 
-#ifdef Q_OS_LINUX
-#define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/../share/dengueme/Models/")
-#elif defined(Q_OS_MACOS)
 #define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/Models/")
-#else
-#define DEFAULT_MODELS_DIR (ABS_APP_DIR + "/Models/")
-#endif
 
 class MainWindow;
 
