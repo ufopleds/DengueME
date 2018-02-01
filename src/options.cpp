@@ -16,16 +16,24 @@ Options::Options(QWidget* parent) :
   fontAwesome.setPixelSize(12);
 
   ui->warningMessageLabel->setFont(fontAwesome);
+  ui->iconWarning->setFont(fontAwesome);
+
+  ui->iconWarningRunLabel->setFont(fontAwesome);
   ui->warningRunLabel->setFont(fontAwesome);
+
   ui->errorWorksapcePath->setFont(fontAwesome);
   ui->errorTmePath->setFont(fontAwesome);
   ui->errorRPath->setFont(fontAwesome);
 
   ui->warningRunLabel->setText("");
+  ui->iconWarningRunLabel->setText("");
+
+  ui->warningMessageLabel->setText("");
+  ui->iconWarning->setText("");
+
   ui->errorWorksapcePath->setText("");
   ui->errorTmePath->setText("");
   ui->errorRPath->setText("");
-  ui->warningMessageLabel->setText("");
 
   ui->workspaceLineEdit->setText(dengueme::settingsFile.value("workspace").toString());
   ui->tmeLineEdit->setText(dengueme::settingsFile.value("terrame").toString());
@@ -54,7 +62,9 @@ Options::Options(QWidget* parent) :
 
       QString userLanguage = dengueme::config("locale") == "English" ? dengueme::config("gui_user_language") : getLanguageName(dengueme::config("gui_user_language"));
       QString warningLanguage = tr("  There is a pending update: the interface will change to ") + userLanguage +  tr(" in the next initialization.");
-      ui->warningMessageLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + warningLanguage);
+
+      ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+      ui->warningMessageLabel->setText(warningLanguage);
     } else {
       if (getLanguageName(ui->languageComboBox->itemText(i)) == dengueme::settingsFile.value("gui_user_language"))
         ui->languageComboBox->setCurrentIndex(i);
@@ -81,16 +91,20 @@ Options::~Options() {
 }
 
 void Options::languageMessage() {
-  QString actualLanguage = dengueme::config("locale");
+  QString systemLanguage = dengueme::config("locale") == "English" ? dengueme::config("locale") : getLanguageName(dengueme::config("locale"));
 
-  if (actualLanguage != ui->languageComboBox->currentText()) {
-    ui->warningMessageLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + tr("  Please restart DengueME for the changes to take effect."));
+  if (systemLanguage != ui->languageComboBox->currentText()) {
+    ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+    ui->warningMessageLabel->setText(tr("Please restart DengueME for the changes to take effect."));
   } else {
     QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
-    if (errorWorkspace == false && (oldWorkspacePath == ui->workspaceLineEdit->text()))
+    if (errorWorkspace == false && (oldWorkspacePath == ui->workspaceLineEdit->text())) {
+      ui->iconWarning->setText("");
       ui->warningMessageLabel->setText("");
-  }
+    }
 
+
+  }
 }
 
 void Options::checkCheckBox() {
@@ -122,7 +136,7 @@ void Options::browseRscript() {
 void Options::checkPath(QString path) {
   QObject* obj = sender();
 
-  QString warningMessage = tr("  You must reboot DengueME to apply the path change.");
+  QString warningMessage = tr("You must reboot DengueME to apply the path change.");
   QString errorMessage = tr("  This folder does not exist.");
   QString errorMessageInterpreter = tr("  This path is not valid.");
   QString styleSheet = "border: 1px solid red";
@@ -131,7 +145,8 @@ void Options::checkPath(QString path) {
     if (QDir(path).exists()) {
       QString oldWorkspacePath = dengueme::settingsFile.value("workspace").toString();
       if (path != oldWorkspacePath) {
-        ui->warningMessageLabel->setText(ICON_FA_TIMES_CIRCLE + tr("  You must reboot DengueME to apply the change."));
+        ui->iconWarning->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+        ui->warningMessageLabel->setText(tr("You must reboot DengueME to apply the change."));
       }
 
       errorWorkspace = false;
@@ -169,8 +184,10 @@ void Options::checkPath(QString path) {
       QString oldPathTME = dengueme::settingsFile.value("terrame").toString();
       QString oldPathR = dengueme::settingsFile.value("rscript").toString();
       if ((oldPathTME != path) && (oldPathR != path)) {
-        ui->warningRunLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE + warningMessage);
+        ui->iconWarningRunLabel->setText(ICON_FA_EXCLAMATION_TRIANGLE);
+        ui->warningRunLabel->setText(warningMessage);
       } else {
+        ui->iconWarningRunLabel->setText("");
         ui->warningRunLabel->setText("");
       }
 
